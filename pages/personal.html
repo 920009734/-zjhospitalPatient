@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+		<script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+        <link rel="stylesheet" href="../css/frozen.css">
+		<script type="text/javascript" src="../js/placeImage.js"></script>
+		<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+		<!-- <script type="text/javascript" src="../js/ajaxfileupload.js" ></script> -->
+		<script type="text/javascript" src="../js/uploadPreview.js" ></script>
+		<script src="../js/Utils.js"></script>
+		<title></title>
+		<style type="text/css"> 
+		body{background-color: #FFFFFF;}
+			.ui-header.ui-header-positive{height: 50px;line-height:50px;background-color: #3A93A5;}
+			.ui-icon.ui-icon-return{font-size: 25px;margin-top: 3px;}
+			.login_img{display: block;width: 100%;}
+			.login_img>img{display: block;margin: 0 auto;margin-top: 50px;}
+			.login-inp{display: block;width: 100%;margin-top: 20px;}
+			.login_user{display: block;width: 90%;height: 45px;line-height: 45px; margin:0 auto;border-bottom: 1px solid #E7E7E7;}
+			.login_user>span{display: block;float: left;}
+			.user_name{display: block;float: left; width:25%;text-align: right;}
+			.user_inp{display: block;float: left; width: 70%;margin-left: 4%;}
+			.user_inp>input{display: block;float: left; width: 100%;height: 45px;line-height:45px;border: none;}
+			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;}
+			.login_btn>button{border-radius:2px ;background: #3A93A5;}
+			.ui-checkbox input:checked:before, .ui-checkbox-s input:checked:before{color: #3A93A5;}
+			.upload_img{display: block;width: 100%;margin-top: 25px;}
+			.showImg>img{display: block;margin: 0 auto;}
+			.upload_detail{display:block;width: 100%; text-align: center;font-size: 14px;margin-top: 5px;color: #666666;}
+			.nav_right{display: block;float: right;margin-right: 15px;}
+		</style>
+		
+		<script type="text/javascript">
+		$(function(){
+			$(".showImg").click(function(){
+				$("#f").click();
+			});
+			
+			$("#baocun").click(function(){
+				$.post(Utils.getRoot()+"/patientApp/perfect", {realname:$("#realname").val(), sex:$("#sex").val(),idcard:$("#idcard").val(),
+					address:$("#address").val(), headimage:$("#headimage").val()}, function(res){
+					if (res.success) {
+						location.href="main.html"
+					} else {
+						alert(res.message);
+					}
+				});
+			});
+			
+			/* $("#f").uploadPreview({ 
+				UpBtn: "f",
+				DivShow: "photodiv", 
+				ImgShow: "photoimg",
+				ImgType: ["gif", "jpeg", "jpg", "bmp", "png"],
+				callback: function(){  
+				    
+					alert("9090");
+				}  
+			}); */
+		});
+		
+		//选择头像，默认上传到服务器
+		function upload() {
+			alert($("#f").val());
+			if ($("#f").val() != "") {
+				/* $.ajaxFileUpload({
+					type:"post",
+					url:"http://127.0.0.1:8080/patientApp/perfectuploadimage",
+					dataType:"json",
+					fileElementId:"file",
+					success:function(data) {
+						alert("89898: " + data);
+						if (res.success) {
+							alert(res.message);
+							
+							//图片显示
+							$("#headimage").attr("value", res.data.path);
+							$("#preview").attr("src", res.data.path);
+						} else {
+							alert(res.message);
+						}
+					},
+					error:function() {
+						alert("上传失败！009");
+					}
+				}); */
+				
+				//为文件上传添加change事件
+			 	var fileM = document.getElementById("f");
+			  	//获取文件对象，files是文件选取控件的属性，存储的是文件选取控件选取的文件对象，类型是一个数组
+			  	var fileObj=fileM.files[0];
+			  	//创建formdata对象，formData用来存储表单的数据，表单数据时以键值对形式存储的。
+			  	var formData=new FormData();
+			  	formData.append('file',fileObj);
+				$.ajax({
+		             url:Utils.getRoot()+"/patientApp/perfectuploadimage" ,  
+		             type: 'POST',  
+		             data: formData,  
+		             contentType: false,  
+		             processData: false,  
+		             success: function (res) {
+		            	 alert("89898: " + res);
+		            	 if (res.success) {
+							//图片显示
+							$("#headimage").attr("value", res.data.path);
+							$("#photoimg").attr("src", res.data.path);
+						} else {
+							alert(res.message);
+						}
+		             },
+		             error: function(){
+		            	 alert("上传失败！009");
+					 }
+				});
+			} else {
+				alert("请先选择文件！");
+			}
+		}
+	</script>
+		
+	</head>
+	<body>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">完善个人信息<span class="nav_right" ><a href="main.html">跳过</a></span></h4>
+		</header>
+		
+		<section class="ui-container"> 
+			<section id="list">
+				<form action="" id="newForm" name="newFrom" method="post">
+					<div class="upload_img">
+						<div class="showImg" id="photodiv">
+							<img src="../img/uploadPersonal.png" id="photoimg" />
+						</div>	
+						<input id="f" type="file" name="f" onchange="upload();" style="display: none;"/>
+						<input type="hidden" name="headimage" id="headimage" />
+						<span class="upload_detail">上传头像</span>
+					</div>
+					<div class="login-inp">
+						<div class="login_user">
+							<span class="user_name">姓名</span>
+							<span class="user_inp"><input type="text" id="realname"  name="realname" placeholder="请输入真实姓名" class=""/></span>
+						</div>
+						<div class="login_user">
+							<span class="user_name">性别</span>
+							<span class="user_inp"><input type="text" id="sex"  name="sex" placeholder="请输入选择性别" class=""/></span>
+						</div>
+						<div class="login_user">
+							<span class="user_name">身份证号</span>
+							<span class="user_inp"><input type="text" id="idcard"  name="idcard" placeholder="请输入身份证号" class=""/></span>
+						</div>
+						<div class="login_user">
+							<span class="user_name">联系地址</span>
+							<span class="user_inp"><input type="text" id="address"  name="address" placeholder="请输入联系地址" class=""/></span>
+						</div>
+					</div>
+				</form>
+				<div class="login_btn">
+					<button class="ui-btn ui-btn-lg ui-btn-primary"  id="baocun">保存信息</button>
+				</div>
+			</section>
+		</section>
+		<div id="blueimp-gallery" class="blueimp-gallery">
+			<div class="slides"></div>
+		</div>
+	</body>
+</html>

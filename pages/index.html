@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>首页</title>
+        <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+        <link rel="stylesheet" href="../css/frozen.css">
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+        <style type="text/css">
+       	 	body{height: 100%;width: 100%;}
+       	 	.hr_{width: 100%;height: 10px;background-color: #F7F7F7;}
+       	 	
+        	.footer_icon, .footer_title{display:block;float: none; margin-top: -8px;font-size: 15px;}
+			.footer_icon>i{font-size:28px;}  
+			.ui-footer-btn{background-image: none;background-color: #EEEAEB;} 
+			.footer_item{color: #626060;} 
+			.footer_item.active{color: #3A93A5;} 
+			.footer_item.active>.footer_icon>i{color: #3A93A5;}	
+			.search_item{display: block;width: 90%;height: 35px;background-color: #FFFFFF;margin: 0 auto;border-radius: 20px;margin-top: 7.5px;}
+			.tab_img{display: block;float: left;width: 100%;}
+			.tab_img>img{width: 100%;height: auto;}
+			.tab_img>img:nth-child(2){margin-top: -5px;}
+			
+			.fun_item{display: block;float: left;width: 100%; min-height: 100px; max-height: 300px;background-color: #FFFFFF;}
+			.fun_title{display: block;width: 96%;height: 40px;line-height: 40px;margin: 0 auto;margin-bottom: 10px;}
+			.fun_title>span{display: block;float: left;}
+			.item_img{width: 25px;height: 25px;border-radius: 50px;margin-top: 7px;margin-right: 12px;}
+			.item_img>img{display: block; width: 100%;height: 100%;margin-left: 5px;}
+			.fun_item_list{display: block;width: 96%; min-height: 60px;max-height: 300px;margin: 0 auto;margin-top: 5px;}
+			.item_list{display: block;float: left; width: 33.3%;height: 70px;}
+			.item_list>span{display: block;margin: 0 auto;text-align: center;font-size: 13px;;}
+			.list_icon{display: block; width: 40px;height: 40px;border-radius:50% ;}
+			.list_title{padding-top: 3px;width: 100%;}
+			.item_list>span>img{display: block;margin: 0 auto;width: 100%;height: 100%;}
+			
+			
+			.notice_item{display: block;float: left;width: 100%;height:30% ;margin-top: 5px;background-color: #FFFFFF;}
+			.notice_title{display: block;float: left;width: 100%;height: 35px;line-height: 35px;}
+			.notice_title>img{display: block;float: left; margin-top: 6px;margin-left: 10px;}
+			.notice_p{margin-left: 5px;}
+			.more_notice{display: block;float: right;}
+			.more_notice>i{display: block;float: right ;margin-top: -6px;}
+			.notice_li{display: block;float: left;width: 100%;height: 35px;line-height: 35px;border-bottom: 1px solid #E6E6E6;}
+			.notice_li>a{color: #000000;padding-left: 10px;}
+			#new_item{margin-bottom: 70px;} 
+			.a_img ,.a_con{display: block;float: left;}
+			.a_img{width: 25%;}
+			.a_img>img{margin-top: 4px;margin-left: 5px;}
+			.a_con{width: 74%;} 
+			.a_con>p{font-size: 12px;}
+			.new_li>a{color: #000000;}
+			.new_li{display: block;float: left;width: 100%;border-bottom: 1px solid #E6E6E6;padding-top: 5px;}
+        </style> 
+    </head> 
+    
+    <body ontouchstart>
+        <section class="ui-container">
+			<section id="list">
+				<div class="tab_img">
+					<img src="../img/zjLogo.png" />
+					<img src="../img/zjlogo3.png" />
+					<i class="fa-adjust"></i>
+				</div>
+				<!-- 功能块 -->
+				<div class="fun_item">
+					<div class="fun_title ui-border-b">
+						<span class="item_img"><img src="../img/index/menzhen1.png"></span>	
+						<span class="item_title">门诊</span>
+					</div>
+					<div class="fun_item_list" >
+						<div class="item_list" id="ksxz">
+							<span class="list_icon"><img src="../img/index/rili1.png"/></span>
+							<span class="list_title">预约挂号</span>
+						</div>
+						<div class="item_list" id="liuyan">
+							<span class="list_icon"><img src="../img/index/liuyanzixun.png"/></span>
+							<span class="list_title">医生咨询</span>
+						</div>
+						<!-- <div class="item_list">
+							<span class="list_icon" id="zxzx"><img src="../img/index/online.png"/></span>
+							<span class="list_title">在线咨询</span>
+						</div> -->
+						<div class="item_list">
+							<span class="list_icon"><img src="../img/index/paidui.png"/></span>
+							<span class="list_title">排队查询</span>
+						</div>
+						<!-- <div class="item_list">
+							<span class="list_icon"><img src="../img/index/jilu.png"/></span>
+							<span class="list_title">预约记录</span>
+						</div> -->
+						<div class="item_list" style="float: right;">
+							<span class="list_icon"><img src="../img/more.png"/></span>
+							<span class="list_title">更多</span>
+						</div>
+					</div>
+				</div>
+				<!-- 医院 -->
+				<div class="fun_item" style="margin-top: 5px;">
+					<div class="fun_title ui-border-b">
+						<span class="item_img"><img src="../img/index/yiyuan.png"></span>	
+						<span class="item_title">医院</span>
+					</div>
+					<div class="fun_item_list">
+						<div class="item_list">
+							<span class="list_icon"><img src="../img/index/jilu1.png"/></span>
+							<span class="list_title">住院记录</span>
+						</div>
+						<div class="item_list">
+							<span class="list_icon"><img src="../img/index/zhuyuan.png"/></span>
+							<span class="list_title">费用清单</span>
+						</div>
+						<div class="item_list">
+							<span class="list_icon"><img src="../img/index/feiyong.png"/></span>
+							<span class="list_title">押金补缴</span>
+						</div>
+						<div class="item_list">
+							<span class="list_icon"><img src="../img/index/chuyaun.png"/></span>
+							<span class="list_title">出院带药</span>
+						</div>
+						<div class="item_list">
+							<span class="list_icon"><img src="../img/index/xiaojie.png"/></span>
+							<span class="list_title">出院小结</span>
+						</div>
+					</div>
+				</div>
+				<!-- 体检 -->
+				<div class="fun_item" style="margin-top: 5px;">
+					<div class="fun_title ui-border-b">
+						<span class="item_img"><img src="../img/index/tijian.png"></span>	
+						<span class="item_title">体检</span>
+					</div>
+					<div class="fun_item_list">
+						<div class="item_list">
+							<span class="list_icon"><img src="../img/index/tijain1.png"/></span>
+							<span class="list_title">检查报告</span>
+						</div>
+						<div class="item_list">
+							<span class="list_icon"><img src="../img/index/tijain2.png"/></span>
+							<span class="list_title">检验报告</span>
+						</div>
+						<div class="item_list">
+							<span class="list_icon"><img src="../img/index/tijain4.png"/></span>
+							<span class="list_title">体检报告</span>
+						</div>
+					</div>
+				</div>
+				 
+				<!-- 最新资讯 -->
+				<div class="notice_item" id="new_item">
+					<div class="notice_title">
+						<img src="../img/u80.png" width="25" height="20"/>
+						<span class="notice_p">最新资讯</span>
+						<span class="more_notice">更多<i class="ui-icon ui-icon-arrow"></i></span>
+					</div>
+					<ul class="new_ul">
+						<li class="new_li">
+							<a href="##">
+								<span class="a_img"><img src="../img/u112.png" width="70" height="55"/></span>
+								<span class="a_con">
+									<h4>我院获评“中国房颤中心第一批...</h4>
+									<p>我院全票通过省级胸痛中心认证我院全票通过省级胸痛中心认证证...</p>
+								</span>
+							</a>
+						</li>
+						<li class="new_li">
+							<a href="##">
+								<span class="a_img"><img src="../img/u112.png" width="70" height="55"/></span>
+								<span class="a_con">
+									<h4>我院获评“中国房颤中心第一批...</h4>
+									<p>我院全票通过省级胸痛中心认证我院全票通过省级胸痛中心认证证...</p>
+								</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			
+			</section>
+        </section><!-- /.ui-container-->
+        
+        
+        <script type="text/javascript">
+        	$(function(){
+        		$(".footer_item").click(function(){
+        			var a = $(this).hasClass(("active"));
+        			var home = $(this).hasClass(("home"));
+        			var msg = $(this).hasClass(("msg"));
+        			var myHome = $(this).hasClass(("myHome"));
+        			if(!a){
+        				$(this).addClass("active").siblings("li").removeClass("active");
+        				if(home){
+        					location.href = "index.html";
+        				}
+    					if(msg){
+        					location.href = "msg.html";
+        				}
+						if(myHome){
+        					location.href = "self.html";
+        				}
+        			}
+        		})
+        	});
+        	$("#liuyan").click(function(){
+   				top.location.href="consultation/choiceDepartment.html";
+    		});
+    		
+        	$("#ksxz").click(function(){
+   				top.location.href="yuyueguahao/choiceDepartment.html";
+    		});
+        	
+        </script>
+        
+    </body>
+</html>

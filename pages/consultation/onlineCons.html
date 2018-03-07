@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+		<link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
+		<title>患者端-在线咨询</title>
+		<style type="text/css">
+			.ui-header.ui-header-positive{height: 50px;line-height:50px;background-color: #3A93A5;}
+			.msg_item{display: block;float: left;width: 100%;height: 100%;margin-top: 120px;margin-bottom: 80px;}
+			.msg_list{display: block;float: left;width: 99%;min-height:50px;max-height:4000px;margin-top: 1px;margin-bottom: 5px;}
+			.msg_con, .msg_img, .msg_time, .msg_icon{display: block;float: left;margin-top: 10px;}
+			.msg_time{width: 100%;font-size: 12px;text-align: center;}
+			.msg_time>p{display: block;background-color: #E9EBE8;width: auto;margin: 0 auto;width: 40%;padding: 2px 5px;border-radius: 9px;;}
+			.msg_img{width: 15%;}
+			.msg_img>img{margin-left: 20%;}
+			.msg_con{width: 70%;padding: 5px 10px 5px 12px;background-color: #FFFFFF;border-radius: 3px;font-size: 14px;line-height: 25px;}
+			.msg_icon{margin-right: -1px;}
+			.ui-icon.ui-icon-return{font-size: 25px;margin-top: 3px;}
+			
+			.doc_intro{display: block;width:100%;height: 120px;background-color: #FFFFFF;position: fixed;top: 50;}
+			.intro_photo{display: block;float: left;width: 25%;height: 100%;}
+			.intro_photo>img{display: block;margin: 0 auto;margin-top:20%;}
+			.intro_right{display: block;float: left;width: 73%;height: 100%;margin-left: 2%;}
+			.intro_right>div{height: 35px;line-height: 35px;} 
+			.intro_name{font-size: 18px;}
+			.intro_name,.intro_status,.intro_posti{height: 35px;line-height: 35px;}
+			.intro_status{margin-left:20px;}
+			
+			.intro_dep{width: 96%;font-size: 13px;display: block;float: left;line-height: 20px;}
+			.send_time{display: block;width: 30%;height: 20px;line-height:20px;font-size: 13px; background-color:#F2F2F2;border-radius:10px ;text-align: center;color: #666666;margin: 0 auto;}
+			.msg_list{display: block;width: 94%; min-height: 50px;max-height: 600px;margin: 0 auto;margin-left: 10px;margin-top: 15px; }
+			.cons_per{display: block;width: 100%;hanging-punctuation: 30px;font-size: 13px;color: #999999;text-align: right;}
+			.cons_content{display: block;float: right;width: 85%;font-size: 14px;background-color: #297493;margin-top: 4px;color: #ffffff;padding: 5px 10px;border-radius: 3px;}
+			
+			.cons_doc{display: block;width: 100%;hanging-punctuation: 30px;font-size: 13px;color: #999999;}
+			.consdoc_content{display: block;float: left;width: 85%;font-size: 14px;background-color: #FFFFFF;margin-top: 4px;padding: 5px 10px;border-radius: 3px;}
+			
+			.cons_footer{display: block;width: 100%;height: 60px;background-color: #FFFFFF;position: fixed;bottom: 0;;}
+			.cons_footer>div{display: block;float: left;margin-top: 15px;} 
+			.up_img{width: 17%;height: 100%;}
+			.up_img>img{display: block;margin: 0 auto;margin-top: 3px;}
+			.foot_inp{width: 61%;height: 100%;}
+			.foot_inp>input{height: 30px;line-height: 30px;width: 96%;border: 1px solid #CCCCCC;padding-left: 5px;}
+			.foot_btn{width: 22%;height: 100%;}
+			.foot_btn>button{display: block;margin: 0 auto;margin-top: 1px;border-radius: 2px;background: #297493;}
+		</style>
+		
+		<script type="text/javascript">
+		$(function(){
+			//从之前的页面接受医生id
+			var params = document.location.toString(); //获取带参URL
+			var id = "007"; 
+			if (params.indexOf("?") != -1) { 
+				var str = params.substr(1); 
+				strs = str.split("&"); 
+				id = unescape(strs[0].split("=")[1]);
+			}
+			$("#id").val(id);
+			//然后查询患者和此医生有关的在线咨询信息
+			var queryConsultingReplyByPatientUrl = Utils.getRoot()+"/consultingreplyApp/queryConsultingReplyByPatient";
+			$.post(queryConsultingReplyByPatientUrl, {id:id}, function(res){
+				if (res.success) {
+					createMessage(res.data);
+				} else {
+					alert(res.message);
+				}
+			});
+			//创建咨询回复信息
+			function createMessage(data) {
+				var msglist = $("#msglist");
+				for (var i = 0; i < data.length; i++) {
+					var divlist = "";
+					//判断到底是患者咨询，还是医生回复
+					if (data[i].corr == 1) {
+						divlist = $("<div class='msg_list'><span class='send_time'>"+conversiondate(data[i].createtime)+"</span><span class='cons_per'>患者 ： "+data[i].patientname+" </span><div class='cons_content'><span>"+data[i].crcontent+"</span></div></div>");
+					} else {
+						divlist = $("<div class='msg_list'><span class='send_time'>"+conversiondate(data[i].createtime)+"</span><span class='cons_doc'>主治医生："+data[i].doctorid+"</span><div class='consdoc_content'><span>"+data[i].crcontent+"</span></div></div>");
+					}
+					msglist.append(divlist);
+				}
+			}
+			
+			//格式化时间戳
+			function conversiondate(cdate) {
+				var time = new Date(cdate);
+				var y = time.getFullYear();			//年
+				var m = time.getMonth() + 1;		//月
+				var d = time.getDate();				//日
+				var h = time.getHours();			//时
+				var mm = time.getMinutes();			//分
+				var ss = time.getSeconds();			//秒
+				
+				//获取当前年份
+				var mydate = new Date();
+				var year = mydate.getFullYear();
+				
+				var s = "";
+				
+				//月份前需要不需要加0
+				if (m < 10) {
+					m = "0" + m;
+				}
+				//日前需要不需要加0
+				if (d < 10) {
+					d = "0" + d;
+				}
+				//需要不需要加上年份
+				if (y - year == 0) {
+					s = m+"-"+d+" "+h+":"+mm+":"+ss
+				} else {
+					s = y+"-"+m+"-"+d+" "+h+":"+mm+":"+ss;
+				}
+				return s;
+			}
+			
+			//发送信息
+			$("#fasong").click(function(){
+				var consultingUrl = Utils.getRoot()+"/consultingreplyApp/consulting";
+				$.post(consultingUrl, {doctorid:id, crcontent:$("#crcontent").val()}, function(res){
+					if (res.success) {
+						//刷新咨询回复内容
+						$.post(queryConsultingReplyByPatientUrl, {id:id}, function(res){
+							if (res.success) {
+								$("#msglist").empty();
+								$("#crcontent").val("");
+								createMessage(res.data);
+							} else {
+								alert(res.message);
+							}
+						});
+					} else {
+						alert(res.message);
+					}
+				});
+			});
+		});
+	</script>
+		
+	</head>
+	<body>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">在线咨询</h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="doc_intro">
+					<div class="intro_photo">
+						<img src="../../img/online/u390.png" />
+					</div>
+					<div class="intro_right">
+						<div style="margin-top:10px ;">
+							<input type="hidden" name="id" id="id" />
+							<span class="intro_name">黄纯织</span>
+							<span class="intro_status">副主任医师</span>
+						</div>
+						<div>
+							<span class="intro_dep">对各种疑难消化病、急重症、肝病的诊治、肝移植围手术期处理等积累了丰富经验。</span>
+						</div>
+					</div>
+				</div>
+				<div class="msg_item" id="msglist">
+				</div>
+				
+				<div class="cons_footer">
+					<div class="up_img"><img src="../../img/online/u610.png"/></div>
+					<div class="foot_inp"><input type="text" id="crcontent"/></div>
+					<div class="foot_btn">
+						<button class="ui-btn ui-btn-primary" id="fasong">发送</button>
+					</div>
+				</div>
+			</section>
+		</section>
+	</body>
+</html>

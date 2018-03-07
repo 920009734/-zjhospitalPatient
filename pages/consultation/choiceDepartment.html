@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+		<title>选择科室</title>
+		<style type="text/css">
+			header>h4>span,header>h4>i{display: block;float: left;}
+			header>h4>i{margin-top: 3px;}
+			.search_doc{display: block;width: 92%;height: 60px;margin: 0 auto;margin-top: 15px;}
+			.search_doc>div{display: block;float: left;height: 35px;line-height: 35px;} 
+			.search_left{width: 87%;background-color: #FFFFFF;border-radius: 30px;}
+			.search_left>input,.search_left>i{display: block;float: left;}
+			.search_left>input{height: 33px;line-height: 35px;width: 80%;border: none;margin-left: 15px;}
+			.search_left>i{font-size: 40px;margin-right: -10px;margin-top: -4px;}
+			.search_right{width: 13%;text-align: right;color: #199ED8;}
+			.ck_doc{display: block;width:92%;margin: 0 auto;margin-bottom:5px;height: 100px;background-color: #FFFFFF;border-radius: 2px;}
+			.ck_doc>div{display: block;float: left;}
+			.doc_left{width: 23%;height: 100%;}
+			.doc_left>img{display: block;margin: 0 auto;margin-top:15px ;}
+			.doc_right{width: 76%;height: 100%;margin-top: 5px;}
+			.right_title>span{display: block;float: left;height: 30px;line-height: 30px;}
+			.right_name{width: 25%;}
+			.right_position{width:38%;font-size: 13px;}
+			.right_type{width: 37%;font-size: 13px;text-align: right;}
+			.right_detail{display: block;float: left;width: 100%;font-size: 13px;}
+			.department_show{display: block;width: 80%;min-height: 200px;max-height: 700px; background-color: #FFFFFF;margin: 0 auto;}
+			.ui-dialog-cnt{display: block; width: 90%;margin: 0 auto;border-radius:5px ;background-color: #FFFFFF;}
+			.dep_type{display: block;font-size: 15px;}
+			.type_left{display: block;float: left;width: 35%;height: 420px;overflow-y: auto;}
+			.type_right{display: block;float: left;width: 63%;height: 420px;margin-left: 2%;overflow-y: auto;background-color: #F6F6F6;}
+			.left_item{display: block;width: 100%;height: 40px;line-height: 40px;border-bottom: 1px solid #F6F6F6;}
+			.left_item>span{margin-left: 7px;}
+			.left_item.active{background-color: #F6F6F6;}
+			.ui-dialog-bd{min-height:100px;max-height: 450px;padding: 10px 0;}
+			
+			.right_item{display: block;width: 100%;height: 40px;line-height: 40px;}
+			.right_item>span{margin-left: 10px;}
+			.depitem_list.all{padding-bottom: 5px;}
+		</style>
+	</head>
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;" id="dep_type" ><span>全部科室</span> <i class="ui-icon ui-icon-unfold"></i></h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="search_doc">
+					<div class="search_left">
+						<input type="text" placeholder="搜科室、疾病、医生" />
+						<i class="ui-icon ui-icon-search"></i>
+					</div>
+					<div class="search_right">搜索</div>
+				</div>
+				
+				<div class="ck_doc" class="doctorInfo">
+					<div class="doc_left">
+						<img src="../../img/online/u390.png" />
+					</div>
+					<div class="doc_right">
+						<div class="right_title">
+							<span class="right_name">黄纯织</span>
+							<span class="right_position">副主任医师</span>
+							<span class="right_type">消化内科</span>
+						</div>
+						<div class="right_detail">
+							从事临床诊治工作30余年，擅长消化系肿瘤的放射介入诊疗技术及放射介入诊断和治疗原发性肝癌、上消...
+						</div>
+					</div>
+				</div>
+				<div class="ck_doc">
+					<div class="doc_left">
+						<img src="../../img/docImg.png" />
+					</div>
+					<div class="doc_right">
+						<div class="right_title">
+							<span class="right_name">丁明学</span>
+							<span class="right_position">主治医生</span>
+							<span class="right_type">呼吸内科</span>
+						</div>
+						<div class="right_detail">
+							从事临床诊治工作30余年，擅长消化系肿瘤的放射介入诊疗技术及放射介入诊断和治疗原发性肝癌、上消...
+						</div>
+					</div>
+				</div>
+				<div class="ck_doc">
+					<div class="doc_left">
+						<img src="../../img/docImg.png" />
+					</div>
+					<div class="doc_right">
+						<div class="right_title">
+							<span class="right_name">李志樑</span>
+							<span class="right_position">主任医师</span>
+							<span class="right_type">消化内科</span>
+						</div>
+						<div class="right_detail">
+							从事临床诊治工作30余年，擅长消化系肿瘤的放射介入诊疗技术及放射介入诊断和治疗原发性肝癌、上消...
+						</div>
+					</div>
+				</div>
+				<div class="ck_doc">
+					<div class="doc_left">
+						<img src="../../img/docImg.png" />
+					</div>
+					<div class="doc_right">
+						<div class="right_title">
+							<span class="right_name">刘磊</span>
+							<span class="right_position">副主任医师</span>
+							<span class="right_type">骨科中心</span>
+						</div>
+						<div class="right_detail">
+							从事临床诊治工作30余年，擅长消化系肿瘤的放射介入诊疗技术及放射介入诊断和治疗原发性肝癌、上消...
+						</div>
+					</div>
+				</div>
+			</section>
+		</section>
+		
+		<section id="dialog">
+			<div class="demo-item">
+				<div class="demo-block">
+					<div class="ui-dialog">
+					    <div class="ui-dialog-cnt">
+						    <header class="ui-dialog-hd ui-border-b">
+			                    <h3>选择科室</h3>
+			                    <i class="ui-dialog-close" data-role="button"></i>
+			                </header>
+			                 <div class="ui-dialog-bd">
+					            <h4 class="depitem_list all"><span>全部科室</span></h4>
+					            <div class="dep_type">
+					            	<div class="type_left">
+					            		<div style="min-height: 100px;max-height: 1200px;overflow-y: auto;">
+					            			<div class="left_item active "><span>内科</span></div>	
+					            			<div class="left_item "><span>外科</span></div>		
+					            		</div>
+					            	</div>
+					            	<div class="type_right">
+					            		<div style="min-height: 100px;max-height: 1200px;overflow-y: auto;">
+					            			<div class="right_item "><span>心血管内科</span></div>
+					            			<div class="right_item "><span>消化内科</span></div>
+					            			<div class="right_item "><span>呼吸内科</span></div>
+					            			<div class="right_item "><span>血液内科</span></div>
+					            			<div class="right_item "><span>内分泌科</span></div>
+					            			<div class="right_item "><span>肿瘤科</span></div>
+					            			<div class="right_item "><span>老年病科</span></div>
+											
+					            			<div class="right_item "><span>普通外科</span></div>
+					            			<div class="right_item "><span>肝胆一科</span></div>
+					            			<div class="right_item "><span>肝胆二科</span></div>
+					            			<div class="right_item "><span>骨科中心</span></div>
+					            			<div class="right_item "><span>泌尿外科</span></div>
+					            			<div class="right_item "><span>神经外科</span></div>
+					            			<div class="right_item "><span>胸心外科</span></div>
+					            			<div class="right_item "><span>烧伤整形科</span></div>
+					            			<div class="right_item "><span>肛肠科</span></div>
+					            			<div class="right_item "><span>麻醉科</span></div>
+											
+											
+					            			<div class="right_item "><span>急诊科</span></div>
+					            			<div class="right_item "><span>输血科</span></div>
+					            			<div class="right_item "><span>妇产科</span></div>
+					            			<div class="right_item "><span>儿科</span></div>
+					            			<div class="right_item "><span>神经内科</span></div>
+					            			<div class="right_item "><span>皮肤科</span></div>
+					            			<div class="right_item "><span>风湿免疫科</span></div>
+					            			<div class="right_item "><span>耳鼻咽喉科</span></div>
+					            			<div class="right_item "><span>口腔科</span></div>
+					            			<div class="right_item "><span>眼科</span></div>
+					            			<div class="right_item "><span>中医科</span></div>
+					            			<div class="right_item "><span>感染疾病科</span></div>
+					            			<div class="right_item "><span>营养科</span></div>
+					            		</div>
+					            	</div>
+					            </div>
+					        </div>
+					    </div>        
+					</div>
+					
+				</div>
+			</div>
+		</section>
+		<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#dep_type").click(function(){
+				    $(".ui-dialog").dialog("show");
+				})
+				//$(".ui-dialog").dialog("show");
+				$(".close_dialog,.ui-dialog-close").click(function(){
+					$(".ui-dialog").dialog("hide");
+				});
+				$(".right_item").click(function(){
+					var depValue = $(this).children("span").text();
+					$("#dep_type>span").text(depValue);
+					$(".ui-dialog").dialog("hide");
+					
+				});
+				
+			})
+			$(".ck_doc").click(function(){
+				window.location.href="./consultation.html";
+			});
+		</script>
+	</body>
+</html>

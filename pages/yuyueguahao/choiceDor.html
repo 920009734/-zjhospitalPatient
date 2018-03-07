@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../js/jquery-1.8.3.min.js"></script>
+		<title>选择医生</title>
+		<style type="text/css">
+			html,body{background-color: #FFFFFF;}
+			.nav_date{display: block;width: 94%;height: 120px; margin: 0 auto;margin-top: 10px;margin-bottom:10px;}
+			
+			.dep_name{padding-top: 6px;font-size: 16px;}
+			.dep_addr{font-size: 12px;margin-top: 2px;}
+			
+			.date_con{display: block;width: 94%;margin: 0 auto;margin-top: 10px;}
+			.con_title_right{display: block;float: right;font-size: 14px;color: #E45A33;margin-top: 2px;margin-right: 10px;}
+			.con_title{font-weight: bold;}
+			.con_doc{display: block;width: 100%;height: 70px;background-color: #F7F7F7;border-top: #E7E7E7;margin-bottom: 3px;}
+			.con_doc>div{display: block;float: left;height: 70px;}
+			.doc_img{width: 21%;}
+			.doc_img>img{display:block;margin: 0 auto;margin-top: 15px;}
+			.doc_detail{width: 60%;line-height: 27px;}
+			.doc_yynum{width: 17%;text-align: center;}
+			.doc_detail>span{display: block;width: 100%;}
+			.main_doc{font-weight: 100;margin-left: 15px;font-size: 14px;}
+			.doc_name{margin-top: 10px;font-weight: bold;}
+			.doc_time{font-size: 14px;}
+			.dep_type{margin-left: 10px;}
+			.doc_yynum>span{display: block;width: 100%;line-height: 27px;}
+			.yhao{margin-top: 10px;font-size: 14px;}
+			.yhao_num{font-weight: bold;color: #009900;}
+			.date_item{display: block;float:left;width: 85%;}
+			.date_list{display: block;float: left;width: 24.5%;height:60px;text-align: center;border-right: 1px solid #EEEAEB;}
+			.date_list.active{background-color: #3A93A5;color: #FFFFFF;}
+			.date_list{display: block;border: 1px solid #EEEAEB;} 
+			.date_list:nth-child(2),.date_list:nth-child(3),.date_list:nth-child(4),
+			.date_list:nth-child(6),.date_list:nth-child(7),.date_list:nth-child(8){border-left: none;}
+			.date_list:nth-child(5),.date_list:nth-child(6),.date_list:nth-child(7),.date_list:nth-child(8){border-top: none;}
+			.date_icon{display: block;float:left; border: 1px solid #EEEAEB;width:14%;border-left: none;color: #3A93A5;}
+			.date_icon.open>p{text-align: center;padding-top: 6px;}
+			.date_icon>i{text-align: center;margin-top: -9px;font-size: 42px;color: #3A93A5;}
+			
+			.date_icon.close>p{text-align: center;padding-top: 80%;}
+			.date_icon.close{height: 121px;}
+			.date_icon.open{height: 60px;}
+		</style>
+		<script type="text/javascript">
+        	$(function(){
+        		$("#sjxz").click(function(){
+        			window.location.href="../yuyueguahao/choiceTime.html"
+        		})
+        	})
+        </script>
+	</head>
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">
+				<input type="hidden" value="xugnk" id="xugnk">
+				心血管内科
+			</h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="nav_date">
+					<div class="date_item">
+						<div class="date_list active">
+							<h3 class="dep_name">星期一</h3>
+							<p class="dep_addr">3月05日</p>
+						</div>
+						<div class="date_list">
+							<h3 class="dep_name">星期二</h3>
+							<p class="dep_addr">3月06日</p>
+						</div>
+						<div class="date_list">
+							<h3 class="dep_name">星期三</h3>
+							<p class="dep_addr">3月07日</p>
+						</div>
+						<div class="date_list">
+							<h3 class="dep_name">星期四</h3>
+							<p class="dep_addr">3月08日</p>
+						</div>
+						
+						<div class="date_list ">
+							<h3 class="dep_name">星期五</h3>
+							<p class="dep_addr">3月09日</p>
+						</div>
+						<div class="date_list">
+							<h3 class="dep_name">星期六</h3>
+							<p class="dep_addr">3月10日</p>
+						</div>
+						<div class="date_list">
+							<h3 class="dep_name">星期日</h3>
+							<p class="dep_addr">3月11日</p>
+						</div>
+						<div class="date_list">
+							<h3 class="dep_name">星期一</h3>
+							<p class="dep_addr">3月12日</p>
+						</div>
+					</div>
+					
+					<div class="date_icon open">
+						<!--<p>展开</p><i class="ui-icon ui-icon-unfold"></i>-->
+						
+						<p>展开</p><i class="ui-icon ui-icon-unfold"></i>
+					</div>
+				</div>
+				
+				<div style="display: block;float: left;width: 100%;">
+					<!-- 上午 -->
+					<div class="date_con">
+						<span class="con_title"><font color="#3A93A5">上午</font><span class="con_title_right">3 位</span></span>
+						<div class="con_doc" id="sjxz">
+							<div class="doc_img"><img src="../../img/docImg.png"></div>
+							<div class="doc_detail">
+								<input type="hidden" value="ysid" id="ysid">
+								<span class="doc_name">丁明学<span class="main_doc">主治医生</span></span>
+								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
+							</div>
+							<div class="doc_yynum">
+								<span class="yhao">余号</span>
+								<span class="yhao_num">20</span>
+							</div>
+						</div>
+						<div class="con_doc">
+							<div class="doc_img"><img src="../../img/docImg.png"></div>
+							<div class="doc_detail">
+								<span class="doc_name">李志樑<span class="main_doc">主治医生</span></span>
+								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
+							</div>
+							<div class="doc_yynum">
+								<span class="yhao">余号</span>
+								<span class="yhao_num">20</span>
+							</div>
+						</div>
+						<div class="con_doc">
+							<div class="doc_img"><img src="../../img/docImg.png"></div>
+							<div class="doc_detail">
+								<span class="doc_name">刘磊<span class="main_doc">主治医生</span></span>
+								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
+							</div>
+							<div class="doc_yynum">
+								<span class="yhao">余号</span>
+								<span class="yhao_num">20</span>
+							</div>
+						</div>
+					</div>
+					<div class="date_con">
+						<span class="con_title"><font color="#3A93A5">下午</font><span class="con_title_right">3 位</span></span>
+						<div class="con_doc">
+							<div class="doc_img"><img src="../../img/docImg.png"></div>
+							<div class="doc_detail">
+								<span class="doc_name">李功辉<span class="main_doc">主治医生</span></span>
+								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
+							</div>
+							<div class="doc_yynum">
+								<span class="yhao">余号</span>
+								<span class="yhao_num">15</span>
+							</div>
+						</div>
+						<div class="con_doc">
+							<div class="doc_img"><img src="../../img/docImg.png"></div>
+							<div class="doc_detail">
+								<span class="doc_name">刘磊<span class="main_doc">主治医生</span></span>
+								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
+							</div>
+							<div class="doc_yynum">
+								<span class="yhao">余号</span>
+								<span class="yhao_num">15</span>
+							</div>
+						</div>
+						<div class="con_doc">
+							<div class="doc_img"><img src="../../img/docImg.png"></div>
+							<div class="doc_detail">
+								<span class="doc_name">严全能<span class="main_doc">主治医生</span></span>
+								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
+							</div>
+							<div class="doc_yynum">
+								<span class="yhao">余号</span>
+								<span class="yhao_num">15</span>
+							</div>
+						</div>
+					</div>
+				</div>	
+				
+			</section>
+		</section>
+		
+		<script type="text/javascript">
+			$(function(){
+				$(".date_list:nth(4),.date_list:nth(6),.date_list:nth(7),.date_list:nth(5)").hide();
+				$(".date_icon").click(function(){
+					var aa = $(this).hasClass("open");
+					if(!aa){
+						$(".date_list:nth(4),.date_list:nth(6),.date_list:nth(7),.date_list:nth(5)").hide();
+						$(this).removeClass("close");
+						$(this).addClass("open");
+						$(this).children("p").text("展开");
+					}else{
+						$(".date_list:nth(4),.date_list:nth(6),.date_list:nth(7),.date_list:nth(5)").show();
+						$(this).removeClass("open");
+						$(this).addClass("close");
+						$(this).children("p").text("收起");
+					}
+				})
+			});
+		</script>
+	</body>
+</html>

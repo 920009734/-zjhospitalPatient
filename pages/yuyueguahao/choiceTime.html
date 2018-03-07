@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../js/jquery-1.8.3.min.js"></script>
+		<title>选择时间</title>
+		<style type="text/css">
+			html,body{background-color: #FFFFFF;font-family: "微软雅黑";height: 100%;width: 100%;}
+			.doc_detai{display: block;width: 100%;height: 50px;line-height:50px;border-bottom: 1px solid #EEEAEB;margin-top: 5px;}
+			.date_pers{margin-left: 10px;}
+			.date_type{font-size: 13px;margin-left: 15px;}
+			.date_time{display: block;float:right;font-size:13px;margin-right: 10px;}
+			.date_detail{display: block;width:100% ;height: 60px;border-bottom: 1px solid #EEEAEB;}
+			.ck_time{display: block;float: left;margin-top:15px;margin-left:10px;width: 16%;height: 30px;text-align:center;line-height: 30px; border: 1px solid #199ED8;border-radius: 2px;color: #199ED8;font-size: 15px;}
+			.detail_time{display: block;float: left;width: 100%;height: 20px;background-color: #F7F7F7;line-height: 20px;font-size: 13px;color: #199ED8;}
+			.detail_time>p{margin-left: 10px;}
+			.detail_dateTime{display: block;float: left;width: 100%;min-height: 50px;max-height: 200px;}
+			.ck_dateTime{display: block;float: left;margin-top:15px;margin-left:12px;width: 19%;height: 30px;text-align:center;line-height: 30px; border: 1px solid #199ED8;border-radius: 2px;color: #199ED8;font-size: 15px;}
+			.ck_dateTime:last-child{margin-bottom: 15px;}
+		</style>
+		<script type="text/javascript">
+        	$(function(){
+        		$("#qrxz").click(function(){
+        			window.location.href="../yuyueguahao/comfirmMsg.html"
+        		})
+        	})
+        </script>
+	</head>
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">预约时间</h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="doc_detai">
+					<span class="date_pers">丁明学</span>
+					<span class="date_type">心血管内科门诊</span>
+					<span class="date_time">2018-03-25 上午</span>
+				</div>
+				<div class="date_detail">
+					<div class="ck_time"> 9点 </div>
+					<div class="ck_time"> 10点 </div>
+					<div class="ck_time"> 11点 </div>
+				</div>
+				<div class="time_item">
+					<div class="detail_time"><p>9点</p></div>
+					<div class="detail_dateTime">
+						<div class="ck_dateTime" id="qrxz"> 09:00:00 </div>
+						<div class="ck_dateTime"> 09:15:00 </div>
+						<div class="ck_dateTime"> 09:30:00 </div>
+						<div class="ck_dateTime"> 09:45:00 </div>
+					</div>
+				</div>
+				<div class="time_item">
+					<div class="detail_time"><p>10点</p></div>
+					<div class="detail_dateTime">
+						<div class="ck_dateTime"> 10:00:00 </div>
+						<div class="ck_dateTime"> 10:15:00 </div>
+						<div class="ck_dateTime"> 10:30:00 </div>
+						<div class="ck_dateTime"> 10:45:00 </div>
+					</div>
+				</div>
+				<div class="time_item">
+					<div class="detail_time"><p>11点</p></div>
+					<div class="detail_dateTime">
+						<div class="ck_dateTime"> 11:00:00 </div>
+						<div class="ck_dateTime"> 11:15:00 </div>
+						<div class="ck_dateTime"> 11:30:00 </div>
+						<div class="ck_dateTime"> 11:45:00 </div>
+					</div>
+				</div>
+			</section>
+		</section>
+	</body>
+</html>

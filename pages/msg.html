@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>FrozenUI Demo</title>
+        <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+        <link rel="stylesheet" href="../css/frozen.css">
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+        
+        <style type="text/css">
+        body{height: 100%;width: 100%;}
+        	.ui-header.ui-header-positive{height: 50px;background-color: #3A93A5;}
+        	.footer_icon, .footer_title{display:block;float: none; margin-top: -8px;font-size: 15px;}
+			.footer_icon>i{font-size:28px;}  
+			.ui-footer-btn{background-image: none;background-color: #EEEAEB;} 
+			.footer_item{color: #626060;} 
+			.footer_item.active{color: #3A93A5;} 
+			.footer_item.active>.footer_icon>i{color: #3A93A5;}	
+			.msg-li{padding: 5px 0;}
+			.ui-badge-cornernum{margin-top: 25px;margin-right: 20px;}
+        </style> 
+    </head> 
+    
+    <body ontouchstart>
+    	<header class="ui-header ui-header-positive"><h1>我的消息</h1></header>
+        <section class="ui-container">
+			<section id="list">
+				<ul class="ui-list ui-list-function ui-border-tb">
+	                <li dataType="1" class="msg-li ui-border-t">
+	                    <div>
+	                        <span><i class="ui-icon ui-icon-comment"></i></span>
+	                    </div>
+	                    <div class="ui-list-info">
+	                        <h4>私信 <div id="message_type_1" class=""></div></h4>
+	                    </div>
+	                </li>
+	                <li dataType="2" class="msg-li ui-border-t">
+	                    <div>
+	                        <span><img src="../img/msg.png" style="margin-top: 11px;margin-left: 5px; margin-right: 10px;width: 22px;height: 24px;"></span>
+	                    </div>
+	                    <div class="ui-list-info">
+	                        <h4>通知 <div id="message_type_2" class=""></div></h4>
+	                    </div>
+	                </li>
+	                <li dataType="3" class="msg-li ui-border-t">
+	                    <div>
+	                        <span><img src="../img/u34.jpg" style="margin-top: 11px;margin-left: 5px; margin-right: 10px;width: 24px;height: 24px;"></span>
+	                    </div>
+	                    <div class="ui-list-info">
+	                        <h4>预约 <div id="message_type_3" class=""></div></h4>
+	                    </div>
+	                </li>
+	                <li dataType="4" class="msg-li ui-border-t">
+	                    <div>
+	                        <span><img src="../img/jiaofei.png" style="margin-top: 11px;margin-left: 5px; margin-right: 10px;width: 22px;height: 24px;	"></span>
+	                    </div>
+	                    <div class="ui-list-info">
+	                        <h4>缴费 <div id="message_type_4" class=""></div></h4>
+	                    </div>
+	                </li>
+               </ul>
+			</section>
+        </section><!-- /.ui-container-->
+        <script type="text/javascript">
+        	$(".msg-li").click(function(){
+        		location.href="detailMsg.html?dataType="+$(this).attr("dataType")
+        	});
+        </script>
+    </body>
+</html>

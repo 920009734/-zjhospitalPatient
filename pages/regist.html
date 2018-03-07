@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+		<script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+        <link rel="stylesheet" href="../css/frozen.css">
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+        <script src="../js/Utils.js"></script>
+		<title></title>
+		<style type="text/css">
+		body{background-color: #FFFFFF;}
+			.ui-header.ui-header-positive{height: 50px;line-height:50px;background-color: #3A93A5;}
+			.ui-icon.ui-icon-return{font-size: 25px;margin-top: 3px;}
+			.login_img{display: block;width: 100%;}
+			.login_img>img{display: block;margin: 0 auto;margin-top: 50px;}
+			.login-inp{display: block;width: 100%;margin-top: 20px;}
+			.login_user{display: block;width: 90%;height: 45px;margin:0 auto;border-bottom: 1px solid #E7E7E7;}
+			.login_user>span{display: block;float: left;}
+			.user_icon{display: block;width: 15%;}
+			.user_inp{display: block;width: 84%;}
+			.user_inp>input{display: block;float: left; width: 100%;height: 35px;line-height:35px;margin-top: 5px;border: none;}
+			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;}
+			.login_btn>button{border-radius:2px ;background: #3A93A5;}
+			.login-detai{display: block;width: 90%;margin: 0 auto;margin-top:15px;font-size: 14px;color: #3A93A5;}
+			.login-reg{display: block;float: right;}
+			.yzm{display: block;float: left; width:27%;height: 35px;line-height:35px;margin-top: 5px;border-left: 1px solid #E7E7E7;font-size: 14px;padding-left: 5px;color: #999999;}
+			.reg_agree{display: block;margin-top: 10px;}
+			.reg_agree>div>p{font-size: 14px;}
+			.ui-checkbox input:checked:before, .ui-checkbox-s input:checked:before{color: #3A93A5;}
+		</style>
+	</head>
+	<body>
+		<script>
+			function ocxieyi(isCheck){
+				if(isCheck){
+					$("#regist_sub").removeAttr("disabled");
+				}else{
+					$("#regist_sub").attr("disabled","disabled");
+				}
+			}
+			function regist(){
+				var phone = $("#phone_").val();
+				var password = $("#password_").val();
+				var identifyingCode = $("#ic_").val();
+				$.ajax({
+					type:"post",
+					url:Utils.getRoot()+"/patientApp/register",
+					async:false,
+					data: {
+						phone: phone,
+						password: password,
+						identifyingCode: identifyingCode
+					},
+					success: function(result){
+						alert(result.message);
+						if(result.success){
+							location.href="login.html"
+						}
+					}
+				});
+			}
+		</script>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i><h4 style="margin-left: 25px;">注册</h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="login-inp">
+					<div class="login_user">
+						<span class="user_icon"><i class="ui-icon ui-icon-personal"></i></span>
+						<span class="user_inp"><input id="phone_" type="text" placeholder="请输入手机号" class=""/></span>
+					</div>
+					<div class="login_user">
+						<span class="user_icon"><i class="ui-icon ui-icon-personal"></i></span>
+						<span class="user_inp"><input id="password_" type="password" placeholder="请输入密码" class=""/></span>
+					</div>
+					<div class="login_user">
+						<span class="user_icon"><i class="ui-icon ui-icon-personal"></i></span>
+						<span class="user_inp">
+							<input id="ic_" type="text" placeholder="请输入验证码" style="width: 69%;"/>
+							<span class="yzm">获取验证码</span>
+						</span>
+					</div>
+					<div class="reg_agree">
+	                    <div class="ui-form-item ui-form-item-checkbox">
+	                        <label class="ui-checkbox">
+	                            <input onchange="ocxieyi(this.checked)" type="checkbox" checked="true"/>
+	                        </label>
+	                        <p>同意<font color="#3A93A5">《珠江医院用户协议》</font></p>
+	                    </div>
+					</div>
+				</div>
+				<div class="login_btn">
+					<button id="regist_sub" onclick="regist()" class="ui-btn ui-btn-lg ui-btn-primary">注册</button>
+				</div>
+			</section>
+		</section>
+	</body>
+</html>

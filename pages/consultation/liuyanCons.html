@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
+		<title>选择科室</title>
+		<style type="text/css">
+			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
+			.comfirm_item{display: block;width: 100%;height: 50px;border-bottom: 1px solid #EEEAEB;background-color: #FFFFFF;line-height: 50px;}
+			.item_name{display: block;float: left; margin-left: 10px;width: 39%;}
+			.item_value{display: block;float: left;width: 55%;text-align: right;height: 50px;line-height: 50px;font-size: 14px;}
+			.item_value>i{display: block;float: right;margin-top: 2px;margin-right: -10px;}
+			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;background-color: #FFFFFF;}
+			.login_btn>button{border-radius:2px ;background: #3A93A5;font-size: 16px;}
+			.tab_per{display: block;width: 100%;height: 50px;}
+			.tab_per>span{display: block;float: left;width: 49.5%;height: 50px;line-height: 50px;text-align: center;}
+			.per_type.active{background-color: #FFFFFF;}
+			.item_value>input{width: 100%;border: none;text-align: right;}
+			.item_name>i,.item_name>span{display: block;float: left;}
+			.item_name>span{margin-right: 5px;}
+			.item_name>i{margin-left: -10px;margin-right: -6px;margin-top: 3px;}
+			.ui-switch{right: 50px;}
+			.ui-actionsheet-cnt{font-size: 15px;}
+			.personl_gx.active{color: #00BA7F;font-weight: bold;}
+			.personl_zj.active{color: #00BA7F;font-weight: bold;}
+			.liuyanTextArea{display: block;width: 100%;margin: 0 auto;height: 100px;background-color: #FFFFFF;padding-top: 8px;}
+			.textArea_inp{display: block;width:90%;margin: 0 auto; height: 80%;border: 1px solid #5EB6CB;border-radius:2px;font-size: 14px;padding: 5px;}
+			.upload_photo{display: block;width: 100%;min-height: 120px;max-height:200px;background-color: #FFFFFF;}
+			.upload_title{display: block;width: 100%;font-size: 13px;}
+			.upload_title>span{display: block; padding-left:10px;padding-top: 5px;}
+			.ui-dialog-cnt{display: block; width: 90%;margin: 0 auto;border-radius:5px ;background-color: #FFFFFF;}
+			.dep_type{display: block;font-size: 15px;}
+			/*图片上传*/
+			.z_photo {
+            overflow: auto;
+            clear: both;
+            width:100%;
+            height:auto;
+			}
+			
+			.z_photo img {
+				width: 65px;
+				height: 65px;
+			}
+			
+			.z_addImg {
+				float: left;
+				margin-right: 10px;
+				margin-top:5px;
+			}
+			
+			.z_file {
+				width: 65px;
+				height: 65px;
+				background: url(../../img/z_add.png) no-repeat;
+				background-size: 100% 100%;
+				float: left;
+				margin-right: 10px;
+				margin-top:5px;
+			}
+			
+			.z_file input::-webkit-file-upload-button {
+				width: 1rem;
+				height: 1rem;
+				border: none;
+				position: absolute;
+				outline: 0;
+				opacity: 0;
+			}
+			
+			.z_file input {
+				display: block;
+				width: auto;
+				border: 0;
+				vertical-align: middle;
+			}
+			.img_item{margin-left: 10px;}
+			.login_btn>span{display: block;width: 60%;margin: 0 auto;font-size: 14px;margin-top: 10px;}
+			.ui-dialog-cnt{display: block; width: 90%;margin: 0 auto;border-radius:5px ;background-color: #FFFFFF;}
+			.ui-dialog-bd{background-color: #F7F7F7;padding: 0 10px;min-height:200px;max-height: 450px;border-radius: 3px;-webkit-box-pack:inherit;}
+			.add_per{display: block;width: 100%;height: 50px;line-height: 50px;background-color: #FFFFFF;margin-top: 15px;}
+			.add_per>span{display: block;width: 45%;height: 100%;margin: 0 auto;}
+			.add_per>span>i,.add_per>span>span{display: block;float:left ;color: #00BA7F;}
+			.add_per>span>i{font-size: 30px;margin-top: 3px;color: #00BA7F;}
+			.per_name{display: block;width: 90%;margin:0 auto;background-color: #FFFFFF;margin-top: 10px;height: 35px;line-height: 35px;}
+			.per_name>span{display: block;float: left;width: 44%;margin-left: 10px;}
+			.per_relationship{text-align: right;}
+			.hidden{display: none;}
+			.ui-dialog-cnt{margin:50% auto;}
+		</style>
+	</head> 
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">留言咨询</h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="comfirm_item hidden">
+					<span class="item_name">咨询时间</span>
+					<span class="item_value" id="myself"><span id="">00:00 -- 23:59</span> </span>
+				</div>
+				<div class="comfirm_item ">
+					<span class="item_name">医生</span>
+					<span class="item_value" id="doctorName_">黄纯织</span>
+				</div>
+				<div class="comfirm_item ">
+					<span class="item_name" id="shenfenz">患者</span>
+					<span class="item_value" id="huanzhe" ><span id="huanzhe_">测试人员</span> <i class="ui-icon ui-icon-arrow"></i></span>
+					<input type="hidden" id="huanzhe_id" value="">
+				</div>
+				<div class="comfirm_item hidden">
+					<span class="item_name" id="shenfenz">健康档案</span>
+					<span class="item_value" id="myself"><span>家族病史、过敏史等</span> <i class="ui-icon ui-icon-arrow"></i></span>
+				</div>
+				<div class="liuyanTextArea ui-border-b">
+					<textarea class="textArea_inp" placeholder="详细描述你的病情、症状、治疗经过以及想要获得的帮助" id="describe_"></textarea>
+				</div>
+				<div class="upload_photo ui-border-b">
+					<div class="upload_title"><span>添加图片描述，有利于与医生更了解你的病情，最多选择5张图片</span></div>
+					<div class="img_item">
+						<div class="z_photo">
+				            <div class="z_file">
+				                <input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+				            </div>
+				        </div>
+					</div>
+				</div>
+				
+				<div style="display: block;float: left;width: 100%;height: 130px; background-color: #FFFFFF;">
+					<div class="login_btn">
+						<button class="ui-btn ui-btn-lg ui-btn-primary" id="submitbt">马上提问</button>
+						<!-- <button class="ui-btn ui-btn-lg ui-btn-primary" id="test">测试</button> -->
+						<span>请阅读<font color="#7AB6D9">《留言咨询须知》</font></span>
+					</div>
+					
+				</div>
+				<div id="testdiv"></div>
+			</section>
+		</section>
+		<section id="dialog">
+			<div class="demo-item">
+				<div class="demo-block">
+					<div class="ui-dialog addPatient">
+					    <div class="ui-dialog-cnt">
+						    <header class="ui-dialog-hd ui-border-b">
+			                    <h3>修改就诊人</h3>
+			                    <i class="ui-dialog-close" data-role="button"></i>
+			                </header>
+			                 <div class="ui-dialog-bd">
+					            <div class="add_per">
+					            	<span>
+						            	<i class="ui-icon ui-icon-add-people"></i>
+						            	<span>修改就诊人</span>
+					            	</span>
+					            </div>
+					            <div class="per_name">
+					            	<span>测试</span>
+					            	<span class="per_relationship">本人</span>
+					            </div>
+					        </div>
+					    </div>        
+					</div>
+					
+				</div>
+			</div>
+		</section>
+		<div class="ui-dialog">
+			<div class="ui-dialog-cnt">
+				<div class="ui-dialog-bd"> 
+					<i class="ui-dialog-close" data-role="button"></i>
+					<h4>温馨提示: </h4> 
+					<span id="dialogText"></span>
+				</div>
+				<div class="ui-dialog-ft">
+					<button type="button" data-role="button" class="close_dialog">关闭</button>
+				</div>
+			</div>        
+		</div>
+		
+		<script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#huanzhe").click(function(){
+				    $(".addPatient").show();
+				})
+				$(".close_dialog,.ui-dialog-close").click(function(){
+					$(".ui-dialog").hide();
+				});
+				
+			})
+		</script>
+		
+		<script type="text/javascript">
+		var files = new Array();
+        //px转换为rem
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 640) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+
+        function imgChange(obj1, obj2) {
+            //获取点击的文本框
+            var file = document.getElementById("file");
+            //存放图片的父级元素
+            var imgContainer = document.getElementsByClassName(obj1)[0];
+            //获取的图片文件
+            var fileList = file.files;
+            //文本框的父级元素
+            var input = document.getElementsByClassName(obj2)[0];
+            var imgArr = [];
+            //遍历获取到得图片文件
+            for (var i = 0; i < 5; i++) {
+				//给传值的files赋值
+            	files.push(file.files[i]);
+                var imgUrl = window.URL.createObjectURL(file.files[i]);
+                imgArr.push(imgUrl);
+                var img = document.createElement("img");
+                img.setAttribute("src", imgArr[i]);
+                var imgAdd = document.createElement("div");
+                imgAdd.setAttribute("class", "z_addImg");
+                imgAdd.appendChild(img);
+                imgContainer.appendChild(imgAdd);
+            };
+            imgRemove();
+        };
+
+        function imgRemove() {
+            var imgList = document.getElementsByClassName("z_addImg");
+            var mask = document.getElementsByClassName("z_mask")[0];
+            var cancel = document.getElementsByClassName("z_cancel")[0];
+            var sure = document.getElementsByClassName("z_sure")[0];
+            for (var j = 0; j < imgList.length; j++) {
+                imgList[j].index = j;
+                imgList[j].onclick = function() {
+                    var t = this;
+                    mask.style.display = "block";
+                    cancel.onclick = function() {
+                        mask.style.display = "none";
+                    };
+                    sure.onclick = function() {
+                        mask.style.display = "none";
+                        t.style.display = "none";
+                    };
+
+                }
+            };
+        };
+        
+    </script>
+	<script type="text/javascript">
+		$("#submitbt").click(function(){
+			var formData = new FormData();
+		    formData.append("receiver", $("#doctorName_").html());
+		    formData.append("sender", $("#huanzhe_").html());
+		    formData.append("content", $("#describe_").val());
+		    formData.append("parentId", " ");
+		    for(var i = 0 ; i < files.length ; i ++){
+		    	formData.append("files", files[i]);
+		    }
+			if(!$("#describe_").val()){
+				$("#dialogText").html("请输入你要提的问题!");
+				$(".ui-dialog").show();
+				return false;
+			}
+			$.ajax({
+	             url: Utils.getRoot()+"/inquiry/addInquiry" ,  
+	             type: 'POST',  
+	             data: formData,  
+	             contentType: false,  
+	             processData: false,  
+	             success: function (result) {
+			     	location.href = "../index.html";
+	             },
+	             error: function(result){
+					$("#dialogText").html(result.message);
+					$(".ui-dialog").show();
+				 }
+	        });
+			
+		});
+		$("#test").click(function(){	
+			$.post(Utils.getRoot()+"/inquiry/test", {
+				id: '81416598AC224816852BCF1C25E3781D'
+			} ,function(result){
+				if(result.success){
+					$("#testdiv").empty();
+					var attr=result.data.imgPath.split(",");
+					for (var i=0; i<attr.length; i++){
+					alert(attr[i]);
+						$("#testdiv").append("<img src='"+attr[i]+"'>");
+					}
+				}else{
+					$("#dialogText").html(result.message);
+					$(".ui-dialog").show();
+				}
+			})
+		});
+	</script>
+	</body>
+</html>
