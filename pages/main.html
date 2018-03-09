@@ -10,13 +10,13 @@
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
         <style type="text/css">
-       	 	html,body{height: 100%;width: 100%;}
+       	 	html,body{height: 100%;width: 100%;font-family: "微软雅黑";background-color: #F1F0F8;}
         	.footer_icon, .footer_title{display:block;float: none; margin-top: -8px;font-size: 15px;}
-			.footer_icon>i{font-size:28px;}  
-			.ui-footer-btn{background-image: none;background-color: #EEEAEB;} 
-			.footer_item{color: #626060;} 
-			.footer_item.active{color: #3A93A5;} 
-			.footer_item.active>.footer_icon>i{color: #3A93A5;}
+			.footer_icon>i{font-size:28px;color: #FFFFFF;}  
+			.ui-footer-btn{font-family: "微软雅黑";background-color: #3A93A5; background-image: none;} 
+			.footer_item{color: #FFFFFF;} 
+			.footer_item.active{color: #FFFFFF; font-weight: bold;} 
+			.footer_item.active>.footer_icon>i{color: #FFFFFF; font-weight: bold;}
 			#list{width: 100%;height: 100%;}
 			#main_frame{display: block;width:100%;height: 100%;}
 			#main_div{display: block;float: left; width: 100%;height: 100%;}
@@ -84,7 +84,7 @@
 				}
 				  // 监听Socket的关闭
 				socket.onclose = function(event) {
-				  console.log('closed', event); 
+				  //console.log('closed', event); 
 				};
         		
         		$(".footer_item").click(function(){

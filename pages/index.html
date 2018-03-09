@@ -10,32 +10,25 @@
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
         <style type="text/css">
-       	 	body{height: 100%;width: 100%;}
-       	 	.hr_{width: 100%;height: 10px;background-color: #F7F7F7;}
-       	 	
-        	.footer_icon, .footer_title{display:block;float: none; margin-top: -8px;font-size: 15px;}
-			.footer_icon>i{font-size:28px;}  
-			.ui-footer-btn{background-image: none;background-color: #EEEAEB;} 
-			.footer_item{color: #626060;} 
-			.footer_item.active{color: #3A93A5;} 
-			.footer_item.active>.footer_icon>i{color: #3A93A5;}	
-			.search_item{display: block;width: 90%;height: 35px;background-color: #FFFFFF;margin: 0 auto;border-radius: 20px;margin-top: 7.5px;}
+       	 	html,body{height: 100%;width: 100%;font-family: "微软雅黑";background-color: #F1F0F8;}
+			
 			.tab_img{display: block;float: left;width: 100%;}
 			.tab_img>img{width: 100%;height: auto;}
 			.tab_img>img:nth-child(2){margin-top: -5px;}
 			
-			.fun_item{display: block;float: left;width: 100%; min-height: 100px; max-height: 300px;background-color: #FFFFFF;}
+			.fun_item{display: block;float: left;width: 100%; min-height: 100px; max-height: 300px;background-color: #FFFFFF;margin-top: 5px;}
+			.fun_item:nth-child(3){margin-top: 25px;margin-bottom: 20px;}
+			.fun_item:nth-child(4){margin-bottom: 20px;}
 			.fun_title{display: block;width: 96%;height: 40px;line-height: 40px;margin: 0 auto;margin-bottom: 10px;}
 			.fun_title>span{display: block;float: left;}
 			.item_img{width: 25px;height: 25px;border-radius: 50px;margin-top: 7px;margin-right: 12px;}
 			.item_img>img{display: block; width: 100%;height: 100%;margin-left: 5px;}
 			.fun_item_list{display: block;width: 96%; min-height: 60px;max-height: 300px;margin: 0 auto;margin-top: 5px;}
-			.item_list{display: block;float: left; width: 33.3%;height: 70px;}
+			.item_list{display: block;float: left; width: 33.3%;height: 90px;}
 			.item_list>span{display: block;margin: 0 auto;text-align: center;font-size: 13px;;}
-			.list_icon{display: block; width: 40px;height: 40px;border-radius:50% ;}
+			.list_icon{display: block; width: 50px;height: 50px;border-radius:50% ;}
 			.list_title{padding-top: 3px;width: 100%;}
 			.item_list>span>img{display: block;margin: 0 auto;width: 100%;height: 100%;}
-			
 			
 			.notice_item{display: block;float: left;width: 100%;height:30% ;margin-top: 5px;background-color: #FFFFFF;}
 			.notice_title{display: block;float: left;width: 100%;height: 35px;line-height: 35px;}
@@ -61,9 +54,10 @@
 			<section id="list">
 				<div class="tab_img">
 					<img src="../img/zjLogo.png" />
-					<img src="../img/zjlogo3.png" />
-					<i class="fa-adjust"></i>
+					<!--<img src="../img/zjlogo3.png" />-->
+					<!--i class="fa-adjust"></i>-->
 				</div>
+				
 				<!-- 功能块 -->
 				<div class="fun_item">
 					<div class="fun_title ui-border-b">
@@ -91,14 +85,14 @@
 							<span class="list_icon"><img src="../img/index/jilu.png"/></span>
 							<span class="list_title">预约记录</span>
 						</div> -->
-						<div class="item_list" style="float: right;">
+						<div class="item_list">
 							<span class="list_icon"><img src="../img/more.png"/></span>
 							<span class="list_title">更多</span>
 						</div>
 					</div>
 				</div>
 				<!-- 医院 -->
-				<div class="fun_item" style="margin-top: 5px;">
+				<div class="fun_item">
 					<div class="fun_title ui-border-b">
 						<span class="item_img"><img src="../img/index/yiyuan.png"></span>	
 						<span class="item_title">医院</span>
@@ -127,7 +121,7 @@
 					</div>
 				</div>
 				<!-- 体检 -->
-				<div class="fun_item" style="margin-top: 5px;">
+				<div class="fun_item">
 					<div class="fun_title ui-border-b">
 						<span class="item_img"><img src="../img/index/tijian.png"></span>	
 						<span class="item_title">体检</span>
@@ -176,7 +170,6 @@
 						</li>
 					</ul>
 				</div>
-			
 			</section>
         </section><!-- /.ui-container-->
         
