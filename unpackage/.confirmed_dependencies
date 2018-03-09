@@ -1,1 +1,12 @@
-null
+{
+	"pages/login.html": {
+		"resources": [
+			"font/iconfont-full.ttf",
+			"img/u364.png",
+			"js/frozen.js",
+			"css/frozen.css",
+			"lib/zepto.min.js",
+			"js/Utils.js"
+		]
+	}
+}
