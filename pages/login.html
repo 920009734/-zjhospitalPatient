@@ -43,10 +43,11 @@
 						password: password
 					},
 					success: function(result){
-						alert(result.message);
 						if(result.success){
 							sessionStorage.setItem("patientId",result.data.patientid);
 							location.href="personal.html"
+						}else{
+							alert(result.message);
 						}
 					}
 				});
