@@ -61,7 +61,7 @@
         	$(function(){
         		var patientId = sessionStorage.getItem('patientId');
 				// 创建一个Socket实例
-				var socket = new WebSocket('ws://112.93.117.28:8089/zjhospital-app/websocket/socketServer?userId=' + patientId); 
+				var socket = new WebSocket('ws://112.93.117.28:8089/zjhospital-app/websocket/socketServer?token=' + localStorage.getItem("token")); 
 				// 打开Socket 
 				socket.onopen = function(event) {
 				  console.log('open', event); 

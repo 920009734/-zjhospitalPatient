@@ -280,7 +280,8 @@
 					"js/frozen.js",
 					"css/frozen.css",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"pages/personal.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -323,7 +324,9 @@
 					"img/myD.png",
 					"pages/msg.html",
 					"pages/yuyueguahao/choiceDepartment.html",
-					"pages/consultation/choiceDepartment.html"
+					"pages/consultation/choiceDepartment.html",
+					"pages/detailMsg.html",
+					"js/Utils.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -340,6 +343,18 @@
 				"resources": [
 					"img/online/u390.png",
 					"img/docImg.png",
+					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/personal.html": {
+				"resources": [
+					"img/uploadPersonal.png",
+					"js/jquery-1.8.3.min.js",
+					"js/uploadPreview.js",
+					"js/placeImage.js",
+					"pages/login.html",
 					"pages/main.html"
 				],
 				"refer": [],

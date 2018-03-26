@@ -43,9 +43,10 @@
 						password: password
 					},
 					success: function(result){
+						console.log(result)
 						if(result.success){
-							sessionStorage.setItem("patientId",result.data.patientid);
-							location.href="personal.html"
+							localStorage.setItem("token",result.data.token)
+							location.href="personal.html";
 						}else{
 							alert(result.message);
 						}

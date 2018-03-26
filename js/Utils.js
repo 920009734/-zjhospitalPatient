@@ -3,7 +3,7 @@ Utils = {
 	 * 获取项目根目录
 	 */
 	getRoot : function() {
-		return "http://112.93.117.28:8089/zjhospital-app";
+		return "http://127.0.0.1:8080/zjhospital-app";
 	},
 	/**
 	 * 转换long值为日期字符串
