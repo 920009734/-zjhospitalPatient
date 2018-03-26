@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+		<title>选择科室</title>
+		<style type="text/css">
+			html,body{background-color: #FFFFFF;width: 100%;height: 99%;}
+			.keshi{display: block;width: 100%;height: 100%;} 
+			.kes_left{display: block;float: left;width: 42%;overflow-y: auto;}
+			.kes_right{display: block;float: left;width: 58%;overflow-y: auto;}
+			.left_box{display: block;float: left;width: 100%;height: 70px;background-color:#D5E8EC ;border-bottom:1px solid #FFFFFF;}
+			.left_box.active{background-color: #FFFFFF;}
+			.box_img{display: block;float: left;width: 34%;height: 100%;}
+			.box_img>span{display: block;width: 35px;height: 35px;margin: 0 auto;margin-top: 14px;}
+			
+			.box_imgScr_a{background:url(../../img/kes/a.png) no-repeat;background-size: 100%;}
+			.box_imgScr_a.open{background:url(../../img/kes/a1.png) no-repeat;background-size: 100%;}
+			.box_imgScr_b{background:url(../../img/kes/b.png) no-repeat;background-size: 100%;}
+			.box_imgScr_b.open{background:url(../../img/kes/b1.png) no-repeat;background-size: 100%;}
+			.box_imgScr_c{background:url(../../img/kes/c.png) no-repeat;background-size: 100%;}
+			.box_imgScr_c.open{background:url(../../img/kes/c1.png) no-repeat;background-size: 100%;}
+			.box_imgScr_d{background:url(../../img/kes/d.png) no-repeat;background-size: 100%;}
+			.box_imgScr_d.open{background:url(../../img/kes/d1.png) no-repeat;background-size: 100%;}
+			.box_imgScr_e{background:url(../../img/kes/e.png) no-repeat;background-size: 100%;}
+			.box_imgScr_e.open{background:url(../../img/kes/e1.png) no-repeat;background-size: 100%;}
+			.box_imgScr_f{background:url(../../img/kes/f.png) no-repeat;background-size: 100%;}
+			.box_imgScr_f.open{background:url(../../img/kes/f1.png) no-repeat;background-size: 100%;}
+			.box_imgScr_g{background:url(../../img/kes/g.png) no-repeat;background-size: 100%;}
+			.box_imgScr_g.open{background:url(../../img/kes/g1.png) no-repeat;background-size: 100%;}
+			.box_imgScr_h{background:url(../../img/kes/h.png) no-repeat;background-size: 100%;}
+			.box_imgScr_h.open{background:url(../../img/kes/h1.png) no-repeat;background-size: 100%;}
+			
+			
+			.box_name{display: table-cell;font-size: 14px;height: 70px;vertical-align: middle;padding-right:2px}
+			.right_box{display: block;float: left;width:99%;height: 40px;line-height: 40px;font-size: 13px;border-bottom: 1px solid #E8E8E8;border-left: 1px solid #E8E8E8;}
+			.right_box>span{display: block;float: left; padding-left: 5%;}
+			.right_box>i{display: block;float: right;color: #C5C5C5;}
+		</style>
+	</head>
+	<body>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;" id="dep_type" ><span>科室介绍</span> </h4>
+		</header>
+		
+		<section class="ui-container">
+			<div class="keshi">
+				<div class="kes_left">
+					<div style="min-height: 100px;max-height: 1200px;overflow-y: auto;">
+						<div class="left_box active">
+							<span class="box_img a"><span class="box_imgScr_a open"></span></span>
+							<span class="box_name">广东省临床重点专科</span>
+						</div>
+						<div class="left_box">
+							<span class="box_img b"><span class="box_imgScr_b "></span></span>
+							<span class="box_name">国家临床重点专科</span>
+						</div>
+						<div class="left_box">
+							<span class="box_img c"><span class="box_imgScr_c "></span></span>
+							<span class="box_name">儿科中心</span>
+						</div>
+						<div class="left_box">
+							<span class="box_img d"><span class="box_imgScr_d "></span></span>
+							<span class="box_name">内科</span>
+						</div>
+						<div class="left_box">
+							<span class="box_img e"><span class="box_imgScr_e "></span></span>
+							<span class="box_name">外科</span>
+						</div>
+						<div class="left_box">
+							<span class="box_img f"><span class="box_imgScr_f "></span></span>
+							<span class="box_name">专科</span>
+						</div>
+						<div class="left_box">
+							<span class="box_img g"><span class="box_imgScr_g "></span></span>
+							<span class="box_name">特需医疗</span>
+						</div>
+						<div class="left_box">
+							<span class="box_img h"><span class="box_imgScr_h "></span></span>
+							<span class="box_name">辅诊科室</span>
+						</div>
+						<div class="left_box">
+							<span class="box_img h"><span class="box_imgScr_h "></span></span>
+							<span class="box_name">辅诊科室</span>
+						</div>
+						<div class="left_box">
+							<span class="box_img h"><span class="box_imgScr_h "></span></span>
+							<span class="box_name">辅诊科室</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="kes_right ">
+					<div style="min-height: 100px;max-height: 1200px;overflow-y: auto;" >
+						<div class="right_box ">
+							<span class="box_con ">心血管内科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">消化内科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">呼吸内科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">肾内科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">血液内科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">内分泌内科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">肿瘤科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">普通外科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">骨科中心</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">泌尿外科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">胸心外科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">重症医学科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">妇产科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">神经内科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">眼科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">康复医学科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">影像诊断科</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">检验医学部</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+	
+	<script type="text/javascript">
+		var bodyHeight = document.body.clientHeight;
+		$(".kes_left, .kes_right").height(bodyHeight-50+"px");
+		
+		$(".left_box").click(function(){
+			var hasActive = $(this).hasClass("active");
+			if(!hasActive){
+				$(this).addClass("active").siblings(".left_box").removeClass("active");
+				$(this).children(".box_img").children("span").addClass("open");
+				$(this).siblings(".left_box").children(".box_img").children("span").removeClass("open");
+			}
+			
+		})
+	</script>
+</html>
