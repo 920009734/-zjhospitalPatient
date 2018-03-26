@@ -1,3 +1,10 @@
-.ui-header.ui-header-positive{height: 50px;line-height:50px;background-color: #3A93A5;}
+.ui-header.ui-header-positive{height: 50px;line-height:50px;background-color: #0066CC;}
 .ui-icon.ui-icon-return{font-size: 25px;margin-top: 3px;}
 .ui-container{margin-top: 5px;}
+
+.footer_icon, .footer_title{display:block;float: none; margin-top: -8px;font-size: 15px;}
+.footer_icon>i{font-size:28px;}  
+.ui-footer-btn{background-image: none;background-color: #EEEAEB;} 
+.footer_item{color: #626060;} 
+.footer_item.active{color: #3A93A5;} 
+.footer_item.active>.footer_icon>i{color: #3A93A5;}	
