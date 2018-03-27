@@ -98,7 +98,7 @@
 							<span class="list_icon"><img src="../img/index/yygh.png"/></span>
 							<span class="list_title">预约挂号</span>
 						</div>
-						<div class="item_list" id="liuyan">
+						<div class="item_list" >
 							<span class="list_icon"><img src="../img/index/yuyueRecord.png"/></span>
 							<span class="list_title">预约记录</span>
 						</div>
@@ -107,7 +107,7 @@
 							<span class="list_icon"><img src="../img/index/paiduijiaohao.png"/></span>
 							<span class="list_title">排队叫号</span>
 						</div>
-						 <div class="item_list">
+						 <div class="item_list" id="zx">
 							<span class="list_icon"><img src="../img/index/zhuanjiazixun.png"/></span>
 							<span class="list_title">专家咨询</span>
 						</div> 
@@ -174,7 +174,7 @@
 						<span class="item_title">综合</span>
 					</div>
 					<div class="fun_item_list">
-						<div class="zonghe_item ui-border-r">
+						<div class="zonghe_item ui-border-r" id="divisionIntroduce">
 							<div class="zonghe_img"><img src="../img/index/kesjs.png"></div>
 							<div class="zonghe_con">
 								<h5>科室介绍</h5>
@@ -222,37 +222,22 @@
 					</ul>
 				</div>
 			</section>
-        </section><!-- /.ui-container-->
+        </section>
         
         
         <script type="text/javascript">
         	$(function(){
-        		$(".footer_item").click(function(){
-        			var a = $(this).hasClass(("active"));
-        			var home = $(this).hasClass(("home"));
-        			var msg = $(this).hasClass(("msg"));
-        			var myHome = $(this).hasClass(("myHome"));
-        			if(!a){
-        				$(this).addClass("active").siblings("li").removeClass("active");
-        				if(home){
-        					location.href = "index.html";
-        				}
-    					if(msg){
-        					location.href = "msg.html";
-        				}
-						if(myHome){
-        					location.href = "self.html";
-        				}
-        			}
-        		})
+        		$("#zx").click(function(){
+   					top.location.href="consultation/choiceDepartment.html";
+	    		});
+	    		$("#divisionIntroduce").click(function(){
+   					top.location.href="divisionIntroduce.html";
+	    		});
+	    		
+	        	$("#ksxz").click(function(){
+	   				top.location.href="yuyueguahao/choiceDepartment.html";
+	    		});
         	});
-        	$("#liuyan").click(function(){
-   				top.location.href="consultation/choiceDepartment.html";
-    		});
-    		
-        	$("#ksxz").click(function(){
-   				top.location.href="yuyueguahao/choiceDepartment.html";
-    		});
         	
         </script>
         

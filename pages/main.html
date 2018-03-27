@@ -61,7 +61,7 @@
         	$(function(){
         		var patientId = sessionStorage.getItem('patientId');
 				// 创建一个Socket实例
-				var socket = new WebSocket('ws://112.93.117.28:8089/zjhospital-app/websocket/socketServer?token=' + localStorage.getItem("token")); 
+				var socket = new WebSocket('ws://localhost:8080/zjhospital-app/websocket/socketServer?token=' + localStorage.getItem("token")); 
 				// 打开Socket 
 				socket.onopen = function(event) {
 				  console.log('open', event); 
@@ -98,10 +98,10 @@
         					$("#main_frame").attr("src","index.html");
         				}
     					if(msg){
-        					$("#main_frame").attr("src","msg.html");
+        					$("#main_frame").attr("src","message1.html");
         				}
 						if(myHome){
-        					$("#main_frame").attr("src","self.html");
+        					$("#main_frame").attr("src","mySelf.html");
         				}
         			}
         		})
