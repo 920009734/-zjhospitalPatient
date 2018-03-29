@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+		<script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
+		<title></title>
+		<style type="text/css">
+		body{background-color: #F7F7F7;}
+			.first{display: block;width: 100%;height: 40px;}
+			.first_left{display: block;float: left;;width: 50%;height: 40px;background-color:#FFFFFF ;}
+			.first_right{display: block;float: left;width: 50%;height: 40px;background-color:#F7F7F7;}
+			.word{margin-top: 10px;text-align: center;font-size: 14px;}
+			.second{display: block;;width: 100%;height:355px;background: #FFFFFF;float:left;}
+	        .item{display: block;width: 96%;margin: 0 auto;height:70px;line-height:70px;border-bottom: 1px solid #EEEAEB;background: #FFFFFF;}
+			.item_left{display: block;float: left;margin-left: 5px;width: 20%;height: 100%;}
+			.item_right{width:75%;height:70px;margin-left: 0px;line-height:70px;float: left;}
+			.item_right_fiest_one{display: block;height: 35%;width: 48%;line-height:35px;font-size: 14px;float: left;}
+		    .item_right_fiest_two{display: block;height: 35%;width: 51%;line-height:35px;font-size: 13px;float: left;text-align: right;color: #999999;}
+		    .item_right_second{display: block;float: left;height: 35%;line-height:35px;font-size: 14px;float: left;}
+			a{color:#000000}
+		</style>
+	</head>
+	<body>
+    
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i><h4 style="margin-left: 25px;">咨询记录</h4>
+		</header>
+    
+    <section class="ui-container"> 
+			<section id="list">
+			 <div class="first">
+			 	<span class="first_left" id="unanswered">
+			 		<div class="word">未回复<span id="replied_"></span></div>
+			 	</span>
+			 	<span class="first_right" id="replied">
+			 		<div class="word">已回复<span id="unanswered_"></span></div>
+			 	</span>
+			 </div>
+			 
+			 <div class="second">
+			 
+	       	 </div>
+      
+	</body>
+	<script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="../../js/Utils.js"></script>
+	<script type="text/javascript">
+	window.onload=function () {
+		checkIsReply(1);
+	}
+	$("#unanswered").click(function(){
+		if(!$("#unanswered").hasClass("first_left")){
+			$("#replied").removeClass("first_left").addClass("first_right");
+			$("#unanswered").removeClass("first_right").addClass("first_left");
+			checkIsReply(1);
+		}
+	})
+	$("#replied").click(function(){
+		if(!$("#replied").hasClass("first_left")){
+			$("#unanswered").removeClass("first_left").addClass("first_right");
+			$("#replied").removeClass("first_right").addClass("first_left");
+			checkIsReply(0);
+		}
+	})
+	//根据是否回复状态查看列表（0：已回复，1：未回复）
+	function checkIsReply(replayState){
+		$.post(Utils.getRoot()+"/inquiry/searchMessages", {
+			receiver:"测试 男",
+			isReply:replayState,
+			parentId:" "
+		} ,function(result){
+			if(result.success){
+				$(".second").empty();
+				for (var i=0; i<result.data.length; i++){
+					//alert(result.data[i]);
+					$(".second").append(
+						"<a href='./liuyanConsCheck.html?id="+result.data[i].id+"'><div class='item'>"
+				        	+"<span class='item_left'>"
+				        		+"<img style='margin: 0 auto;margin-top: 4px;' width='55' height='55' src='../../img/u16.png' />"
+				        	+"</span>"
+				        	+"<span class='item_right'>"
+					        	+"<div class='item_right_first'>"
+					        	     +"<span class='item_right_fiest_one'>"+result.data[i].sender+"</span>"
+					        	     +"<span class='item_right_fiest_two'>"+Utils.formatDateByLong(result.data[i].sendTime)+"</span>"
+					             +"</div>"
+							     +"<div class='item_right_second'>"+result.data[i].content+"</div>"
+						    +"</span>"
+						+"</div></a>"
+					);
+				}
+			}else{
+				$(".second").empty();
+				$("#dialogText").html(result.message);
+				$(".ui-dialog").show();
+			}
+		})
+	}
+	</script>
+</html>

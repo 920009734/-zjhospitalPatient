@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css"/>
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
+		<title>选择科室</title>
+		<style type="text/css">
+			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
+			.comfirm_item{display: block;width: 100%;height: 50px;border-bottom: 1px solid #EEEAEB;background-color: #FFFFFF;line-height: 50px;}
+			.item_name{display: block;float: left; margin-left: 10px;width: 39%;}
+			.item_value{display: block;float: left;width: 55%;text-align: right;height: 50px;line-height: 50px;font-size: 14px;}
+			.item_value>i{display: block;float: right;margin-top: 2px;margin-right: -10px;}
+			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;background-color: #FFFFFF;}
+			.login_btn>button{border-radius:2px ;background: #3A93A5;font-size: 16px;}
+			.tab_per{display: block;width: 100%;height: 50px;}
+			.tab_per>span{display: block;float: left;width: 49.5%;height: 50px;line-height: 50px;text-align: center;}
+			.per_type.active{background-color: #FFFFFF;}
+			.item_value>input{width: 100%;border: none;text-align: right;}
+			.item_name>i,.item_name>span{display: block;float: left;}
+			.item_name>span{margin-right: 5px;}
+			.item_name>i{margin-left: -10px;margin-right: -6px;margin-top: 3px;}
+			.ui-switch{right: 50px;}
+			.ui-actionsheet-cnt{font-size: 15px;}
+			.personl_gx.active{color: #00BA7F;font-weight: bold;}
+			.personl_zj.active{color: #00BA7F;font-weight: bold;}
+			.liuyanTextArea{display: block;width: 100%;margin: 0 auto;height: 100px;background-color: #FFFFFF;padding-top: 8px;}
+			.textArea_inp{display: block;width:90%;margin: 0 auto; height: 80%;border: 1px solid #5EB6CB;border-radius:2px;font-size: 14px;padding: 5px;}
+			.upload_photo{display: block;width: 100%;min-height: 120px;max-height:200px;background-color: #FFFFFF;}
+			.upload_title{display: block;width: 100%;font-size: 13px;}
+			.upload_title>span{display: block; padding-left:10px;padding-top: 5px;}
+			.ui-dialog-cnt{display: block; width: 90%;margin: 0 auto;border-radius:5px ;background-color: #FFFFFF;}
+			.dep_type{display: block;font-size: 15px;}
+			/*图片上传*/
+			.z_photo {
+            overflow: auto;
+            clear: both;
+            width:100%;
+            height:auto;
+			}
+			
+			.z_photo img {
+				width: 65px;
+				height: 65px;
+			}
+			
+			.z_addImg {
+				float: left;
+				margin-right: 10px;
+				margin-top:5px;
+			}
+			
+			.z_file {
+				width: 65px;
+				height: 65px;
+				background: url(../../img/z_add.png) no-repeat;
+				background-size: 100% 100%;
+				float: left;
+				margin-right: 10px;
+				margin-top:5px;
+			}
+			
+			.z_file input::-webkit-file-upload-button {
+				width: 1rem;
+				height: 1rem;
+				border: none;
+				position: absolute;
+				outline: 0;
+				opacity: 0;
+			}
+			
+			.z_file input {
+				display: block;
+				width: auto;
+				border: 0;
+				vertical-align: middle;
+			}
+			.img_item{margin-left: 10px;}
+			.login_btn>span{display: block;width: 60%;margin: 0 auto;font-size: 14px;margin-top: 10px;}
+			.comfirm_item.hidden{display: none;}
+			.ui-dialog-cnt{margin:50% auto;}
+			#dialogText{display: block; margin-top: 10px;}
+			
+			.dialog_message{display: block;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.4);}
+			.dialog_message_cnt{display: block;width: 90%;min-height: 100px;max-height: 1200px;background-color: #FFFFFF;position: relative;margin-left: 5%;margin-top: 10%;border-radius: 5px;}
+			.dialog_left{display: block;float: left;width: 92%;margin-left: 4%;font-size: 14px;margin-bottom: 15px;}
+			.dialog_right{display: block;float: right;width: 92%;margin-right: 4%;font-size: 14px;margin-bottom: 15px;}
+			.dialog_left_item{display: block;float: left;width: 100%;}
+			.dialog_right_item{display: block;float: right;widows: 100%;}
+			.dialog_time{display: block;margin: 0 auto; width: 32%;height: 20px;line-height: 20px;font-size: 12px;background-color: #F2F2F2;text-align: center;border-radius: 10px;margin-top: 10px;color: #999999;margin-bottom: 10px;}
+			.dialog_bd{display: block;width: 100%;min-height: 100px;max-height: 500px;overflow-y:auto ;background-color: #F8F8F8;}
+			.dialog_patient{display: block;color: #999999;}
+			.dialog_right .dialog_patient{display: block;color: #999999;text-align: right;}
+			.left_item_con{display: block;float: left;min-width: 45%;max-width: 80%;min-height: 30px;background-color: #FFFFFF;border-radius: 3px;margin-top:5px;padding: 5px 10px;line-height: 25px;font-size: 13px;}
+			.right_item_con{display: block;float: right;min-width: 45%;max-width: 80%;min-height: 30px;background-color: #297493;border-radius: 3px;margin-top:5px;padding: 5px 10px;line-height: 25px;font-size: 13px;color: #FFFFFF}
+		</style>
+	</head> 
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">留言咨询</h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="comfirm_item ">
+					<span class="item_name">咨询时间</span>
+					<span class="item_value" id="myself"><span id="askTime_"></span> </span>
+				</div>
+				<div class="comfirm_item ">
+					<span class="item_name">医生</span>
+					<span class="item_value" id="doctorName"><span id="doctorName_"></span> </span>
+					<input type="hidden" id="doctorName_in" value="">
+				</div>
+				<div class="comfirm_item hidden">
+					<span class="item_name" id="shenfenz">患者</span>
+					<span class="item_value" id="huanzhe" ><span id="huanzhe_"></span> </span>
+					<input type="hidden" id="huanzhe_in" value="">
+				</div>
+				<div class="comfirm_item hidden">
+					<span class="item_name" id="shenfenz">健康档案</span>
+					<span class="item_value" id="myself"><span>家族病史、过敏史等</span> <i class="ui-icon ui-icon-arrow"></i></span>
+				</div>
+				<div class="comfirm_item " id="record_">
+					<span class="item_name">聊天记录</span>
+					<span class="item_value" id="myself"><i class="ui-icon ui-icon-arrow"></i></span>
+				</div>
+				<!--<div class="liuyanTextArea ui-border-b">
+					<textarea class="textArea_inp" placeholder="显示聊天信息"  disabled onclick="ckShow()"></textarea>
+				</div>-->
+				<div id="imgdiv" class="comfirm_item ">
+				</div>
+				<div class="liuyanTextArea ui-border-b">
+					<textarea class="textArea_inp" placeholder="对医生的解答进行回复" id="describe_"></textarea>
+				</div>
+				<div class="upload_photo ui-border-b">
+					<div class="upload_title"><span>添加图片描述，有利于与患者更好的解读，最多选择5张图片</span></div>
+					<div class="img_item">
+						<div class="z_photo">
+				            <div class="z_file">
+				                <input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+				            </div>
+				        </div>
+					</div>
+				</div>
+				
+				<div style="display: block;float: left;width: 100%;height: 130px; background-color: #FFFFFF;">
+					<div class="login_btn">
+						<button class="ui-btn ui-btn-lg ui-btn-primary" id="submitbt">马上回复</button>
+						<span>请阅读<font color="#7AB6D9">《留言咨询须知》</font></span>
+					</div>
+					
+				</div>
+			</section>
+		</section>
+		
+		<div class="ui-dialog">
+			<div class="ui-dialog-cnt">
+				<div class="ui-dialog-bd"> 
+					<h4>温馨提示: </h4> 
+					<span id="dialogText"></span>
+				</div>
+				<div class="ui-dialog-ft">
+					<button type="button" data-role="button" class="close_dialog">关闭</button>
+				</div>
+			</div>        
+		</div>
+		
+		<div class="dialog_message">
+			<div class="dialog_message_cnt">
+				<header class="ui-dialog-hd ui-border-b">
+                    <h3>聊天记录</h3>
+			        <i class="ui-dialog-close close_dialogMessage" data-role="button"></i>
+                </header>
+                <div class="dialog_bd">
+					<!--<div class="dialog_right">
+						<div class="dialog_time">03-22 17:44</div>
+						<div class="dialog_right_item">
+							<span class="dialog_patient">患者: 陈*</span>
+							<span class="right_item_con">医生，你好。请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个</span>
+						</div>
+					</div>
+					<div class="dialog_left">
+						<div class="dialog_time">03-22 17:44</div>
+						<div class="dialog_left_item">
+							<span class="dialog_patient">主治医生: 黄纯质</span>
+							<span class="left_item_con">医生，你好。请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个</span>
+						</div>
+					</div>
+					<div class="dialog_left">
+						<div class="dialog_time">03-22 17:44</div>
+						<div class="dialog_left_item">
+							<span class="dialog_patient">主治医生: 黄纯质</span>
+							<span class="left_item_con">医生，你好。请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个</span>
+						</div>
+					</div>
+					<div class="dialog_right">
+						<div class="dialog_time">03-22 17:44</div>
+						<div class="dialog_right_item">
+							<span class="dialog_patient">患者: 陈*</span>
+							<span class="right_item_con">医生，你好。请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个请问我这个</span>
+						</div>
+					</div>
+					<div class="dialog_right">
+						<div class="dialog_time">03-22 17:44</div>
+						<div class="dialog_right_item">
+							<span class="dialog_patient">患者: 陈*</span>
+							<span class="right_item_con">医生，你好 </span>
+						</div>
+					</div>-->
+                </div>
+				
+				<div class="ui-dialog-ft">
+					<button type="button" class="close_dialogMessage">关闭</button>
+				</div>
+			</div>
+		</div>
+		
+	<script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="../../js/Utils.js"></script>
+	<script type="text/javascript">
+		var files = new Array();
+        //px转换为rem
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if (clientWidth >= 640) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+
+        function imgChange(obj1, obj2) {
+            //获取点击的文本框
+            var file = document.getElementById("file");
+            //存放图片的父级元素
+            var imgContainer = document.getElementsByClassName(obj1)[0];
+            //获取的图片文件
+            var fileList = file.files;
+            //文本框的父级元素
+            var input = document.getElementsByClassName(obj2)[0];
+            var imgArr = [];
+            //遍历获取到得图片文件
+            for (var i = 0; i < 5; i++) {
+				//给传值的files赋值
+            	files.push(file.files[i]);
+                var imgUrl = window.URL.createObjectURL(file.files[i]);
+                imgArr.push(imgUrl);
+                var img = document.createElement("img");
+                img.setAttribute("src", imgArr[i]);
+                var imgAdd = document.createElement("div");
+                imgAdd.setAttribute("class", "z_addImg");
+                imgAdd.appendChild(img);
+                imgContainer.appendChild(imgAdd);
+            };
+            imgRemove();
+        };
+
+        function imgRemove() {
+            var imgList = document.getElementsByClassName("z_addImg");
+            var mask = document.getElementsByClassName("z_mask")[0];
+            var cancel = document.getElementsByClassName("z_cancel")[0];
+            var sure = document.getElementsByClassName("z_sure")[0];
+            for (var j = 0; j < imgList.length; j++) {
+                imgList[j].index = j;
+                imgList[j].onclick = function() {
+                    var t = this;
+                    mask.style.display = "block";
+                    cancel.onclick = function() {
+                        mask.style.display = "none";
+                    };
+                    sure.onclick = function() {
+                        mask.style.display = "none";
+                        t.style.display = "none";
+                    };
+
+                }
+            };
+        };
+        $(".close_dialog,.ui-dialog-close").click(function(){
+			$(".ui-dialog").hide();
+		});
+		$(".dialog_message").hide();
+		$("#record_").click(function(){
+			$(".dialog_message").show();
+		});
+		$(".close_dialogMessage").click(function(){
+			$(".dialog_message").hide();
+		})
+		
+    </script>
+	<script type="text/javascript">
+		//获取URL参数
+		function getQueryString(name) { 
+	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	        var r = window.location.search.substr(1).match(reg); 
+	        if (r != null) return unescape(r[2]); 
+	        return null; 
+	    }
+		window.onload=function () {
+			var parentId = getQueryString("id");
+			$.post(Utils.getRoot()+"/inquiry/messageDetail", {
+				id:getQueryString("id")
+			} ,function(result){
+				if(result.success){
+					$("#doctorName_in").val(result.data.receiver);
+					$("#huanzhe_in").val(result.data.sender);
+				    $("#doctorName_").html(result.data.receiver);
+				    $("#askTime_").html(Utils.formatDateByLong(result.data.sendTime));
+				    $("#huanzhe_").html(result.data.sender);
+				    //$("#ask_").val(result.data.content);
+				    var attr=result.data.imgPath.split(",");
+					for (var i=0; i<attr.length; i++){
+						//alert(attr[i]);
+						$("#imgdiv").append("<img src='"+attr[i]+"'>");
+					}
+				}else{
+					$("#dialogText").html(result.message);
+					$(".ui-dialog").show();
+				}
+			})
+		}
+		$("#record_").click(function(){
+			var parentId = getQueryString("id");
+			$.post(Utils.getRoot()+"/inquiry/chatrecord", {
+				parentId:getQueryString("id")
+			} ,function(result){
+				if(result.success){
+					$(".dialog_bd").empty();
+					for (var i=0; i<result.data.length; i++){
+					    if(result.data[i].sender==$("#huanzhe_in").val()){
+					    	$(".dialog_bd").append(
+					    		"<div class='dialog_right'>"
+									+"<div class='dialog_time'>"+Utils.formatDateByLong(result.data[i].sendTime)+"</div>"
+									+"<div class='dialog_right_item'>"
+										+"<span class='dialog_patient'>主治医生:"+result.data[i].sender+"</span>"
+										+"<span class='right_item_con'>"+result.data[i].content+"</span>"
+									+"</div>"
+								+"</div>"
+					    	);
+					    }
+					    if(result.data[i].sender==$("#doctorName_in").val()){
+					    	$(".dialog_bd").append(
+					    		"<div class='dialog_left'>"
+									+"<div class='dialog_time'>"+Utils.formatDateByLong(result.data[i].sendTime)+"</div>"
+									+"<div class='dialog_left_item'>"
+										+"<span class='dialog_patient'>患者:"+result.data[i].receiver+"</span>"
+										+"<span class='left_item_con'>"+result.data[i].content+"</span>"
+									+"</div>"
+								+"</div>"
+					    	);
+					    }
+				    }
+				}else{
+					$("#dialogText").html(result.message);
+					$(".ui-dialog").show();
+				}
+			})
+		})
+		$("#submitbt").click(function(){
+			var formData = new FormData();
+		    formData.append("receiver", $("#doctorName_").html());
+		    formData.append("sender", $("#huanzhe_").html());
+		    formData.append("content", $("#describe_").val());
+		    formData.append("parentId", getQueryString("id"));
+		    for(var i = 0 ; i < files.length ; i ++){
+		    	formData.append("files", files[i]);
+		    }
+			if($("#describe_").val().length===0){
+				$("#dialogText").html("请输入你的回复!");
+				$(".ui-dialog").show();
+				return false;
+			}
+			$.ajax({
+	             url: Utils.getRoot()+"/inquiry/addInquiry" ,
+	             type: 'POST',  
+	             data: formData,  
+	             contentType: false,  
+	             processData: false,  
+	             success: function (result) {
+			     	location.href = "../index.html";
+	             },
+	             error: function(result){
+					$("#dialogText").html(result.message);
+					$(".ui-dialog").show();
+				 }
+	        });
+			
+		});
+	</script>
+	</body>
+</html>
