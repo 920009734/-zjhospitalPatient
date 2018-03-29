@@ -44,10 +44,10 @@
 						password: password
 					},
 					success: function(result){
-						console.log(result)
 						if(result.success){
 							localStorage.setItem("token",result.data.token)
-							location.href="personal.html";
+							localStorage.setItem("patientId",result.data.patientid)
+							location.href="main.html";
 						}else{
 							alert(result.message);
 						}

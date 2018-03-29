@@ -281,7 +281,9 @@
 					"css/frozen.css",
 					"lib/zepto.min.js",
 					"js/Utils.js",
-					"pages/personal.html"
+					"pages/personal.html",
+					"fontIcon/iconfont.css",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
