@@ -72,7 +72,7 @@
 	//根据是否回复状态查看列表（0：已回复，1：未回复）
 	function checkIsReply(replayState){
 		$.post(Utils.getRoot()+"/inquiry/searchMessages", {
-			receiver:"测试 男",
+			sender:"测试人员",
 			isReply:replayState,
 			parentId:" "
 		} ,function(result){
