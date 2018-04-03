@@ -24,10 +24,19 @@
 			.user_inp{display: block;width: 80%;}
 			.user_inp>input{width: 100%;height: 35px;line-height:35px;margin-top: 3px;border: none;}
 			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;}
-			.login_btn>button{border-radius:2px ;background: #0066CC;}
-			.login-detai{display: block;width: 90%;margin: 0 auto;margin-top:15px;font-size: 14px;color: #3A93A5;}
+			.login_btn>button{border-radius:5px ;background: #0066CC;}
+			.login-detai{display: block;width: 89%;margin: 0 auto;margin-top:10px;font-size: 16px;color: #00A5E0;}
 			.login-reg{float: right;}
 			
+			.auto_logo{display: block; height: 30px;width: 90%;margin-left:5%;margin-top: 10px;}
+			
+			.ui-switch input{height: 20px;}
+			.ui-switch input:before{height: 20px;}
+			.ui-switch input:checked:after{left: 31px;}
+			.ui-switch input:after{width: 20px;height: 20px;}
+			.ui-switch{margin-top: -12px;right: 0px;}
+			.ui-form-item{padding: 0;}
+			.ui-form-item>span{color: #00A5E0;}
 		</style>
 	</head>
 	<body>
@@ -73,12 +82,21 @@
 						<span class="user_inp"><input id="password_" type="password" placeholder="请输入密码" class=""/></span>
 					</div>
 				</div>
+				
 				<div class="login_btn">
 					<button onclick="login()" class="ui-btn ui-btn-lg ui-btn-primary">登录</button>
 				</div>
 				<div class="login-detai">
 					<span><a href="##"> 忘记密码？</a></span>
 					<a href="regist.html" class="login-reg">立即注册</a>
+				</div>
+				<div class="auto_logo">
+					<div class="ui-form-item ui-form-item-switch">
+                        <span>自动登录 </span>
+                        <label class="ui-switch">
+                            <input type="checkbox" checked="" />
+                        </label>
+                    </div>
 				</div>
 			</section>
 		</section>
