@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css">
+        
+        <script src="../../lib/zepto.min.js">  </script>
+        <script src="../../js/frozen.js"></script>
+		<title>检验报告详情</title>
+		
+		<style type="text/css">
+			html,body{font-family: "微软雅黑";}
+			.list-item{display: block;float: left;width: 100%;min-height: 20px;max-height: 200px; padding:13px 0;background-color: #FFFFFF;}
+			.demo_name{display: block;float: left;width: 26%;padding-left: 3%;font-size: 15px;}
+			.demo_value{display: block;float: right;width: 65%; color: #999999;font-size: 15px;margin-right: 3%;}
+			.demo_value>span{display: block;float: right;}
+			a{color: #000000;}
+			.jianyan_detail{display: block;float: left; width: 100%;margin-top: 20px;border-top: 2px solid #2CA99D;}
+			.baogao_table{width:100%; background-color: #FFFFFF;}
+			table thead tr th{height: 40px;font-weight: 400;text-align: center;border: 1px solid #F6F6F6;color: #989898;}
+			table tbody tr td{padding: 10px 5px ;border: 1px solid #F6F6F6;font-size: 14px;}
+		</style>
+	</head>
+	<body ontouchstart> 
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;" ><span>检验报告详情</span></h4>
+		</header>
+		
+		<section class="ui-container">
+			<section class="list">
+				<div class="demo-block">
+					<div class="list-item">
+						<span class="demo_name">开方医生</span>
+						<span class="demo_value"><span>张建</span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">开方科室</span>
+						<span class="demo_value"><span>肿瘤科病区</span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">报告时间</span>
+						<span class="demo_value"><span>2018-04-04 15:44</span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">报告单号</span>
+						<span class="demo_value"><span>040415</span></span>
+					</div>
+				</div>
+				<div class="demo-block">
+					<div class="jianyan_detail">
+						<table class="baogao_table">
+							<thead>
+								<tr>
+									<th style="width: 30%;">检查项目</th>
+									<th style="width: 23%;">结果</th>
+									<th style="width: 23%;">单位</th>
+									<th style="width: 24%;">参考值</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>钾(K)</td>
+									<td style="text-align: center;">3.38</td>
+									<td style="text-align: center;">mmol/L</td>
+									<td style="text-align: center;">3.5~5.5</td>
+								</tr>
+								<tr>
+									<td>纳(Na)</td>
+									<td style="text-align: center;">138.9</td>
+									<td style="text-align: center;">mmol/L</td>
+									<td style="text-align: center;">135~145</td>
+								</tr>
+								<tr>
+									<td>尿素(Urea)</td>
+									<td style="text-align: center;">1.5</td>
+									<td style="text-align: center;">mmol/L</td>
+									<td style="text-align: center;">1.8~7.1</td>
+								</tr>
+								<tr>
+									<td>总二氧化碳(T_CO2)</td>
+									<td style="text-align: center;">27.8</td>
+									<td style="text-align: center;">mmol/L</td>
+									<td style="text-align: center;">22.0~31.0</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>	
+		</section>
+	</body>
+</html>
