@@ -53,7 +53,7 @@
 			.yiyuan_icon{display: block;float: left;height: 40px; width: 12%;}
 			.yiyuan_icon>img{display: block;margin: 0 auto;margin-top: 9px; width: 18px;height:22px;}
 			.yiyuan_name{display: block;float: left;height: 40px; width: 50%;}
-			.yiyuan_name>img{display: block;width: 52px;height: 18px;margin-top: 11px;}
+			.yiyuan_name>img{display: block;width: 160px;height: 18px;margin-top: 11px;}
 			.yiyuan_per{display: block;float: right; width: 11%;height: 40px; }
 			.yiyuan_per>img{display: block;width: 25px;height: 25px;margin-top: 7px;}
 			
@@ -99,14 +99,10 @@
 							<span class="list_icon"><img src="../img/index/yygh.png"/></span>
 							<span class="list_title">预约挂号</span>
 						</div>
-						<div class="item_list" >
-							<span class="list_icon"><img src="../img/index/yuyueRecord.png"/></span>
-							<span class="list_title">预约记录</span>
-						</div>
 						<a href="lineUpSearch/paiduijiaohaoMenu.html">	
 							<div class="item_list">
 								<span class="list_icon"><img src="../img/index/paiduijiaohao.png"/></span>
-								<span class="list_title">排队叫号</span>
+								<span class="list_title">排队候诊</span>
 							</div>
 						</a>					
 						 <div class="item_list" id="zx">
@@ -115,7 +111,7 @@
 						</div> 
 						<div class="item_list">
 							<span class="list_icon"><img src="../img/index/zwjf.png"/></span>
-							<span class="list_title">诊问缴费</span>
+							<span class="list_title">诊间缴费</span>
 						</div>
 					</div>
 				</div>
@@ -150,20 +146,20 @@
 				</div> 
 				<!-- 体检 -->
 				<div class="fun_item">
-					<div class="fun_title ">
+					<div class="fun_title " >
 						<span class="item_img"><img src="../img/index/baogcxun.png" width="22" height="23"></span>	
 						<span class="item_title">报告查询</span>
 					</div>
 					<div class="fun_item_list">
-						<div class="item_list">
+						<div class="item_list" id="jcbg">
 							<span class="list_icon"><img src="../img/index/bgcx1.png"/></span>
 							<span class="list_title">检查报告查询</span>
 						</div>
-						<div class="item_list">
+						<div class="item_list" id="jybg">
 							<span class="list_icon"><img src="../img/index/bgcx2.png"/></span>
 							<span class="list_title">检验报告查询</span>
 						</div>
-						<div class="item_list">
+						<div class="item_list" id="tjbg"> 
 							<span class="list_icon"><img src="../img/index/bgcx3.png"/></span>
 							<span class="list_title">体检报告查询</span>
 						</div>
@@ -238,6 +234,16 @@
 	    		
 	        	$("#ksxz").click(function(){
 	   				top.location.href="yuyueguahao/choiceDepartment.html";
+	    		});
+	    		
+	    		$("#jcbg").click(function(){
+	   				top.location.href="lineUpSearch/jcbg_list.html";
+	    		});
+	    		$("#jybg").click(function(){
+	   				top.location.href="lineUpSearch/jybg_list.html";
+	    		});
+	    		$("#tjbg").click(function(){
+	   				top.location.href="lineUpSearch/tjbg_list.html";
 	    		});
         	});
         	

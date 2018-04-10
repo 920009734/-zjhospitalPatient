@@ -1,98 +1,98 @@
 {
-	"pages/login.html": {
-		"resources": [
-			"font/iconfont-full.ttf",
-			"img/u364.png",
-			"js/frozen.js",
-			"css/frozen.css",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"pages/personal.html",
-			"fontIcon/iconfont.css",
-			"css/style.css"
-		],
-		"refer": [
-			"pages/personal.html"
-		]
-	},
-	"pages/main.html": {
-		"resources": [
-			"img/index/tijain1.png",
-			"img/more.png",
-			"img/u112.png",
-			"pages/index.html",
-			"img/index/rili1.png",
-			"img/index/feiyong.png",
-			"img/index/tijain2.png",
-			"lib/zepto.min.js",
-			"img/index/jilu1.png",
-			"js/App.js",
-			"img/index/liuyanzixun.png",
-			"img/index/paidui.png",
-			"img/index/tijian.png",
-			"img/zjLogo.png",
-			"font/iconfont-full.ttf",
-			"img/index/yiyuan.png",
-			"js/frozen.js",
-			"img/u80.png",
-			"css/frozen.css",
-			"img/index/tijain4.png",
-			"img/index/chuyaun.png",
-			"img/zjlogo3.png",
-			"img/index/xiaojie.png",
-			"img/index/zhuyuan.png",
-			"img/index/menzhen1.png",
-			"img/msg.png",
-			"img/u132.png",
-			"img/jiaofei.png",
-			"img/u58.png",
-			"pages/self.html",
-			"img/onlieIcon.png",
-			"img/u130.png",
-			"img/u34.jpg",
-			"img/myD.png",
-			"pages/msg.html",
-			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/consultation/choiceDepartment.html",
-			"pages/detailMsg.html",
-			"js/Utils.js"
-		],
-		"refer": [
-			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/consultation/choiceDepartment.html"
-		]
-	},
-	"pages/yuyueguahao/choiceDepartment.html": {
-		"resources": [
-			"css/style.css",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/consultation/choiceDepartment.html": {
-		"resources": [
-			"img/online/u390.png",
-			"img/docImg.png",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/personal.html": {
-		"resources": [
-			"img/uploadPersonal.png",
-			"js/jquery-1.8.3.min.js",
-			"js/uploadPreview.js",
-			"js/placeImage.js",
-			"pages/login.html",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/login.html",
-			"pages/main.html"
-		]
-	}
+  "pages/login.html": {
+    "resources": [
+      "font/iconfont-full.ttf",
+      "img/u364.png",
+      "js/frozen.js",
+      "css/frozen.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/personal.html",
+      "fontIcon/iconfont.css",
+      "css/style.css"
+    ],
+    "refer": [
+      "pages/personal.html"
+    ]
+  },
+  "pages/main.html": {
+    "resources": [
+      "img/index/tijain1.png",
+      "img/more.png",
+      "img/u112.png",
+      "pages/index.html",
+      "img/index/rili1.png",
+      "img/index/feiyong.png",
+      "img/index/tijain2.png",
+      "lib/zepto.min.js",
+      "img/index/jilu1.png",
+      "js/App.js",
+      "img/index/liuyanzixun.png",
+      "img/index/paidui.png",
+      "img/index/tijian.png",
+      "img/zjLogo.png",
+      "font/iconfont-full.ttf",
+      "img/index/yiyuan.png",
+      "js/frozen.js",
+      "img/u80.png",
+      "css/frozen.css",
+      "img/index/tijain4.png",
+      "img/index/chuyaun.png",
+      "img/zjlogo3.png",
+      "img/index/xiaojie.png",
+      "img/index/zhuyuan.png",
+      "img/index/menzhen1.png",
+      "img/msg.png",
+      "img/u132.png",
+      "img/jiaofei.png",
+      "img/u58.png",
+      "pages/self.html",
+      "img/onlieIcon.png",
+      "img/u130.png",
+      "img/u34.jpg",
+      "img/myD.png",
+      "pages/msg.html",
+      "pages/yuyueguahao/choiceDepartment.html",
+      "pages/consultation/choiceDepartment.html",
+      "pages/detailMsg.html",
+      "js/Utils.js"
+    ],
+    "refer": [
+      "pages/yuyueguahao/choiceDepartment.html",
+      "pages/consultation/choiceDepartment.html"
+    ]
+  },
+  "pages/yuyueguahao/choiceDepartment.html": {
+    "resources": [
+      "css/style.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/consultation/choiceDepartment.html": {
+    "resources": [
+      "img/online/u390.png",
+      "img/docImg.png",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/personal.html": {
+    "resources": [
+      "img/uploadPersonal.png",
+      "js/jquery-1.8.3.min.js",
+      "js/uploadPreview.js",
+      "js/placeImage.js",
+      "pages/login.html",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/login.html",
+      "pages/main.html"
+    ]
+  }
 }
