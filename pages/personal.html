@@ -38,8 +38,13 @@
 			});
 			
 			$("#baocun").click(function(){
-				$.post(Utils.getRoot()+"/patientApp/perfect", {realname:$("#realname").val(), sex:$("#sex").val(),idcard:$("#idcard").val(),
-					address:$("#address").val(), headimage:$("#headimage").val()}, function(res){
+				$.post(Utils.getRoot()+"/patientApp/perfect", {
+					realname: $("#realname").val(), 
+					sex: $("#sex").val(),
+					idcard: $("#idcard").val(),
+					address: $("#address").val(), 
+					headimage: $("#headimage").val()
+				}, function(res){
 					if (res.success) {
 						location.href="main.html"
 					} else {
@@ -47,45 +52,11 @@
 					}
 				});
 			});
-			
-			/* $("#f").uploadPreview({ 
-				UpBtn: "f",
-				DivShow: "photodiv", 
-				ImgShow: "photoimg",
-				ImgType: ["gif", "jpeg", "jpg", "bmp", "png"],
-				callback: function(){  
-				    
-					alert("9090");
-				}  
-			}); */
 		});
 		
 		//选择头像，默认上传到服务器
 		function upload() {
-			alert($("#f").val());
 			if ($("#f").val() != "") {
-				/* $.ajaxFileUpload({
-					type:"post",
-					url:"http://127.0.0.1:8080/patientApp/perfectuploadimage",
-					dataType:"json",
-					fileElementId:"file",
-					success:function(data) {
-						alert("89898: " + data);
-						if (res.success) {
-							alert(res.message);
-							
-							//图片显示
-							$("#headimage").attr("value", res.data.path);
-							$("#preview").attr("src", res.data.path);
-						} else {
-							alert(res.message);
-						}
-					},
-					error:function() {
-						alert("上传失败！009");
-					}
-				}); */
-				
 				//为文件上传添加change事件
 			 	var fileM = document.getElementById("f");
 			  	//获取文件对象，files是文件选取控件的属性，存储的是文件选取控件选取的文件对象，类型是一个数组
@@ -100,7 +71,6 @@
 		             contentType: false,  
 		             processData: false,  
 		             success: function (res) {
-		            	 alert("89898: " + res);
 		            	 if (res.success) {
 							//图片显示
 							$("#headimage").attr("value", res.data.path);
@@ -144,7 +114,7 @@
 						</div>
 						<div class="login_user">
 							<span class="user_name">性别</span>
-							<span class="user_inp"><input type="text" id="sex"  name="sex" placeholder="请输入选择性别" class=""/></span>
+							<span class="user_inp"><input type="text" id="sex"  name="sex" placeholder="请输入性别" class=""/></span>
 						</div>
 						<div class="login_user">
 							<span class="user_name">身份证号</span>
