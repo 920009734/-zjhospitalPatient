@@ -70,8 +70,9 @@
 							if(result.data){
 								location.href="main.html";
 							}else{
-								alert(result.message)
 								localStorage.removeItem('token');
+								localStorage.removeItem('patientId');
+								alert(result.message)
 							}
 						}else{
 							alert(result.message);
