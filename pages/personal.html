@@ -7,9 +7,11 @@
 		<script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
         <link rel="stylesheet" href="../css/frozen.css">
         <link rel="stylesheet" href="../css/style.css"/>
-		<script type="text/javascript" src="../js/placeImage.js"></script>
+		<!--<script type="text/javascript" src="../js/placeImage.js"></script>
 		<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
-		<script type="text/javascript" src="../js/uploadPreview.js" ></script>
+		<script type="text/javascript" src="../js/uploadPreview.js" ></script>-->
+		<script src="../lib/zepto.min.js"></script>
+		<script src="../js/frozen.js"></script>
 		<script src="../js/Utils.js"></script>
 		<title></title>
 		<style type="text/css"> 
@@ -32,7 +34,7 @@
 		</style>
 		
 		<script type="text/javascript">
-		$(function(){
+		/*$(function(){
 			$(".showImg").click(function(){
 				$("#f").click();
 			});
@@ -86,6 +88,32 @@
 			} else {
 				alert("请先选择文件！");
 			}
+		}*/
+	</script>
+	
+	<script>
+		function authentication(){
+			var realname = $("#realname").val();
+			var idcard = $("#idcard").val();
+			if(!realname || !idcard){
+				alert('信息填写不完整');
+				return false;
+			}
+			$.ajax({
+					type: "post",
+					url: Utils.getRoot()+"/patientApp/authentication",
+					async: false,
+					data: {
+						realname: realname, 
+						idcard: idcard
+					},
+					success: function(result){
+						alert(result.message);
+						if(result.success){
+							location.href="main.html"
+						}
+					}
+				});
 		}
 	</script>
 		
@@ -93,41 +121,33 @@
 	<body>
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;">完善个人信息<span class="nav_right" ><a href="main.html">跳过</a></span></h4>
+			<h4 style="margin-left: 25px;">个人信息认证<span class="nav_right" ><a href="main.html">跳过</a></span></h4>
 		</header>
 		
-		<section class="ui-container"> 
+		<section class="ui-container">
 			<section id="list">
 				<form action="" id="newForm" name="newFrom" method="post">
-					<div class="upload_img">
+					<!--<div class="upload_img">
 						<div class="showImg" id="photodiv">
 							<img src="../img/uploadPersonal.png" id="photoimg" />
 						</div>	
 						<input id="f" type="file" name="f" onchange="upload();" style="display: none;"/>
 						<input type="hidden" name="headimage" id="headimage" />
 						<span class="upload_detail">上传头像</span>
-					</div>
+					</div>-->
 					<div class="login-inp">
 						<div class="login_user">
 							<span class="user_name">姓名</span>
-							<span class="user_inp"><input type="text" id="realname"  name="realname" placeholder="请输入真实姓名" class=""/></span>
-						</div>
-						<div class="login_user">
-							<span class="user_name">性别</span>
-							<span class="user_inp"><input type="text" id="sex"  name="sex" placeholder="请输入性别" class=""/></span>
+							<span class="user_inp"><input type="text" id="realname" placeholder="请输入真实姓名" class=""/></span>
 						</div>
 						<div class="login_user">
 							<span class="user_name">身份证号</span>
-							<span class="user_inp"><input type="text" id="idcard"  name="idcard" placeholder="请输入身份证号" class=""/></span>
-						</div>
-						<div class="login_user">
-							<span class="user_name">联系地址</span>
-							<span class="user_inp"><input type="text" id="address"  name="address" placeholder="请输入联系地址" class=""/></span>
+							<span class="user_inp"><input type="text" id="idcard" placeholder="请输入身份证号" class=""/></span>
 						</div>
 					</div>
 				</form>
 				<div class="login_btn">
-					<button class="ui-btn ui-btn-lg ui-btn-primary"  id="baocun">保存信息</button>
+					<button class="ui-btn ui-btn-lg ui-btn-primary" onclick="authentication()">认证信息</button>
 				</div>
 			</section>
 		</section>
