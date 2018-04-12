@@ -23,9 +23,28 @@
 		</style>
 		 <script type="text/javascript">
         	$(function(){
-        		$("#ysxz").click(function(){
-        			window.location.href="../yuyueguahao/choiceDor.html"
-        		})
+        		var params={};
+        		$.post(Utils.getRoot()+"/registerApp/selDivision",params,function(data){
+					if (data.success) {
+						var deptInfo = new Array();
+						deptInfo= data.data;
+						for (var i = 1; i < deptInfo.length; i++) {
+							$("#deptInfoList").append(
+								"<div class='dep_list' onclick='locatDor(this)'>"+
+								  "<input type='hidden' value='"+deptInfo[i].deptCode+"' name='deptCode'>"+
+								  "<h3 class='dep_name' name='deptName'>"+deptInfo[i].deptName+"</h3>"+
+								"</div>"
+							);
+						}
+					}
+				});
+        		
+        		function locatDor(data){
+        			var deptCode = $(data).children("input [name='deptCode']").val();
+        			var deptName = $(data).children("input [name='deptName']").val();
+        			window.location.href="../yuyueguahao/choiceDor.html?deptCode="+deptCode+"&deptName="+deptName;
+        		}
+        		
         	})
         </script>
 	</head>
@@ -37,141 +56,11 @@
 		<section class="ui-container"> 
 			<section id="list">
 				<div class="dep_item">
-					<!-- <div class="dep_sx">E</div> --> 
-					<div class="dep_con">
-						<div class="dep_list" id="ysxz">
-							<input type="hidden" value="xugnk" id="xugnk">
-							<h3 class="dep_name" >心血管内科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>
-						<div class="dep_list">
-							<h3 class="dep_name">消化内科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">呼吸内科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">血液内科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">内分泌科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">肿瘤科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">老年病科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
+					<div class="dep_con"id="deptInfoList">
+						
 					</div>
 				</div>
-				<div class="dep_item">
-					<!-- <div class="dep_sx">E</div> --> 
-					<div class="dep_con">
-						<div class="dep_list">
-							<h3 class="dep_name">普通外科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>
-						<div class="dep_list">
-							<h3 class="dep_name">肝胆一科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">肝胆二科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">骨科中心</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">泌尿外科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">神经外科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">胸心外科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">烧伤整形科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">肛肠科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">麻醉科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-					</div>
-				</div>
-				<div class="dep_item">
-					<!-- <div class="dep_sx">E</div> -->
-					<div class="dep_con">
-						<div class="dep_list">
-							<h3 class="dep_name">急诊科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>
-						<div class="dep_list">
-							<h3 class="dep_name">输血科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">妇产科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">儿科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">神经内科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">皮肤科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">风湿免疫科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">耳鼻咽喉科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">口腔科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">眼科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">中医科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">感染疾病科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-						<div class="dep_list">
-							<h3 class="dep_name">营养科</h3>
-							<!-- <p class="dep_addr">三号楼三楼</p> -->
-						</div>	
-					</div>
-				</div>
+				
 			</section>
 		</section>
 	</body>

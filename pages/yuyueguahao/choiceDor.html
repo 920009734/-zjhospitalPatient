@@ -49,9 +49,89 @@
 		</style>
 		<script type="text/javascript">
         	$(function(){
-        		$("#sjxz").click(function(){
-        			window.location.href="../yuyueguahao/choiceTime.html"
-        		})
+        		function GetRequest() {
+       			  var url = decodeURI(location.search); //获取url中"?"符后的字串
+       			   var theRequest = new Object();
+       			   if (url.indexOf("?") != -1) {
+       			      var str = url.substr(1);
+       			      strs = str.split("&");
+       			      for(var i = 0; i < strs.length; i ++) {
+       			         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+       			      }
+       			   }
+       			   return theRequest;
+       			}
+        		var Request = new Object();
+        		Request = GetRequest();
+        		$("#deptCode").val(Request["deptCode"]);
+        		var deptName = $("#deptName").val(Request["deptName"]);
+        		
+				var params={};
+				params.deptCode=Request["deptCode"];
+				params.dateTime = new Date();
+        		$.post(Utils.getRoot()+"/registerApp/selDoctor",params,function(data){
+					if (data.success) {
+						var dortorInfo = new Array();
+						dortorInfo= data.data;
+						for (var i = 1; i < dortorInfo.length; i++) {
+							if (dortorInfo[i].timeFlag==1) {//上午
+								$("#swinfoList").append(
+									"<span class='con_title'><font color='#3A93A5'>上午</font><span class='con_title_right'>"+dortorInfo[i].count+"人</span></span>"+
+									"<div class='con_doc' onclick='fs(this,"+dortorInfo[i].timeFlag+")'>"+
+										"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+										 "<div class='doc_detail'>"+
+											"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
+											"<span class='doc_name'>"+dortorInfo[i].doctorName+"<span class='main_doc'>主任医生</span></span>"+
+										"</div>"+
+										"<div class='doc_yynum'>"+
+											"<span class='yhao'>余号</span>"+
+											"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+										"</div>"+
+									"</div>"+
+								);
+							} else if(dortorInfo[i].timeFlag==2) {//下午
+								$("#xwinfoList").append(
+									"<span class='con_title'><font color='#3A93A5'>下午</font><span class='con_title_right'>"+dortorInfo[i].count+"人</span></span>"+
+									"<div class='con_doc' onlcick='fs(this,"+dortorInfo[i].timeFlag+")'>"+
+										"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+										 "<div class='doc_detail'>"+
+											"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
+											"<span class='doc_name'>"+dortorInfo[i].doctorName+"<span class='main_doc'>主任医生</span></span>"+
+										"</div>"+
+										"<div class='doc_yynum'>"+
+											"<span class='yhao'>余号</span>"+
+											"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+										"</div>"+
+									"</div>"+
+								);
+							}else{//晚上
+								$("#wsinfoList").append(
+									"<span class='con_title'><font color='#3A93A5'>晚上</font><span class='con_title_right'>"+dortorInfo[i].count+"人</span></span>"+
+									"<div class='con_doc' onclick='fs(this,"+dortorInfo[i].timeFlag+")'>"+
+										"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+										 "<div class='doc_detail'>"+
+											"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
+											"<span class='doc_name'>"+dortorInfo[i].doctorName+"<span class='main_doc'>主任医生</span></span>"+
+										"</div>"+
+										"<div class='doc_yynum'>"+
+											"<span class='yhao'>余号</span>"+
+											"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+										"</div>"+
+									"</div>"+
+								);
+							}
+							
+						}
+					}
+					}
+				});
+        		
+        		function fs(data,timeFlag){
+        			var doctorCode = $(data).children("input[name='doctorCode']").val();
+        			var deptCode = $("#deptCode").val();
+        			var dateTime = new Date();
+        			window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&timeFlag="+timeFlag+"&deptName="+deptName+"&dateTime="+dateTime;
+        		}
         	})
         </script>
 	</head>
@@ -59,8 +139,8 @@
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
 			<h4 style="margin-left: 25px;">
-				<input type="hidden" value="xugnk" id="xugnk">
-				心血管内科
+				<input type="text" value="" id="deptCode">
+				<span id="deptName"></span>
 			</h4>
 		</header>
 		<section class="ui-container"> 
@@ -103,7 +183,6 @@
 					</div>
 					
 					<div class="date_icon open">
-						<!--<p>展开</p><i class="ui-icon ui-icon-unfold"></i>-->
 						
 						<p>展开</p><i class="ui-icon ui-icon-unfold"></i>
 					</div>
@@ -112,76 +191,18 @@
 				<div style="display: block;float: left;width: 100%;">
 					<!-- 上午 -->
 					<div class="date_con">
-						<span class="con_title"><font color="#3A93A5">上午</font><span class="con_title_right">3 位</span></span>
-						<div class="con_doc" id="sjxz">
-							<div class="doc_img"><img src="../../img/docImg.png"></div>
-							<div class="doc_detail">
-								<input type="hidden" value="ysid" id="ysid">
-								<span class="doc_name">丁明学<span class="main_doc">主治医生</span></span>
-								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
-							</div>
-							<div class="doc_yynum">
-								<span class="yhao">余号</span>
-								<span class="yhao_num">20</span>
-							</div>
-						</div>
-						<div class="con_doc">
-							<div class="doc_img"><img src="../../img/docImg.png"></div>
-							<div class="doc_detail">
-								<span class="doc_name">李志樑<span class="main_doc">主治医生</span></span>
-								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
-							</div>
-							<div class="doc_yynum">
-								<span class="yhao">余号</span>
-								<span class="yhao_num">20</span>
-							</div>
-						</div>
-						<div class="con_doc">
-							<div class="doc_img"><img src="../../img/docImg.png"></div>
-							<div class="doc_detail">
-								<span class="doc_name">刘磊<span class="main_doc">主治医生</span></span>
-								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
-							</div>
-							<div class="doc_yynum">
-								<span class="yhao">余号</span>
-								<span class="yhao_num">20</span>
-							</div>
+						<div id="swinfoList">
+						
 						</div>
 					</div>
 					<div class="date_con">
-						<span class="con_title"><font color="#3A93A5">下午</font><span class="con_title_right">3 位</span></span>
-						<div class="con_doc">
-							<div class="doc_img"><img src="../../img/docImg.png"></div>
-							<div class="doc_detail">
-								<span class="doc_name">李功辉<span class="main_doc">主治医生</span></span>
-								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
-							</div>
-							<div class="doc_yynum">
-								<span class="yhao">余号</span>
-								<span class="yhao_num">15</span>
-							</div>
+						<div id="xwinfoList">
+						
 						</div>
-						<div class="con_doc">
-							<div class="doc_img"><img src="../../img/docImg.png"></div>
-							<div class="doc_detail">
-								<span class="doc_name">刘磊<span class="main_doc">主治医生</span></span>
-								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
-							</div>
-							<div class="doc_yynum">
-								<span class="yhao">余号</span>
-								<span class="yhao_num">15</span>
-							</div>
-						</div>
-						<div class="con_doc">
-							<div class="doc_img"><img src="../../img/docImg.png"></div>
-							<div class="doc_detail">
-								<span class="doc_name">严全能<span class="main_doc">主治医生</span></span>
-								<span class="doc_time">2018-03-05 <span class="dep_type">心血管内科门诊</span></span>
-							</div>
-							<div class="doc_yynum">
-								<span class="yhao">余号</span>
-								<span class="yhao_num">15</span>
-							</div>
+					</div>
+					<div class="date_con">
+						<div id="wsinfoList">
+						
 						</div>
 					</div>
 				</div>	

@@ -24,9 +24,83 @@
 		</style>
 		<script type="text/javascript">
         	$(function(){
-        		$("#qrxz").click(function(){
+        		function GetRequest() {
+       			  var url = decodeURI(location.search); //获取url中"?"符后的字串
+       			   var theRequest = new Object();
+       			   if (url.indexOf("?") != -1) {
+       			      var str = url.substr(1);
+       			      strs = str.split("&");
+       			      for(var i = 0; i < strs.length; i ++) {
+       			         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+       			      }
+       			   }
+       			   return theRequest;
+       			}
+        		var Request = new Object();
+        		Request = GetRequest();
+        		$("#deptCode").val(Request["deptCode"]);
+        		$("#doctorCode").val(Request["doctorCode"]);
+        		$("#deptName").text(Request["deptName"]);
+        		$("#dateTime").text(Request["dateTime"]);
+        		
+        		var params={};
+        		params.deptCode = Request["deptCode"];
+        		params.doctorCode = Request["doctorCode"];
+        		params.dateTime = Request["dateTime"];
+        		
+        		$.post(Utils.getRoot()+"/registerApp/selTime",params,function(data){
+					if (data.success) {
+						var doctorInfo = new Array();
+						doctorInfo= data.data;
+						$("#doctorName").text(doctorInfo[0].doctorName);
+						for (var i = 1; i < doctorInfo.length; i++) {
+							if (doctorInfo[i].timeFlag==1) {//区分时段
+								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
+									//把挂号费转为元，原本是分
+									var regFee = parseInt(doctorInfo[i].regFee)/100;
+									$("#swdateTime").append(
+										"<div class='ck_dateTime' on0click='xzTime(this,"+octorInfo[i].timeFlag+")'>"+
+											"<span>"+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+"</span>"+
+											"<span>"+doctorInfo[i].leftNum+"</span>"+
+											"<span>"+regFee+"</span>"+
+										"</div>"
+									);
+								}else{
+									$("#swdateTime").append(
+										"<div class='ck_dateTime'> 暂无时间</div>"
+									);
+								} 
+							} else if (doctorInfo[i].timeFlag==2){
+								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
+									$("#xwdateTime").append(
+										"<div class='ck_dateTime' onclick='xzTime(this,"+octorInfo[i].timeFlag+")'> "+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+" </div>"
+									);
+								}else{
+									$("#xwdateTime").append(
+										"<div class='ck_dateTime'> 暂无时间</div>"
+									);
+								}
+							}else{
+								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
+									$("#wsdateTime").append(
+										"<div class='ck_dateTime' onclick='xzTime(this,"+octorInfo[i].timeFlag+")'> "+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+" </div>"
+									);
+								} else{
+									$("#wsdateTime").append(
+										"<div class='ck_dateTime'> 暂无时间</div>"
+									);
+								}
+						}
+					}
+				});
+        		
+        		
+        		function xzTime(data,timeFlag){
+        			var doctorCode = $(data).children("input[name='doctorCode']").val();
+        			var deptCode = $("#deptCode").val();
+        			var dateTime = new Date();
         			window.location.href="../yuyueguahao/comfirmMsg.html"
-        		})
+        		}
         	})
         </script>
 	</head>
@@ -38,40 +112,25 @@
 		<section class="ui-container"> 
 			<section id="list">
 				<div class="doc_detai">
-					<span class="date_pers">丁明学</span>
-					<span class="date_type">心血管内科门诊</span>
-					<span class="date_time">2018-03-25 上午</span>
+					<input type="hidden" val="" id="doctorCode">
+					<span class="date_pers" id="doctorName"></span>
+					<input type="hidden" val="" id="deptCode">
+					<span class="date_type" id="deptName"></span>
+					<span class="date_time" id="dateTime"></span>
 				</div>
-				<div class="date_detail">
-					<div class="ck_time"> 9点 </div>
-					<div class="ck_time"> 10点 </div>
-					<div class="ck_time"> 11点 </div>
-				</div>
-				<div class="time_item">
-					<div class="detail_time"><p>9点</p></div>
-					<div class="detail_dateTime">
-						<div class="ck_dateTime" id="qrxz"> 09:00:00 </div>
-						<div class="ck_dateTime"> 09:15:00 </div>
-						<div class="ck_dateTime"> 09:30:00 </div>
-						<div class="ck_dateTime"> 09:45:00 </div>
+				<div class='time_item'>
+					<div class='detail_time'><p>上午</p></div>
+					<div class='detail_dateTime' id="swdateTime">
 					</div>
 				</div>
-				<div class="time_item">
-					<div class="detail_time"><p>10点</p></div>
-					<div class="detail_dateTime">
-						<div class="ck_dateTime"> 10:00:00 </div>
-						<div class="ck_dateTime"> 10:15:00 </div>
-						<div class="ck_dateTime"> 10:30:00 </div>
-						<div class="ck_dateTime"> 10:45:00 </div>
+				<div class='time_item'>
+					<div class='detail_time'><p>下午</p></div>
+					<div class='detail_dateTime' id="xwdateTime">
 					</div>
 				</div>
-				<div class="time_item">
-					<div class="detail_time"><p>11点</p></div>
-					<div class="detail_dateTime">
-						<div class="ck_dateTime"> 11:00:00 </div>
-						<div class="ck_dateTime"> 11:15:00 </div>
-						<div class="ck_dateTime"> 11:30:00 </div>
-						<div class="ck_dateTime"> 11:45:00 </div>
+				<div class='time_item'>
+					<div class='detail_time'><p>晚上</p></div>
+					<div class='detail_dateTime' id="wsdateTime">
 					</div>
 				</div>
 			</section>
