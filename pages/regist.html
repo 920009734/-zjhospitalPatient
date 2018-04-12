@@ -33,6 +33,7 @@
 	</head>
 	<body>
 		<script>
+			var idfycode = "";
 			function ocxieyi(isCheck){
 				if(isCheck){
 					$("#regist_sub").removeAttr("disabled");
@@ -40,23 +41,55 @@
 					$("#regist_sub").attr("disabled","disabled");
 				}
 			}
+			function getIdfyCode(){
+				var phone = $("#phone_").val();
+				if(!phone){
+					alert('请输入手机号码');
+					return false;
+				}
+				$.ajax({
+					type:"post",
+					url:Utils.getRoot()+"/patientApp/getIdentifyingCode",
+					async:false,
+					data: {
+						phone: phone
+					},
+					success: function(result){
+						if(result.success){
+							idfycode = result.data;
+						}else{
+							alert(result.message);
+						}
+					}
+				});
+			}
 			function regist(){
 				var phone = $("#phone_").val();
 				var password = $("#password_").val();
 				var identifyingCode = $("#ic_").val();
+				if(!phone || !password || !identifyingCode){
+					alert('信息填写不完整');
+					return false;
+				}
+				if(identifyingCode != idfycode){
+					alert('验证码错误');
+					return false;
+				}
 				$.ajax({
 					type:"post",
 					url:Utils.getRoot()+"/patientApp/register",
 					async:false,
 					data: {
 						phone: phone,
-						password: password,
-						identifyingCode: identifyingCode
+						password: password
 					},
 					success: function(result){
 						alert(result.message);
 						if(result.success){
-							location.href="login.html"
+							localStorage.setItem("user_phone", result.data.phone);
+							localStorage.setItem("token",result.data.token)
+							localStorage.setItem("patientId",result.data.patientid)
+							location.href="personal.html"
 						}
 					}
 				});
@@ -80,7 +113,7 @@
 						<span class="user_icon"><i class="ui-icon icon-qrcode"></i></span>
 						<span class="user_inp">
 							<input id="ic_" type="text" placeholder="请输入验证码" style="width: 65%;"/>
-							<span class="yzm">获取验证码</span>
+							<span class="yzm" onclick="getIdfyCode()">获取验证码</span>
 						</span>
 					</div>
 					<div class="reg_agree">

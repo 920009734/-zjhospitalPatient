@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+        <title>住院记录查询</title>
+        <style type="text/css">
+        	html,body{width: 100%;background-color: #FFFFFF;font-family: "微软雅黑";}
+        	.search_hospital{display: block;float: left;width: 90%;margin-left: 5%;height: 60px;margin-top: 20px;}
+        	.search_hospital>input{display: block;width: 95%;height: 40px;line-height: 40px;font-size: 15px;border: 1px solid #E6E6E6;border-radius: 2px;}
+        	.search_hospital>button{display: block;float: left; width: 99.3%;height: 40px;line-height: 40px;margin-top: 25px; border-radius: 2px;background: #0066CC;border: 1px solid #0066CC;color: #FFFFFF;}
+        	input[placeholder]{padding-left: 4%;}
+        </style>
+        
+	</head>
+	
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">住院记录查询</h4>
+		</header>
+		<section class="ui-container">
+			<div class="demo-block">
+				<div class="search_hospital">
+					<input type="text" class="inp_" placeholder="诊疗卡号/住院号" />
+					<button id="hos_btn">查询</button>
+				</div>
+			</div>
+		</section>
+		
+		<script type="text/javascript">
+			$("#hos_btn").click(function(){
+				location.href = "inhospitalRecord.html";
+			});
+		</script>
+	</body>
+</html>
