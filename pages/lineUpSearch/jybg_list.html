@@ -6,9 +6,9 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css">
-        
         <script src="../../lib/zepto.min.js">  </script>
         <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
 		<title>检验结果列表</title>
 		
 		<style type="text/css">
@@ -18,6 +18,32 @@
 			.list-item>span{display: block;float: left; padding-left: 15px;font-size: 15px;}
 			a{color: #000000;}
 		</style>
+		<script type="text/javascript">
+        	$(function(){
+        		var params={};
+        		$.post(Utils.getRoot()+"/registerApp/selDivision",params,function(data){
+					if (data.success) {
+						var deptInfo = new Array();
+						deptInfo= data.data;
+						for (var i = 0; i < deptInfo.length; i++) {
+							$("#deptInfoList").append(
+								"<div class='dep_list' >"+
+								  "<input type='hidden' value='"+deptInfo[i].deptCode+"' name='deptCode'>"+
+								  "<h3 class='dep_name' name='deptName'>"+deptInfo[i].deptName+"</h3>"+
+								"</div>"
+							);
+						}
+					}
+				});
+        		
+        		$("#deptInfoList").on("click",".dep_list",function(){
+        			var deptCode = $(this).children("input").val();
+        			var deptName = $(this).children(".dep_name").text();
+        			window.location.href="../yuyueguahao/choiceDor.html?deptCode="+deptCode+"&deptName="+deptName;
+        		});
+        		
+        	})
+        </script>
 	</head>
 	<body ontouchstart> 
 		<header class="ui-header ui-header-positive">
@@ -28,7 +54,7 @@
 		<section class="ui-container">
 			<section class="list">
 				<div class="demo-block">
-					<a href="jianchabg_view.html">
+					<a href="jianyanbg_view.html">
 						<div class="list-item ">
 							<span>检验结果列表1</span>
 							<i class="ui-icon ui-icon-arrow"></i>

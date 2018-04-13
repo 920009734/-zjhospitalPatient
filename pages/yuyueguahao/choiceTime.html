@@ -50,7 +50,6 @@
 					if (data.success) {
 						var doctorInfo = new Array();
 						doctorInfo= data.data;
-						console.log(JSON.stringify(doctorInfo))
 						for (var i = 0; i < doctorInfo.length; i++) {
 							if (doctorInfo[i].timeFlag==1) {//区分时段
 								$("#swDiv").show();
@@ -58,10 +57,12 @@
 									//把挂号费转为元，原本是分
 									var regFee = parseInt(doctorInfo[i].regFee)/100;
 									$("#swdateTime").append(
-										"<div class='slot_item'>"+
-											"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
-											"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
-											"<span class='ghmoney'>￥"+regFee+"</span>"+
+										"<div class='ck_dateTime'>"+
+											"<div class='slot_item'>"+
+												"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
+												"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
+												"<span class='ghmoney'>￥"+regFee+"</span>"+
+											"</div>"+
 										"</div>"
 									);
 								}else{
@@ -76,10 +77,12 @@
 								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
 									var regFee = parseInt(doctorInfo[i].regFee)/100;
 									$("#xwdateTime").append(
-										"<div class='slot_item'>"+
-											"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
-											"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
-											"<span class='ghmoney'>￥"+regFee+"</span>"+
+										"<div class='ck_dateTime'>"+
+											"<div class='slot_item'>"+
+												"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
+												"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
+												"<span class='ghmoney'>￥"+regFee+"</span>"+
+											"</div>"+
 										"</div>"
 									);
 								}else{
@@ -94,10 +97,12 @@
 								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
 									var regFee = parseInt(doctorInfo[i].regFee)/100;
 									$("#wsdateTime").append(
-										"<div class='slot_item'>"+
-											"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
-											"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
-											"<span class='ghmoney'>￥"+regFee+"</span>"+
+										"<div class='ck_dateTime'>"+
+											"<div class='slot_item'>"+
+												"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
+												"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
+												"<span class='ghmoney'>￥"+regFee+"</span>"+
+											"</div>"+
 										"</div>"
 									);
 								} else{
@@ -112,8 +117,7 @@
 					}
 				});
 				
-        		
-        		$("#swdateTime,#xwdateTime,#wsdateTime").on("click",".cscs",function(){
+        		$("#swdateTime,#xwdateTime,#wsdateTime").on("click",".ck_dateTime",function(){
         			var deptCode = $("#deptCode").val();
         			var deptName = $("#deptName").val();
         			var doctorCode = $("#doctorCode").val();
@@ -140,35 +144,23 @@
 					<span class="date_type" id="deptName"></span>
 					<span class="date_time" id="dateTime"></span>
 				</div>
-				<div class='time_item' id="swDiv" style="display: none;">
-				
-				<div>
-					<div class='time_item'>
-						<div class='detail_time'><p>上午</p></div>
-						<div class='detail_dateTime' >
-							<div class="ck_dateTime"id="swdateTime">
-								
-							</div>
-						</div>
+				<div class='time_item' id='swDiv' style="display: none;">
+					<div class='detail_time'><p>上午</p></div>
+					<div class='detail_dateTime' id="swdateTime">
+						
 					</div>
-					<div class='time_item' id="xwDiv" style="display: none;">
-						<div class='detail_time'><p>下午</p></div>
-						<div class='detail_dateTime' >
-							<div class="ck_dateTime"id="xwdateTime">
-								
-							</div>
-						</div>
-					</div>
-					<div class='time_item' id="wsDiv" style="display: none;">
-						<div class='detail_time'><p>晚上</p></div>
-						<div class='detail_dateTime' >
-							<div class="ck_dateTime"id="wsdateTime">
-								
-							</div>
-						</div>
-					</div>
-					
 				</div>
+				<div class='time_item' id="xwDiv" style="display: none;">
+					<div class='detail_time'><p>下午</p></div>
+					<div class='detail_dateTime' id="xwdateTime">
+					</div>
+				</div>
+				<div class='time_item' id="wsDiv" style="display: none;">
+					<div class='detail_time'><p>晚上</p></div>
+					<div class='detail_dateTime' id="wsdateTime">
+					</div>
+				</div>
+					
 				
 			</section>
 		</section>

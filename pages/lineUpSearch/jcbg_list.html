@@ -18,6 +18,37 @@
 			.list-item>span{display: block;float: left; padding-left: 15px;font-size: 15px;}
 			a{color: #000000;}
 		</style>
+		 <script type="text/javascript">
+        	$(function(){
+        		var params={};
+        		params.startTime = ;
+        		params.endTime = ;
+        		
+        		$.post(Utils.getRoot()+"/reportQuery/selDivision",params,function(data){
+					if (data.success) {
+						var deptInfo = new Array();
+						deptInfo= data.data;
+						for (var i = 0; i < deptInfo.length; i++) {
+							$("#jcList").append(
+								<a href="jianchabg_view.html">
+									<div class="list-item ">
+										<span>检查结果列表1</span>
+										<i class="ui-icon ui-icon-arrow"></i>
+									</div>
+								</a>
+							);
+						}
+					}
+				});
+        		
+        		$("#jcList").on("click",".dep_list",function(){
+        			var deptCode = $(this).children("input").val();
+        			var deptName = $(this).children(".dep_name").text();
+        			window.location.href="../yuyueguahao/choiceDor.html?deptCode="+deptCode+"&deptName="+deptName;
+        		});
+        		
+        	})
+        </script>
 	</head>
 	<body ontouchstart> 
 		<header class="ui-header ui-header-positive">
@@ -27,21 +58,8 @@
 		
 		<section class="ui-container">
 			<section class="list">
-				<div class="demo-block">
-					<a href="jianchabg_view.html">
-						<div class="list-item ">
-							<span>检查结果列表1</span>
-							<i class="ui-icon ui-icon-arrow"></i>
-						</div>
-					</a>
-					<div class="list-item ">
-						<span>检查结果列表2</span>
-						<i class="ui-icon ui-icon-arrow"></i>
-					</div>
-					<div class="list-item ">
-						<span>检查结果列表3</span>
-						<i class="ui-icon ui-icon-arrow"></i>
-					</div>
+				<div class="demo-block" id="jcList">
+					
 				</div>
 			</section>
 		</section>
