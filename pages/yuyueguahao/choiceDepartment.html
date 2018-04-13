@@ -7,20 +7,25 @@
         <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
 		<title>选择科室</title>
 		<style type="text/css">
-			.dep_item{display: block;width: 100%;}
-			.dep_item:first-child{margin-top: 5px;}
-			.dep_sx{display: block;width: 90%;margin: 0 auto; height: 25px;font-size:14px;line-height: :;px;color: #3A93A5;}
-			.dep_con{display: block;width: 100%;min-height: 55px;max-height: 1000px;background-color: #FFFFFF;}
-			.dep_con .dep_list:last-child{border: none;}
-			.dep_list{display: block;width: 100%;height: 55px;border-bottom: 1px solid #E7E7E7;}
-			.dep_name,.dep_addr{display: block; padding-left: 14px;}
-			.dep_name{padding-top: 6px;}
-			.dep_addr{font-size: 12px;margin-top: 2px;}
+			html,body{font-family: "微软雅黑";}
+			.dep_item{display: block; width: 100%;}
+			.dep_con{display: block;width: 100%; min-height: 50px;max-height: 2000px;}
+			
+			.dep_list{display: block;width: 100%;height: 50px;line-height: 50px; margin-bottom: 5px;background-color: #FFFFFF;}
+			.dep_list>span{display: block;float: left;width: 84%;padding-left: 15px;}
+			.dep_list>i{display: block;float: right;line-height: 50px;width: 10%;color: #8B8B8B;}
+			
+			.search_dep{display: block;width: 100%;height: 70px;background-color: #FFFFFF;margin-bottom: 15px;}
+			.huanzhe_search{display: block;float:left;width: 90%;height: 40px;margin-left:5%;margin-top: 15px;margin-bottom: 10px; line-height: 40px;background-color: #FAFAFA;border: 1px solid #49B6AC;border-radius: 5px;}
+			.huanzhe_search>input{display: block;float: left; width: 87%;border: none;height: 30px;margin-top: 5px;background-color: #FAFAFA;}
+			.huanzhe_search>i{display: block;float: left;width: 7%;font-size: 22px;line-height: 40px;color: #49B6AC;}
+			input[placeholder]{font-size: 14px;padding-left:10px;}
 		</style>
 		 <script type="text/javascript">
         	$(function(){
@@ -33,7 +38,8 @@
 							$("#deptInfoList").append(
 								"<div class='dep_list' >"+
 								  "<input type='hidden' value='"+deptInfo[i].deptCode+"' name='deptCode'>"+
-								  "<h3 class='dep_name' name='deptName'>"+deptInfo[i].deptName+"</h3>"+
+								  "<span class='dep_name' name='deptName'>"+deptInfo[i].deptName+"</span>"+
+								  "<i class='ui-icon ui-icon-arrow'></i>"+
 								"</div>"
 							);
 						}
@@ -56,9 +62,39 @@
 		</header>
 		<section class="ui-container"> 
 			<section id="list">
+				<div class="search_dep">
+					<div class="huanzhe_search">
+						<input type="text" id="chazhao" placeholder="查找科室" />
+						<i class="ui-icon icon-search" id="searchp"></i>
+					</div>
+				</div>
 				<div class="dep_item">
-					<div class="dep_con"id="deptInfoList">
-						
+					<div class="dep_con" id="deptInfoList">
+						<!--<div class='dep_list' >
+						  	<input type='hidden' value='' name='deptCode'>
+						  	<span class='dep_name' name='deptName'>神经内科</span>
+						  	<i class="ui-icon ui-icon-arrow"></i>
+						</div>
+						<div class='dep_list' >
+						  	<input type='hidden' value='' name='deptCode'>
+						  	<span class='dep_name' name='deptName'>内科</span>
+						  	<i class="ui-icon ui-icon-arrow"></i>
+						</div>
+						<div class='dep_list' >
+						  <input type='hidden' value='' name='deptCode'>
+						  <span class='dep_name' name='deptName'>眼科</span>
+						  <i class="ui-icon ui-icon-arrow"></i>
+						</div>
+						<div class='dep_list' >
+						  <input type='hidden' value='' name='deptCode'>
+						  <span class='dep_name' name='deptName'>外科</span>
+						  <i class="ui-icon ui-icon-arrow"></i>
+						</div>
+						<div class='dep_list' >
+						  <input type='hidden' value='' name='deptCode'>
+						  <span class='dep_name' name='deptName'>妇产科</span>
+						  <i class="ui-icon ui-icon-arrow"></i>
+						</div>-->
 					</div>
 				</div>
 				
