@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../js/jquery-1.8.3.min.js"></script>
+        <script src="../../js/Utils.js"></script>
+		<title>选择医生</title>
+		<style type="text/css">
+			html,body{background-color: #FFFFFF;}
+			.nav_date{display: block;width: 94%;height: 20px; margin: 0 auto;margin-top: 10px;margin-bottom:10px;}
+			
+			.dep_name{padding-top: 6px;font-size: 16px;}
+			.dep_addr{font-size: 12px;margin-top: 2px;}
+			
+			.date_con{display: block;width: 94%;margin: 0 auto;margin-top: 10px;}
+			.con_title_right{display: block;float: right;font-size: 14px;color: #E45A33;margin-top: 2px;margin-right: 10px;}
+			.con_title{font-weight: bold;}
+			.con_doc{display: block;width: 100%;height: 70px;background-color: #F7F7F7;border-top: #E7E7E7;margin-bottom: 3px;}
+			.con_doc>div{display: block;float: left;height: 70px;}
+			.doc_img{width: 21%;}
+			.doc_img>img{display:block;margin: 0 auto;margin-top: 15px;}
+			.doc_detail{width: 60%;line-height: 27px;}
+			.doc_yynum{width: 17%;text-align: center;}
+			.doc_detail>span{display: block;width: 100%;}
+			.main_doc{font-weight: 100;margin-left: 15px;font-size: 14px;}
+			.doc_name{margin-top: 10px;font-weight: bold;}
+			.doc_time{font-size: 14px;}
+			.dep_type{margin-left: 10px;}
+			.doc_yynum>span{display: block;width: 100%;line-height: 27px;}
+			.yhao{margin-top: 10px;font-size: 14px;}
+			.yhao_num{font-weight: bold;color: #0066CC;}
+			.date_item{display: block;float:left;width: 85%;}
+			.date_list{display: block;float: left;width: 24.5%;height:60px;text-align: center;border-right: 1px solid #EEEAEB;}
+			.date_list.active{background-color: #0066CC;color: #FFFFFF;}
+			.date_list{display: block;border: 1px solid #EEEAEB;} 
+			.date_list:nth-child(2),.date_list:nth-child(3),.date_list:nth-child(4),
+			.date_list:nth-child(6),.date_list:nth-child(7),.date_list:nth-child(8){border-left: none;}
+			.date_list:nth-child(5),.date_list:nth-child(6),.date_list:nth-child(7),.date_list:nth-child(8){border-top: none;}
+			.date_icon{display: block;float:left; border: 1px solid #EEEAEB;width:14%;border-left: none;color: #3A93A5;}
+			.date_icon.open>p{text-align: center;padding-top: 6px;}
+			.date_icon>i{text-align: center;margin-top: -9px;font-size: 42px;color: #3A93A5;}
+			
+			.date_icon.close>p{text-align: center;padding-top: 80%;}
+			.date_icon.close{height: 121px;}
+			.date_icon.open{height: 60px;}
+		</style>
+		<script type="text/javascript">
+        	$(function(){
+        		function GetRequest() {
+       			  var url = decodeURI(location.search); //获取url中"?"符后的字串
+       			   var theRequest = new Object();
+       			   if (url.indexOf("?") != -1) {
+       			      var str = url.substr(1);
+       			      strs = str.split("&");
+       			      for(var i = 0; i < strs.length; i ++) {
+       			         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+       			      }
+       			   }
+       			   return theRequest;
+       			}
+        		var Request = new Object();
+        		Request = GetRequest();
+        		
+				var params={};
+				params.deptCode=Request["deptCode"];
+				
+        		$.post(Utils.getRoot()+"/registerApp/selDoctor",params,function(data){
+					if (data.success) {
+						var dortorInfo = new Array();
+						dortorInfo= data.data;
+						for (var i = 1; i < dortorInfo.length; i++) {
+							$("#dortorList").append(
+								"<div class='con_doc' id='sjxz'>"+
+									"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+									"<div class='doc_detail'>"+
+										"<input type='hidden' value='ysid' id='ysid'>"+
+										"<input type='hidden' value='"+dortorInfo[i].deptCode+"' id='deptCode'>"+
+										"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' id='doctorCode'>"+
+										"<span class='doc_name'>"+dortorInfo[i].doctorName+"<span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+									"</div>"+
+								"</div>"
+							);
+						}
+					}
+					}
+				});
+        		
+        		$("#sjxz").click(function(){
+        			window.location.href="../yuyueguahao/choiceTime.html"
+        		})
+        	})
+        </script>
+	</head>
+	<body ontouchstart>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="nav_date">
+				</div>
+				<div style="display: block;float: left;width: 100%;">
+					<div class="date_con" id="dortorList">
+						
+					</div>
+				</div>	
+				
+			</section>
+		</section>
+		
+		<script type="text/javascript">
+			$(function(){
+				$(".date_list:nth(4),.date_list:nth(6),.date_list:nth(7),.date_list:nth(5)").hide();
+				$(".date_icon").click(function(){
+					var aa = $(this).hasClass("open");
+					if(!aa){
+						$(".date_list:nth(4),.date_list:nth(6),.date_list:nth(7),.date_list:nth(5)").hide();
+						$(this).removeClass("close");
+						$(this).addClass("open");
+						$(this).children("p").text("展开");
+					}else{
+						$(".date_list:nth(4),.date_list:nth(6),.date_list:nth(7),.date_list:nth(5)").show();
+						$(this).removeClass("open");
+						$(this).addClass("close");
+						$(this).children("p").text("收起");
+					}
+				})
+			});
+		</script>
+	</body>
+</html>
