@@ -11,18 +11,25 @@
         <script src="../../js/Utils.js"></script>
 		<title>选择时间</title>
 		<style type="text/css">
-			html,body{background-color: #FFFFFF;font-family: "微软雅黑";height: 100%;width: 100%;}
-			.doc_detai{display: block;width: 100%;height: 50px;line-height:50px;border-bottom: 1px solid #EEEAEB;margin-top: 5px;}
+			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
+			.doc_detai{display: block;width: 100%;height: 50px;line-height:50px;border-bottom: 1px solid #EEEAEB;background-color: #FFFFFF;}
 			.date_pers{margin-left: 10px;}
 			.date_type{font-size: 13px;margin-left: 15px;}
 			.date_time{display: block;float:right;font-size:13px;margin-right: 10px;}
 			.date_detail{display: block;width:100% ;height: 60px;border-bottom: 1px solid #EEEAEB;}
-			.ck_time{display: block;float: left;margin-top:15px;margin-left:10px;width: 16%;height: 30px;text-align:center;line-height: 30px; border: 1px solid #0066CC;border-radius: 2px;color: #199ED8;font-size: 15px;}
-			.detail_time{display: block;float: left;width: 100%;height: 20px;background-color: #F7F7F7;line-height: 20px;font-size: 13px;color: #199ED8;}
+			.ck_time{display: block;float: left;margin-top:15px;margin-left:10px;width: 16%;height: 30px;text-align:center;line-height: 30px; border: 1px solid #199ED8;border-radius: 2px;color: #199ED8;font-size: 15px;}
+			.detail_time{display: block;float: left;width: 100%;height: 30px;background-color: #F7F7F7;line-height: 30px;font-size: 15px;color: #4CB6AC;}
 			.detail_time>p{margin-left: 10px;}
-			.detail_dateTime{display: block;float: left;width: 100%;min-height: 50px;max-height: 200px;}
-			.ck_dateTime{display: block;float: left;margin-top:15px;margin-left:12px;width: 19%;height: 30px;text-align:center;line-height: 30px; border: 1px solid #0066CC;border-radius: 2px;color: #199ED8;font-size: 15px;}
-			.ck_dateTime:last-child{margin-bottom: 15px;}
+			.detail_dateTime{display: block;float: left;width: 100%;min-height: 50px;max-height: 200px;background-color: #FFFFFF;}
+			.ck_dateTime{display: block;float: left;width: 100%;height: 50px;line-height: 50px;border-bottom: 1px solid #E4E4E4;font-size: 15px;}
+			.ck_dateTime:last-child{border: none;}
+			.slot_item{display: block;float: left;width: 94%;margin-left: 3%;height:50px;line-height: 50px;}
+			.slot_item>span{display: block;float: left;}
+			.time_slot{width: 54%;}
+			.yuhao, .ghmoney{width: 22%;height: 30px;line-height: 30px;font-size: 13px;text-align: center;margin-top: 10px;margin-left: 1%;color: #FFFFFF;border-radius: 3px;}
+			.yuhao{background-color: #3B92A6;}
+			.ghmoney{background-color: #D84C29;}
+			.notData{color: #999999;}
 		</style>
 		<script type="text/javascript">
         	$(function(){
@@ -51,15 +58,17 @@
 									//把挂号费转为元，原本是分
 									var regFee = parseInt(doctorInfo[i].regFee)/100;
 									$("#swdateTime").append(
-										"<div class='cscs'>"+
-											"<span class='sjd'>"+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+"</span>"+
-											"<span>余号："+doctorInfo[i].leftNum+"</span>"+
-											"<span class='ghf'>挂号费："+regFee+"</span>"+
+										"<div class='slot_item'>"+
+											"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
+											"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
+											"<span class='ghmoney'>￥"+regFee+"</span>"+
 										"</div>"
 									);
 								}else{
 									$("#swdateTime").append(
-										"<div class='ck_dateTime'> 暂无时间</div>"
+										"div class='slot_item'>"+
+											"<p class='notData'>暂无数据</p>"+
+										"</div>"
 									);
 								} 
 							} else if (doctorInfo[i].timeFlag==2){
@@ -67,15 +76,17 @@
 								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
 									var regFee = parseInt(doctorInfo[i].regFee)/100;
 									$("#xwdateTime").append(
-										"<div class='cscs'>"+
-											"<span class='sjd'>"+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+"</span>"+
-											"<span>余号："+doctorInfo[i].leftNum+"</span>"+
-											"<span class='ghf'>挂号费："+regFee+"</span>"+
+										"<div class='slot_item'>"+
+											"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
+											"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
+											"<span class='ghmoney'>￥"+regFee+"</span>"+
 										"</div>"
 									);
 								}else{
 									$("#xwdateTime").append(
-										"<div class='ck_dateTime'> 暂无时间</div>"
+										"div class='slot_item'>"+
+											"<p class='notData'>暂无数据</p>"+
+										"</div>"
 									);
 								}
 							}else{
@@ -83,21 +94,24 @@
 								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
 									var regFee = parseInt(doctorInfo[i].regFee)/100;
 									$("#wsdateTime").append(
-										"<div class='cscs'>"+
-											"<span class='sjd'>"+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+"</span>"+
-											"<span>余号："+doctorInfo[i].leftNum+"</span>"+
-											"<span class='ghf'>挂号费："+regFee+"</span>"+
+										"<div class='slot_item'>"+
+											"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
+											"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
+											"<span class='ghmoney'>￥"+regFee+"</span>"+
 										"</div>"
 									);
 								} else{
 									$("#wsdateTime").append(
-										"<div class='ck_dateTime'> 暂无时间</div>"
+										"div class='slot_item'>"+
+											"<p class='notData'>暂无数据</p>"+
+										"</div>"
 									);
 								}
 							}
 						}
 					}
 				});
+				
         		
         		$("#swdateTime,#xwdateTime,#wsdateTime").on("click",".cscs",function(){
         			var deptCode = $("#deptCode").val();
@@ -105,8 +119,8 @@
         			var doctorCode = $("#doctorCode").val();
         			var doctorName = $("#doctorName").val();
         			var dateTime = $("#dateTime").val();
-        			var sjd = $(this).children(".sjd").text();
-        			var regFee = $(this).children(".ghf").text();
+        			var sjd = $(this).children(".time_slot").text();
+        			var regFee = $(this).children(".ghmoney").text();
         			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&ddoctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&sjd="+sjd;
         		});
         	})
@@ -127,20 +141,35 @@
 					<span class="date_time" id="dateTime"></span>
 				</div>
 				<div class='time_item' id="swDiv" style="display: none;">
-					<div class='detail_time'><p>上午</p></div>
-					<div class='detail_dateTime' id="swdateTime">
+				
+				<div>
+					<div class='time_item'>
+						<div class='detail_time'><p>上午</p></div>
+						<div class='detail_dateTime' >
+							<div class="ck_dateTime"id="swdateTime">
+								
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class='time_item' id="xwDiv" style="display: none;">
-					<div class='detail_time'><p>下午</p></div>
-					<div class='detail_dateTime' id="xwdateTime">
+					<div class='time_item' id="xwDiv" style="display: none;">
+						<div class='detail_time'><p>下午</p></div>
+						<div class='detail_dateTime' >
+							<div class="ck_dateTime"id="xwdateTime">
+								
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class='time_item' id="wsDiv" style="display: none;">
-					<div class='detail_time'><p>晚上</p></div>
-					<div class='detail_dateTime' id="wsdateTime">
+					<div class='time_item' id="wsDiv" style="display: none;">
+						<div class='detail_time'><p>晚上</p></div>
+						<div class='detail_dateTime' >
+							<div class="ck_dateTime"id="wsdateTime">
+								
+							</div>
+						</div>
 					</div>
+					
 				</div>
+				
 			</section>
 		</section>
 	</body>
