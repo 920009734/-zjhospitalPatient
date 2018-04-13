@@ -7,4 +7,7 @@
 .ui-footer-btn{background-image: none;background-color: #EEEAEB;} 
 .footer_item{color: #626060;} 
 .footer_item.active{color: #3A93A5;} 
-.footer_item.active>.footer_icon>i{color: #3A93A5;}	
+.footer_item.active>.footer_icon>i{color: #3A93A5;}
+
+/*隐藏滚动条*/
+::-webkit-scrollbar{width:0;height:0}	
