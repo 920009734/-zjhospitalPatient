@@ -6,7 +6,8 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
-        <script src="../../js/jquery-1.8.3.min.js"></script>
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
 		<title>选择时间</title>
 		<style type="text/css">
@@ -25,22 +26,12 @@
 		</style>
 		<script type="text/javascript">
         	$(function(){
-        		function GetRequest() {
-       			  var url = decodeURI(location.search); //获取url中"?"符后的字串
-       			   var theRequest = new Object();
-       			   if (url.indexOf("?") != -1) {
-       			      var str = url.substr(1);
-       			      strs = str.split("&");
-       			      for(var i = 0; i < strs.length; i ++) {
-       			         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
-       			      }
-       			   }
-       			   return theRequest;
-       			}
+        		
         		var Request = new Object();
-        		Request = GetRequest();
+        		Request = Utils.getRequest();
         		$("#deptCode").val(Request["deptCode"]);
         		$("#doctorCode").val(Request["doctorCode"]);
+        		$("#doctorName").text(Request["doctorCode"]);
         		$("#deptName").text(Request["deptName"]);
         		$("#dateTime").text(Request["dateTime"]);
         		
@@ -48,22 +39,22 @@
         		params.deptCode = Request["deptCode"];
         		params.doctorCode = Request["doctorCode"];
         		params.dateTime = Request["dateTime"];
-        		
-        		$.post(Utils.getRoot()+"/registerApp/selTime",params,function(data){
+        		$.post(Utils.getRoot()+"/registerApp/selhasDetailTime",params,function(data){
 					if (data.success) {
 						var doctorInfo = new Array();
 						doctorInfo= data.data;
-						$("#doctorName").text(doctorInfo[0].doctorName);
-						for (var i = 1; i < doctorInfo.length; i++) {
+						console.log(JSON.stringify(doctorInfo))
+						for (var i = 0; i < doctorInfo.length; i++) {
 							if (doctorInfo[i].timeFlag==1) {//区分时段
+								$("#swDiv").show();
 								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
 									//把挂号费转为元，原本是分
 									var regFee = parseInt(doctorInfo[i].regFee)/100;
 									$("#swdateTime").append(
-										"<div class='ck_dateTime' on0click='xzTime(this,"+octorInfo[i].timeFlag+")'>"+
-											"<span>"+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+"</span>"+
-											"<span>"+doctorInfo[i].leftNum+"</span>"+
-											"<span>"+regFee+"</span>"+
+										"<div class='cscs'>"+
+											"<span class='sjd'>"+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+"</span>"+
+											"<span>余号："+doctorInfo[i].leftNum+"</span>"+
+											"<span class='ghf'>挂号费："+regFee+"</span>"+
 										"</div>"
 									);
 								}else{
@@ -72,9 +63,15 @@
 									);
 								} 
 							} else if (doctorInfo[i].timeFlag==2){
+								$("#xwDiv").show();
 								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
+									var regFee = parseInt(doctorInfo[i].regFee)/100;
 									$("#xwdateTime").append(
-										"<div class='ck_dateTime' onclick='xzTime(this,"+octorInfo[i].timeFlag+")'> "+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+" </div>"
+										"<div class='cscs'>"+
+											"<span class='sjd'>"+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+"</span>"+
+											"<span>余号："+doctorInfo[i].leftNum+"</span>"+
+											"<span class='ghf'>挂号费："+regFee+"</span>"+
+										"</div>"
 									);
 								}else{
 									$("#xwdateTime").append(
@@ -82,26 +79,36 @@
 									);
 								}
 							}else{
+								$("#wsDiv").show();
 								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
+									var regFee = parseInt(doctorInfo[i].regFee)/100;
 									$("#wsdateTime").append(
-										"<div class='ck_dateTime' onclick='xzTime(this,"+octorInfo[i].timeFlag+")'> "+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+" </div>"
+										"<div class='cscs'>"+
+											"<span class='sjd'>"+doctorInfo[i].beginTime+" - "+doctorInfo[i].endTime+"</span>"+
+											"<span>余号："+doctorInfo[i].leftNum+"</span>"+
+											"<span class='ghf'>挂号费："+regFee+"</span>"+
+										"</div>"
 									);
 								} else{
 									$("#wsdateTime").append(
 										"<div class='ck_dateTime'> 暂无时间</div>"
 									);
 								}
+							}
 						}
 					}
 				});
         		
-        		
-        		function xzTime(data,timeFlag){
-        			var doctorCode = $(data).children("input[name='doctorCode']").val();
+        		$("#swdateTime,#xwdateTime,#wsdateTime").on("click",".cscs",function(){
         			var deptCode = $("#deptCode").val();
-        			var dateTime = new Date();
-        			window.location.href="../yuyueguahao/comfirmMsg.html"
-        		}
+        			var deptName = $("#deptName").val();
+        			var doctorCode = $("#doctorCode").val();
+        			var doctorName = $("#doctorName").val();
+        			var dateTime = $("#dateTime").val();
+        			var sjd = $(this).children(".sjd").text();
+        			var regFee = $(this).children(".ghf").text();
+        			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&ddoctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&sjd="+sjd;
+        		});
         	})
         </script>
 	</head>
@@ -119,17 +126,17 @@
 					<span class="date_type" id="deptName"></span>
 					<span class="date_time" id="dateTime"></span>
 				</div>
-				<div class='time_item'>
+				<div class='time_item' id="swDiv" style="display: none;">
 					<div class='detail_time'><p>上午</p></div>
 					<div class='detail_dateTime' id="swdateTime">
 					</div>
 				</div>
-				<div class='time_item'>
+				<div class='time_item' id="xwDiv" style="display: none;">
 					<div class='detail_time'><p>下午</p></div>
 					<div class='detail_dateTime' id="xwdateTime">
 					</div>
 				</div>
-				<div class='time_item'>
+				<div class='time_item' id="wsDiv" style="display: none;">
 					<div class='detail_time'><p>晚上</p></div>
 					<div class='detail_dateTime' id="wsdateTime">
 					</div>

@@ -29,7 +29,7 @@
 					if (data.success) {
 						var deptInfo = new Array();
 						deptInfo= data.data;
-						for (var i = 1; i < deptInfo.length; i++) {
+						for (var i = 0; i < deptInfo.length; i++) {
 							$("#deptInfoList").append(
 								"<div class='dep_list' >"+
 								  "<input type='hidden' value='"+deptInfo[i].deptCode+"' name='deptCode'>"+

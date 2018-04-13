@@ -11,7 +11,7 @@
         <script src="../../js/Utils.js"></script>
         <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
 		<title>选择医生</title>
-		<style type="text/css">
+		<style type="text/css">d
 			html,body{background-color: #FFFFFF;}
 			.nav_date{display: none;float: left; width: 94%; overflow-x:auto;margin-left:3%;margin-bottom:10px;margin-top: 10px;}
 			.nav_date.active{display: block;}
@@ -52,34 +52,20 @@
 		</style>
 		<script type="text/javascript">
         	$(function(){
-        		function GetRequest() {
-       			  var url = decodeURI(location.search); //获取url中"?"符后的字串
-       			   var theRequest = new Object();
-       			   if (url.indexOf("?") != -1) {
-       			      var str = url.substr(1);
-       			      strs = str.split("&");
-       			      for(var i = 0; i < strs.length; i ++) {
-       			         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
-       			      }
-       			   }
-       			   return theRequest;
-       			}
         		var Request = new Object();
-        		Request = GetRequest();
+        		Request = Utils.getRequest();
         		
         		$("#deptCode").val(Request["deptCode"]);
         		$("#deptName").text(Request["deptName"]);
-        		
 				var params={};
 				params.deptCode=Request["deptCode"];
 				params.dateTime = "2018-04-13";
         		$.post(Utils.getRoot()+"/registerApp/selclinicSchedule",params,function(data){
-					console.log(JSON.stringify(data.data))
 					if (data.success) {
 						var dortorInfo = new Array();
 						dortorInfo= data.data;
 						var s=0,x=0,w=0;
-						for (var i = 1; i < dortorInfo.length; i++) {
+						for (var i = 0; i < dortorInfo.length; i++) {
 							if (dortorInfo[i].timeFlag==1) {//上午
 								s++;
 								$("#swcount").text(s+"人");
@@ -98,7 +84,7 @@
 									"</div>"
 								);
 							} else if(dortorInfo[i].timeFlag==2) {//下午
-								x++
+								x++;
 								$("#xwcount").text(x+"人");
 								$("#xwinfoList").append(
 									"<div class='con_doc' >"+
@@ -135,7 +121,7 @@
 							
 						}
 						if (s == 0) {
-							$("#xwDiv").hide();
+							$("#swDiv").hide();
 						}
 						if (x == 0) {
 							$("#xwDiv").hide();
@@ -149,10 +135,10 @@
         		
         		$("#swinfoList,#xwinfoList,#wsinfoList").on("click",".con_doc",function(){
         			var doctorCode = $(this).children(".doc_detail").children("input[name='doctorCode']").val();
-        			var timeFlag = $(this).children(".doc_detail").children("input[name='timeFlag']").val();
         			var deptCode = $("#deptCode").val();
+        			var deptName = $("#deptName").text();
         			var dateTime = "2018-04-13";
-        			window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&timeFlag="+timeFlag+"&deptName="+deptName+"&dateTime="+dateTime;
+        			window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime;
         		});
         		
         	})
@@ -163,7 +149,7 @@
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
 			<h4 style="margin-left: 25px;">
-				<input type="text" value="" id="deptCode">
+				<input type="hidden" value="" id="deptCode">
 				<span id="deptName"></span>
 			</h4>
 		</header>
