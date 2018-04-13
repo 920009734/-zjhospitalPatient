@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="../../css/style.css" />
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
 		<title>选择科室</title>
 		<style type="text/css">
 			.dep_item{display: block;width: 100%;}
@@ -30,7 +31,7 @@
 						deptInfo= data.data;
 						for (var i = 1; i < deptInfo.length; i++) {
 							$("#deptInfoList").append(
-								"<div class='dep_list' onclick='locatDor(this)'>"+
+								"<div class='dep_list' >"+
 								  "<input type='hidden' value='"+deptInfo[i].deptCode+"' name='deptCode'>"+
 								  "<h3 class='dep_name' name='deptName'>"+deptInfo[i].deptName+"</h3>"+
 								"</div>"
@@ -39,11 +40,11 @@
 					}
 				});
         		
-        		function locatDor(data){
-        			var deptCode = $(data).children("input [name='deptCode']").val();
-        			var deptName = $(data).children("input [name='deptName']").val();
+        		$("#deptInfoList").on("click",".dep_list",function(){
+        			var deptCode = $(this).children("input").val();
+        			var deptName = $(this).children(".dep_name").text();
         			window.location.href="../yuyueguahao/choiceDor.html?deptCode="+deptCode+"&deptName="+deptName;
-        		}
+        		});
         		
         	})
         </script>

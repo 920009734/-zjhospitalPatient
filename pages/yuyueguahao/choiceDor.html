@@ -6,7 +6,9 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
-        <script src="../../js/jquery-1.8.3.min.js"></script>
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
 		<title>选择医生</title>
 		<style type="text/css">
 			html,body{background-color: #FFFFFF;}
@@ -63,75 +65,95 @@
        			}
         		var Request = new Object();
         		Request = GetRequest();
+        		
         		$("#deptCode").val(Request["deptCode"]);
-        		var deptName = $("#deptName").val(Request["deptName"]);
+        		$("#deptName").text(Request["deptName"]);
         		
 				var params={};
 				params.deptCode=Request["deptCode"];
-				params.dateTime = new Date();
-        		$.post(Utils.getRoot()+"/registerApp/selDoctor",params,function(data){
+				params.dateTime = "2018-04-13";
+        		$.post(Utils.getRoot()+"/registerApp/selclinicSchedule",params,function(data){
+					console.log(JSON.stringify(data.data))
 					if (data.success) {
 						var dortorInfo = new Array();
 						dortorInfo= data.data;
+						var s=0,x=0,w=0;
 						for (var i = 1; i < dortorInfo.length; i++) {
 							if (dortorInfo[i].timeFlag==1) {//上午
+								s++;
+								$("#swcount").text(s+"人");
 								$("#swinfoList").append(
-									"<span class='con_title'><font color='#3A93A5'>上午</font><span class='con_title_right'>"+dortorInfo[i].count+"人</span></span>"+
-									"<div class='con_doc' onclick='fs(this,"+dortorInfo[i].timeFlag+")'>"+
-										"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+									"<div class='con_doc'>"+
+										 "<div class='doc_img'><img src='../../img/docImg.png'></div>"+
 										 "<div class='doc_detail'>"+
 											"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
-											"<span class='doc_name'>"+dortorInfo[i].doctorName+"<span class='main_doc'>主任医生</span></span>"+
+											"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+											"<span class='doc_name'>"+dortorInfo[i].doctorCode+"<span class='main_doc'>主任医生</span></span>"+
 										"</div>"+
 										"<div class='doc_yynum'>"+
 											"<span class='yhao'>余号</span>"+
 											"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
 										"</div>"+
-									"</div>"+
+									"</div>"
 								);
 							} else if(dortorInfo[i].timeFlag==2) {//下午
+								x++
+								$("#xwcount").text(x+"人");
 								$("#xwinfoList").append(
-									"<span class='con_title'><font color='#3A93A5'>下午</font><span class='con_title_right'>"+dortorInfo[i].count+"人</span></span>"+
-									"<div class='con_doc' onlcick='fs(this,"+dortorInfo[i].timeFlag+")'>"+
+									"<div class='con_doc' >"+
 										"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
 										 "<div class='doc_detail'>"+
 											"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
-											"<span class='doc_name'>"+dortorInfo[i].doctorName+"<span class='main_doc'>主任医生</span></span>"+
+											"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+											"<span class='doc_name'>"+dortorInfo[i].doctorCode+"<span class='main_doc'>主任医生</span></span>"+
 										"</div>"+
 										"<div class='doc_yynum'>"+
 											"<span class='yhao'>余号</span>"+
 											"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
 										"</div>"+
-									"</div>"+
+									"</div>"
 								);
-							}else{//晚上
+							}else if(dortorInfo[i].timeFlag==3){//晚上
+								w++;
+								$("#wscount").text(w+"人");
 								$("#wsinfoList").append(
-									"<span class='con_title'><font color='#3A93A5'>晚上</font><span class='con_title_right'>"+dortorInfo[i].count+"人</span></span>"+
-									"<div class='con_doc' onclick='fs(this,"+dortorInfo[i].timeFlag+")'>"+
+									"<div class='con_doc'>"+
 										"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
 										 "<div class='doc_detail'>"+
 											"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
-											"<span class='doc_name'>"+dortorInfo[i].doctorName+"<span class='main_doc'>主任医生</span></span>"+
+											"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+											"<span class='doc_name'>"+dortorInfo[i].doctorCode+"<span class='main_doc'>主任医生</span></span>"+
 										"</div>"+
 										"<div class='doc_yynum'>"+
 											"<span class='yhao'>余号</span>"+
 											"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
 										"</div>"+
-									"</div>"+
+									"</div>"
 								);
 							}
 							
 						}
-					}
+						if (s == 0) {
+							$("#xwDiv").hide();
+						}
+						if (x == 0) {
+							$("#xwDiv").hide();
+						}
+						if (w == 0) {
+							$("#wsDiv").hide();
+						}
+						
 					}
 				});
         		
-        		function fs(data,timeFlag){
-        			var doctorCode = $(data).children("input[name='doctorCode']").val();
+        		$("#swinfoList,#xwinfoList,#wsinfoList").on("click",".con_doc",function(){
+        			var doctorCode = $(this).children(".doc_detail").children("input[name='doctorCode']").val();
+        			var timeFlag = $(this).children(".doc_detail").children("input[name='timeFlag']").val();
         			var deptCode = $("#deptCode").val();
-        			var dateTime = new Date();
+        			var dateTime = "2018-04-13";
         			window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&timeFlag="+timeFlag+"&deptName="+deptName+"&dateTime="+dateTime;
-        		}
+        		});
+        		
         	})
         </script>
 	</head>
@@ -190,17 +212,27 @@
 				
 				<div style="display: block;float: left;width: 100%;">
 					<!-- 上午 -->
-					<div class="date_con">
+					<div class="date_con" id="swDiv">
+						<span class='con_title'>
+							<font color='#3A93A5'>上午</font>
+							<span class='con_title_right' id="swcount"></span>
+						</span>
 						<div id="swinfoList">
-						
 						</div>
 					</div>
-					<div class="date_con">
+					<div class="date_con" id="xwDiv">
+						<span class='con_title'>
+							<font color='#3A93A5'>下午</font>
+							<span class='con_title_right' id="xwcount"></span>
+						</span>
 						<div id="xwinfoList">
-						
 						</div>
 					</div>
-					<div class="date_con">
+					<div class="date_con" id="wsDiv">
+						<span class='con_title'>
+							<font color='#3A93A5'>晚上</font>
+							<span class='con_title_right' id="wscount"></span>
+						</span>
 						<div id="wsinfoList">
 						
 						</div>
