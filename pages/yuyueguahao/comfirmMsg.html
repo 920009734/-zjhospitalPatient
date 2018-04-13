@@ -72,7 +72,18 @@
         		$("#add_rela").click(function(){
         			window.location.href="../yuyueguahao/addPerple.html"
         		});
+        		$("#deptName_").text(Request["deptName"]);
+        		$("#doctorName_").text(Request["doctorName"]);
+        		$("#fullTime_").text(Request["dateTime"]);
+        		$("#CNregFee_").text(Request["regFee"]);
         		
+				params.doctorName=$("#deptName_").val();
+				params.czDate = $("#deptName_").val();
+				params.money=$("input[name='regFee_']").val();
+				param.scheduleDate=$("input[name='scheduleDate_']").val();
+				param.beginTime=$("input[name='beginTime_']").val();
+				param.endTime=$("input[name='endTime_']").val();
+				param.regFee=$("input[name='regFee_']").val();
         		
         		$("#zf").click(function(){//支付成功后添加信息
         			if ($("#patientid").val()=="") {

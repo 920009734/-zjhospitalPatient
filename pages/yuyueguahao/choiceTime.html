@@ -61,7 +61,7 @@
 											"<div class='slot_item'>"+
 												"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
 												"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
-												"<span class='ghmoney'>￥"+regFee+"</span>"+
+												"<span class='ghmoney'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
 											"</div>"+
 										"</div>"
 									);
@@ -81,7 +81,7 @@
 											"<div class='slot_item'>"+
 												"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
 												"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
-												"<span class='ghmoney'>￥"+regFee+"</span>"+
+												"<span class='ghmoney'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
 											"</div>"+
 										"</div>"
 									);
@@ -101,13 +101,13 @@
 											"<div class='slot_item'>"+
 												"<span class='time_slot'>"+doctorInfo[i].beginTime+"~"+doctorInfo[i].endTime+"</span>"+
 												"<span class='yuhao'>余号："+doctorInfo[i].leftNum+"</span>"+
-												"<span class='ghmoney'>￥"+regFee+"</span>"+
+												"<span class='ghmoney'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
 											"</div>"+
 										"</div>"
 									);
 								} else{
 									$("#wsdateTime").append(
-										"div class='slot_item'>"+
+										"<div class='slot_item'>"+
 											"<p class='notData'>暂无数据</p>"+
 										"</div>"
 									);
@@ -119,13 +119,14 @@
 				
         		$("#swdateTime,#xwdateTime,#wsdateTime").on("click",".ck_dateTime",function(){
         			var deptCode = $("#deptCode").val();
-        			var deptName = $("#deptName").val();
+        			var deptName = $("#deptName").text();
         			var doctorCode = $("#doctorCode").val();
-        			var doctorName = $("#doctorName").val();
-        			var dateTime = $("#dateTime").val();
-        			var sjd = $(this).children(".time_slot").text();
-        			var regFee = $(this).children(".ghmoney").text();
-        			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&ddoctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&sjd="+sjd;
+        			var doctorName = $("#doctorName").text();
+        			var dateTime = $("#dateTime").text();
+        			var sjd = $(this).children().children(".time_slot").text();
+        			var regFee = $(this).children().children(".ghmoney").children(".regFee").text();
+        			alert(sjd+"--"+regFee);
+        			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&sjd="+sjd;
         		});
         	})
         </script>
