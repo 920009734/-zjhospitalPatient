@@ -28,6 +28,21 @@
 			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;background-color: #FFFFFF;}
 			.login_btn>button{border-radius:2px ;background: #0066CC;font-size: 16px;}
 			.ui-radio input:checked:after{background: #0066CC;}
+			
+			.img_item{margin-left: 10px;}
+			.login_btn>span{display: block;width: 60%;margin: 0 auto;font-size: 14px;margin-top: 10px;}
+			.ui-dialog-cnt{display: block; width: 90%;margin: 0 auto;border-radius:5px ;background-color: #FFFFFF;}
+			.ui-dialog-bd{background-color: #F7F7F7;padding: 0 10px;min-height:200px;max-height: 450px;border-radius: 3px;-webkit-box-pack:inherit;}
+			.add_per{display: block;width: 100%;height: 50px;line-height: 50px;background-color: #FFFFFF;margin-top: 15px;}
+			.add_per>span{display: block;width: 45%;height: 100%;margin: 0 auto;}
+			.add_per>span>i,.add_per>span>span{display: block;float:left ;color: #00BA7F;}
+			.add_per>span>i{font-size: 30px;margin-top: 3px;color: #00BA7F;}
+			.per_name{display: block;width: 90%;margin:0 auto;background-color: #FFFFFF;margin-top: 10px;height: 35px;line-height: 35px;}
+			.per_name>span{display: block;float: left;width: 44%;margin-left: 10px;}
+			.per_relationship{text-align: right;}
+			.hidden{display: none;}
+			.ui-dialog-cnt{margin:50% auto;}
+		</style>
 		</style>
 		<script type="text/javascript">
         	$(function(){
@@ -45,31 +60,40 @@
        			}
         		var Request = new Object();
         		Request = GetRequest();
-				var patientname = Request["patientname"];
-				var patientid = Request["patientid"];
-				$("#patientid").val(patientid);
-				$("#patientname").text(patientname);
+//				var patientname = Request["patientname"];
+//				var patientid = Request["patientid"];
+//				$("#patientid").val(patientid);
+//				$("#patientname").text(patientname);
 				
         		$("#jzrxz").click(function(){
-        			window.location.href="../yuyueguahao/xzPerple.html"
+        			$(".addPatient").show();
+        			//window.location.href="../yuyueguahao/xzPerple.html"
+        		});
+        		$("#add_rela").click(function(){
+        			window.location.href="../yuyueguahao/addPerple.html"
         		});
         		
+        		
         		$("#zf").click(function(){//支付成功后添加信息
-        			if ( $("#patientid").val().length<10) {
+        			if ($("#patientid").val()=="") {
         				$("#dialogText").html("请选择就诊人！");
-						$(".ui-dialog").dialog("show");
+						$(".ui-dialog").show();
 					}else{
 						var params={};
-						params.patientId=Request["patientid"];
-						params.patientName=Request["patientname"];
-						params.patientGender=Request["gender"];
-						params.patientIdcard=Request["idcard"];
-						params.patientPhoneNumber=Request["phone"];
-						params.patientCardNumber=Request["attendancecard"];
-						params.divisionName="心血管内科";
-						params.doctorName="丁明学";
-						params.czDate = "2018-03-05 09:00:00";
-						params.money="20";
+//						params.patientId=Request["patientid"];
+//						params.patientName=Request["patientname"];
+//						params.patientGender=Request["gender"];
+//						params.patientIdcard=Request["idcard"];
+//						params.patientPhoneNumber=Request["phone"];
+//						params.patientCardNumber=Request["attendancecard"];
+						params.divisionName=$("#deptName_").val();
+						params.doctorName=$("#deptName_").val();
+						params.czDate = $("#deptName_").val();
+						params.money=$("input[name='regFee_']").val();
+						param.scheduleDate=$("input[name='scheduleDate_']").val();
+						param.beginTime=$("input[name='beginTime_']").val();
+						param.endTime=$("input[name='endTime_']").val();
+						param.regFee=$("input[name='regFee_']").val();
 						
 						$(".ui-loading-block").show();
 						$(".ui-loading-block").css("margin","45% 0 0 31%");
@@ -83,7 +107,7 @@
 									$(".ui-loading-block").show();
 									$(".ui-loading-block").css("margin","45% 0 0 31%");
 									$(".ui-loading-block").hide();
-				        			$("#dialogText").html("支付成功！");
+				        			$("#dialogText").html("订单已生成！");
 				        			$(".ui-dialog").dialog("show");
 				        			setTimeout(function(){//定时5秒后跳转页面
 										window.location.href="../main.html";
@@ -93,8 +117,12 @@
 						});
 					}
         		});
+        		$("#choosePeople_").click(function(){
+        			$("#patientid").val("myself");
+        			$(".addPatient").hide();
+        		})
         		$(".close_dialog,.ui-dialog-close").click(function(){
-					$(".ui-dialog").dialog("hide");
+					$(".ui-dialog").hide();
 				});
         	})
         </script>
@@ -116,26 +144,30 @@
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name">科室名称</span>
-					<span class="item_value">心血管内科 </span>
+					<span class="item_value" id="deptName_"></span>
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name">医生名字</span>
-					<span class="item_value">丁明学</span>
+					<span class="item_value" id="doctorName_"></span>
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name">就诊时间</span>
-					<span class="item_value">2018-03-05 09:00:00 </span>
+					<input type="hidden" name="scheduleDate_" />
+					<input type="hidden" name="beginTime_" />
+					<input type="hidden" name="endTime_" />
+					<span class="item_value" id="fullTime_"></span>
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name">挂号金额</span>
-					<span class="item_value">￥20元</span>
+					<input type="hidden" name="regFee_" />
+					<span class="item_value" id="CNregFee_"></span>
 				</div>
 				
 				<!--<div class="comfirm_item menz">
 					<span class="item_name">支付方式</span>
 				</div>
 				<div>
-					<div class="ui-form-item ui-form-item-radio ">
+					<div class="ui-form-item ui-form-itemd-radio ">
                         <label class="ui-radio" for="radio">
                             <input type="radio" name="radio" />
                         </label>
@@ -154,6 +186,33 @@
 					</div>
 				</div>
 			</section>
+		</section>
+		<section id="dialog">
+			<div class="demo-item">
+				<div class="demo-block">
+					<div class="ui-dialog addPatient">
+					    <div class="ui-dialog-cnt">
+						    <header class="ui-dialog-hd ui-border-b">
+			                    <h3>选择就诊人</h3>
+			                    <i class="ui-dialog-close" data-role="button"></i>
+			                </header>
+			                 <div class="ui-dialog-bd">
+					            <div class="add_per">
+					            	<span id="add_rela">
+						            	<i class="ui-icon ui-icon-add-people"></i>
+						            	<span>添加就诊人</span>
+					            	</span>
+					            </div>
+					            <div class="per_name" id="choosePeople_">
+					            	<span>测试人员</span>
+					            	<span class="per_relationship">本人</span>
+					            </div>
+					        </div>
+					    </div>        
+					</div>
+					
+				</div>
+			</div>
 		</section>
 		
 		<div class="ui-dialog">
