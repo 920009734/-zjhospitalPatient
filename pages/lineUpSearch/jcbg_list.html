@@ -23,28 +23,25 @@
         		var params={};
         		params.startTime = ;
         		params.endTime = ;
-        		
-        		$.post(Utils.getRoot()+"/reportQuery/selDivision",params,function(data){
+        		$.post(Utils.getRoot()+"/reportQuery/selExamItems",params,function(data){
 					if (data.success) {
 						var deptInfo = new Array();
 						deptInfo= data.data;
 						for (var i = 0; i < deptInfo.length; i++) {
 							$("#jcList").append(
-								<a href="jianchabg_view.html">
-									<div class="list-item ">
-										<span>检查结果列表1</span>
-										<i class="ui-icon ui-icon-arrow"></i>
-									</div>
-								</a>
+								"<div class='list-item '>"+
+									"<span>检查结果列表1</span>"+
+									"<i class='ui-icon ui-icon-arrow'></i>"+
+								"</div>"+
 							);
 						}
 					}
 				});
         		
-        		$("#jcList").on("click",".dep_list",function(){
+        		$("#jcList").on("click",".list-item",function(){
         			var deptCode = $(this).children("input").val();
         			var deptName = $(this).children(".dep_name").text();
-        			window.location.href="../yuyueguahao/choiceDor.html?deptCode="+deptCode+"&deptName="+deptName;
+        			window.location.href="../lineUpSearch/jianchabg_view.html?deptCode="+deptCode+"&deptName="+deptName;
         		});
         		
         	})
