@@ -58,9 +58,11 @@
         		
         		$("#deptCode").val(Request["deptCode"]);
         		$("#deptName").text(Request["deptName"]);
+        		
+        		
 				var params={};
 				params.deptCode=Request["deptCode"];
-				params.dateTime = "2018-04-13";
+				params.dateTime = "2018-04-17";
         		$.post(Utils.getRoot()+"/registerApp/selclinicSchedule",params,function(data){
 					if (data.success) {
 						var dortorInfo = new Array();
