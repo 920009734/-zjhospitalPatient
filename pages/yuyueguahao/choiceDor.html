@@ -142,7 +142,8 @@
         			var deptCode = $("#deptCode").val();
         			var deptName = $("#deptName").text();
         			var dateTime = "2018-04-17";
-        			window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime;
+        			var timeFlag = $(this).children().find("input[name='timeFlag']").val();
+        			window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag;
         		});
         		
         	})
