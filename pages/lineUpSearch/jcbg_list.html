@@ -7,8 +7,10 @@
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../date/date.css">
         <link rel="stylesheet" href="../../css/style.css">
-        
-        <script src="../../date/jquery-1.8.3.min.js"></script>
+         <script src="../../lib/zepto.min.js">  </script>
+        <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
+        <script src="../../js/jquery-1.8.3.min.js"></script>
         <script src="../../date/date.js"></script>
         
 		<title>检查结果列表</title>
@@ -20,85 +22,82 @@
 			.list-item>span{display: block;float: left; padding-left: 15px;font-size: 15px;}
 			a{color: #000000;}
 			input{padding-left:10px ;}
-			
-			.riqi{display: block;float: left; width:100%;height: 60px; background-color: #FFFFFF;margin-bottom: 10px;}
+			.riqi{display: block;float: left; width:100%;height: 60px; background-color: #FFFFFF;margin-bottom: 10px; }
 			.riqi_item{display: block;float: left;width: 90%;height: 60px;margin-left: 5%;}
-			.riqi_item>input{width:35%;height: 30px;line-height: 30px;border: 1px solid #039789;border-radius: 5px;margin-top: 15px;color: #039789;}
+			.riqi_item>input{width:28%;height: 30px;line-height: 30px;border: 1px solid #039789;border-radius: 5px;margin-top: 15px;color: #039789;}
 			#datetitle{background: #039789;}
 			#datetitle>h1{font-size: 16px;}
 			#dateconfirm{background: #039789;}
+			.notData{color: #999999;}
 		</style>
+		<script type="text/javascript">
+			$(function(){
+				$('#startTime').date();
+				$('#endTime').date();
+				$('#startTime').val("2017-09-01");
+				$('#endTime').val("2018-04-01");
+			});
+		</script>
 		 <script type="text/javascript">
         	$(function(){
         		var params={};
-        		params.startTime = ;
-        		params.endTime = ;
+        		params.startTime = $('#startTime').val();
+        		params.endTime = $('#endTime').val();
         		$.post(Utils.getRoot()+"/reportQuery/selExamItems",params,function(data){
 					if (data.success) {
-						var deptInfo = new Array();
-						deptInfo= data.data;
-						for (var i = 0; i < deptInfo.length; i++) {
+						var examItemsInfo = new Array();
+						examItemsInfo= data.data;
+						
+						for (var i = 0; i < examItemsInfo.length; i++) {
 							$("#jcList").append(
 								"<div class='list-item '>"+
-									"<span>检查结果列表1</span>"+
+									"<input type='hidden' name='deptCode' value='"+examItemsInfo[i].deptCode+"'>"+
+									"<span style='font-size: 12px;'>"+examItemsInfo[i].deptName+"</span>"+
+									"<input type='hidden' name='checkId' value='"+examItemsInfo[i].checkId+"'>"+
+									"<span style='font-size: 12px;'>"+examItemsInfo[i].checkName+"</span>"+
+									"<span style='font-size: 10px;'>"+examItemsInfo[i].checkTime+"</span>"+
 									"<i class='ui-icon ui-icon-arrow'></i>"+
-								"</div>"+
-							);
+								"</div>"
+							)
 						}
+					}else{
+						$("#jcList").append(
+							"<div class='list-item '>"+
+								"<p class='notData'>暂无数据</p>"+
+							"</div>"
+						);
 					}
 				});
         		
         		$("#jcList").on("click",".list-item",function(){
-        			var deptCode = $(this).children("input").val();
-        			var deptName = $(this).children(".dep_name").text();
-        			window.location.href="../lineUpSearch/jianchabg_view.html?deptCode="+deptCode+"&deptName="+deptName;
+        			var checkId = $(this).children("input[name='checkId']").val();
+        			window.location.href="../lineUpSearch/jianchabg_view.html?checkId="+checkId;
         		});
         		
         	})
        </script>
 		
-		<script type="text/javascript">
-			$(function(){
-				$('#startTime').date();
-				$('#endTime').date();
-			});
-		</script>
 	</head>
 	<body ontouchstart> 
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;" id="dep_type" ><span>检查结果列表</span></h4>
+			<h4 style="margin-left: 25px;" id="dep_type" ><span>检查报告列表</span></h4>
 		</header>
 		
 		<section class="ui-container">
 			<section class="list">
-				<div class="demo-block" id="jcList">
-					
 				<div class="riqi">
 					<div class="riqi_item">
 						<span style="color: #039789;"> 时间：</span>
 						<input type="text" id="startTime" class="kbtn" /> 
 						<font color="#4DB6AC"> - </font> 
 						<input type="text" id="endTime" class="kbtn" /> 
+						<input type="button" style="width: 50px;text-align: center;background-color: white;" value="查询">
 					</div>
 				</div>
 				<div id="datePlugin"></div>
-				
-				<div class="demo-block">
-					<a href="jianchabg_view.html">
-						<div class="list-item ">
-							<span>检查结果列表1</span>
-							<i class="ui-icon ui-icon-arrow"></i>
-						</div>
-					</a>
-					<div class="list-item ">
-						<span>检查结果列表2</span>
-						<i class="ui-icon ui-icon-arrow"></i>
-					</div>
-					<div class="list-item ">
-						<span>检查结果列表3</span>
-						<i class="ui-icon ui-icon-arrow"></i>
-					</div>
+				<div class="demo-block" id="jcList">
+					
 				</div>
 			</section>
 		</section>

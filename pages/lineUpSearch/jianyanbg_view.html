@@ -9,6 +9,7 @@
         
         <script src="../../lib/zepto.min.js">  </script>
         <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
 		<title>检验报告详情</title>
 		
 		<style type="text/css">
@@ -31,6 +32,67 @@
 			.con_left>span:first-child,.con_center>span:first-child,.con_right>span:first-child{font-size: 13px;}
 			.hr_sex{display: block;float: left;width: 1px;height: 30px;margin-top: 10px;border-right: 1px solid #FFFFFF;}
 		</style>
+		<script type="text/javascript">
+        	$(function(){
+        		var Request = new Object();
+        		Request = Utils.getRequest();
+        		
+        		/*查询检查报告详情*/
+        		var params={};
+        		params.inspectId = Request["inspectId"];
+        		$.post(Utils.getRoot()+"/reportQuery/selLabItemsDetail",params,function(data){
+					if (data.success) {
+						var labItemsInfo = new Array();
+						labItemsInfo= data.data;
+						console.log(JSON.stringify(labItemsInfo))
+						var patientInfo = labItemsInfo[0].patientInfo;
+						$("#patientname").text(patientInfo.patientname);
+						$("#sex").text(patientInfo.sex);
+						$("#age").text(patientInfo.age);
+						
+						$("#inspectId").text(labItemsInfo[0].inspectId);
+						$("#deptName").text(labItemsInfo[0].deptName);
+						$("#doctorName").text(labItemsInfo[0].doctorName);
+						$("#inspectName").text(labItemsInfo[0].inspectName);
+						$("#reportTime").text(labItemsInfo[0].reportTime);
+						
+						for (var i = 0; i < labItemsInfo.length; i++) {
+							if (labItemsInfo[i].abnormal==0) {//结果正常
+								$("#jyBgList").append(
+									"<tr>"+
+										"<td>"+labItemsInfo[i].itemName+"</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].result+"</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].unit+"</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].refRange+"</td>"+
+									"</tr>"
+								);
+							} else if (labItemsInfo[i].abnormal==1){//结果偏高
+								$("#jyBgList").append(
+									"<tr>"+
+										"<td>"+labItemsInfo[i].itemName+"</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].result+"↓</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].unit+"</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].refRange+"</td>"+
+									"</tr>"
+								);
+							}else{//结果偏低
+								$("#jyBgList").append(
+									"<tr>"+
+										"<td>"+labItemsInfo[i].itemName+"</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].result+"↑</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].unit+"</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].refRange+"</td>"+
+									"</tr>"
+								);
+							}
+						}
+					}else{
+						
+					}
+				});
+        		
+        	})
+       </script>
 	</head>
 	<body ontouchstart> 
 		<header class="ui-header ui-header-positive">
@@ -41,41 +103,46 @@
 		<section class="ui-container">
 			<section class="list">
 				<div class="person_msg">
-					<div class="jcbg_title">检查报告</div>
+					<div class="jcbg_title">检验报告</div>
 					<div class="jcbg_con">
 						<div class="con_left">
-							<span>就诊人</span>
-							<span></span>罗定轩</p>
+							<span>患者</span>
+							<span id="patientname"></span>
 						</div>
 						<span class="hr_sex"></span>
 						<div class="con_center">
 							<span>性别</span>
-							<span>男</span>
+							<span id="sex"></span>
 						</div>
 						<span class="hr_sex"></span>
 						<div class="con_right">
 							<span>年龄</span>
-							<span>22</span>
+							<span id="age"></span>
 						</div>
 					</div>
 				</div>
 				<div class="demo-block">
 					<div class="list-item">
-						<span class="demo_name">开方医生</span>
-						<span class="demo_value"><span>张建</span></span>
+						<span class="demo_name">报告单号</span>
+						<span class="demo_value"><span id="inspectId"></span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">体检名称</span>
+						<span class="demo_value"><span id="inspectName"></span></span>
 					</div>
 					<div class="list-item">
 						<span class="demo_name">开方科室</span>
-						<span class="demo_value"><span>肿瘤科病区</span></span>
+						<span class="demo_value"><span id="deptName"></span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">开方医生</span>
+						<span class="demo_value"><span id="doctorName"></span></span>
 					</div>
 					<div class="list-item">
 						<span class="demo_name">报告时间</span>
-						<span class="demo_value"><span>2018-04-04 15:44</span></span>
+						<span class="demo_value"><span id="reportTime"></span></span>
 					</div>
-					<div class="list-item">
-						<span class="demo_name">报告单号</span>
-						<span class="demo_value"><span>040415</span></span>
-					</div>
+					
 				</div>
 				<div class="demo-block">
 					<div class="jianyan_detail">
@@ -88,31 +155,8 @@
 									<th style="width: 24%;">参考值</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>钾(K)</td>
-									<td style="text-align: center;">3.38</td>
-									<td style="text-align: center;">mmol/L</td>
-									<td style="text-align: center;">3.5~5.5</td>
-								</tr>
-								<tr>
-									<td>纳(Na)</td>
-									<td style="text-align: center;">138.9</td>
-									<td style="text-align: center;">mmol/L</td>
-									<td style="text-align: center;">135~145</td>
-								</tr>
-								<tr>
-									<td>尿素(Urea)</td>
-									<td style="text-align: center;">1.5</td>
-									<td style="text-align: center;">mmol/L</td>
-									<td style="text-align: center;">1.8~7.1</td>
-								</tr>
-								<tr>
-									<td>总二氧化碳(T_CO2)</td>
-									<td style="text-align: center;">27.8</td>
-									<td style="text-align: center;">mmol/L</td>
-									<td style="text-align: center;">22.0~31.0</td>
-								</tr>
+							<tbody id="jyBgList">
+								
 							</tbody>
 						</table>
 					</div>

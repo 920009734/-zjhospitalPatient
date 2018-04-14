@@ -7,8 +7,9 @@
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css">
         
-        <script src="../../lib/zepto.min.js">  </script>
+         <script src="../../lib/zepto.min.js">  </script>
         <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
 		<title>检查报告详情</title>
 		
 		<style type="text/css">
@@ -26,6 +27,38 @@
 			.con_left>span:first-child,.con_center>span:first-child,.con_right>span:first-child{font-size: 13px;}
 			.hr_sex{display: block;float: left;width: 1px;height: 30px;margin-top: 10px;border-right: 1px solid #FFFFFF;}
 		</style>
+		<script type="text/javascript">
+        	$(function(){
+        		var Request = new Object();
+        		Request = Utils.getRequest();
+        		
+        		/*查询检查报告详情*/
+        		var params={};
+        		params.checkId = Request["checkId"];
+        		$.post(Utils.getRoot()+"/reportQuery/selExamItemsDetail",params,function(data){
+					if (data.success) {
+						var examItemsInfo = new Array();
+						examItemsInfo= data.data;
+						$("#checkId").text(examItemsInfo[0].checkId);
+						$("#deptName").text(examItemsInfo[0].deptName);
+						$("#doctorName").text(examItemsInfo[0].doctorName);
+						$("#checkName").text(examItemsInfo[0].checkName);
+						$("#reportTime").text(examItemsInfo[0].reportTime);
+						$("#checkPart").text(examItemsInfo[0].checkPart);
+						$("#checkMethod").text(examItemsInfo[0].checkMethod);
+						$("#checkSituation").text(examItemsInfo[0].checkSituation);
+						$("#option").text(examItemsInfo[0].option);
+						$("#advice").text(examItemsInfo[0].advice);
+						
+						var patientInfo = examItemsInfo[0].patientInfo;
+						$("#patientname").text(patientInfo.patientname);
+						$("#sex").text(patientInfo.sex);
+						$("#age").text(patientInfo.age);
+					}
+				});
+        		
+        	})
+       </script>
 	</head>
 	<body ontouchstart> 
 		<header class="ui-header ui-header-positive">
@@ -39,54 +72,64 @@
 					<div class="jcbg_title">检查报告</div>
 					<div class="jcbg_con">
 						<div class="con_left">
-							<span>就诊人</span>
-							<span></span>罗定轩</p>
+							<span>患者</span>
+							<span id="patientname"></span>
 						</div>
 						<span class="hr_sex"></span>
 						<div class="con_center">
 							<span>性别</span>
-							<span>男</span>
+							<span id="sex"></span>
 						</div>
 						<span class="hr_sex"></span>
 						<div class="con_right">
 							<span>年龄</span>
-							<span>22</span>
+							<span id="age"></span>
 						</div>
 					</div>
 				</div>
-				<div class="demo-block">
+				<div class="demo-block" style="margin-top: 10px;">
 					<div class="list-item">
-						<span class="demo_name">开方医生</span>
-						<span class="demo_value"><span>张建</span></span>
+						<span class="demo_name">报告单号</span>
+						<span class="demo_value"><span id="checkId"></span></span>
 					</div>
 					<div class="list-item">
 						<span class="demo_name">开方科室</span>
-						<span class="demo_value"><span>肿瘤科病区</span></span>
+						<span class="demo_value"><span id="deptName"></span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">开方医生</span>
+						<span class="demo_value"><span id="doctorName"></span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">检查名称</span>
+						<span class="demo_value"><span id="checkName"></span></span>
 					</div>
 					<div class="list-item">
 						<span class="demo_name">报告时间</span>
-						<span class="demo_value"><span>2018-04-04 15:44</span></span>
+						<span class="demo_value"><span id="reportTime"></span></span>
 					</div>
-					<div class="list-item">
-						<span class="demo_name">报告单号</span>
-						<span class="demo_value"><span>040415</span></span>
-					</div>
+					
 					<div class="list-item" style="margin-top: 10px;">
 						<span class="demo_name">检查部位</span>
-						<span class="demo_value"><span>普通</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">检查所见</span>
-						<span class="demo_value"><span>窦性心律 右束支传导阻滞（完全性）</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">诊断意见</span>
-						<span class="demo_value"><span>直肠癌</span></span>
+						<span class="demo_value"><span id="checkPart"></span></span>
 					</div>
 					<div class="list-item">
 						<span class="demo_name">检查方法</span>
-						<span class="demo_value"><span></span></span>
+						<span class="demo_value"><span id="checkMethod"></span></span>
 					</div>
+					<div class="list-item">
+						<span class="demo_name">检查所见</span>
+						<span class="demo_value"><span id="checkSituation"> </span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">诊断意见</span>
+						<span class="demo_value"><span id="option"></span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">医嘱</span>
+						<span class="demo_value"><span id="advice"></span></span>
+					</div>
+					
 				</div>
 			</section>	
 		</section>
