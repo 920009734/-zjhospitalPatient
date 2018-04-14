@@ -50,18 +50,6 @@
 		</style>
 		<script type="text/javascript">
         	$(function(){
-        		function GetRequest() {
-       			  var url = decodeURI(location.search); //获取url中"?"符后的字串
-       			   var theRequest = new Object();
-       			   if (url.indexOf("?") != -1) {
-       			      var str = url.substr(1);
-       			      strs = str.split("&");
-       			      for(var i = 0; i < strs.length; i ++) {
-       			         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
-       			      }
-       			   }
-       			   return theRequest;
-       			}
         		var Request = new Object();
         		Request = GetRequest();
         		
@@ -86,7 +74,6 @@
 							);
 						}
 					}
-					}
 				});
         		
         		$("#sjxz").click(function(){
@@ -100,11 +87,7 @@
 			<section id="list">
 				<div class="nav_date">
 				</div>
-				<div style="display: block;float: left;width: 100%;">
-					<div class="date_con" id="dortorList">
-						
-					</div>
-				</div>	
+				
 				
 			</section>
 		</section>

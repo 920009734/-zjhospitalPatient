@@ -9,6 +9,7 @@
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
+        <script src="../../js/yysj.js"></script>
 		<title>选择时间</title>
 		<style type="text/css">
 			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
@@ -29,72 +30,8 @@
 			.yuhao, .ghmoney{width: 22%;height: 30px;line-height: 30px;font-size: 13px;text-align: center;margin-top: 10px;margin-left: 1%;color: #FFFFFF;border-radius: 3px;}
 			.yuhao{background-color: #3B92A6;}
 			.ghmoney{background-color: #D84C29;}
-			.notData{color: #999999;}
+			.notData{color: #999999;text-align: center;}
 		</style>
-		<script type="text/javascript">
-        	$(function(){
-        		
-        		var Request = new Object();
-        		Request = Utils.getRequest();
-        		$("#deptCode").val(Request["deptCode"]);
-        		$("#doctorCode").val(Request["doctorCode"]);
-        		$("#doctorName").text(Request["doctorCode"]);
-        		$("#deptName").text(Request["deptName"]);
-        		$("#dateTime").text(Request["dateTime"]);
-        		
-        		var params={};
-        		params.deptCode = Request["deptCode"];
-        		params.doctorCode = Request["doctorCode"];
-        		params.dateTime = Request["dateTime"];
-        		
-        		$.post(Utils.getRoot()+"/registerApp/selhasDetailTime",params,function(data){
-					if (data.success) {
-						
-						var doctorInfo = new Array();
-						doctorInfo= data.data;
-						for (var i = 0; i < doctorInfo.length; i++) {
-							if(doctorInfo[i].timeFlag==Request["timeFlag"]){
-								if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
-									//把挂号费转为元，原本是分
-									var regFee = parseInt(doctorInfo[i].regFee)/100;
-									$("#dateTimeDiv").append(
-										"<div class='ck_dateTime'>"+
-											"<div class='slot_item'>"+
-												"<input type='hidden' name='timeFlag_' value='"+doctorInfo[i].timeFlag+"' />"+
-												"<span class='time_slot'>"+"<span class='beginTime_'>"+doctorInfo[i].beginTime+"</span>"+"~"+"<span class='endTime_'>"+doctorInfo[i].endTime+"</span>"+"</span>"+
-												"<span class='yuhao'>余号：<span class='yuhao_'>"+doctorInfo[i].leftNum+"</span></span>"+
-												"<span class='ghmoney'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
-											"</div>"+
-										"</div>"
-									);
-								}else{
-									$("#dateTimeDiv").append(
-										"<div class='slot_item'>"+
-											"<p class='notData'>暂无数据</p>"+
-										"</div>"
-									);
-								}
-							}
-						}
-					}
-				});
-				
-        		$("#dateTimeDiv").on("click",".ck_dateTime",function(){
-        			if($(this).children().children(".yuhao").children(".yuhao_").text()>0){
-	        			var deptCode = $("#deptCode").val();
-	        			var deptName = $("#deptName").text();
-	        			var doctorCode = $("#doctorCode").val();
-	        			var doctorName = $("#doctorName").text();
-	        			var dateTime = $("#dateTime").text();
-	        			var regFee = $(this).children().children(".ghmoney").children(".regFee").text();
-	        			var beginTime = $(this).children().children(".time_slot").children(".beginTime_").text();
-	        			var endTime = $(this).children().children(".time_slot").children(".endTime_").text();
-	        			var timeFlag = $(this).children().find("input[name='timeFlag_']").val();
-	        			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag;            
-        			}
-        		});
-        	})
-        </script>
 	</head>
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
@@ -110,11 +47,31 @@
 					<span class="date_type" id="deptName"></span>
 					<span class="date_time" id="dateTime"></span>
 				</div>
-				<div class='time_item' id='swDiv' >
+				<div class='time_item' id="rqgh">
 					<div class='detail_dateTime' id="dateTimeDiv">
 						
 					</div>
 				</div>
+				
+				<div class='time_item' id="ysgh" style="display: none;">
+					<div class='time_item' id='swDiv' style="display: none;">
+						<div class='detail_time'><p>上午</p></div>
+						<div class='detail_dateTime' id="swdateTime">
+							
+						</div>
+					</div>
+					<div class='time_item' id="xwDiv" style="display: none;">
+						<div class='detail_time'><p>下午</p></div>
+						<div class='detail_dateTime' id="xwdateTime">
+						</div>
+					</div>
+					<div class='time_item' id="wsDiv" style="display: none;">
+						<div class='detail_time'><p>晚上</p></div>
+						<div class='detail_dateTime' id="wsdateTime">
+						</div>
+					</div>
+				</div>
+					
 					
 				
 			</section>
