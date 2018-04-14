@@ -46,6 +46,21 @@
 		</style>
 		<script type="text/javascript">
         	$(function(){
+        		
+        		$("#jzrxz").click(function(){
+        			$(".addPatient").show();
+        			//window.location.href="../yuyueguahao/xzPerple.html"
+        		});
+        		$("#add_rela").click(function(){
+        			window.location.href="../yuyueguahao/addPerple.html"
+        		});
+        		$("#choosePeople_").click(function(){
+        			$("#patientid").val("myself");
+        			$(".addPatient").hide();
+        		})
+        		$(".close_dialog,.ui-dialog-close").click(function(){
+					$(".ui-dialog").hide();
+				});
         		function GetRequest() {
        			  var url = decodeURI(location.search); //获取url中"?"符后的字串
        			   var theRequest = new Object();
@@ -65,13 +80,18 @@
 //				$("#patientid").val(patientid);
 //				$("#patientname").text(patientname);
 				
-        		$("#jzrxz").click(function(){
-        			$(".addPatient").show();
-        			//window.location.href="../yuyueguahao/xzPerple.html"
-        		});
-        		$("#add_rela").click(function(){
-        			window.location.href="../yuyueguahao/addPerple.html"
-        		});
+        		
+        		$("#deptName_").text(Request["deptName"]);
+        		$("#doctorName_").text(Request["doctorName"]);
+        		$("#fullTime_").text(Request["dateTime"]+" "+Request["beginTime"]+"~"+Request["endTime"]);
+        		$("#CNregFee_").text("￥"+""+Request["regFee"]+"元");
+				$("input[name='deptCode_']").val(Request["deptCode"]);
+				$("input[name='doctorCode_']").val(Request["doctorCode"]);
+				$("input[name='scheduleDate_']").val(Request["dateTime"]);
+				$("input[name='timeFlag_']").val(Request["timeFlag"]);
+				$("input[name='beginTime_']").val(Request["beginTime"]);
+				$("input[name='endTime_']").val(Request["endTime"]);
+        		$("input[name='regFee_']").val(parseInt(Request["regFee"])*100);
         		
         		
         		$("#zf").click(function(){//支付成功后添加信息
@@ -86,44 +106,45 @@
 //						params.patientIdcard=Request["idcard"];
 //						params.patientPhoneNumber=Request["phone"];
 //						params.patientCardNumber=Request["attendancecard"];
-						params.divisionName=$("#deptName_").val();
-						params.doctorName=$("#deptName_").val();
-						params.czDate = $("#deptName_").val();
+						params.divisionName=$("#deptName_").text();
+						params.divisionId=$("input[name='deptCode_']").val();
+						params.doctorName=$("#doctorName_").text();
+						//params.czDate = new Date(("input[name='scheduleDate_']").val().replace(/-/g,"/"));
+						params.bespeakTime=$("#fullTime_").text();
 						params.money=$("input[name='regFee_']").val();
-						param.scheduleDate=$("input[name='scheduleDate_']").val();
-						param.beginTime=$("input[name='beginTime_']").val();
-						param.endTime=$("input[name='endTime_']").val();
-						param.regFee=$("input[name='regFee_']").val();
+						params.doctorId=$("input[name='doctorCode_']").val();
+						params.patientId=$("#patientid").val();
+						params.scheduleDate=$("input[name='scheduleDate_']").val();
+						params.timeFlag=$("input[name='timeFlag_']").val();
+						params.beginTime=$("input[name='beginTime_']").val();
+						params.endTime=$("input[name='endTime_']").val();
+						params.regFee=$("input[name='regFee_']").val();
 						
 						$(".ui-loading-block").show();
 						$(".ui-loading-block").css("margin","45% 0 0 31%");
 						
 						$.post(Utils.getRoot()+"/registerApp/addbespeakInfo",params,function(data){
-							$(".ui-loading-block").hide();
-							$("#dialogText").html(data.message);
-							$(".ui-dialog").dialog("show");
-							setTimeout(function(){
+//							$(".ui-loading-block").hide();
+//							$("#dialogText").html(data.message);
+//							$(".ui-dialog").dialog("show");
+//							setTimeout(function(){
 								if (data.success) {
-									$(".ui-loading-block").show();
-									$(".ui-loading-block").css("margin","45% 0 0 31%");
-									$(".ui-loading-block").hide();
-				        			$("#dialogText").html("订单已生成！");
-				        			$(".ui-dialog").dialog("show");
+//									$(".ui-loading-block").show();
+//									$(".ui-loading-block").css("margin","45% 0 0 31%");
+//									$(".ui-loading-block").hide();
+				        			$("#dialogText").html("订单已生成,请前往支付！");
+				        			$(".ui-dialog").show();
 				        			setTimeout(function(){//定时5秒后跳转页面
 										window.location.href="../main.html";
 									},5000);//定时器
+								}else{
+									$("#dialogText").html(data.message);
+									$(".ui-dialog").show();
 								}
-							}, 2000);
+//							}, 2000);
 						});
 					}
         		});
-        		$("#choosePeople_").click(function(){
-        			$("#patientid").val("myself");
-        			$(".addPatient").hide();
-        		})
-        		$(".close_dialog,.ui-dialog-close").click(function(){
-					$(".ui-dialog").hide();
-				});
         	})
         </script>
 	</head>
@@ -144,10 +165,12 @@
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name">科室名称</span>
+					<input type="hidden" name="deptCode_" />
 					<span class="item_value" id="deptName_"></span>
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name">医生名字</span>
+					<input type="hidden" name="doctorCode_" />
 					<span class="item_value" id="doctorName_"></span>
 				</div>
 				<div class="comfirm_item ">
@@ -155,6 +178,7 @@
 					<input type="hidden" name="scheduleDate_" />
 					<input type="hidden" name="beginTime_" />
 					<input type="hidden" name="endTime_" />
+					<input type="hidden" name="timeFlag_" />
 					<span class="item_value" id="fullTime_"></span>
 				</div>
 				<div class="comfirm_item ">

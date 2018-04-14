@@ -140,8 +140,9 @@
         			var doctorCode = $(this).children(".doc_detail").children("input[name='doctorCode']").val();
         			var deptCode = $("#deptCode").val();
         			var deptName = $("#deptName").text();
-        			var dateTime = "2018-04-13";
-        			window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime;
+        			var dateTime = "2018-04-17";
+        			var timeFlag = $(this).children().find("input[name='timeFlag']").val();
+        			window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag;
         		});
         		
         	})
