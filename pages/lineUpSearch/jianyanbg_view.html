@@ -6,6 +6,7 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css">
         
         <script src="../../lib/zepto.min.js">  </script>
         <script src="../../js/frozen.js"></script>
@@ -31,6 +32,7 @@
 			.con_left>span, .con_center>span, .con_right>span{display: block;float: left;width: 100%;}
 			.con_left>span:first-child,.con_center>span:first-child,.con_right>span:first-child{font-size: 13px;}
 			.hr_sex{display: block;float: left;width: 1px;height: 30px;margin-top: 10px;border-right: 1px solid #FFFFFF;}
+			.iconfont{color: #FF0000;font-weight: bold;font-size: 20px;}
 		</style>
 		<script type="text/javascript">
         	$(function(){
@@ -61,7 +63,7 @@
 								$("#jyBgList").append(
 									"<tr>"+
 										"<td>"+labItemsInfo[i].itemName+"</td>"+
-										"<td style='text-align: center;'>"+labItemsInfo[i].result+"</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].result+"</td>'+
 										"<td style='text-align: center;'>"+labItemsInfo[i].unit+"</td>"+
 										"<td style='text-align: center;'>"+labItemsInfo[i].refRange+"</td>"+
 									"</tr>"
@@ -70,7 +72,7 @@
 								$("#jyBgList").append(
 									"<tr>"+
 										"<td>"+labItemsInfo[i].itemName+"</td>"+
-										"<td style='text-align: center;'>"+labItemsInfo[i].result+"↓</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].result+" <i class='iconfont icon-xiajiantou1'></i></td>"+
 										"<td style='text-align: center;'>"+labItemsInfo[i].unit+"</td>"+
 										"<td style='text-align: center;'>"+labItemsInfo[i].refRange+"</td>"+
 									"</tr>"
@@ -79,7 +81,7 @@
 								$("#jyBgList").append(
 									"<tr>"+
 										"<td>"+labItemsInfo[i].itemName+"</td>"+
-										"<td style='text-align: center;'>"+labItemsInfo[i].result+"↑</td>"+
+										"<td style='text-align: center;'>"+labItemsInfo[i].result+" <i class='iconfont icon-shangjiantou1'></i></td>"+
 										"<td style='text-align: center;'>"+labItemsInfo[i].unit+"</td>"+
 										"<td style='text-align: center;'>"+labItemsInfo[i].refRange+"</td>"+
 									"</tr>"
@@ -156,7 +158,6 @@
 								</tr>
 							</thead>
 							<tbody id="jyBgList">
-								
 							</tbody>
 						</table>
 					</div>
