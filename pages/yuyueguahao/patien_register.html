@@ -36,8 +36,7 @@
 				})
 				
 				var params={};
-				params.doctorId="007";
-        		$.post(Utils.getRoot()+"/registerApp/selBespeakInfo",params,function(data){
+        		$.post(Utils.getRoot()+"/registerApp/selyyjl",params,function(data){
 					if (data.success) {
 						var patient = new Array();
 						patient= data.data;
@@ -85,6 +84,7 @@
 			    	<span class="dep_sec" id="gender"></span>
 			    	<div class="doc_time">预约时间： <span id="czDate"></span></div>	    
 		   	    </div>
+		   	    
 	        </div>
 	     </div>
 	</body>
