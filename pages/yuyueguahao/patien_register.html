@@ -15,24 +15,23 @@
 		<style type="text/css">
 			body{background-color: #F7F7F7;}
 			.ui-container{margin-top: 5px;}
-			.ui-header.ui-header-positive{height: 50px;line-height:50px;background-color: #3A93A5;}
+			.ui-header.ui-header-positive{height: 50px;line-height:50px;background-color: #0066cc;}
             .msg{display: block;width: 100%;height: 110px;margin: 0 auto;background-color: #FFFFFF;margin-top: 50px; }
             .msg_1{display: block;width: 100%;height: 110px;margin: 0 auto;margin-top:2px;background-color: #FFFFFF;}
             .msg_left{display: block;width: 28%;height: 100%;float: left;}
             .msg_left>img{display: block;margin: 0 auto;margin-top: 15px;}
  			.msg_right{display: block;width:70%;float: left;margin-top: 25px;}
-            .doc_name{display: block;float:left;font-size: 20px;width:25%;}
-            .doc_age{display: block;float:left;font-size: 20px;width:15%;}
+            .doc_name{display: block;float:left;font-size: 20px;width:40%;}
+            .doc_age{display: block;float:left;font-size: 20px;width:20%;}
             .dep_sec{display: block;float:left;font-size: 20px;width:40%;}
-            .doc_time{display: block;float: left;height: 30px;line-height: 30px;color: #626060;font-size: 18px;}
+            .doc_time{display: block;float:left;color: #626060;font-size: 18px;width:300px;}
 		</style>
 		<script type="text/javascript">
         	$(function(){
 				$(".msg_right").click(function(data){
-					var patientId = $(this).children("#patientId").val();
 					var bespeakId = $(this).children("#bespeakId").val();
 					var serialNumber = $(this).children("#serialNumber").val();
-					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?patientId="+patientId+"&bespeakId="+bespeakId+"&serialNumber="+serialNumber;
+					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?bespeakId="+bespeakId+"&serialNumber="+serialNumber;
 				})
 				
 				var params={};
@@ -40,12 +39,13 @@
 					if (data.success) {
 						var patient = new Array();
 						patient= data.data;
+						console.log(JSON.stringify(patient));
 						for (var i = 0; i < patient.length; i++) {
 							if (patient.length==1) {
-								$("#patientId").val(patient[i].patientId);
-								$("#patientName").html(patient[i].patientName);
+								$("#bespeakId").val(patient[i].bespeakId);
 								$("#gender").html(patient[i].patientGender);
-								$("#czDate").html(patient[i].czDateStr);
+								$("#patientName").html(patient[i].patientName);
+								$("#czDate").html(patient[i].bespeakTime);
 							}else{
 								$("#yyList").append(
 									"<div class='msg'>"+
@@ -53,10 +53,10 @@
 							        		 "<img src='../img/u132.png' width='80' height='80'/>	"+
 							       		 "</div>"+
 							       		"<div class='msg_right'>"+
-							       			"<input type='hidden'  id='patientId' value='"+patient[i].patientId+"'  >"+
+							       			"<input type='hidden'  id='bespeakId' value='"+patient[i].bespeakId+"'  >"+
 									    	"<span class='doc_name' id='patientName'>"+patient[i].patientName+"</span>"+
 									    	"<span class='dep_sec' id='gender'>"+patient[i].patientGender+"</span>"+
-									    	"<div class='doc_time'>预约时间： <span id='czDate'>"+patient[i].czDateStr+"</span></div>"    +
+									    	"<div class='doc_time'>预约时间： <span id='czDate'>"+patient[i].bespeakTime+"</span></div>"    +
 								   	   " </div>"+
 							        "</div>"
 								);
@@ -69,7 +69,7 @@
 	</head>
 	<body>
 		<header class="ui-header ui-header-positive">
-        <i class="ui-icon ui-icon-return" onclick="history.back()"></i><h4 style="margin-left: 25px;margin-top: -3px;">患者挂号 </h4>
+        <i class="ui-icon ui-icon-return" onclick="history.back()"></i><h4 style="margin-left: 25px;margin-top: -3px;">挂号记录 </h4>
 		</header>
 		<div id="yyList">
 	        <div class="msg">
@@ -77,7 +77,7 @@
 	        		 <img src="../../img/u132.png" width="80" height="80"/>	
 	       		 </div>
 	       		<div class="msg_right" >
-	       			<input type="hidden"  id="patientId" value=""/>
+	       			<input type="hidden"  id="bespeakId" value=""/>
 	       			<input type="hidden"  id="bespeakId" value=""/>
 	       			<input type="hidden"  id="serialNumber" value=""/>
 			    	<span class="doc_name" id="patientName"></span>

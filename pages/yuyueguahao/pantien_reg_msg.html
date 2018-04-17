@@ -16,7 +16,7 @@
 		<style type="text/css">
 			body{background-color: #F7F7F7;}
 			.ui-container{margin-top: 5px;}
-			.ui-header.ui-header-positive{height: 50px;line-height:50px;background-color: #3A93A5;}
+			.ui-header.ui-header-positive{height: 50px;line-height:50px;background-color: #0066cc;}
             .name{display: block;width: 100%;height: 50px;margin-top: 50px;background-color: #FFFFFF;}
             .nam_c{display: block;width: 100%;height: 50px;margin-top: 2px;background-color: #FFFFFF;}
             .nam_left{display: block;width: 45%;height:50px;line-height:50px;margin-left:20px;float: left;}
@@ -75,9 +75,8 @@
         		
         		$("#bespeakId").val(Request["bespeakId"]);
         		$("#serialNumber").val(Request["serialNumber"]);
-        		
 				var params={};
-				params.patientId=Request["patientId"];
+				params.bespeakId=Request["bespeakId"];
         		$.post(Utils.getRoot()+"/registerApp/selPatientYYInfo",params,function(data){
 					if (data.success) {
 						var Patient = data.data;
@@ -88,8 +87,9 @@
 						$("#attendancecard").val(Patient.patientCardNumber);
 						$("#divisionName").val(Patient.divisionName);
 						$("#doctorName").val(Patient.doctorName);
-						$("#money").val(Patient.money);
-						$("#czDate").val(Patient.czDateStr);
+						$("#money").val(Patient.money/100);
+						
+						$("#czDate").val(Patient.bespeakTime);
 					}
 				});
 				
@@ -131,7 +131,7 @@
 	<body>
     
 		<header class="ui-header ui-header-positive">
-        <i class="ui-icon ui-icon-return" onclick="history.back()"></i><h4 style="margin-left: 25px;margin-top: -3px;">患者详情 </h4>
+        <i class="ui-icon ui-icon-return" onclick="history.back()"></i><h4 style="margin-left: 25px;margin-top: -3px;">预约挂号详情 </h4>
 		</header>
   
         <div class="name">
