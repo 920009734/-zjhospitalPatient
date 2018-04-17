@@ -186,6 +186,7 @@ $(function(){
 		$("#swcount").html("");
 		$("#xwcount").html("");
 		$("#wscount").html("");
+		
 	}
 		
 	function doctorInfoList(nowdate){
@@ -307,6 +308,7 @@ $(function(){
 	
 	
 	function doctorGh(deptCode){
+		$("#dortorList").html("");
 		var params={};
 		params.deptCode=deptCode;
 		$.post(Utils.getRoot()+"/registerApp/selDoctor",params,function(data){
