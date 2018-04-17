@@ -60,8 +60,10 @@
         	}
         	$(function(){
 				// 创建一个Socket实例
-				var socket = new WebSocket('ws://http://localhost:8080/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
-				// 打开Socket 
+//				var socket = new WebSocket('ws://http://localhost:8080/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
+				
+				var socket = new WebSocket('ws://http://172.18.30.16:8080/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
+				// 打开Socket
 				socket.onopen = function(event) {
 				  console.log('open', event); 
 				}

@@ -33,7 +33,7 @@
 			.depName{display: block;float: left;width: 100%; font-size: 16px;margin-top: 5px;line-height:23px;}
 			.ckName{display: block;float: left;width: 100%;font-size: 14px;max-height: 120px;line-height:23px;}
 			.ckTime{display: block;float: left;width: 100%;color: #999999;font-size: 12px;margin-bottom: 5px;}
-			.keshi_item{display: block;float: left;width: 87%;margin-left: 5%;}
+			.keshi_item{display: block;float: r;width: 87%;margin-left: 5%;}
 		</style>
 		<script type="text/javascript">
 			$(function(){
@@ -55,14 +55,15 @@
 						
 						for (var i = 0; i < examItemsInfo.length; i++) {
 							$("#jcList").append(
-								"<div class='list-item '><div class='keshi_item'>"+
-									"<input type='hidden' name='deptCode' value='"+examItemsInfo[i].deptCode+"'>"+
-									"<span class='depName'>"+examItemsInfo[i].deptName+"</span>"+
-									"<input type='hidden' name='checkId' value='"+examItemsInfo[i].checkId+"'>"+
-									"<span class='ckName'>"+examItemsInfo[i].checkName+"</span>"+
-									"<span class='ckTime'>"+examItemsInfo[i].checkTime+"</span>"+
+								"<div class='list-item '>"+
+									"<div class='keshi_item'>"+
+										"<input type='hidden' name='deptCode' value='"+examItemsInfo[i].deptCode+"'>"+
+										"<span class='depName'>"+examItemsInfo[i].deptName+"</span>"+
+										"<input type='hidden' name='checkId' value='"+examItemsInfo[i].checkId+"'>"+
+										"<span class='ckName'>"+examItemsInfo[i].checkName+"</span>"+
+										"<span class='ckTime'>"+examItemsInfo[i].checkTime+"</span>"+
 									"<div>"+
-									"<i class='ui-icon ui-icon-arrow'></i>"+
+									/*"<i class='ui-icon ui-icon-arrow'></i>"+*/
 								"</div>"
 							)
 						}
@@ -76,7 +77,7 @@
 				});
         		
         		$("#jcList").on("click",".list-item",function(){
-        			var checkId = $(this).children("input[name='checkId']").val();
+        			var checkId = $(this).children().children("input[name='checkId']").val();
         			window.location.href="../lineUpSearch/jianchabg_view.html?checkId="+checkId;
         		});
         		
