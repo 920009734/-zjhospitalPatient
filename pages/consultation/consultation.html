@@ -6,6 +6,8 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
+		<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+        <script src="../../js/Utils.js"></script>
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
 		<title>选择科室</title>
@@ -62,12 +64,12 @@
 					</div>
 					<div class="intro_right">
 						<div style="margin-top:20px ;">
-							<span class="intro_name">黄纯织</span>
-							<span class="intro_status">离线</span>
+							<span class="intro_name" id="doctorName_">黄纯织</span>
+							<span class="intro_status"></span>
 						</div>
 						<div>
-							<span class="intro_dep">消化内科</span>
-							<span class="intro_posti">副主任医师</span>
+							<span class="intro_dep" id="deptName_">消化内科</span>
+							<span class="intro_posti" id="doctorTitle_">副主任医师</span>
 						</div>
 					</div>
 				</div>
@@ -112,7 +114,7 @@
 						<span><img src="../../img/myD.png"/></span>
 						<span class="intro_title_con">医生介绍</span>
 					</div>
-					<div class="intro_detailCon ui-border-b">
+					<div class="intro_detailCon ui-border-b" id="introduce_">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					毕业于南京医学院医疗系 
 					曾任扬州市妇幼保健院妇产科主任、副院长、技术顾问，中华医学会扬州分会理事、妇产科专业委员会副主任委员、江苏省优生优育协会秘书长、国家级爱婴医院评估员、扬州市母婴保健技术鉴定委员会主任委员、扬州大学副教授等职。在国家级、省级医学杂志发表论文数篇，曾获国家卫生部、国家计生委“计划生育万例手术无事故先进个人”， 江苏省“巾帼建功先进个人”，江苏省“妇幼卫生先进工作者”等称号。从事妇产科临床、科研、教学工作五十余年，在诊治妇产科各种疑难病症、不孕不育、高危妊娠的诊断和处理、更年期疾病等方面积累了丰富的临床经验。
@@ -150,13 +152,37 @@
 				</div>-->
 			</section>
 		</section>
-		<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript">
 			$("#onlineCon").click(function(){
 				window.location.href="./onlineCons.html";
 			});
 			$("#liuyanCon").click(function(){
 				window.location.href="./liuyanCons.html";
+			});
+			$(function(){
+				//获取URL参数
+				function getQueryString(name) { 
+			        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+			        var r = window.location.search.substr(1).match(reg); 
+			        if (r != null) return unescape(r[2]); 
+			        return null; 
+			    }
+				var params={};
+    			params.deptCode=getQueryString("deptCode");
+    			params.doctorCode=getQueryString("doctorCode");
+    			//alert(params.deptCode+"---"+params.doctorCode);
+				$.post(Utils.getRoot()+"/inquiry/findDoctor",params,function(data){
+					if (data.success) {
+						var doctorInfo = new Array();
+						doctorInfo= data.data; 
+						for (var i = 0; i < doctorInfo.length; i++) {
+							$("#doctorName_").html(doctorInfo[i].doctorName);
+							$("#deptName_").html(doctorInfo[i].deptName);
+							$("#doctorTitle_").html(doctorInfo[i].doctorTitle);
+							$("#introduce_").html(doctorInfo[i].doctorIntrodution);
+						}
+					}
+				});
 			});
 		</script>
 	</body>

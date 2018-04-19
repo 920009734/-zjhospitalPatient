@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../../css/style.css" />
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
 		<title>选择科室</title>
 		<style type="text/css">
 			header>h4>span,header>h4>i{display: block;float: left;}
@@ -33,7 +34,7 @@
 			.ui-dialog-cnt{display: block; width: 90%;margin: 0 auto;border-radius:5px ;background-color: #FFFFFF;}
 			.dep_type{display: block;font-size: 15px;}
 			.type_left{display: block;float: left;width: 35%;height: 420px;overflow-y: auto;}
-			.type_right{display: block;float: left;width: 63%;height: 420px;margin-left: 2%;overflow-y: auto;background-color: #F6F6F6;}
+			.type_right{display: block;float: left;width: 95%;height: 420px;margin-left: 2%;overflow-y: auto;background-color: #F6F6F6;}
 			.left_item{display: block;width: 100%;height: 40px;line-height: 40px;border-bottom: 1px solid #F6F6F6;}
 			.left_item>span{margin-left: 7px;}
 			.left_item.active{background-color: #F6F6F6;}
@@ -50,16 +51,17 @@
 			<h4 style="margin-left: 25px;" id="dep_type" ><span>全部科室</span> <i class="ui-icon ui-icon-unfold"></i></h4>
 		</header>
 		<section class="ui-container"> 
-			<section id="list">
+			<section>
 				<div class="search_doc">
 					<div class="search_left">
-						<input type="text" placeholder="搜科室、疾病、医生" />
+						<input type="text" placeholder="输入医生姓名搜索医生" />
 						<i class="ui-icon ui-icon-search"></i>
 					</div>
 					<div class="search_right">搜索</div>
 				</div>
+				<div id="doctor_"></div>
 				
-				<div class="ck_doc" class="doctorInfo">
+				<!--<div class="ck_doc" class="doctorInfo">
 					<div class="doc_left">
 						<img src="../../img/online/u390.png" />
 					</div>
@@ -118,7 +120,7 @@
 							从事临床诊治工作30余年，擅长消化系肿瘤的放射介入诊疗技术及放射介入诊断和治疗原发性肝癌、上消...
 						</div>
 					</div>
-				</div>
+				</div>-->
 			</section>
 		</section>
 		
@@ -134,15 +136,15 @@
 			                 <div class="ui-dialog-bd">
 					            <h4 class="depitem_list all"><span>全部科室</span></h4>
 					            <div class="dep_type">
-					            	<div class="type_left">
+					            	<!--<div class="type_left">
 					            		<div style="min-height: 100px;max-height: 1200px;overflow-y: auto;">
 					            			<div class="left_item active "><span>内科</span></div>	
 					            			<div class="left_item "><span>外科</span></div>		
 					            		</div>
-					            	</div>
+					            	</div>-->
 					            	<div class="type_right">
-					            		<div style="min-height: 100px;max-height: 1200px;overflow-y: auto;">
-					            			<div class="right_item "><span>心血管内科</span></div>
+					            		<div id="dept_" style="min-height: 100px;max-height: 1200px;overflow-y: auto;">
+					            			<!--<div class="right_item "><span>心血管内科</span></div>
 					            			<div class="right_item "><span>消化内科</span></div>
 					            			<div class="right_item "><span>呼吸内科</span></div>
 					            			<div class="right_item "><span>血液内科</span></div>
@@ -174,7 +176,7 @@
 					            			<div class="right_item "><span>眼科</span></div>
 					            			<div class="right_item "><span>中医科</span></div>
 					            			<div class="right_item "><span>感染疾病科</span></div>
-					            			<div class="right_item "><span>营养科</span></div>
+					            			<div class="right_item "><span>营养科</span></div>-->
 					            		</div>
 					            	</div>
 					            </div>
@@ -185,27 +187,97 @@
 				</div>
 			</div>
 		</section>
-		<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				$("#dep_type").click(function(){
 				    $(".ui-dialog").dialog("show");
 				})
-				//$(".ui-dialog").dialog("show");
 				$(".close_dialog,.ui-dialog-close").click(function(){
 					$(".ui-dialog").dialog("hide");
 				});
-				$(".right_item").click(function(){
-					var depValue = $(this).children("span").text();
-					$("#dep_type>span").text(depValue);
-					$(".ui-dialog").dialog("hide");
-					
-				});
+//				$(".right_item").click(function(){
+//					var depValue = $(this).children("span").text();
+//					$("#dep_type>span").text(depValue);
+//					$(".ui-dialog").dialog("hide");
+//					
+//				});
+//				$(".ck_doc").click(function(){
+//					window.location.href="./consultation.html";
+//				});
 				
+				//查询全部科室
+				var params={};
+        		$.post(Utils.getRoot()+"/inquiry/findDivision",params,function(data){
+        			$("#dept_").empty();
+					if (data.success) {
+						var deptInfo = new Array();
+						deptInfo= data.data;
+						for (var i = 0; i < deptInfo.length; i++) {
+							$("#dept_").append(
+								"<div class='clickitem'>"
+								+"<input type='hidden' value='"+deptInfo[i].deptCode+"' name='deptCode'>"
+								+"<div class='right_item deptName'>"+deptInfo[i].deptName+"</div>"
+								+"</div>"
+							);
+						}
+					}
+				});
+				//点击科室查询当前科室下的医生
+				$("#dept_").on("click",".clickitem",function(){
+        			var deptCode = $(this).children("input[name='deptCode']").val();
+        			var deptName = $(this).children(".deptName").text();
+        			//alert(deptCode+"-------"+deptName);
+					$("#dep_type>span").text(deptName);
+					$(".ui-dialog").dialog("hide");
+        			//点击科室信息时查询当前科室医生信息
+        			getDoctorInfo(deptCode,"");
+        			
+        		});
+        		//进入页面时默认查询医生信息(给空值查全部)
+        		getDoctorInfo("","");
+        		//查询医生
+        		function getDoctorInfo(deptCode,doctorCode){
+        			var params={};
+        			params.deptCode=deptCode;
+        			params.doctorCode=doctorCode;
+	        		$.post(Utils.getRoot()+"/inquiry/findDoctor",params,function(data){
+	        			//alert(deptCode+"---"+doctorCode)
+	        			$("#doctor_").empty();
+						if (data.success) {
+							var doctorInfo = new Array();
+							doctorInfo= data.data;
+							for (var i = 0; i < doctorInfo.length; i++) {
+								$("#doctor_").append(
+									"<div class='ck_doc'>"
+										+"<div class='doc_left'>"
+											+"<img src='../../img/docImg.png'/>"
+										+"</div>"
+										+"<div class='doc_right'>"
+											+"<div class='right_title'>"
+												+"<input type='hidden' value='"+doctorInfo[i].deptCode+"' name='deptCode'>"
+												+"<input type='hidden' value='"+doctorInfo[i].doctorCode+"' name='doctorCode'>"
+												+"<span class='right_name'>"+doctorInfo[i].doctorName+"</span>"
+												+"<span class='right_position'>"+doctorInfo[i].doctorTitle+"</span>"
+												+"<span class='right_type'>"+doctorInfo[i].deptName+"</span>"
+											+"</div>"
+											+"<div class='right_detail'>"
+												+doctorInfo[i].doctorIntrodution
+											+"</div>"
+										+"</div>"
+									+"</div>"
+								);
+							}
+						}
+					});
+        		}
+        		
+				//点击医生进入医生详情页面
+				$("#doctor_").on("click",".ck_doc",function(){
+        			var deptCode = $(this).children().children().children("input[name='deptCode']").val();
+        			var doctorCode = $(this).children().children().children("input[name='doctorCode']").val();
+        			window.location.href="../consultation/consultation.html?deptCode="+deptCode+"&doctorCode="+doctorCode;
+        		});
 			})
-			$(".ck_doc").click(function(){
-				window.location.href="./consultation.html";
-			});
 		</script>
 	</body>
 </html>
