@@ -11,6 +11,7 @@
         
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
+        <script src="../js/Utils.js"></script>
         <style type="text/css">
        	 	html,body{height: 100%;width: 100%;font-family: "微软雅黑";background-color: #FFFFFF;}
         	.footer_icon, .footer_title{display:block;float: none; margin-top: -8px;font-size: 15px;}
@@ -64,7 +65,8 @@
 				// 创建一个Socket实例
 //				var socket = new WebSocket('ws://http://localhost:8080/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
 				
-				var socket = new WebSocket('ws://http://172.18.30.16:8080/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
+				//var socket = new WebSocket('ws://http://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
+				var socket = new WebSocket('ws://'+Utils.getRoot()+'/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
 				// 打开Socket
 				socket.onopen = function(event) {
 				  console.log('open', event); 
