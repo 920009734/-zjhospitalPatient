@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../css/frozen.css">
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
+        <script src="../js/Utils.js"></script>
 		<title></title>
 		<style type="text/css">
 		     body{background-color:#EDF3F3 ;font-family: "微软雅黑";}
@@ -47,10 +48,10 @@
 				        <img src="../img/self/self.png" width="80" height="80"/>	
 				    </div>
 				    <div class="top_center">
-				    	<span class="top_right_t">测试</span>
+				    	<!--<span class="top_right_t">测试</span>
 				    	<span class="top_right_i">男</span>
 				    	<span class="top_right_j">|</span>
-				    	<span class="top_right_k">积分：110</span>
+				    	<span class="top_right_k">年龄</span>-->
 				    </div>
 				    <div class="top-right">
 				    	<i class="ui-icon-arrow"></i>
@@ -100,6 +101,26 @@
 	</body>
 	<script type="text/javascript">
     	$(function(){
+    		/**
+    		 * 查询个人信息
+    		 */
+    		var queryMySelfUrl = Utils.getRoot()+"/patientApp/queryMySelf";
+    		$.post(queryMySelfUrl, function(res) {
+    			if (res.success) {
+    				var s = '';
+    				if (res.data.sex == 1) {
+    					s = '<span class="top_right_i">男</span>';
+    				} else {
+    					s = '<span class="top_right_i">女</span>';
+    				}
+    				$(".top_center").append('<span class="top_right_t">'+res.data.realname+'</span>'+s+
+				    	'<span class="top_right_j">|</span>'+
+				    	'<span class="top_right_k">'+res.data.age+'</span>');
+    			} else {
+    				alert(res.message);
+    			}
+    		});
+    		
     		$("#zxjl").click(function(){
 				top.location.href="consultation/consulteLlist.html";
     		});
@@ -107,6 +128,21 @@
     		
     		$("#ghjl").click(function(){
     			top.location.href="yuyueguahao/patien_register.html";
+    		});
+    		
+    		/**
+    		 * 退出
+    		 */
+    		$(".login_btn").click(function() {
+    			var logoutUrl = Utils.getRoot()+"/patientApp/logout";
+    			var token = localStorage.getItem('token');
+    			$.post(logoutUrl, token, function(res) {
+	    			if (res.success) {
+	    				location.href="login.html";
+	    			} else {
+	    				alert(res.message);
+	    			}
+	    		});
     		});
     	});
     </script>
