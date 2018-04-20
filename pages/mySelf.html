@@ -58,7 +58,7 @@
 				    </div>
 				</div>	
 				<div class="cat_container">
-					<div class="catlog">
+					<div class="catlog" id="wdgz">
 						<div class="pic"><img src="../img/self/wodeguanzhu.png" /></div>
 						<div class="pic_w">我的关注</div>
 					</div>
@@ -119,6 +119,10 @@
     			} else {
     				alert(res.message);
     			}
+    		});
+    		
+    		$("#wdgz").click(function(){
+    			top.location.href="myAttention.html";
     		});
     		
     		$("#zxjl").click(function(){
