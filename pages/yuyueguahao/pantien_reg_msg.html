@@ -74,6 +74,7 @@
         		Request = GetRequest();
         		
         		$("#bespeakId").val(Request["bespeakId"]);
+        		$("#hisOrdNum").val(Request["hisOrdNum"]);
         		$("#serialNumber").val(Request["serialNumber"]);
 				var params={};
 				params.bespeakId=Request["bespeakId"];
@@ -111,11 +112,11 @@
 				//取消预约
 				function cancel() {
 					var params={};
-					params.bespeakId = $("#bespeakId").val();
+					params.bespeakId = $("#hisOrdNum").val();
 					params.serialNumber = $("#serialNumber").val();
 					params.cancelReason = $("#cancelReason").val();
 					
-					alert(params);
+					alert(params.serialNumber +"---"+ params.cancelReason);
 					
 					$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(res){
 						if (res.success) {
@@ -180,6 +181,7 @@
 		
 		<div class="login_btn">
 			<input type="hidden"  id="bespeakId" value=""/>
+			<input type="hidden"  id="hisOrdNum" value=""/>
 	       	<input type="hidden"  id="serialNumber" value=""/>
 			<button id="cancel" class="ui-btn ui-btn-lg ui-btn-primary">取消预约</button>
 		</div>

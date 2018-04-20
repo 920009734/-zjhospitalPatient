@@ -30,8 +30,9 @@
         	$(function(){
 				$(".msg_right").click(function(data){
 					var bespeakId = $(this).children("#bespeakId").val();
+					var hisOrdNum = $(this).children("#hisOrdNum").val();
 					var serialNumber = $(this).children("#serialNumber").val();
-					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?bespeakId="+bespeakId+"&serialNumber="+serialNumber;
+					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?bespeakId="+bespeakId+"&serialNumber="+serialNumber+"&hisOrdNum="+hisOrdNum;
 				})
 				
 				var params={};
@@ -58,6 +59,7 @@
 							       		 "</div>"+
 							       		"<div class='msg_right'>"+
 							       			"<input type='hidden'  id='bespeakId' value='"+patient[i].bespeakId+"'  >"+
+							       			"<input type='hidden'  id='hisOrdNum' value='"+patient[i].hisOrdNum+"'  >"+
 									    	"<span class='doc_name' id='patientName'>"+patient[i].patientName+"</span>"+
 									    	"<span class='dep_sec' id='gender'>"+patient[i].patientGender+"</span>"+
 									    	"<div class='doc_time'>预约时间： <span id='czDate'>"+patient[i].bespeakTime+"</span></div>"    +
@@ -82,7 +84,7 @@
 	       		 </div>
 	       		<div class="msg_right" >
 	       			<input type="hidden"  id="bespeakId" value=""/>
-	       			<input type="hidden"  id="bespeakId" value=""/>
+	       			<input type="hidden"  id="hisOrdNum" value=""/>
 	       			<input type="hidden"  id="serialNumber" value=""/>
 			    	<span class="doc_name" id="patientName"></span>
 			    	<span class="dep_sec" id="gender"></span>
