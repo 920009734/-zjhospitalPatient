@@ -76,13 +76,15 @@
         		$("#bespeakId").val(Request["bespeakId"]);
         		$("#hisOrdNum").val(Request["hisOrdNum"]);
         		$("#serialNumber").val(Request["serialNumber"]);
+        		
 				var params={};
 				params.bespeakId=Request["bespeakId"];
         		$.post(Utils.getRoot()+"/registerApp/selPatientYYInfo",params,function(data){
 					if (data.success) {
 						var Patient = data.data;
+						var patientGender = Patient.patientGender=="1"?"男":"女";
 						$("#patientname").val(Patient.patientName);
-						$("#sex").val(Patient.patientGender);
+						$("#sex").val(patientGender);
 						$("#idcard").val(Patient.patientIdcard);
 						$("#phone").val(Patient.patientPhoneNumber);
 						$("#attendancecard").val(Patient.patientCardNumber);
@@ -115,8 +117,6 @@
 					params.bespeakId = $("#hisOrdNum").val();
 					params.serialNumber = $("#serialNumber").val();
 					params.cancelReason = $("#cancelReason").val();
-					
-					alert(params.serialNumber +"---"+ params.cancelReason);
 					
 					$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(res){
 						if (res.success) {
