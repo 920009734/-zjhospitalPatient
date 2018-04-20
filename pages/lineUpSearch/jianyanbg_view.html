@@ -48,8 +48,12 @@
 						labItemsInfo= data.data;
 						console.log(JSON.stringify(labItemsInfo))
 						var patientInfo = labItemsInfo[0].patientInfo;
-						$("#patientname").text(patientInfo.patientname);
-						$("#sex").text(patientInfo.sex);
+						$("#realname").text(patientInfo.realname);
+						if (patientInfo.sex == 1) {
+							$("#sex").text("男");
+						} else {
+							$("#sex").text("女");
+						}
 						$("#age").text(patientInfo.age);
 						
 						$("#inspectId").text(labItemsInfo[0].inspectId);
@@ -109,7 +113,7 @@
 					<div class="jcbg_con">
 						<div class="con_left">
 							<span>患者</span>
-							<span id="patientname"></span>
+							<span id="realname"></span>
 						</div>
 						<span class="hr_sex"></span>
 						<div class="con_center">
