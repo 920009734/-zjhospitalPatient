@@ -47,40 +47,51 @@
 		</script>
 		 <script type="text/javascript">
         	$(function(){
-        		var params={};
-        		params.startTime = $('#startTime').val();
-        		params.endTime = $('#endTime').val();
-        		$.post(Utils.getRoot()+"/reportQuery/selExamItems",params,function(data){
-					if (data.success) {
-						var examItemsInfo = new Array();
-						examItemsInfo= data.data;
-						
-						for (var i = 0; i < examItemsInfo.length; i++) {
+        		searchList($('#startTime').val(),$('#endTime').val());
+        		
+        		function searchList(startTime,endTime){
+        			$("#jcList").html("");
+        			var params={};
+	        		params.startTime = $('#startTime').val();
+	        		params.endTime = $('#endTime').val();
+	        		$.post(Utils.getRoot()+"/reportQuery/selExamItems",params,function(data){
+						if (data.success) {
+							var examItemsInfo = new Array();
+							examItemsInfo= data.data;
+							
+							for (var i = 0; i < examItemsInfo.length; i++) {
+								$("#jcList").append(
+									"<div class='list-item '>"+
+										"<div class='keshi_item'>"+
+											"<input type='hidden' name='deptCode' value='"+examItemsInfo[i].deptCode+"'>"+
+											"<span class='depName'>"+examItemsInfo[i].deptName+"</span>"+
+											"<input type='hidden' name='checkId' value='"+examItemsInfo[i].checkId+"'>"+
+											"<span class='ckName'>"+examItemsInfo[i].checkName+"</span>"+
+											"<span class='ckTime'>"+examItemsInfo[i].checkTime+"</span>"+
+										"<div>"+
+										/*"<i class='ui-icon ui-icon-arrow'></i>"+*/
+									"</div>"
+								)
+							}
+						}else{
 							$("#jcList").append(
 								"<div class='list-item '>"+
-									"<div class='keshi_item'>"+
-										"<input type='hidden' name='deptCode' value='"+examItemsInfo[i].deptCode+"'>"+
-										"<span class='depName'>"+examItemsInfo[i].deptName+"</span>"+
-										"<input type='hidden' name='checkId' value='"+examItemsInfo[i].checkId+"'>"+
-										"<span class='ckName'>"+examItemsInfo[i].checkName+"</span>"+
-										"<span class='ckTime'>"+examItemsInfo[i].checkTime+"</span>"+
-									"<div>"+
-									/*"<i class='ui-icon ui-icon-arrow'></i>"+*/
+									"<p class='notData'>暂无数据</p>"+
 								"</div>"
-							)
+							);
 						}
-					}else{
-						$("#jcList").append(
-							"<div class='list-item '>"+
-								"<p class='notData'>暂无数据</p>"+
-							"</div>"
-						);
-					}
-				});
+					});
+        		}
         		
         		$("#jcList").on("click",".list-item",function(){
         			var checkId = $(this).children().children("input[name='checkId']").val();
         			window.location.href="../lineUpSearch/jianchabg_view.html?checkId="+checkId;
+        		});
+        		
+        		$("#searchp").click(function(){
+					var startTime = $('#startTime').val();
+					var endTime = $('#endTime').val();
+					searchList(startTime,endTime);
         		});
         		
         	})
@@ -102,7 +113,7 @@
 						 - 
 						<input type="button" id="endTime" onclick="pickDate(this)"  /> 
 					</div>
-					<button type="button" class="riqiBtn">查询</button>
+					<button type="button" class="riqiBtn" id="searchp">查询</button>
 				</div>
 				<div id="datePlugin"></div>
 				<div class="demo-block" id="jcList">
