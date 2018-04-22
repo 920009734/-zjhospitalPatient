@@ -155,8 +155,12 @@
 		<script type="text/javascript">
 			$(function(){
 				var doctorCode = "";
+				var doctorName = "";
+				var doctorIntrodution = "";
+				var doctorTitle = "";
+				
 				$("#onlineCon").click(function(){
-					window.location.href="./onlineCons.html?doctorCode="+doctorCode";
+					window.location.href="./onlineCons.html?doctorCode="+doctorCode+"&doctorName="+doctorName+"&doctorIntrodution="+doctorIntrodution+"&doctorTitle="+doctorTitle;
 				});
 				$("#liuyanCon").click(function(){
 					window.location.href="./liuyanCons.html";
@@ -181,6 +185,10 @@
 						var doctorInfo = new Array();
 						doctorInfo= data.data; 
 						for (var i = 0; i < doctorInfo.length; i++) {
+							doctorName = doctorInfo[i].doctorName;
+							deptName = doctorInfo[i].deptName;
+							doctorTitle = doctorInfo[i].doctorTitle;
+							
 							$("#doctorName_").html(doctorInfo[i].doctorName);
 							$("#deptName_").html(doctorInfo[i].deptName);
 							$("#doctorTitle_").html(doctorInfo[i].doctorTitle);

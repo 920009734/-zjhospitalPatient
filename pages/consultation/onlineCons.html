@@ -54,14 +54,30 @@
 		<script type="text/javascript">
 		$(function(){
 			//从之前的页面接受医生id
-			var params = document.location.toString(); //获取带参URL
-			var id = ""; 
+			/*var params = document.location.toString(); //获取带参URL
 			if (params.indexOf("?") != -1) { 
 				var str = params.substr(1); 
 				strs = str.split("&"); 
 				id = unescape(strs[0].split("=")[1]);
-			}
+			}*/
+			
+			//获取URL参数
+			function getQueryString(name) { 
+		        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+		        var r = window.location.search.substr(1).match(reg); 
+		        if (r != null) return unescape(r[2]); 
+		        return null; 
+		    }
+			
+			var id = getQueryString("doctorCode");
+			var doctorName = getQueryString("doctorName");
+			var doctorIntrodution = getQueryString("doctorIntrodution");
+			var doctorTitle = getQueryString("doctorTitle");
+			
 			$("#id").val(id);
+			$("#doctorName").text(doctorName);
+			$("#doctorIntrodution").text(doctorIntrodution);
+			$("#doctorTitle").text(doctorTitle);
 			//然后查询患者和此医生有关的在线咨询信息
 			var queryConsultingReplyByPatientUrl = Utils.getRoot()+"/consultingreplyApp/queryConsultingReplyByPatient";
 			$.post(queryConsultingReplyByPatientUrl, {id:id}, function(res){
@@ -157,11 +173,11 @@
 					<div class="intro_right">
 						<div style="margin-top:10px ;">
 							<input type="hidden" name="id" id="id" />
-							<span class="intro_name">黄纯织</span>
-							<span class="intro_status">副主任医师</span>
+							<span class="intro_name" id="doctorName">黄纯织</span>
+							<span class="intro_status" id="doctorTitle">副主任医师</span>
 						</div>
 						<div>
-							<span class="intro_dep">对各种疑难消化病、急重症、肝病的诊治、肝移植围手术期处理等积累了丰富经验。</span>
+							<span class="intro_dep" id="doctorIntrodution">对各种疑难消化病、急重症、肝病的诊治、肝移植围手术期处理等积累了丰富经验。</span>
 						</div>
 					</div>
 				</div>
