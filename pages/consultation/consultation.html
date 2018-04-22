@@ -153,13 +153,15 @@
 			</section>
 		</section>
 		<script type="text/javascript">
-			$("#onlineCon").click(function(){
-				window.location.href="./onlineCons.html";
-			});
-			$("#liuyanCon").click(function(){
-				window.location.href="./liuyanCons.html";
-			});
 			$(function(){
+				var doctorCode = "";
+				$("#onlineCon").click(function(){
+					window.location.href="./onlineCons.html?doctorCode="+doctorCode";
+				});
+				$("#liuyanCon").click(function(){
+					window.location.href="./liuyanCons.html";
+				});
+				
 				//获取URL参数
 				function getQueryString(name) { 
 			        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
@@ -170,6 +172,9 @@
 				var params={};
     			params.deptCode=getQueryString("deptCode");
     			params.doctorCode=getQueryString("doctorCode");
+    			
+    			doctorCode = getQueryString("doctorCode");
+    			
     			//alert(params.deptCode+"---"+params.doctorCode);
 				$.post(Utils.getRoot()+"/inquiry/findDoctor",params,function(data){
 					if (data.success) {
