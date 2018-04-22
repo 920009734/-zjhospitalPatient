@@ -146,9 +146,12 @@
     		 */
     		$(".login_btn").click(function() {
     			var logoutUrl = Utils.getRoot()+"/patientApp/logout";
-    			var token = localStorage.getItem('token');
-    			$.post(logoutUrl, token, function(res) {
+    			$.post(logoutUrl,{
+    				token: localStorage.getItem('token')
+    			}, function(res) {
 	    			if (res.success) {
+	    				localStorage.removeItem('token');
+	    				localStorage.removeItem('patientId');
 	    				location.href="login.html";
 	    			} else {
 	    				alert(res.message);
