@@ -8,15 +8,16 @@
         <link rel="stylesheet" href="../css/style.css" />
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
+        <script src="../js/Utils.js" ></script>
 		<title>选择科室</title>
 		<style type="text/css">
-			html,body{background-color: #FFFFFF;width: 100%;height: 99%;}
+			html,body{background-color: #FFFFFF;width: 100%;height: 99%;font-family: "微软雅黑";}
 			.keshi{display: block;width: 100%;height: 100%;} 
 			.kes_left{display: block;float: left;width: 42%;overflow-y: auto;}
-			.kes_right{display: block;float: left;width: 58%;overflow-y: auto;}
+			.kes_right{display: block;float: left;width: 58%;overflow-y: auto;} 
 			.left_box{display: block;float: left;width: 100%;height: 70px;background-color:#D5E8EC ;border-bottom:1px solid #FFFFFF;}
-			.left_box.active{background-color: #FFFFFF;}
-			.box_img{display: block;float: left;width: 34%;height: 100%;}
+			.left_box.active{background-color: #FFFFFF;border-bottom: 1px solid #D5E8EC;}
+			.box_img{display: block;float: left;width: 34%;height: 100%;} 
 			.box_img>span{display: block;width: 35px;height: 35px;margin: 0 auto;margin-top: 14px;}
 			
 			.box_imgScr_a{background:url(../img/kes/a.png) no-repeat;background-size: 100%;}
@@ -36,14 +37,12 @@
 			.box_imgScr_h{background:url(../img/kes/h.png) no-repeat;background-size: 100%;}
 			.box_imgScr_h.open{background:url(../img/kes/h1.png) no-repeat;background-size: 100%;}
 			
-			
 			.box_name{display: table-cell;font-size: 14px;height: 70px;vertical-align: middle;padding-right:2px}
 			.right_box{display: block;float: left;width:99%;height: 40px;line-height: 40px;font-size: 13px;border-bottom: 1px solid #E8E8E8;border-left: 1px solid #E8E8E8;}
 			.right_box>span{display: block;float: left; padding-left: 5%;}
 			.right_box>i{display: block;float: right;color: #C5C5C5;}
 			::-webkit-scrollbar{width:0;height:0}
-			
-		</style>
+		</style> 
 	</head>
 	<body>
 		<header class="ui-header ui-header-positive">
@@ -52,14 +51,14 @@
 		</header>
 		
 		<section class="ui-container">
-			<div class="keshi">
-				<div class="kes_left">
+			<div class="keshi" id="department">
+				<!--<div class="kes_left">
 					<div style="min-height: 100px;max-height: 1200px;overflow-y: auto;">
-						<div class="left_box active">
+						<div class="left_box active" id="001">
 							<span class="box_img a"><span class="box_imgScr_a open"></span></span>
 							<span class="box_name">广东省临床重点专科</span>
 						</div>
-						<div class="left_box">
+						<div class="left_box" id="002">
 							<span class="box_img b"><span class="box_imgScr_b "></span></span>
 							<span class="box_name">国家临床重点专科</span>
 						</div>
@@ -98,7 +97,7 @@
 					</div>
 				</div>
 				
-				<div class="kes_right ">
+				<div class="kes_right" name="001">
 					<div style="min-height: 100px;max-height: 1200px;overflow-y: auto;" >
 						<div class="right_box ">
 							<span class="box_con ">心血管内科</span>
@@ -174,22 +173,121 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="kes_right" name="002">
+					<div style="min-height: 100px;max-height: 1200px;overflow-y: auto;" >
+						<div class="right_box ">
+							<span class="box_con ">最强王者</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+						<div class="right_box ">
+							<span class="box_con ">超凡大师</span>
+							<i class="ui-icon-arrow"></i>
+						</div>
+					</div>
+				</div>-->
 			</div>
 		</section>
 	</body>
-	
+	 
 	<script type="text/javascript">
+	$(function() {
+		var id = "";
+		
 		var bodyHeight = document.body.clientHeight;
 		$(".kes_left, .kes_right").height(bodyHeight-50+"px");
 		
-		$(".left_box").click(function(){
+		$(".keshi").on("click",".left_box",function(){
 			var hasActive = $(this).hasClass("active");
 			if(!hasActive){
 				$(this).addClass("active").siblings(".left_box").removeClass("active");
 				$(this).children(".box_img").children("span").addClass("open");
 				$(this).siblings(".left_box").children(".box_img").children("span").removeClass("open");
+				
+				$("div[name='"+id+"']").hide();
+				id = $(".left_box.active").attr("id");
+				$("div[name='"+id+"']").show();
 			}
 			
-		})
+		});
+		//查询全部科室
+		var params={};
+		$.post(Utils.getRoot()+"/inquiry/findDivision2",params,function(res){
+			if (res.success) {
+				createdepartment(res.data);
+			}
+		});
+		
+		function createdepartment(data) {
+			//前清空之前的父级科室、子级科室
+			$("#department").empty();
+			var department = $("#department");
+			var n = data.length;
+			
+			//左菜单栏，存放父级科室
+			var kleft = $('<div class="kes_left"><div style="min-height: 1px;max-height: 1200px;overflow-y: auto;"></div></div>');
+			for (var i = 0; i < n; i++) {
+				var parentdepartment = '';
+				
+				if (i == 0) {
+					id = data[i].deptCode;
+					parentdepartment = '<div class="left_box active" id="'+id+'">'+
+										'<span class="box_img a"><span class="box_imgScr_a open"></span></span>'+
+										'<span class="box_name">'+data[i].deptName+'</span>'+
+									'</div>';
+					
+					var m = data[i].childs.length;
+					//判断是否有子级
+					if (m > 0 ) {
+						var cdata = new Object();
+						cdata = data[i].childs;
+						//右菜单栏，存放子级科室
+						var kright = $('<div class="kes_right" name="'+data[i].deptCode+'"><div style="min-height: 100px;max-height: 1200px;overflow-y: auto;" ></div></div>');
+						for (var j = 0; j < m; j++) {
+							var childdepartment = '';
+							childdepartment = '<div class="right_box" id="'+cdata[i].deptCode+'">'+
+											'<span class="box_con ">'+cdata[i].deptName+'</span>'+
+											'<i class="ui-icon-arrow"></i>'+
+										'</div>';
+										
+							kright.append(childdepartment);
+						}
+						department.append(kright);
+					}
+					
+					$("div[name='"+id+"']").show();
+				} else {
+					
+					parentdepartment = '<div class="left_box" id="'+data[i].deptCode+'">'+
+										'<span class="box_img a"><span class="box_imgScr_a"></span></span>'+
+										'<span class="box_name">'+data[i].deptName+'</span>'+
+									'</div>';
+					var m = data[i].childs.length;
+					//判断是否有子级
+					if (m > 0 ) {
+						var cdata = new Object();
+						cdata = data[i].childs;
+						//右菜单栏，存放子级科室
+						var kright = $('<div class="kes_right" name="'+data[i].deptCode+'"><div style="min-height: 100px;max-height: 1200px;overflow-y: auto;" ></div></div>');
+						for (var j = 0; j < m; j++) {
+							var childdepartment = '';
+							childdepartment = '<div class="right_box" id="'+cdata[i].deptCode+'">'+
+											'<span class="box_con ">'+cdata[i].deptName+'</span>'+
+											'<i class="ui-icon-arrow"></i>'+
+										'</div>';
+										
+							kright.append(childdepartment);
+						}
+						department.append(kright);
+					}
+					$("div[name='"+data[i].deptCode+"']").hide();
+				}
+				kleft.append(parentdepartment);
+			}
+			
+			//添加父级科室
+			department.append(kleft);
+		}
+	});
 	</script>
 </html>
