@@ -60,19 +60,13 @@
 				strs = str.split("&"); 
 				id = unescape(strs[0].split("=")[1]);
 			}*/
+			var Request = new Object();
+			Request = Utils.getRequest();
 			
-			//获取URL参数
-			function getQueryString(name) { 
-		        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
-		        var r = window.location.search.substr(1).match(reg); 
-		        if (r != null) return unescape(r[2]); 
-		        return null; 
-		    }
-			
-			var id = getQueryString("doctorCode");
-			var doctorName = getQueryString("doctorName");
-			var doctorIntrodution = getQueryString("doctorIntrodution");
-			var doctorTitle = getQueryString("doctorTitle");
+			var id = Request["doctorCode"];
+			var doctorName = Request["doctorName"];
+			var doctorIntrodution = Request["doctorIntrodution"];
+			var doctorTitle = Request["doctorTitle"];
 			
 			$("#id").val(id);
 			$("#doctorName").text(doctorName);
@@ -173,11 +167,11 @@
 					<div class="intro_right">
 						<div style="margin-top:10px ;">
 							<input type="hidden" name="id" id="id" />
-							<span class="intro_name" id="doctorName">黄纯织</span>
-							<span class="intro_status" id="doctorTitle">副主任医师</span>
+							<span class="intro_name" id="doctorName"></span>
+							<span class="intro_status" id="doctorTitle"></span>
 						</div>
 						<div>
-							<span class="intro_dep" id="doctorIntrodution">对各种疑难消化病、急重症、肝病的诊治、肝移植围手术期处理等积累了丰富经验。</span>
+							<span class="intro_dep" id="doctorIntrodution"></span>
 						</div>
 					</div>
 				</div>
