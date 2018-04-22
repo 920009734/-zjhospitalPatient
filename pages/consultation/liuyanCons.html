@@ -93,6 +93,8 @@
 			.per_relationship{text-align: right;}
 			.hidden{display: none;}
 			.ui-dialog-cnt{margin:50% auto;}
+			#doctorName_{color: #00AEEF;}
+			#huanzhe_{color: #00AEEF;}
 		</style>
 	</head> 
 	<body ontouchstart>
@@ -108,11 +110,11 @@
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name">医生</span>
-					<span class="item_value" id="doctorName_">黄纯织</span>
+					<span class="item_value" id="doctorName_"></span>
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name" id="shenfenz">患者</span>
-					<span class="item_value" id="huanzhe" ><span id="huanzhe_">测试人员</span> <i class="ui-icon ui-icon-arrow"></i></span>
+					<span class="item_value" id="huanzhe" ><span id="huanzhe_">请选择患者</span> <i class="ui-icon ui-icon-arrow"></i></span>
 					<input type="hidden" id="huanzhe_id" value="">
 				</div>
 				<div class="comfirm_item hidden">
@@ -157,11 +159,11 @@
 					            <div class="add_per">
 					            	<span>
 						            	<i class="ui-icon ui-icon-add-people"></i>
-						            	<span>修改就诊人</span>
+						            	<span>添加就诊人</span>
 					            	</span>
 					            </div>
-					            <div class="per_name">
-					            	<span>测试人员</span>
+					            <div class="per_name" id="choosePeople_">
+					            	<span id="patientname_">测试人员</span>
 					            	<span class="per_relationship">本人</span>
 					            </div>
 					        </div>
@@ -184,20 +186,25 @@
 			</div>        
 		</div>
 		
-		<script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
-		<script type="text/javascript">
+	<script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">
 			$(function(){
+		$("#doctorName_").html(getQueryString("doctorName")); 
 				$("#huanzhe").click(function(){
 				    $(".addPatient").show();
+				})
+				$("#choosePeople_").click(function(){
+					$("#huanzhe_").html($("#patientname_").html());
+					$(".addPatient").hide();
 				})
 				$(".close_dialog,.ui-dialog-close").click(function(){
 					$(".ui-dialog").hide();
 				});
 				
 			})
-		</script>
+	</script>
 		
-		<script type="text/javascript">
+	<script type="text/javascript">
 		var files = new Array();
         //px转换为rem
         (function(doc, win) {
@@ -268,16 +275,33 @@
         
     </script>
 	<script type="text/javascript">
+		//获取URL参数
+		function getQueryString(name) { 
+	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+	        var r = window.location.search.substr(1).match(reg); 
+	        if (r != null) return unescape(r[2]); 
+	        return null; 
+	    }
 		$("#submitbt").click(function(){
 			var formData = new FormData();
-		    formData.append("receiver", $("#doctorName_").html());
+		    formData.append("receiver", getQueryString("doctorCode"));
 		    formData.append("sender", $("#huanzhe_").html());
 		    formData.append("content", $("#describe_").val());
 		    formData.append("parentId", " ");
 		    for(var i = 0 ; i < files.length ; i ++){
 		    	formData.append("files", files[i]);
 		    }
-			if(!$("#describe_").val()){
+		    if($("#doctorName_").html()==""){
+				$("#dialogText").html("请重新选择医生!");
+				$(".ui-dialog").show();
+				return false;
+			}
+			if($("#huanzhe_").html()=="请选择患者" || $("#huanzhe_").html()=="" ){
+				$("#dialogText").html("请选择患者!");
+				$(".ui-dialog").show();
+				return false;
+			}
+		    if(!$("#describe_").val()){
 				$("#dialogText").html("请输入你要提的问题!");
 				$(".ui-dialog").show();
 				return false;

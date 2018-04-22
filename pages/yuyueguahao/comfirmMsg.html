@@ -48,14 +48,16 @@
         	$(function(){
         		
         		$("#jzrxz").click(function(){
+        			//缺少将自己的家人查询出来
+        			
         			$(".addPatient").show();
-        			//window.location.href="../yuyueguahao/xzPerple.html"
         		});
         		$("#add_rela").click(function(){
         			window.location.href="../yuyueguahao/addPerple.html"
         		});
         		$("#choosePeople_").click(function(){
         			$("#patientid").val("myself");
+        			$("#patientname").html($("#patientname_").html());
         			$(".addPatient").hide();
         		})
         		$(".close_dialog,.ui-dialog-close").click(function(){
@@ -228,7 +230,7 @@
 					            	</span>
 					            </div>
 					            <div class="per_name" id="choosePeople_">
-					            	<span>测试人员</span>
+					            	<span id="patientname_">测试人员</span>
 					            	<span class="per_relationship">本人</span>
 					            </div>
 					        </div>
