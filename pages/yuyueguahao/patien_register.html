@@ -28,11 +28,6 @@
 		</style>
 		<script type="text/javascript">
         	$(function(){
-				$(".msg_right").click(function(data){
-					var bespeakId = $(this).children("#bespeakId").val();
-					var serialNumber = $(this).children("#serialNumber").val();
-					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?bespeakId="+bespeakId+"&serialNumber="+serialNumber;
-				})
 				
 				var params={};
         		$.post(Utils.getRoot()+"/registerApp/selyyjl",params,function(data){
@@ -68,6 +63,12 @@
 						}
 					}
 				});
+				
+				$("#yyList").on("click",".msg_right",function(data){
+					var bespeakId = $(this).children("#bespeakId").val();
+					var serialNumber = $(this).children("#serialNumber").val();
+					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?bespeakId="+bespeakId+"&serialNumber="+serialNumber;
+				});
         	})
         </script>
 	</head>
@@ -89,6 +90,7 @@
 			    	<div class="doc_time">预约时间： <span id="czDate"></span></div>	    
 		   	    </div>
 	        </div>
+	        
 	     </div>
 	</body>
 </html>
