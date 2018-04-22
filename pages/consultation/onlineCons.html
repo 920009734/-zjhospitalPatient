@@ -62,7 +62,6 @@
 				id = unescape(strs[0].split("=")[1]);
 			}
 			$("#id").val(id);
-			
 			//然后查询患者和此医生有关的在线咨询信息
 			var queryConsultingReplyByPatientUrl = Utils.getRoot()+"/consultingreplyApp/queryConsultingReplyByPatient";
 			$.post(queryConsultingReplyByPatientUrl, {id:id}, function(res){
