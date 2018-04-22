@@ -63,7 +63,8 @@
 					url: Utils.getRoot()+"/common/checkToken",
 					async: false,
 					data: {
-						token: token
+						token: token,
+						type: 'PATIENT'
 					},
 					success: function(result){
 						if(result.success){
