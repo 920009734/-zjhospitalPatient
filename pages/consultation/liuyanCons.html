@@ -189,7 +189,12 @@
 	<script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript">
 			$(function(){
-		$("#doctorName_").html(getQueryString("doctorName")); 
+				var Request = new Object();
+				Request = Utils.getRequest();
+				var doctorCode = Request["doctorCode"];
+				var doctorName = Request["doctorName"];
+				$("#doctorName_").html(doctorName);
+				
 				$("#huanzhe").click(function(){
 				    $(".addPatient").show();
 				})
@@ -284,7 +289,7 @@
 	    }
 		$("#submitbt").click(function(){
 			var formData = new FormData();
-		    formData.append("receiver", getQueryString("doctorCode"));
+		    formData.append("receiver", doctorCode);
 		    formData.append("sender", $("#huanzhe_").html());
 		    formData.append("content", $("#describe_").val());
 		    formData.append("parentId", " ");
