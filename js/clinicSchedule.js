@@ -195,9 +195,11 @@ $(function(){
 		params.deptCode=Request["deptCode"];
 		params.dateTime = nowdate;
 		$.post(Utils.getRoot()+"/registerApp/selclinicSchedule",params,function(data){
+			console.log(JSON.stringify(data));
 			if (data.success) {
 				var dortorInfo = new Array();
 				dortorInfo= data.data;
+				
 				var s=0,x=0,w=0;
 				for (var i = 0; i < dortorInfo.length; i++) {
 					if (dortorInfo[i].timeFlag==1) {//上午
@@ -252,7 +254,6 @@ $(function(){
 							"</div>"
 						);
 					}
-					
 				}
 				if (s == 0) {
 					$("#swinfoList").append(
@@ -275,23 +276,8 @@ $(function(){
 						"</div>"
 					);
 				}
-				
 			}else{
-				$("#swinfoList").append(
-					"<div class='list-item '>"+
-						"<p class='notData'>暂无数据</p>"+
-					"</div>"
-				);
-				$("#xwinfoList").append(
-					"<div class='list-item '>"+
-						"<p class='notData'>暂无数据</p>"+
-					"</div>"
-				);
-				$("#wsinfoList").append(
-					"<div class='list-item '>"+
-						"<p class='notData'>暂无数据</p>"+
-					"</div>"
-				);
+				alert(data.message);
 			}
 		});
 	}
