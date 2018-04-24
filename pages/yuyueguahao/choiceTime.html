@@ -6,6 +6,8 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
+        
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
@@ -15,8 +17,8 @@
 			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
 			.doc_detai{display: block;width: 100%;height: 50px;line-height:50px;border-bottom: 1px solid #EEEAEB;background-color: #FFFFFF;}
 			.date_pers{margin-left: 10px;}
-			.date_type{font-size: 13px;margin-left: 15px;}
-			.date_time{display: block;float:right;font-size:13px;margin-right: 10px;}
+			.date_type{font-size: 15px;margin-left: 15px;}
+			.date_time{display: block;float:right;font-size:15px;margin-right: 10px;}
 			.date_detail{display: block;width:100% ;height: 60px;border-bottom: 1px solid #EEEAEB;}
 			.ck_time{display: block;float: left;margin-top:15px;margin-left:10px;width: 16%;height: 30px;text-align:center;line-height: 30px; border: 1px solid #199ED8;border-radius: 2px;color: #199ED8;font-size: 15px;}
 			.detail_time{display: block;float: left;width: 100%;height: 30px;background-color: #F7F7F7;line-height: 30px;font-size: 15px;color: #4CB6AC;}
@@ -36,7 +38,10 @@
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;">预约时间</h4>
+			<h4 style="margin-left: 25px;">
+				<span>预约时间</span>
+				<span class="reflash_item"><i class="iconfont icon-switch"></i></span>
+			</h4>
 		</header>
 		<section class="ui-container"> 
 			<section id="list">
@@ -71,10 +76,37 @@
 						</div>
 					</div>
 				</div>
-					
-					
-				
 			</section>
 		</section>
+		<!--刷新-->
+		<section id="actionsheet">
+			<div class="demo-item">
+				<div class="demo-block">
+					<div class="ui-actionsheet ">  
+						<div class="ui-actionsheet-cnt">
+							<button class="reflash_btn">刷新</button>  
+							<button class="actionsheetClose">取消</button> 
+						</div>         
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<script type="text/javascript">
+			$(function(){
+				//刷新页面
+				$(".reflash_item").on("click",function(){
+					$(".ui-actionsheet").addClass("show");
+				});
+				$(".actionsheetClose").on("click",function(){
+					$(".ui-actionsheet").removeClass("show");
+				});
+				$(".reflash_btn").on("click",function(){
+					location.reload();
+					$(".ui-actionsheet").removeClass("show");
+				});
+        		
+			});
+		</script>
 	</body>
 </html>

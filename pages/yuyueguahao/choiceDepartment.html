@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
         <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
+        
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
@@ -54,13 +55,26 @@
         			window.location.href="../yuyueguahao/choiceDor.html?deptCode="+deptCode+"&deptName="+deptName;
         		});
         		
+        		//刷新页面
+				$(".reflash_item").on("click",function(){
+					$(".ui-actionsheet").addClass("show");
+				});
+				$(".actionsheetClose").on("click",function(){
+					$(".ui-actionsheet").removeClass("show");
+				});
+				$(".reflash_btn").on("click",function(){
+					location.reload();
+					$(".ui-actionsheet").removeClass("show");
+				});
+        		
         	})
         </script>
 	</head>
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;">南方医科大学珠江医院</h4>
+			<h4 style="margin-left: 25px;"><span>南方医科大学珠江医院</span><span class="reflash_item"><i class="iconfont icon-switch"></i></span></h4>
+			
 		</header>
 		<section class="ui-container"> 
 			<section id="list">
@@ -76,6 +90,19 @@
 				</div>
 				
 			</section>
+		</section>
+		<!--刷新-->
+		<section id="actionsheet">
+			<div class="demo-item">
+				<div class="demo-block">
+					<div class="ui-actionsheet ">  
+						<div class="ui-actionsheet-cnt">
+							<button class="reflash_btn">刷新</button>  
+							<button class="actionsheetClose">取消</button> 
+						</div>         
+					</div>
+				</div>
+			</div>
 		</section>
 	</body>
 </html>

@@ -12,3 +12,8 @@ html,body{font-family: "微软雅黑";}
 
 /*隐藏滚动条*/
 ::-webkit-scrollbar{width:0;height:0}	
+
+/*刷新*/
+.reflash_item>i{display: block;float: right; font-size: 25px;}
+.ui-actionsheet-cnt>button{font-size: 16px;}
+.ui-actionsheet-cnt .actionsheetClose{color: #FF0000;}
