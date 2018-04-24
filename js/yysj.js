@@ -4,7 +4,7 @@ $(function(){
         		Request = Utils.getRequest();
         		$("#deptCode").val(Request["deptCode"]);
         		$("#doctorCode").val(Request["doctorCode"]);
-        		$("#doctorName").text(Request["doctorCode"]);
+        		$("#doctorName").text(Request["doctorName"]);
         		$("#deptName").text(Request["deptName"]);
         		$("#dateTime").text(Request["dateTime"]);
         		var timeFlag = Request["timeFlag"];

@@ -199,7 +199,7 @@ $(function(){
 			if (data.success) {
 				var dortorInfo = new Array();
 				dortorInfo= data.data;
-				
+				console.log(JSON.stringify(dortorInfo))
 				var s=0,x=0,w=0;
 				for (var i = 0; i < dortorInfo.length; i++) {
 					if (dortorInfo[i].timeFlag==1) {//上午
@@ -211,7 +211,7 @@ $(function(){
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
-									"<span class='doc_name'>"+dortorInfo[i].doctorCode+"<span class='main_doc'>主任医生</span></span>"+
+									"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
 								"</div>"+
 								"<div class='doc_yynum'>"+
 									"<span class='yhao'>余号</span>"+
@@ -228,7 +228,7 @@ $(function(){
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
-									"<span class='doc_name'>"+dortorInfo[i].doctorCode+"<span class='main_doc'>主任医生</span></span>"+
+									"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
 								"</div>"+
 								"<div class='doc_yynum'>"+
 									"<span class='yhao'>余号</span>"+
@@ -245,7 +245,7 @@ $(function(){
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
-									"<span class='doc_name'>"+dortorInfo[i].doctorCode+"<span class='main_doc'>主任医生</span></span>"+
+									"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
 								"</div>"+
 								"<div class='doc_yynum'>"+
 									"<span class='yhao'>余号</span>"+
@@ -277,18 +277,33 @@ $(function(){
 					);
 				}
 			}else{
-				alert(data.message);
+				$("#swinfoList").append(
+						"<div class='list-item '>"+
+							"<p class='notData'>暂无数据</p>"+
+						"</div>"
+					);
+					$("#xwinfoList").append(
+						"<div class='list-item '>"+
+							"<p class='notData'>暂无数据</p>"+
+						"</div>"
+					);
+				$("#wsinfoList").append(
+						"<div class='list-item '>"+
+							"<p class='notData'>暂无数据</p>"+
+						"</div>"
+					);
 			}
 		});
 	}
 	
 	$("#swinfoList,#xwinfoList,#wsinfoList").on("click",".con_doc",function(){
 		var doctorCode = $(this).children(".doc_detail").children("input[name='doctorCode']").val();
+		var doctorName = $(this).children(".doc_detail").children(".doc_name").children(".doctorName").text();
 		var deptCode = $("#deptCode").val();
 		var deptName = $("#deptName").text();
 		var dateTime = $("#nowTime").text();
 		var timeFlag = $(this).children().find("input[name='timeFlag']").val();
-		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag;
+		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag+"&doctorName="+doctorName;
 	});
 	
 	
