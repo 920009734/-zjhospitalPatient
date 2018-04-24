@@ -6,6 +6,8 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css">
+        
         <script src="../../js/jquery-1.8.3.min.js"></script>
         <script>$.noConflict();</script>
         <script src="../../js/Utils.js"></script>
@@ -25,7 +27,10 @@
 	<body ontouchstart> 
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;" id="dep_type" ><span>门诊候诊信息查询</span></h4>
+			<h4 style="margin-left: 25px;" id="dep_type" >
+				<span>门诊候诊信息查询</span>
+				<span class="reflash_item"><i class="iconfont icon-switch"></i></span>
+			</h4>
 		</header>
 		
 		<section class="ui-container">
@@ -47,6 +52,20 @@
 		        </div>
 		    </div>        
 		</div>
+		<!--刷新-->
+		<section id="actionsheet">
+			<div class="demo-item">
+				<div class="demo-block">
+					<div class="ui-actionsheet ">  
+						<div class="ui-actionsheet-cnt">
+							<button class="reflash_btn">刷新</button>  
+							<button class="actionsheetClose">取消</button> 
+						</div>         
+					</div>
+				</div>
+			</div>
+		</section>
+		
 		<script type="text/javascript">
         	$(function(){
         		$.post(Utils.getRoot()+"/waitingInfo/treatmentInfo",function(data){
@@ -68,6 +87,18 @@
 				});
 				$(".close_dialog,.ui-dialog-close").click(function(){
 					$(".ui-dialog").hide();
+				});
+				
+				//刷新页面
+				$(".reflash_item").on("click",function(){
+					$(".ui-actionsheet").addClass("show");
+				});
+				$(".actionsheetClose").on("click",function(){
+					$(".ui-actionsheet").removeClass("show");
+				});
+				$(".reflash_btn").on("click",function(){
+					location.reload();
+					$(".ui-actionsheet").removeClass("show");
 				});
         	});
         </script>

@@ -6,6 +6,8 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
+        
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
@@ -48,7 +50,10 @@
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;" id="dep_type" ><span>全部科室</span> <i class="ui-icon ui-icon-unfold"></i></h4>
+			<h4 style="margin-left: 25px;" id="dep_type" >
+				<span>全部科室</span> <i class="ui-icon ui-icon-unfold"></i>
+			</h4>
+			<span class="reflash_item"><i class="iconfont icon-switch"></i></span>
 		</header>
 		<section class="ui-container"> 
 			<section>
@@ -187,6 +192,20 @@
 				</div>
 			</div>
 		</section>
+		
+		<!--刷新-->
+		<section id="actionsheet">
+			<div class="demo-item">
+				<div class="demo-block">
+					<div class="ui-actionsheet ">  
+						<div class="ui-actionsheet-cnt">
+							<button class="reflash_btn">刷新</button>  
+							<button class="actionsheetClose">取消</button> 
+						</div>         
+					</div>
+				</div>
+			</div>
+		</section>
 		<script type="text/javascript">
 			$(function(){
 				$("#dep_type").click(function(){
@@ -277,7 +296,19 @@
         			var doctorCode = $(this).children().children().children("input[name='doctorCode']").val();
         			window.location.href="../consultation/consultation.html?deptCode="+deptCode+"&doctorCode="+doctorCode;
         		});
-		});
+        		
+        	//刷新页面
+				$(".reflash_item").on("click",function(){
+					$(".ui-actionsheet").addClass("show");
+				});
+				$(".actionsheetClose").on("click",function(){
+					$(".ui-actionsheet").removeClass("show");
+				});
+				$(".reflash_btn").on("click",function(){
+					location.reload();
+					$(".ui-actionsheet").removeClass("show");
+				});
+			});
 		</script>
 	</body>
 </html>
