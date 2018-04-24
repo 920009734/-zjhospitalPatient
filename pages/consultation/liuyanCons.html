@@ -287,9 +287,12 @@
 	        if (r != null) return unescape(r[2]); 
 	        return null; 
 	    }
+		
+		$("#doctorName_").text(getQueryString("doctorName"));
+		
 		$("#submitbt").click(function(){
 			var formData = new FormData();
-		    formData.append("receiver", doctorCode);
+		    formData.append("receiver", getQueryString("doctorCode"));
 		    formData.append("sender", $("#huanzhe_").html());
 		    formData.append("content", $("#describe_").val());
 		    formData.append("parentId", " ");
@@ -311,6 +314,20 @@
 				$(".ui-dialog").show();
 				return false;
 			}
+		    
+		    /*alert("90909");
+		    location.href = "../main.html";*/
+		    //后台处理
+		    /*var addInquiryUrl = Utils.getRoot()+"/inquiry/addInquiry";
+		    $.post(addInquiryUrl, formData, function(res) {
+		    	if (res.success) {
+		    		location.href = "../main.html";
+		    	} else {
+		    		$("#dialogText").html(res.message);
+					$(".ui-dialog").show();
+		    	}
+		    });*/
+		    
 			$.ajax({
 	             url: Utils.getRoot()+"/inquiry/addInquiry" ,  
 	             type: 'POST',  
@@ -318,7 +335,12 @@
 	             contentType: false,  
 	             processData: false,  
 	             success: function (result) {
-			     	location.href = "../main.html";
+			     	if (result.success) {
+			    		location.href = "../main.html";
+			    	} else {
+			    		$("#dialogText").html(res.message);
+						$(".ui-dialog").show();
+			    	}
 	             },
 	             error: function(result){
 					$("#dialogText").html(result.message);
@@ -327,7 +349,8 @@
 	        });
 			
 		});
-		$("#test").click(function(){	
+		//测试
+		/*$("#test").click(function(){	
 			$.post(Utils.getRoot()+"/inquiry/test", {
 				id: '81416598AC224816852BCF1C25E3781D'
 			} ,function(result){
@@ -343,7 +366,7 @@
 					$(".ui-dialog").show();
 				}
 			})
-		});
+		});*/
 	</script>
 	</body>
 </html>
