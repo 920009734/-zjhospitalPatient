@@ -194,6 +194,8 @@ $(function(){
 		var params={};
 		params.deptCode=Request["deptCode"];
 		params.dateTime = nowdate;
+		//刚添加，尚未用到doctorCode字段，默认为null
+		params.doctorCode = "";
 		$.post(Utils.getRoot()+"/registerApp/selclinicSchedule",params,function(data){
 			console.log(JSON.stringify(data));
 			if (data.success) {
@@ -342,4 +344,4 @@ $(function(){
 		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag;
 	});
 		
-})
+});
