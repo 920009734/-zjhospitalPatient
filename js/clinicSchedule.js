@@ -51,8 +51,10 @@ $(function(){
 			if($(this).children("input").val()=="xzDate"){
 				$("#doctorGh").hide();
 				$("#dateGh").show();
+				$(".nowTime").show();
 			}else{
 				$("#dateGh").hide();
+				$(".nowTime").hide();
 				$("#doctorGh").show();
 			}
 			var a = $(this).hasClass("active");

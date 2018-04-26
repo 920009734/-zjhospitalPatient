@@ -6,7 +6,10 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
-        <script src="../../lib/zepto.min.js"></script>
+        
+        	
+        <!--<script src="../../lib/zepto.min.js"></script>-->
+        <script src="../../js/jquery-1.8.3.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
         <script src="../../js/clinicSchedule.js"></script>
@@ -44,12 +47,13 @@
 			.date_list.active{background-color: #4CB6AC;color: #FFFFFF;}
 			
 			.show_tab_time{display: block;float: left;width: 94%;margin-left:3%;height: 40px;}
-			.show_tab_time>span{display: block;float: left;height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;}
-			.nowTime{width: 35%;color: #4CB6AC;}
+			.show_tab_time>span{height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;width: 40%;}
+			.show_tab_time>div{display: block;float: right; width:60%; height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;}
+			.nowTime{display: block;float: left;width: 35%;color: #4CB6AC;}
 			.nowTime>span{display: block;float: left;height: 30px;line-height: 30px;}
 			.nowTime>i{display: block;float: left; font-size: 16px;height:30px;line-height: 30px; margin-left: 5px;color: #4CB6AC;}
-			.data_guahao{margin-left:8.3%;margin-right: -3px;}
-			.guahao{width: 28%;border: 1px solid #000000;text-align: center;border: 1px solid #4CB6AC;border-radius: 2px;}
+			.data_guahao{margin-right: -3px;}
+			.guahao{display: block;float: left; width: 49%;border: 1px solid #000000;text-align: center;border: 1px solid #4CB6AC;border-radius: 2px;}
 			.guahao.active{background-color: #4CB6AC;color: #FFFFFF;}
 			::-webkit-scrollbar{width:0;height:0}
 			
@@ -74,14 +78,17 @@
 						<!--icon-xiajiantou-->
 						<i class="iconfont icon-xiajiantou"></i>
 					</span>
-					<span class="data_guahao guahao active">
-						<input type="hidden"value="xzDate">
-						按日期挂号 
-					</span>
-					<span class="doct_guahao guahao ">
-						<input type="hidden"value="xzDoctor">
-						按医生挂号
-					</span>
+					<div >
+						<span class="data_guahao guahao active">
+							<input type="hidden"value="xzDate">
+							按日期挂号 
+						</span>
+						<span class="doct_guahao guahao ">
+							<input type="hidden"value="xzDoctor">
+							按医生挂号
+						</span>
+					</div>
+					
 				</div>
 				<div class="nav_date active">
 					<div class="date_item">
