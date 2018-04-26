@@ -213,6 +213,7 @@ $(function(){
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+									"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
 									"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
 								"</div>"+
 								"<div class='doc_yynum'>"+
@@ -230,6 +231,7 @@ $(function(){
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+									"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
 									"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
 								"</div>"+
 								"<div class='doc_yynum'>"+
@@ -247,6 +249,7 @@ $(function(){
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+									"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
 									"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
 								"</div>"+
 								"<div class='doc_yynum'>"+
@@ -300,12 +303,13 @@ $(function(){
 	
 	$("#swinfoList,#xwinfoList,#wsinfoList").on("click",".con_doc",function(){
 		var doctorCode = $(this).children(".doc_detail").children("input[name='doctorCode']").val();
+		var clinicType = $(this).children(".doc_detail").children("input[name='clinicType']").val();
 		var doctorName = $(this).children(".doc_detail").children(".doc_name").children(".doctorName").text();
 		var deptCode = $("#deptCode").val();
 		var deptName = $("#deptName").text();
 		var dateTime = $("#nowTime").text();
 		var timeFlag = $(this).children().find("input[name='timeFlag']").val();
-		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag+"&doctorName="+doctorName;
+		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag+"&doctorName="+doctorName+"&clinicType="+clinicType;
 	});
 	
 	
@@ -325,6 +329,7 @@ $(function(){
 							"<div class='doc_detail'>"+
 								"<input type='hidden' value='ysid' id='ysid'>"+
 								"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
+								"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
 								"<input type='hidden' value='"+dortorInfo[i].deptCode+"' name='deptCode'>"+
 								"<span class='doc_name'>"+dortorInfo[i].doctorName+"<span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
 							"</div>"+
@@ -337,11 +342,12 @@ $(function(){
 	}
 	$("#dortorList").on("click",".con_doc",function(){
 		var doctorCode = $(this).children(".doc_detail").children("input[name='doctorCode']").val();
+		var clinicType = $(this).children(".doc_detail").children("input[name='clinicType']").val();
 		var deptCode = $("#deptCode").val();
 		var deptName = $("#deptName").text();
 		var dateTime = $("#nowTime").text();
 		var timeFlag = "";
-		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag;
+		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;;
 	});
 		
 });

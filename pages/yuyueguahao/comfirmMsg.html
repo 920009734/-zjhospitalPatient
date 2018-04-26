@@ -87,6 +87,7 @@
         		
         		$("#deptName_").text(Request["deptName"]);
         		$("#doctorName_").text(Request["doctorName"]);
+        		$("#clinicType_").text(Request["clinicType"])
         		$("#fullTime_").text(Request["dateTime"]+" "+Request["beginTime"]+"~"+Request["endTime"]);
         		$("#CNregFee_").text("￥"+""+Request["regFee"]+"元");
 				$("input[name='deptCode_']").val(Request["deptCode"]);
@@ -113,6 +114,7 @@
 						params.divisionName=$("#deptName_").text();
 						params.divisionId=$("input[name='deptCode_']").val();
 						params.doctorName=$("#doctorName_").text();
+						params.clinicType=$("#clinicType_").text();
 						//params.czDate = new Date(("input[name='scheduleDate_']").val().replace(/-/g,"/"));
 						params.bespeakTime=$("#fullTime_").text();
 						params.money=$("input[name='regFee_']").val();
@@ -179,6 +181,11 @@
 					<span class="item_name">医生名字</span>
 					<input type="hidden" name="doctorCode_" />
 					<span class="item_value" id="doctorName_"></span>
+				</div>
+				<div class="comfirm_item ">
+					<span class="item_name">出诊类型</span>
+					<input type="hidden" name="doctorCode_" />
+					<span class="item_value" id="clinicType_"></span>
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name">就诊时间</span>

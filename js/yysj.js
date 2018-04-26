@@ -4,6 +4,7 @@ $(function(){
         		Request = Utils.getRequest();
         		$("#deptCode").val(Request["deptCode"]);
         		$("#doctorCode").val(Request["doctorCode"]);
+        		$("#clinicType").val(Request["clinicType"]);
         		$("#doctorName").text(Request["doctorName"]);
         		$("#deptName").text(Request["deptName"]);
         		$("#dateTime").text(Request["dateTime"]);
@@ -154,13 +155,14 @@ $(function(){
 	        			var deptCode = $("#deptCode").val();
 	        			var deptName = $("#deptName").text();
 	        			var doctorCode = $("#doctorCode").val();
+	        			var clinicType = $("#clinicType").val();
 	        			var doctorName = $("#doctorName").text();
 	        			var dateTime = $("#dateTime").text();
 	        			var regFee = $(this).children().children(".ghmoney").children(".regFee").text();
 	        			var beginTime = $(this).children().children(".time_slot").children(".beginTime_").text();
 	        			var endTime = $(this).children().children(".time_slot").children(".endTime_").text();
 	        			var timeFlag = $(this).children().find("input[name='timeFlag_']").val();
-	        			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag;            
+	        			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;            
         			}
         		});
         		
@@ -169,13 +171,14 @@ $(function(){
 	        			var deptCode = $("#deptCode").val();
 	        			var deptName = $("#deptName").text();
 	        			var doctorCode = $("#doctorCode").val();
+	        			var clinicType = $("#clinicType").val();
 	        			var doctorName = $("#doctorName").text();
 	        			var dateTime = $("#dateTime").text();
 	        			var beginTime = $(this).children().children(".time_slot").children(".beginTime_").text();
 	        			var endTime = $(this).children().children(".time_slot").children(".endTime_").text();
 	        			var regFee = $(this).children().children(".ghmoney").children(".regFee").text();
 	        			var timeFlag = $(this).children().find("input[name='timeFlag_']").val();
-	        			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag; 
+	        			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType; 
         			}
         		});
         	})
