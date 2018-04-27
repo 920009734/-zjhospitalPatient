@@ -53,13 +53,11 @@ $(function(){
 				$("#dateGh").show();
 				$(".nowTime").show();
 			}else{
-				$("#dateGh").hide();
-				$(".nowTime").hide();
-				$("#doctorGh").show();
+				location.href = "doctorGuahao.html";
 			}
 			var a = $(this).hasClass("active");
 			if(!a){
-				$(this).addClass("active").siblings(".guahao").removeClass("active");
+				$(this).addClass("active");
 			}
 			
 		});

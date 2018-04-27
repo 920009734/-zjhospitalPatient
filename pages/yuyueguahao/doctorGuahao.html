@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
+        
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
+		<title>医生挂号</title>
+		<style type="text/css">
+			html,body{background-color: #FFFFFF;}
+			.nav_date{display: none;float: left; width: 94%; overflow-x:auto;margin-left:3%;margin-bottom:10px;margin-top: 10px;}
+			.nav_date.active{display: block;}
+			.dep_name{padding-top: 6px;font-size: 16px;}
+			.dep_addr{font-size: 12px;margin-top: 2px;}
+			.notData{color: #999999; text-align: center;}
+			.yhao{margin-top: 10px;font-size: 14px;}
+			.yhao_num{font-weight: bold;color: #4CB6AC;}
+			.date_item{display: block;float:left;width: 500px; overflow-x: auto;}
+			.date_list{display: block;float: left;width: 70px;height:60px;text-align: center;border: 1px solid #4CB6AC;border-right: none;}
+			.date_list:last-child{border-right: 1px solid #4CB6AC;}
+			.date_list.active{background-color: #4CB6AC;color: #FFFFFF;}
+			
+			.show_tab_time{display: block;float: left;width: 94%;margin-left:3%;height: 40px;}
+			.show_tab_time>span{height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;width: 40%;}
+			.show_tab_time>div{display: block;float: right; width:60%; height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;}
+			.nowTime{display: block;float: left;width: 35%;color: #4CB6AC;}
+			.nowTime>span{display: block;float: left;height: 30px;line-height: 30px;}
+			.nowTime>i{display: block;float: left; font-size: 16px;height:30px;line-height: 30px; margin-left: 5px;color: #4CB6AC;}
+			.data_guahao{margin-right: -3px;}
+			.guahao{display: block;float: left; width: 49%;border: 1px solid #000000;text-align: center;border: 1px solid #4CB6AC;border-radius: 2px;}
+			.guahao.active{background-color: #4CB6AC;color: #FFFFFF;}
+			.mingyi_guahao{margin-left: -2px;}
+			
+			.doc_content{display: block;float: left;width: 100%;background-color: #F7F7F7;}
+			.doc_item{display: block;float: left;width: 94%; margin-left:3%; height: 70px;background-color: #FFFFFF;margin-top: 10px;border-radius: 3px;}
+			.doc_item>div{display: block;float: left;height: 100%;}
+			.doc_item_img{width: 20%;}
+			.doc_item_img>img{display: block;margin: 0 auto;width: 40px;height: 40px;margin-top: 15px;}
+			.doc_item_content{width: 65%;margin-top: 12px;}
+			.doc_item_content>div{}
+			.doc_item_yuhao{width: 15%;text-align: center;margin-top: 12px;font-size: 14px;}
+			.doc_item:last-child{margin-bottom: 10px;}
+			.doc_time{font-size: 13px;color: #999999;line-height: 25px;}
+			.yuhao{color: #4CB6AC;}
+			.yuhao_num{color: #008D00;font-size: 15px;}
+			.doc_name>span:nth-child(2){font-size: 13px;color: #008080;padding-left: 5px;}
+			.doc_time>span:nth-child(1){padding-left:5px ;}
+		</style>
+		
+	</head>
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">
+				<input type="hidden" value="" id="deptCode">
+				<span id="deptName">医生挂号</span>
+				<span class="reflash_item"><i class="iconfont icon-switch"></i></span>
+			</h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="show_tab_time">
+					<span class="nowTime ">
+						<span id="nowTime"></span>
+						<!--icon-xiajiantou-->
+						<!--<i class="iconfont icon-xiajiantou"></i>-->
+					</span>
+					<div >
+						<span class="zhuanjia_guahao guahao active">
+							<input type="hidden"value="xzDate">
+							专家挂号 
+						</span>
+						<span class="mingyi_guahao guahao ">
+							<input type="hidden"value="xzDoctor">
+							名医挂号
+						</span>
+					</div>
+				</div>
+				<!-- 选择时间 -->
+				<div class="nav_date active">
+					<div class="date_item">
+						<div class="date_list active">
+							<h3 class="dep_name">星期一</h3>
+							<p class="dep_addr">16日(有号)</p>
+						</div>
+						<div class="date_list ">
+							<h3 class="dep_name">星期二</h3>
+							<p class="dep_addr">16日(有号)</p>
+						</div>
+						<div class="date_list ">
+							<h3 class="dep_name">星期三</h3>
+							<p class="dep_addr">16日(有号)</p>
+						</div>
+						<div class="date_list ">
+							<h3 class="dep_name">星期四</h3>
+							<p class="dep_addr">16日(有号)</p>
+						</div>
+						<div class="date_list ">
+							<h3 class="dep_name">星期五</h3>
+							<p class="dep_addr">16日(有号)</p>
+						</div>
+						<div class="date_list ">
+							<h3 class="dep_name">星期六</h3>
+							<p class="dep_addr">16日(有号)</p>
+						</div>
+						<div class="date_list ">
+							<h3 class="dep_name">星期天</h3>
+							<p class="dep_addr">16日(有号)</p>
+						</div>
+					</div>
+				</div>
+				
+				<div class="doc_content">
+					<div class="doc_item">
+						<div class="doc_item_img">
+							<img src="../../img/kes/a1.png" />
+						</div>
+						<div class="doc_item_content">
+							<div class="doc_name">
+								<span>董方明</span>
+								<span>主治医生(专家、名医)</span>
+							</div>
+							<div class="doc_time"> 
+								<span>2018-04-11</span>
+								<span>普通门诊</span>
+							</div>
+						</div>
+						<div class="doc_item_yuhao">
+							<div class="yuhao">余号</div>
+							<div class="yuhao_num">18</div>
+						</div>
+					</div>
+					<div class="doc_item">
+						<div class="doc_item_img">
+							<img src="../../img/kes/a1.png" />
+						</div>
+						<div class="doc_item_content">
+							<div class="doc_name">
+								<span>董方明</span>
+								<span>主治医生(专家、名医)</span>
+							</div>
+							<div class="doc_time"> 
+								<span>2018-04-11</span>
+								<span>普通门诊</span>
+							</div>
+						</div>
+						<div class="doc_item_yuhao">
+							<div class="yuhao">余号</div>
+							<div class="yuhao_num">18</div>
+						</div>
+					</div>
+					<div class="doc_item">
+						<div class="doc_item_img">
+							<img src="../../img/kes/a1.png" />
+						</div>
+						<div class="doc_item_content">
+							<div class="doc_name">
+								<span>董方明</span>
+								<span>主治医生(名医)</span>
+							</div>
+							<div class="doc_time"> 
+								<span>2018-04-11</span>
+								<span>普通门诊</span>
+							</div>
+						</div>
+						<div class="doc_item_yuhao">
+							<div class="yuhao">余号</div>
+							<div class="yuhao_num">18</div>
+						</div>
+					</div>
+					
+					<div class="doc_item">
+						<div class="doc_item_img">
+							<img src="../../img/kes/a1.png" />
+						</div>
+						<div class="doc_item_content">
+							<div class="doc_name">
+								<span>董方明</span>
+								<span>主治医生(专家)</span>
+							</div>
+							<div class="doc_time"> 
+								<span>2018-04-11</span>
+								<span>普通门诊</span>
+							</div>
+						</div>
+						<div class="doc_item_yuhao">
+							<div class="yuhao">余号</div>
+							<div class="yuhao_num">18</div>
+						</div>
+					</div>
+				</div>	
+			</section>
+		</section>
+		<!--刷新-->
+		<section id="actionsheet">
+			<div class="demo-item">
+				<div class="demo-block">
+					<div class="ui-actionsheet ">  
+						<div class="ui-actionsheet-cnt">
+							<button class="reflash_btn">刷新</button>  
+							<button class="actionsheetClose">取消</button> 
+						</div>         
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<script type="text/javascript">
+			$(function(){
+				
+				$("#nowTime").html(Utils.formatDateByLong(new Date(),"yyyy-MM-dd"));
+				//刷新页面
+				$(".reflash_item").on("click",function(){
+					$(".ui-actionsheet").addClass("show");
+				});
+				$(".actionsheetClose").on("click",function(){
+					$(".ui-actionsheet").removeClass("show");
+				});
+				$(".reflash_btn").on("click",function(){
+					location.reload();
+					$(".ui-actionsheet").removeClass("show");
+				});
+        		$(".guahao").on("click",function(){
+        			var a = $(this).hasClass("active");
+        			if(!a){
+        				$(this).addClass("active").siblings("span").removeClass("active");
+        			}
+        		})
+			});
+		</script>
+	</body>
+</html>
