@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>楼层分布</title>
+        <link rel="stylesheet" href="../css/frozen.css">
+        <link rel="stylesheet" href="../css/style.css"/>
+        
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+        
+        <style type="text/css">
+        	.floor_list{display: block;width: 100%;height:100%; margin: 0 auto;}
+        	.floor_left{display: block;float: left;width: 100%;height: 100%;}
+        	.floor_right{display: block;float: left;width: 20%;height: 100%;background-color: #21868E;}
+        	.floor_left_top{display: block;width: 100%;height: 65px;background-color: #6F7A76; position: fixed;top: 50px;}
+        	.floor_left_top>span{display: block;float: left; width: 100%;text-align: center;color: #FFFFFF;}
+        	.floor_left_top>span:nth-child(1){font-size: 23px;margin-top: 6px;}
+        	.floor_left_top>span:nth-child(2){font-size: 11px;}
+        	.floor_left_con{display: block;float: left;width: 100%;margin-top: 65px;}
+        	.con_item{display: block;float: left;width: 100%;border-bottom: 1px solid #999D9C;}
+        	.con_item_left{display: block;float: left;width: 20%;height: 100%;background-color: #31767B;color: #FFFFFF;text-align: center;font-size: 14px;}
+        	.con_item_left>span{display: block;margin-top: 15px;}
+        	.con_item_right{display: block;float: left;width: 80%;height: 100%;background-color: #DEE2E1;}
+        	.right_item{display: block;float: left;margin-left: 15px;margin-top: 7px;}
+        	.right_item>span{display: block;}
+        	.right_item>span:nth-child(1){font-size: 16px;}
+        	.right_item>span:nth-child(2){font-size: 11px ;}
+        	.floor_table{width: 100%;height: 100%;}
+        	.floor_table tr td{}/*858988*/
+        	.floor_num{width: 16%;text-align: center;background-color: #31767B;color: #FFFFFF;font-size: 14px;border-bottom: 1px solid #B6BAB9;}
+        	.floor_con{width: 83%;background-color: #DDE1E0;padding: 5px 0;border-bottom: 1px solid #B6BAB9;}
+        	.td_right{width: 1%;background-color: #31767B;}
+        	.floor_con_item{display: block;float: left;text-indent: 12px;padding:3px 5px 4px 0}
+        	.floor_con_item>span{display: block;color: #64686B;}
+        	.floor_con_item>span:nth-child(2){font-size: 11px;}
+        	
+        </style> 
+	</head>
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">楼层分布</h4>
+		</header>
+		
+		<section class="ui-container">
+			<section id="list">
+				<div class="floor_list">
+					<div class="floor_left">
+						<div class="floor_left_top">
+							<span>门诊楼楼层索引</span>
+							<span>Out-patient Building Floor Index</span>
+						</div>
+						<div class="floor_left_con">
+							<table class="floor_table">
+								<!-- 13F -->
+								<tr>
+									<td class="floor_num">13F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>网络中心</span>
+											<span>Network Center</span>
+										</div>
+										<div class="floor_con_item">
+											<span>会议室</span>
+											<span>Conference Room</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- 12F/10F -->
+								<tr>
+									<td class="floor_num">12F/10F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>行政办公区</span>
+											<span>Executive Office</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- 9F -->
+								<tr>
+									<td class="floor_num">9F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>检验医学部</span>
+											<span>Department of laboratory medicine</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- 8F -->
+								<tr>
+									<td class="floor_num">8F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>检验医学部</span>
+											<span>Department of laboratory medicine</span>
+										</div>
+										<div class="floor_con_item">
+											<span>健康教育史</span>
+											<span>Health Education</span>
+										</div>
+										<div class="floor_con_item">
+											<span>门诊办公室</span>
+											<span>Health Education</span>
+										</div>
+										<div class="floor_con_item">
+											<span>科普基地</span>
+											<span>Health Education</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- 7F -->
+								<tr>
+									<td class="floor_num">7F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>名医门诊</span>
+											<span>Outpatient Clinic</span>
+										</div>
+										<div class="floor_con_item">
+											<span>整形外科</span>
+											<span>Plastic Surgery</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- 6F -->
+								<tr>
+									<td class="floor_num">6F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>消化内镜中心</span>
+											<span>Digestive Endoscopy</span>
+										</div>
+										<div class="floor_con_item">
+											<span>消化内科</span>
+											<span>Digestive System</span>
+										</div>
+										<div class="floor_con_item">
+											<span>皮肤性病科</span>
+											<span>Dermatology&Department</span>
+										</div>
+										<div class="floor_con_item">
+											<span>中医科</span>
+											<span>Traditional Chinese Medicine</span>
+										</div>
+										<div class="floor_con_item">
+											<span>肛肠科</span>
+											<span>Executive Office</span>
+										</div>
+										<div class="floor_con_item">
+											<span>血液内科</span>
+											<span>Hematology</span>
+										</div>
+										<div class="floor_con_item">
+											<span>中药房</span>
+											<span>Pharmacy of Chinese Medicine</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- 5F -->
+								<tr>
+									<td class="floor_num">5F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>耳鼻咽喉科</span>
+											<span>Otorhinotaryngology</span>
+										</div>
+										<div class="floor_con_item">
+											<span>眼科</span>
+											<span>Ophthalmology</span>
+										</div>
+										<div class="floor_con_item">
+											<span>口腔科</span>
+											<span>Oral&Maxillofacial Surgery</span>
+										</div>
+										<div class="floor_con_item">
+											<span>抽血室</span>
+											<span>Blood Sampling</span>
+										</div>
+										<div class="floor_con_item">
+											<span>法医门诊</span>
+											<span>Forensic Medicine</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- 4F -->
+								<tr>
+									<td class="floor_num">4F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>儿科</span>
+											<span>Pediatrics</span>
+										</div>
+										<div class="floor_con_item">
+											<span>妇产科</span>
+											<span>Obstetrics Gynecology </span>
+										</div>
+										<div class="floor_con_item">
+											<span>超声诊断科</span>
+											<span>Ultrasound Diagnostics</span>
+										</div>
+										<div class="floor_con_item">
+											<span>检验医学部</span>
+											<span>Department of Laboratory Medicine</span>
+										</div>
+										<div class="floor_con_item">
+											<span>门急诊检验</span>
+											<span>Outpatient Emergency</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- 3F -->
+								<tr>
+									<td class="floor_num">3F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>内科诊区</span>
+											<span>Internal Medicine Clinics</span>
+										</div>
+										<div class="floor_con_item">
+											<span>外科诊区</span>
+											<span>Surgical Clinics</span>
+										</div>
+										<div class="floor_con_item">
+											<span>预防保健科</span>
+											<span>Preventive health Clinic</span>
+										</div>
+										<div class="floor_con_item">
+											<span>康复医学科</span>
+											<span>Rehabilitation Medicine</span>
+										</div>
+										<div class="floor_con_item">
+											<span>失眠门诊</span>
+											<span>Sleeplessness Clinic</span>
+										</div>
+										<div class="floor_con_item">
+											<span>全科医学门诊</span>
+											<span>General Medical Clinic</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- 2F -->
+								<tr>
+									<td class="floor_num">2F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>输液大厅</span>
+											<span>Intravenous Therapy Room</span>
+										</div>
+										<div class="floor_con_item">
+											<span>急诊观察室</span>
+											<span>Emergency Observation</span>
+										</div>
+										<div class="floor_con_item">
+											<span>急诊病房</span>
+											<span>Emergency Unit</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- 1F -->
+								<tr>
+									<td class="floor_num">1F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>急诊科</span>
+											<span>Emergency</span>
+										</div>
+										<div class="floor_con_item">
+											<span>胸痛中心</span>
+											<span>Chest Pain Center</span>
+										</div>
+										<div class="floor_con_item">
+											<span>卒中中心</span>
+											<span>Stroke Center</span>
+										</div>
+										<div class="floor_con_item">
+											<span>创伤急救中心</span>
+											<span>Trauma Center</span>
+										</div>
+										<div class="floor_con_item">
+											<span>客户服务中心</span>
+											<span>Customer Service</span>
+										</div>
+										<div class="floor_con_item">
+											<span>影像诊断中心</span>
+											<span>Medical Imaging Center</span>
+										</div>
+										<div class="floor_con_item">
+											<span>感染疾病科</span>
+											<span>Department Infectious Disease</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+								<!-- -1F/-2F -->
+								<tr>
+									<td class="floor_num">-1F/-2F</td>
+									<td class="floor_con">
+										<div class="floor_con_item">
+											<span>车库</span>
+											<span>Parking</span>
+										</div>
+									</td>
+									<td class="td_right"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<!--<div class="floor_right">
+						
+					</div>-->
+				</div>
+				
+			</section>
+		</section>
+	</body>
+</html>
