@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+		<title>选择科室</title>
+		<style type="text/css">
+			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
+			.comfirm_item{display: block;width: 100%;height: 50px;border-bottom: 1px solid #EEEAEB;background-color: #FFFFFF;line-height: 50px;}
+			.item_name{display: block;float: left; margin-left: 10px;width: 28%;}
+			.comfirm_item.menz{margin-top: 0;margin-bottom: 10px;border-bottom:none}
+			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;background-color: #FFFFFF;}
+			.login_btn>button{border-radius:2px ;background: #167F3B;font-size: 16px;}
+			.ui-radio input:checked:after{background: #167F3B;}
+		</style>
+	</head>
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">选择支付方式</h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="comfirm_item menz">
+					<span class="item_name">支付方式</span>
+				</div>
+				<div>
+					<div class="ui-form-item ui-form-item-radio ">
+                        <label class="ui-radio" for="radio">
+                            <input type="radio" name="radio" />
+                        </label>
+                        <p>微信</p>
+                    </div>
+                    <div class="ui-form-item ui-form-item-radio">
+                        <label class="ui-radio" for="radio">
+                            <input type="radio" checked="" name="radio" />
+                        </label>
+                        <p>支付宝</p>
+                    </div>
+				</div>
+				<div style="display: block;float: left;width: 100%;height: 130px; background-color: #FFFFFF;">
+					<div class="login_btn">
+						<button class="ui-btn ui-btn-lg ui-btn-primary">确认</button>
+					</div>
+				</div>
+			</section>
+		</section>
+	</body>
+</html>
