@@ -1,182 +1,187 @@
 $(function(){
-		//获取当前时间
-    	var nowdateTime = Utils.formatDateByLong(new Date(), "yyyy-MM-dd");
-		var Request = new Object();
-		Request = Utils.getRequest();
-		$("#deptCode").val(Request["deptCode"]);
-    	$("#deptName").text(Request["deptName"]);
-		doctorInfoList(nowdateTime);
-		doctorGh($("#deptCode").val());
-		/*
-		 * var nt = new Date();
-		 * $("#nowTime").html(nt.getFullYear()+"-"+(doHandleMonth(nt.getMonth()+1))+"-"+nt.getDate());
-		 */
-		//获取当前时间
+	//储存数据
+	var sdata = new Object();//号源数据
+	var rdata = new Object();//日期数据
+	
+	//获取当前时间
+	var nowdateTime = Utils.formatDateByLong(new Date(), "yyyy-MM-dd");
+	var Request = new Object();
+	Request = Utils.getRequest();
+	$("#deptCode").val(Request["deptCode"]);
+	$("#deptName").text(Request["deptName"]);
+	doctorInfoList(nowdateTime);
+	//doctorGh($("#deptCode").val());
+	/*
+	 * var nt = new Date();
+	 * $("#nowTime").html(nt.getFullYear()+"-"+(doHandleMonth(nt.getMonth()+1))+"-"+nt.getDate());
+	 */
+	//获取当前时间
+	var nowdate = new Date();
+	var nt = Utils.formatDateByLong(nowdate, "yyyy-MM-dd");
+	$("#nowTime").html(nt);
+	//开始日期，结束日期，一共是七天
+	var dateTime = getSevenDate(nowdate);
+	//科室ID
+	var deptCode = $("#deptCode").val();
+	//动态生成当前日期
+	createTime(dateTime, deptCode);
+	
+	$(".date_item").on("click",".date_list",function(){
+		var a = $(this).hasClass("active");
+		if(!a){
+			$(this).addClass("active").siblings(".date_list").removeClass("active");
+			
+			exditTopDate();
+		}
+	});
+	
+	$(".show_tab_time").on("click",".nowTime",function(){
+		var a = $(this).hasClass("openTime");
+		if(!a){
+			$(".nav_date").removeClass("active");
+			$(this).addClass("openTime");
+			$(this).children("i").removeClass("icon-xiajiantou");
+			$(this).children("i").addClass("icon-youjiantou");
+		}else{
+			$(".nav_date").addClass("active");
+			$(this).removeClass("openTime");
+			$(this).children("i").addClass("icon-xiajiantou");
+			$(this).children("i").removeClass("icon-youjiantou");
+		}
+		
+	});
+	
+	$(".show_tab_time").on("click",".guahao",function(){
+		if($(this).children("input").val()=="xzDate"){
+			//$("#doctorGh").hide();
+			$("#dateGh").show();
+			$(".nowTime").show();
+		}else{
+			location.href = "doctorGuahao.html?sdata="+sdata+"&rdata="+rdata+"&deptCode="+deptCode+"&nowdate="+nowdate;
+		}
+		var a = $(this).hasClass("active");
+		if(!a){
+			$(this).addClass("active");
+		}
+		
+	});
+	
+	//创建日期
+	
+	function createTime(dateTime, deptCode) {
+		var params={};
+		params.deptCode = deptCode;
+		params.dateTime = dateTime;
+		$.post(Utils.getRoot()+"/registerApp/seldatetime", params, function(res){
+			if (res.success) {
+				rdata = JSON.stringify(res.data);
+				getDay(res.data);
+			}
+		});
+	}
+	
+	//返回七天的字符串
+	function getSevenDate(nt) {
+		var s = Utils.formatDateByLong(nt, "yyyy-MM-dd") + ",";
+		for (var i = 1; i < 7; i++) {
+			s += nt.getFullYear()+"-"+(doHandleMonth(nt.getMonth()+1))+"-"+(doHandleMonth(nt.getDate()+i)) + ",";
+		}
+		//去除最后一位
+		s = s.substring(0, s.length-1);
+		return s;
+	}
+	
+	function getDay(data){ 
+		for (var i = 0; i < data.length; i++) {
+			var today = new Date();
+        	var targetday_milliseconds = today.getTime() + 1000*60*60*24*i;
+        	today.setTime(targetday_milliseconds); //注意，这行是关键代码
+	        var tYear = today.getFullYear();    
+	        var tMonth = today.getMonth();    
+	        var tDate = today.getDate();
+	        var tday = today.getDay();
+	        tMonth = doHandleMonth(tMonth + 1);
+	        tDate = doHandleMonth(tDate);
+	        if(tday == 0){
+	        	tday = "天";
+	        }else if(tday == 1){
+	        	tday = "一";
+	        }else if(tday == 2){
+	        	tday = "二";
+	        }else if(tday == 3){ 
+	        	tday = "三";
+	        }else if(tday == 4){
+	        	tday = "四";
+	        }else if(tday == 5){
+	        	tday = "五";
+	        }else if(tday == 6){
+	        	tday = "六";
+	        }
+	        var showday = new Date();
+	        if(tDate == doHandleMonth(showday.getDate())){
+	        	if (tDate == data[i].dataday) {
+	        		if (data[i].status == 1) {
+	        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
+							+'<h3 class="dep_name">星期'+tday+'</h3>'
+							+'<p class="dep_addr">'+tDate+'日(有号)</p>'
+							+'</div>');
+	        		} else {
+	        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
+							+'<h3 class="dep_name">星期'+tday+'</h3>'
+							+'<p class="dep_addr">'+tDate+'日(无号)</p>'
+							+'</div>');
+	        		}
+	        	}
+	        	
+	        }else{
+	        	if (tDate == data[i].dataday) {
+	        		if (data[i].status == 1) {
+	        			$(".date_item").append('<div class="date_list " id="'+tDate+'">'
+							+'<h3 class="dep_name">星期'+tday+'</h3>'
+							+'<p class="dep_addr">'+tDate+'日(有号)</p>'
+							+'</div>');
+	        		} else {
+	        			$(".date_item").append('<div class="date_list " id="'+tDate+'">'
+							+'<h3 class="dep_name">星期'+tday+'</h3>'
+							+'<p class="dep_addr">'+tDate+'日(无号)</p>'
+							+'</div>');
+	        		}
+	        	}
+	        	
+	        }
+		}
+	}  
+	function doHandleMonth(month){    
+      	var m = month;    
+	    if(month.toString().length == 1){    
+	        m = "0" + month;    
+	    }    
+        return m;    
+	}
+	
+	function exditTopDate() {
+		var day = $(".date_list.active").attr("id");
+		
+		var topTime = "";
+		
 		var nowdate = new Date();
-		var nt = Utils.formatDateByLong(nowdate, "yyyy-MM-dd");
-		$("#nowTime").html(nt);
-		//开始日期，结束日期，一共是七天
-		var dateTime = getSevenDate(nowdate);
-		//科室ID
-		var deptCode = $("#deptCode").val();
-		//动态生成当前日期
-		createTime(dateTime, deptCode);
+		var s = getSevenDate(nowdate);
 		
-		$(".date_item").on("click",".date_list",function(){
-			var a = $(this).hasClass("active");
-			if(!a){
-				$(this).addClass("active").siblings(".date_list").removeClass("active");
-				
-				exditTopDate();
+		var ss = new Array();
+		ss = s.split(",");
+		for (var i = 0; i < ss.length; i++) {
+			var sss = ss[i].substring(ss[i].length-2, ss[i].length);
+			if (day == sss) {
+				topTime = ss[i];
+				break;
 			}
-		});
-		
-		$(".show_tab_time").on("click",".nowTime",function(){
-			var a = $(this).hasClass("openTime");
-			if(!a){
-				$(".nav_date").removeClass("active");
-				$(this).addClass("openTime");
-				$(this).children("i").removeClass("icon-xiajiantou");
-				$(this).children("i").addClass("icon-youjiantou");
-			}else{
-				$(".nav_date").addClass("active");
-				$(this).removeClass("openTime");
-				$(this).children("i").addClass("icon-xiajiantou");
-				$(this).children("i").removeClass("icon-youjiantou");
-			}
-			
-		});
-		
-		$(".show_tab_time").on("click",".guahao",function(){
-			if($(this).children("input").val()=="xzDate"){
-				$("#doctorGh").hide();
-				$("#dateGh").show();
-				$(".nowTime").show();
-			}else{
-				location.href = "doctorGuahao.html";
-			}
-			var a = $(this).hasClass("active");
-			if(!a){
-				$(this).addClass("active");
-			}
-			
-		});
-		
-		//创建日期
-		
-		function createTime(dateTime, deptCode) {
-			var params={};
-			params.deptCode = deptCode;
-			params.dateTime = dateTime;
-			$.post(Utils.getRoot()+"/registerApp/seldatetime", params, function(res){
-				if (res.success) {
-					getDay(res.data);
-				}
-			});
 		}
 		
-		//返回七天的字符串
-		function getSevenDate(nt) {
-			var s = Utils.formatDateByLong(nt, "yyyy-MM-dd") + ",";
-			for (var i = 1; i < 7; i++) {
-				s += nt.getFullYear()+"-"+(doHandleMonth(nt.getMonth()+1))+"-"+(doHandleMonth(nt.getDate()+i)) + ",";
-			}
-			//去除最后一位
-			s = s.substring(0, s.length-1);
-			return s;
-		}
-		
-		function getDay(data){ 
-			for (var i = 0; i < data.length; i++) {
-				var today = new Date();
-	        	var targetday_milliseconds = today.getTime() + 1000*60*60*24*i;
-	        	today.setTime(targetday_milliseconds); //注意，这行是关键代码
-		        var tYear = today.getFullYear();    
-		        var tMonth = today.getMonth();    
-		        var tDate = today.getDate();
-		        var tday = today.getDay();
-		        tMonth = doHandleMonth(tMonth + 1);
-		        tDate = doHandleMonth(tDate);
-		        if(tday == 0){
-		        	tday = "天";
-		        }else if(tday == 1){
-		        	tday = "一";
-		        }else if(tday == 2){
-		        	tday = "二";
-		        }else if(tday == 3){ 
-		        	tday = "三";
-		        }else if(tday == 4){
-		        	tday = "四";
-		        }else if(tday == 5){
-		        	tday = "五";
-		        }else if(tday == 6){
-		        	tday = "六";
-		        }
-		        var showday = new Date();
-		        if(tDate == showday.getDate()){
-		        	if (tDate == data[i].dataday) {
-		        		if (data[i].status == 1) {
-		        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
-								+'<h3 class="dep_name">星期'+tday+'</h3>'
-								+'<p class="dep_addr">'+tDate+'日(有号)</p>'
-								+'</div>');
-		        		} else {
-		        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
-								+'<h3 class="dep_name">星期'+tday+'</h3>'
-								+'<p class="dep_addr">'+tDate+'日(无号)</p>'
-								+'</div>');
-		        		}
-		        	}
-		        	
-		        }else{
-		        	if (tDate == data[i].dataday) {
-		        		if (data[i].status == 1) {
-		        			$(".date_item").append('<div class="date_list " id="'+tDate+'">'
-								+'<h3 class="dep_name">星期'+tday+'</h3>'
-								+'<p class="dep_addr">'+tDate+'日(有号)</p>'
-								+'</div>');
-		        		} else {
-		        			$(".date_item").append('<div class="date_list " id="'+tDate+'">'
-								+'<h3 class="dep_name">星期'+tday+'</h3>'
-								+'<p class="dep_addr">'+tDate+'日(无号)</p>'
-								+'</div>');
-		        		}
-		        	}
-		        	
-		        }
-			}
-		}  
-		function doHandleMonth(month){    
-	      	var m = month;    
-		    if(month.toString().length == 1){    
-		        m = "0" + month;    
-		    }    
-	        return m;    
-		}
-		
-		function exditTopDate() {
-			var day = $(".date_list.active").attr("id");
-			
-			var topTime = "";
-			
-			var nowdate = new Date();
-			var s = getSevenDate(nowdate);
-			
-			var ss = new Array();
-			ss = s.split(",");
-			for (var i = 0; i < ss.length; i++) {
-				var sss = ss[i].substring(ss[i].length-2, ss[i].length);
-				if (day == sss) {
-					topTime = ss[i];
-					break;
-				}
-			}
-			
-			$("#nowTime").html("");
-			$("#nowTime").html(topTime);
-			doctorInfoList(topTime);
-			doctorGh($("#deptCode").val());
-		}
+		$("#nowTime").html("");
+		$("#nowTime").html(topTime);
+		doctorInfoList(topTime);
+		//doctorGh($("#deptCode").val());
+	}
 	
 	//清空append追加的数据
 	function cleanDiv(){
@@ -201,7 +206,8 @@ $(function(){
 			if (data.success) {
 				var dortorInfo = new Array();
 				dortorInfo= data.data;
-				console.log(JSON.stringify(dortorInfo))
+				sdata = JSON.stringify(dortorInfo);
+				console.log(JSON.stringify(dortorInfo));
 				var s=0,x=0,w=0;
 				for (var i = 0; i < dortorInfo.length; i++) {
 					if (dortorInfo[i].timeFlag==1) {//上午
@@ -314,7 +320,7 @@ $(function(){
 	
 	
 	
-	function doctorGh(deptCode){
+	/*function doctorGh(deptCode){
 		$("#dortorList").html("");
 		var params={};
 		params.deptCode=deptCode;
@@ -347,7 +353,7 @@ $(function(){
 		var deptName = $("#deptName").text();
 		var dateTime = $("#nowTime").text();
 		var timeFlag = "";
-		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;;
-	});
+		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;;
+	});*/
 		
 });
