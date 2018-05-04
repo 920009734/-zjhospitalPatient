@@ -6,6 +6,9 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
 		<title>选择科室</title>
 		<style type="text/css">
 			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
@@ -30,23 +33,36 @@
 				<div>
 					<div class="ui-form-item ui-form-item-radio ">
                         <label class="ui-radio" for="radio">
-                            <input type="radio" name="radio" />
+                            <input type="radio" checked="" value="1" name="radio" />
                         </label>
                         <p>微信</p>
                     </div>
                     <div class="ui-form-item ui-form-item-radio">
                         <label class="ui-radio" for="radio">
-                            <input type="radio" checked="" name="radio" />
+                            <input type="radio" value="2" name="radio" />
                         </label>
                         <p>支付宝</p>
                     </div>
 				</div>
 				<div style="display: block;float: left;width: 100%;height: 130px; background-color: #FFFFFF;">
 					<div class="login_btn">
-						<button class="ui-btn ui-btn-lg ui-btn-primary">确认</button>
+						<button class="ui-btn ui-btn-lg ui-btn-primary" id="btn">确认</button>
 					</div>
 				</div>
 			</section>
 		</section>
+		<script type="text/javascript">
+			$(function(){
+				$("#btn").on("click", function() {
+					//1、微信支付，WX_APP；2、支付宝支付，ALI_APP
+					var n = $("input[name='radio']:checked").val();
+					if (n == 1) {
+						console.log("选择的支付方式是-WX_APP-微信。");
+					} else if (n == 2) {
+						console.log("选择的支付方式是-ALI_APP-支付宝。");
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
