@@ -140,8 +140,16 @@
 //									$(".ui-loading-block").hide();
 				        			$("#dialogText").html("订单已生成,请前往支付！");
 				        			$(".ui-dialog").show();
+				        			
+				        			var registerLockBack = new Object();
+				        			registerLockBack = data.data;
+				        			//挂号订单
+				        			var his = registerLockBack[0].hisOrdNum;
+				        			//就诊费用
+				        			var reg = registerLockBack[0].regFee;
+				        			
 				        			setTimeout(function(){//定时5秒后跳转页面
-										window.location.href="../main.html";
+										window.location.href="../yuyueguahao/paymentMethod.html?hisOrdNum="+his+"&regFee="+reg;
 									},5000);//定时器
 								}else{
 									$("#dialogText").html(data.message);

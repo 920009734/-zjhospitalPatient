@@ -101,18 +101,40 @@
 				
 				//取消预约
 				function cancel() {
+					//医院取消预约
 					var params={};
-					params.bespeakId = $("#hisOrdNum").val();
+					params.bespeakId = $("#bespeakId").val();
+					params.hisOrdNum = $("#hisOrdNum").val();
 					params.serialNumber = $("#serialNumber").val();
 					params.cancelReason = $("#cancelReason").val();
 					
-					$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(res){
+					//第三方支付方，退款
+					/*outChargeNo 支付订单号 String(32) N
+					outRefundNo 退款流水号 String(32) N
+					refundAmt 退款金额，单位为分 Number(12) N
+					refundReason 退款理由 */
+					var oparams={};
+					oparams.outChargeNo = $("#hisOrdNum").val();
+					oparams.serialNumber = $("#serialNumber").val();
+					params.refundAmt = $("#money").val() * 100;
+					oparams.refundReason = $("#cancelReason").val();
+					
+					$.post(Utils.getRoot()+"/registerApp/refund", oparams, function() {
 						if (res.success) {
-							alert(res.message);
+							//医院方，取消预约
+							$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(res){
+								if (res.success) {
+									alert(res.message);
+								} else {
+									alert(res.message);
+								}
+							});
 						} else {
-							alert(res.message);
+							alert("");
 						}
 					});
+					
+					
 				}
 			});
 		</script>
