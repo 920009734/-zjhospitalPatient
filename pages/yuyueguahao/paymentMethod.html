@@ -91,6 +91,7 @@
 						channel = "ALI_APP";
 					}
 					
+					//下单
 					var params={};
 					params.outChargeNo=outChargeNo;
 					params.chargeAmt = chargeAmt;
@@ -98,7 +99,54 @@
 					params.outChargeTime = outChargeTime;
 					//params.subject = subject;
 					$.post(Utils.getRoot()+"/registerApp/registerPay",params,function(res){
-						
+						if (res.success) {
+							/*
+							 返回出参
+							respCode 返回码 String
+							respMsg 返回说明 String
+							timestamp 返回时间戳 String
+							param 返回出参集合 JSON
+							sign 返回出参签名 String
+							signType 签名类型 String MD5
+							encryptType 加密类型 String DES/AES/PLAINTEXT
+							encryptData 加密数据
+							-----
+							出参集合(param)
+							chargeNo 支付平台订单号 String
+							qrCode 二维码路径 String
+							html 支付表单 String 银联网页支付返回表单
+							directUrl 支付地址 String 支付宝 PC、手机网页支付支付地址
+							channel 支付渠道 String
+							credential 支付凭证 
+							 * */
+							var data = new Object();
+							data = res.data;
+							console.log(data);
+							/*var resp = data.respCode;
+							var respMsg = data.respMsg;
+							var timestamp = data.timestamp;
+							var sign = data.sign;
+							var signType = data.signType;
+							var encryptType = data.encryptType;
+							var encryptData = data.encryptData;
+							
+							console.log(resp+", "+respMsg+", "+timestamp+", "+sign+", "
+								+signType+", "+encryptType+", "+encryptData);*/
+							//集合
+							var param = new Object();
+							param = data.param;
+							var chargeNo = param.chargeNo;
+							var qrCode = param.qrCode;
+							var html = param.html;
+							var directUrl = param.directUrl;
+							var channel = param.channel;
+							var credential = param.credential;
+							
+							console.log(chargeNo+", "+qrCode+", "+html+", "+
+								directUrl+", "+channel+", "+credential);
+						} else {
+							alert("后台处理中...");
+						}
 					});
 				});
 			});
