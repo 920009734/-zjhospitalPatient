@@ -28,8 +28,8 @@
 			.item_value>i{display: block;float: right;margin-top: 2px;margin-right: -10px;}
 			.comfirm_item.menz{margin-top: 0;margin-top: 10px;margin-bottom: 10px;border-bottom:none}
 			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;background-color: #FFFFFF;}
-			.login_btn>button{background: #0066CC;font-size: 16px;}
-			.ui-radio input:checked:after{background: #0066CC;}
+			.login_btn>button{background: #167F3B;font-size: 16px;}
+			.ui-radio input:checked:after{background: #167F3B;}
 			
 			.img_item{margin-left: 10px;}
 			.login_btn>span{display: block;width: 60%;margin: 0 auto;font-size: 14px;margin-top: 10px;}
@@ -128,39 +128,47 @@
 						
 						$(".ui-loading-block").show();
 						$(".ui-loading-block").css("margin","45% 0 0 31%");
-						
-						$.post(Utils.getRoot()+"/registerApp/addbespeakInfo",params,function(data){
-//							$(".ui-loading-block").hide();
-//							$("#dialogText").html(data.message);
-//							$(".ui-dialog").dialog("show");
-//							setTimeout(function(){
-								if (data.success) {
-//									$(".ui-loading-block").show();
-//									$(".ui-loading-block").css("margin","45% 0 0 31%");
-//									$(".ui-loading-block").hide();
-				        			$("#dialogText").html("订单已生成,请前往支付！");
-				        			$(".ui-dialog").show();
-				        			
-				        			var registerLockBack = new Object();
-				        			registerLockBack = data.data;
-				        			//挂号订单
-				        			var his = registerLockBack[0].hisOrdNum;
-				        			//就诊费用
-				        			var reg = registerLockBack[0].regFee;
-				        			
-				        			setTimeout(function(){//定时5秒后跳转页面
-										window.location.href="../yuyueguahao/paymentMethod.html?hisOrdNum="+his+"&regFee="+reg;
-									},5000);//定时器
-								}else{
-									$("#dialogText").html(data.message);
-									$(".ui-dialog").show();
-								}
-//							}, 2000);
+						//医院锁号，生成商户订单号
+						$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
+							if (data.success) {
+			        			//统一支付下单，生产支付凭证
+			        			$.post(Utils.getRoot()+"/registerApp/registerPayV2", {
+			        				outChargeNo: data.data[0].hisOrdNum,
+									chargeAmt: data.data[0].regFee,
+									channel: $("input[name='channel_radio']:checked").val() 
+			        			}, function(res){
+									if (res.success) {
+										//支付渠道
+										var channel = res.data.channel;
+										//支付凭证 Map
+										var credential = res.data.credential[channel];
+										if('ALI_APP' == channel){
+											//调起支付宝js sdk进行支付； 支付宝的支付凭证tradeNo就是credential
+											
+											
+										}else if('WX_APP' == channel){
+											//调起微信js sdk进行支付
+											var appid = credential['appid'];
+											var prepayid = credential['prepayid'];//微信预付ID
+											
+											
+										}
+									} else {
+										$(".ui-loading-block").hide();
+										$("#dialogText").html(res.message);
+										$(".ui-dialog").show();
+									}
+								});
+							}else{
+								$(".ui-loading-block").hide();
+								$("#dialogText").html(data.message);
+								$(".ui-dialog").show();
+							}
 						});
 					}
         		});
         	})
-        </script>
+       </script>
 	</head>
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
@@ -209,23 +217,23 @@
 					<span class="item_value" id="CNregFee_"></span>
 				</div>
 				
-				<!--<div class="comfirm_item menz">
+				<div class="comfirm_item menz">
 					<span class="item_name">支付方式</span>
 				</div>
 				<div>
 					<div class="ui-form-item ui-form-itemd-radio ">
                         <label class="ui-radio" for="radio">
-                            <input type="radio" name="radio" />
+                            <input type="radio" checked="" name="channel_radio" value="WX_APP" />
                         </label>
-                        <p>微信</p>
+                        <span>微信</span>
                     </div>
                     <div class="ui-form-item ui-form-item-radio">
                         <label class="ui-radio" for="radio">
-                            <input type="radio" checked="" name="radio" />
+                            <input type="radio" name="channel_radio" value="ALI_APP" />
                         </label>
-                        <p>支付宝</p>
+                        <span>支付宝</span>
                     </div>
-				</div>-->
+				</div>
 				<div style="display: block;float: left;width: 100%;height: 130px; background-color: #FFFFFF;">
 					<div class="login_btn">
 						<button class="ui-btn ui-btn-lg ui-btn-primary" id="zf">确认预约</button>
