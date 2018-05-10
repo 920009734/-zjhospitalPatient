@@ -47,6 +47,7 @@
 		</style>
 		</style>
 		<script type="text/javascript">
+			var outChargeNo = '';//支付订单号
         	$(function(){
         		
         		$("#jzrxz").click(function(){
@@ -138,6 +139,8 @@
 									channel: $("input[name='channel_radio']:checked").val() 
 			        			}, function(res){
 									if (res.success) {
+										//支付订单号
+										outChargeNo = res.data.outChargeNo;
 										//支付渠道
 										var channel = res.data.channel;
 										//支付凭证 Map
@@ -168,6 +171,16 @@
 					}
         		});
         	})
+        	
+        	//页面关闭时关闭交易订单
+        	window.onclose = function(){
+        		if(outChargeNo){
+        			//统一支付下单，生产支付凭证
+        			$.post(Utils.getRoot()+"/registerApp/closePay", {
+        				outChargeNo: outChargeNo
+        			}, function(res){});
+        		}
+        	}
        </script>
 	</head>
 	<body ontouchstart>
