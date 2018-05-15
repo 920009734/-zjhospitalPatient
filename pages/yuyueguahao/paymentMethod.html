@@ -6,8 +6,10 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
-        <script src="../../lib/zepto.min.js"></script>
-        <script src="../../js/frozen.js"></script>
+        <!--<script src="../../lib/zepto.min.js"></script>-->
+        
+        <script src="../../js/jquery-1.8.3.min.js"></script>
+        <!--<script src="../../js/frozen.js"></script>-->
         <script src="../../js/Utils.js"></script>
 		<title>选择科室</title>
 		<style type="text/css">
@@ -53,45 +55,50 @@
 		</section>
 		<script type="text/javascript">
 			$(function(){
-				$("#zf").click(function(){
+				var pay_channels=null;
+				
+				// 1. 获取支付通道
+				function plusReady(){
+				    // 获取支付通道
+				    plus.payment.getChannels(function(channels){
+				    	alert(JSON.stringify(channels));
+				    	pay_channels = channels;
+				    },function(e){
+				        alert(JSON.stringify(e));
+				    });
+				}
+				
+				document.addEventListener('plusready',plusReady,false);
+				$("#btn").click(function(){
+					var a = $("input[name='channel_radio']:checked").val();
 					$.post(Utils.getRoot()+"/registerApp/registerPayV2", {
 	    				outChargeNo: new Date().getTime(),
 						chargeAmt: 1,
-						channel: $("input[name='channel_radio']:checked").val() 
+						channel: a 
 	    			}, function(res){
 						if (res.success) {
-							//支付订单号
-							outChargeNo = res.data.outChargeNo;
 							//支付渠道
 							var channel = res.data.channel;
 							//支付凭证 Map
 							var credential = res.data.credential[channel];
-							
 							var pay_channel=null;
-							// 1. 获取支付通道
-							function plusReady(){
-							    // 获取支付通道
-							    plus.payment.getChannels(function(channels){
-							    	alert(JSON.stringify(channels));
-							        if('ALI_APP' == channel){
-										//调起支付宝js sdk进行支付； 支付宝的支付凭证tradeNo就是credential
-										pay_channel=channels[0];
-									}else if('WX_APP' == channel){
-										//调起微信js sdk进行支付
-										pay_channel=channels[1];
-									}
-							        plus.payment.request(pay_channel, credential,function(result){
-						                plus.nativeUI.alert("支付成功！",function(){
-						                    back();
-						                });
-						            },function(error){
-						                plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
-						            });
-							    },function(e){
-							        alert(JSON.stringify(e));
-							    });
+							console.log(a);
+							if('ALI_APP' == a){
+								//调起支付宝js sdk进行支付； 支付宝的支付凭证tradeNo就是credential
+								pay_channel=pay_channels[0];
+							}else if('WX_APP' == a){
+								//调起微信js sdk进行支付
+								pay_channel=pay_channels[1];
 							}
-							document.addEventListener('plusready',plusReady,false);
+							console.log(JSON.stringify(credential));
+							plus.payment.request(pay_channel, credential,function(result){
+				                plus.nativeUI.alert("支付成功！",function(){
+				                    back();
+				                });
+				            },function(error){
+				                plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+				            });
+							
 							
 						} else {
 							$(".ui-loading-block").hide();
