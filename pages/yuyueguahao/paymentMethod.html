@@ -33,13 +33,13 @@
 				<div>
 					<div class="ui-form-item ui-form-item-radio ">
                         <label class="ui-radio" for="radio">
-                            <input type="radio" checked="" value="1" name="radio" />
+                            <input type="radio" checked="" value="WX_APP" name="channel_radio" />
                         </label>
                         <p>微信</p>
                     </div>
                     <div class="ui-form-item ui-form-item-radio">
                         <label class="ui-radio" for="radio">
-                            <input type="radio" value="2" name="radio" />
+                            <input type="radio" value="ALI_APP" name="channel_radio" />
                         </label>
                         <p>支付宝</p>
                     </div>
@@ -53,52 +53,51 @@
 		</section>
 		<script type="text/javascript">
 			$(function(){
-				
-				var Request = new Object();
-				Request = Utils.getRequest();
-				//订单号
-				var outChargeNo = Request["hisOrdNum"];
-				//支付费用
-				var chargeAmt = Request["regFee"];
-				//支付渠道
-				var channel = "";
-				//商户支付日期
-				var outChargeTime = "";
-				var today = new Date();
-				var y = today.getFullYear();    
-		        var m = today.getMonth();    
-		        var d = today.getDate();
-				var h = today.getHours();
-				var mm = today.getMinutes();
-				var s = today.getSeconds();
-				//日期事件处理
-				function conver(s) {
-					return s < 10?'0' + s:s;
-				}
-				outChargeTime = y + conver(m) + conver(d) + conver(h) + conver(mm) + conver(s);
-				console.log(outChargeTime);		
-				//订单名称
-				//var subject = "易联众-支付";
-				
-				$("#btn").on("click", function() {
-					//1、微信支付，WX_APP；2、支付宝支付，ALI_APP
-					var n = $("input[name='radio']:checked").val();
-					if (n == 1) {
-						console.log("选择的支付方式是-WX_APP-微信。");
-						channel = "WX_APP";
-					} else if (n == 2) {
-						console.log("选择的支付方式是-ALI_APP-支付宝。");
-						channel = "ALI_APP";
-					}
-					
-					var params={};
-					params.outChargeNo=outChargeNo;
-					params.chargeAmt = chargeAmt;
-					params.channel = channel;
-					params.outChargeTime = outChargeTime;
-					//params.subject = subject;
-					$.post(Utils.getRoot()+"/registerApp/registerPay",params,function(res){
-						
+				$("#zf").click(function(){
+					$.post(Utils.getRoot()+"/registerApp/registerPayV2", {
+	    				outChargeNo: new Date().getTime(),
+						chargeAmt: 1,
+						channel: $("input[name='channel_radio']:checked").val() 
+	    			}, function(res){
+						if (res.success) {
+							//支付订单号
+							outChargeNo = res.data.outChargeNo;
+							//支付渠道
+							var channel = res.data.channel;
+							//支付凭证 Map
+							var credential = res.data.credential[channel];
+							
+							var pay_channel=null;
+							// 1. 获取支付通道
+							function plusReady(){
+							    // 获取支付通道
+							    plus.payment.getChannels(function(channels){
+							    	alert(JSON.stringify(channels));
+							        if('ALI_APP' == channel){
+										//调起支付宝js sdk进行支付； 支付宝的支付凭证tradeNo就是credential
+										pay_channel=channels[0];
+									}else if('WX_APP' == channel){
+										//调起微信js sdk进行支付
+										pay_channel=channels[1];
+									}
+							        plus.payment.request(pay_channel, credential,function(result){
+						                plus.nativeUI.alert("支付成功！",function(){
+						                    back();
+						                });
+						            },function(error){
+						                plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+						            });
+							    },function(e){
+							        alert(JSON.stringify(e));
+							    });
+							}
+							document.addEventListener('plusready',plusReady,false);
+							
+						} else {
+							$(".ui-loading-block").hide();
+							$("#dialogText").html(res.message);
+							$(".ui-dialog").show();
+						}
 					});
 				});
 			});

@@ -73,16 +73,14 @@
 		"Zip": {
 			"description": "文件压缩与解压缩"
 		},
-
-
-
-
-
+		"Payment": {
+			"description": "管理支付插件"
+		},
 
 		"Webview": {},
 		"NativeUI": {},
 		"Navigator": {},
-		"NativeObj": {},"Device":{},"Maps":{},"Audio":{},"Speech":{},"Camera":{},"Barcode":{},"Contacts":{},"Messaging":{},"Geolocation":{}
+		"NativeObj": {},"Device":{},"Maps":{},"Audio":{},"Speech":{},"Camera":{},"Barcode":{},"Contacts":{},"Messaging":{},"Geolocation":{},"Payment":{}
 	},
 	"plus": {
 		"splashscreen": {
@@ -91,7 +89,7 @@
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {
+		"distribute": {"plugins":{"payment":{"weixin":{"description":"微信支付","appid":"wxe027dc4cd25ef6fd"},"alipay":{"description":"阿里支付","scheme":""}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -438,7 +436,8 @@
 					"fontIcon/iconfont.css",
 					"css/frozen.css",
 					"css/style.css",
-					"pages/personal.html"
+					"pages/personal.html",
+					"pages/login.html"
 				],
 				"refer": [],
 				"priority": 0
