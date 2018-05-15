@@ -47,6 +47,18 @@
 		</style>
 		</style>
 		<script type="text/javascript">
+			var pay_channels = null;
+			// 1. 获取支付通道
+			function plusReady(){
+			    // 获取支付通道
+			    plus.payment.getChannels(function(channels){
+			    	pay_channels = channels;
+			    },function(e){
+			        plus.nativeUI.alert('系统异常，请稍后重试');
+			    });
+			}
+			document.addEventListener('plusready',plusReady,false);
+			
 			var outChargeNo = '';//支付订单号
         	$(function(){
         		
@@ -132,11 +144,12 @@
 						//医院锁号，生成商户订单号
 						$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
 							if (data.success) {
+								var page_channel = $("input[name='channel_radio']:checked").val();
 			        			//统一支付下单，生产支付凭证
 			        			$.post(Utils.getRoot()+"/registerApp/registerPayV2", {
 			        				outChargeNo: data.data[0].hisOrdNum,
 									chargeAmt: data.data[0].regFee,
-									channel: $("input[name='channel_radio']:checked").val() 
+									channel: page_channel
 			        			}, function(res){
 									if (res.success) {
 										//支付订单号
@@ -147,31 +160,20 @@
 										var credential = res.data.credential[channel];
 										
 										var pay_channel=null;
-										// 1. 获取支付通道
-										function plusReady(){
-										    // 获取支付通道
-										    plus.payment.getChannels(function(channels){
-										    	alert(JSON.stringify(channels));
-										        if('ALI_APP' == channel){
-													//调起支付宝js sdk进行支付； 支付宝的支付凭证tradeNo就是credential
-													pay_channel=channels[0];
-												}else if('WX_APP' == channel){
-													//调起微信js sdk进行支付
-													pay_channel=channels[1];
-												}
-										        plus.payment.request(pay_channel, credential,function(result){
-									                plus.nativeUI.alert("支付成功！",function(){
-									                    back();
-									                });
-									            },function(error){
-									                plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
-									            });
-										    },function(e){
-										        alert(JSON.stringify(e));
-										    });
+										if('ALI_APP' == page_channel){
+											pay_channel=pay_channels[0];
+										}else if('WX_APP' == page_channel){
+											pay_channel=pay_channels[1];
 										}
-										document.addEventListener('plusready',plusReady,false);
 										
+									    // 获取支付通道
+								        plus.payment.request(pay_channel, credential, function(result){
+							                plus.nativeUI.alert("支付成功！",function(){
+							                    back();
+							                });
+							            },function(error){
+							                plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+							            });
 									} else {
 										$(".ui-loading-block").hide();
 										$("#dialogText").html(res.message);
