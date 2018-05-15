@@ -641,6 +641,17 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"pages/yuyueguahao/paymentMethod.html": {
+				"resources": [
+					"js/jquery-1.8.3.min.js",
+					"font/iconfont-full.ttf",
+					"css/frozen.css",
+					"css/style.css",
+					"js/Utils.js"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {

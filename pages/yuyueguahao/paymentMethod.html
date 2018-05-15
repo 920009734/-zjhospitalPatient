@@ -61,14 +61,14 @@
 				function plusReady(){
 				    // 获取支付通道
 				    plus.payment.getChannels(function(channels){
-				    	alert(JSON.stringify(channels));
 				    	pay_channels = channels;
 				    },function(e){
 				        alert(JSON.stringify(e));
 				    });
 				}
 				
-				document.addEventListener('plusready',plusReady,false);
+				document.addEventListener('plusready', plusReady, false);
+				
 				$("#btn").click(function(){
 					var a = $("input[name='channel_radio']:checked").val();
 					$.post(Utils.getRoot()+"/registerApp/registerPayV2", {
@@ -77,21 +77,17 @@
 						channel: a 
 	    			}, function(res){
 						if (res.success) {
-							//支付渠道
-							var channel = res.data.channel;
 							//支付凭证 Map
-							var credential = res.data.credential[channel];
+							var credential = res.data.credential[res.data.channel];
 							var pay_channel=null;
 							
-							if('ALI_APP' == a){
-								//调起支付宝js sdk进行支付； 支付宝的支付凭证tradeNo就是credential
-								pay_channel=pay_channels[0];
-							}else if('WX_APP' == a){
-								//调起微信js sdk进行支付
-								pay_channel=pay_channels[1];
-							}
-							credential.timeStamp = parseInt(credential.timeStamp);
-							console.log(JSON.stringify(credential))
+							pay_channels.forEach(function(channel){
+								console.log(channel)
+								if((channel.id == "wxpay" && 'WX_APP' == a) || (channel.id == "alipay" && 'ALI_APP' == a) ){
+									pay_channel = channel;
+								}
+							})
+							
 							plus.payment.request(pay_channel, credential,function(result){
 				                plus.nativeUI.alert("支付成功！",function(){
 				                    back();
