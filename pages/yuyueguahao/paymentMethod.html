@@ -82,7 +82,7 @@
 							//支付凭证 Map
 							var credential = res.data.credential[channel];
 							var pay_channel=null;
-							console.log(a);
+							
 							if('ALI_APP' == a){
 								//调起支付宝js sdk进行支付； 支付宝的支付凭证tradeNo就是credential
 								pay_channel=pay_channels[0];
@@ -90,7 +90,8 @@
 								//调起微信js sdk进行支付
 								pay_channel=pay_channels[1];
 							}
-							console.log(JSON.stringify(credential));
+							credential.timeStamp = parseInt(credential.timeStamp);
+							console.log(JSON.stringify(credential))
 							plus.payment.request(pay_channel, credential,function(result){
 				                plus.nativeUI.alert("支付成功！",function(){
 				                    back();
