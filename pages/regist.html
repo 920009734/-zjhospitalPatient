@@ -25,14 +25,14 @@
 			.user_inp>input{display: block;float: left; width: 100%;height: 35px;line-height:35px;margin-top: 5px;border: none;}
 			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;}
 			.login_btn>button{border-radius:2px ;background: #0066CC;}
-			.yzm{display: block;float: left; width:32%;height: 35px;line-height:35px;margin-top: 5px;border-left: 1px solid #E7E7E7;font-size: 14px;padding-left: 5px;color: #999999;}
+			.yzm{display: block;float: right; width:37%;height: 35px;line-height:35px;margin-top: 5px;border-left: 1px solid #E7E7E7;font-size: 14px;padding-left: 5px;color: #167F3B;text-align: center;}
 			.reg_agree{display: block;margin-top: 10px;}
 			.reg_agree>div>p{font-size: 14px;}
 			.ui-checkbox input:checked:before, .ui-checkbox-s input:checked:before{color: #0066CC;}
 		</style>
 	</head>
 	<body>
-		<script>
+		<script type="text/javascript">
 			var idfycode = "";
 			function ocxieyi(isCheck){
 				if(isCheck){
@@ -47,6 +47,21 @@
 					alert('请输入手机号码');
 					return false;
 				}
+                $(".yzm").attr("disabled","disabled");
+                var count = 60;
+                var timer = setInterval(function(){
+                    if(count>1){
+                        count--;
+                		$(".yzm").css("color","#999999");
+                        $(".yzm").text("请稍后("+ count +"s)");
+                    }else{
+                		$(".yzm").css("color","#167F3B");
+                        $(".yzm").text("重新获取");
+                        $(".yzm").removeAttr("disabled");
+                        clearInterval(timer); //清除计时器
+                    }
+                },1000);
+				
 				$.ajax({
 					type:"post",
 					url:Utils.getRoot()+"/common/getIdentifyingCode",
@@ -112,8 +127,8 @@
 					<div class="login_user">
 						<span class="user_icon"><i class="ui-icon icon-qrcode"></i></span>
 						<span class="user_inp">
-							<input id="ic_" type="text" placeholder="请输入验证码" style="width: 65%;"/>
-							<span class="yzm" onclick="getIdfyCode()">获取验证码</span>
+							<input id="ic_" type="text" placeholder="请输入验证码" style="width: 62%;"/>
+							<button class="yzm" onclick="getIdfyCode()" >获取验证码</button>
 						</span>
 					</div>
 					<div class="reg_agree">

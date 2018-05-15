@@ -73,16 +73,14 @@
 		"Zip": {
 			"description": "文件压缩与解压缩"
 		},
-
-
-
-
-
+		"Payment": {
+			"description": "管理支付插件"
+		},
 
 		"Webview": {},
 		"NativeUI": {},
 		"Navigator": {},
-		"NativeObj": {},"Device":{},"Maps":{},"Audio":{},"Speech":{},"Camera":{},"Barcode":{},"Contacts":{},"Messaging":{},"Geolocation":{}
+		"NativeObj": {},"Device":{},"Maps":{},"Audio":{},"Speech":{},"Camera":{},"Barcode":{},"Contacts":{},"Messaging":{},"Geolocation":{},"Payment":{}
 	},
 	"plus": {
 		"splashscreen": {
@@ -91,7 +89,7 @@
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
-		"distribute": {
+		"distribute": {"plugins":{"payment":{"weixin":{"description":"微信支付","appid":"wxe027dc4cd25ef6fd"},"alipay":{"description":"阿里支付","scheme":""}}},
 			"apple": {
 				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
 				"mobileprovision": "",/*iOS应用打包配置文件*/
@@ -372,7 +370,18 @@
 					"img/self/member.png",
 					"pages/mySelf.html",
 					"img/self/jiuzhenjilu.png",
-					"pages/hospitalization/inHospotalSearch.html"
+					"pages/hospitalization/inHospotalSearch.html",
+					"pages/lineUpSearch/paiduijiaohaoMenu.html",
+					"img/index/jilu.png",
+					"pages/lineUpSearch/menzhenSearch.html",
+					"fontIcon/iconfont.css",
+					"js/jquery-1.8.3.min.js",
+					"pages/dynamic.html",
+					"pages/divisionIntroduce.html",
+					"H5Js/immersed.js",
+					"H5Js/shortcut.js",
+					"pages/floorDistribution.html",
+					"img/index/floorDistribution.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -380,7 +389,14 @@
 			"pages/yuyueguahao/choiceDepartment.html": {
 				"resources": [
 					"css/style.css",
-					"pages/main.html"
+					"pages/main.html",
+					"fontIcon/iconfont.css",
+					"css/frozen.css",
+					"pages/yuyueguahao/choiceDor.html",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"font/iconfont-full.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -389,7 +405,14 @@
 				"resources": [
 					"img/online/u390.png",
 					"img/docImg.png",
-					"pages/main.html"
+					"pages/main.html",
+					"pages/consultation/consultation.html",
+					"css/frozen.css",
+					"css/style.css",
+					"fontIcon/iconfont.css",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -413,7 +436,8 @@
 					"fontIcon/iconfont.css",
 					"css/frozen.css",
 					"css/style.css",
-					"pages/personal.html"
+					"pages/personal.html",
+					"pages/login.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -472,6 +496,159 @@
 					"pages/hospitalization/inhospitalRecord.html",
 					"css/frozen.css",
 					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/yuyueguahao/choiceDor.html": {
+				"resources": [
+					"fontIcon/iconfont.css",
+					"js/clinicSchedule.js",
+					"css/frozen.css",
+					"css/style.css",
+					"img/docImg.png",
+					"pages/yuyueguahao/choiceTime.html",
+					"pages/yuyueguahao/choiceDepartment.html",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/yuyueguahao/choiceTime.html": {
+				"resources": [
+					"js/yysj.js",
+					"css/frozen.css",
+					"css/style.css",
+					"pages/yuyueguahao/comfirmMsg.html",
+					"pages/yuyueguahao/choiceDor.html",
+					"font/iconfont-full.ttf",
+					"fontIcon/iconfont.css",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/yuyueguahao/comfirmMsg.html": {
+				"resources": [
+					"js/jquery-1.8.3.min.js",
+					"css/frozen.css",
+					"css/style.css",
+					"pages/yuyueguahao/choiceTime.html",
+					"font/iconfont-full.ttf",
+					"fontIcon/iconfont.css",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/lineUpSearch/paiduijiaohaoMenu.html": {
+				"resources": [
+					"pages/lineUpSearch/menzhenSearch.html",
+					"fontIcon/iconfont.css",
+					"img/index/jilu.png",
+					"css/frozen.css",
+					"img/index/tijain2.png",
+					"pages/lineUpSearch/paiduiSearch.html",
+					"css/style.css",
+					"pages/main.html",
+					"font/iconfont-full.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/lineUpSearch/menzhenSearch.html": {
+				"resources": [
+					"js/jquery-1.8.3.min.js",
+					"pages/lineUpSearch/paiduijiaohaoMenu.html",
+					"fontIcon/iconfont.css",
+					"js/frozen.js",
+					"css/frozen.css",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/lineUpSearch/paiduiSearch.html": {
+				"resources": [
+					"pages/lineUpSearch/paiduijiaohaoMenu.html",
+					"font/iconfont-full.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/consultation/consultation.html": {
+				"resources": [
+					"pages/consultation/consultation.html",
+					"img/online/u522.png",
+					"img/online/u576.png",
+					"css/frozen.css",
+					"img/online/u456.png",
+					"pages/consultation/onlineCons.html",
+					"img/myD.png",
+					"img/online/u574.png",
+					"pages/consultation/choiceDepartment.html",
+					"fontIcon/iconfont.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/consultation/onlineCons.html": {
+				"resources": [
+					"js/jquery-1.8.3.min.js",
+					"css/frozen.css",
+					"pages/consultation/onlineCons.html",
+					"img/online/u610.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/dynamic.html": {
+				"resources": [
+					"img/20180410152108.png",
+					"css/frozen.css",
+					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/divisionIntroduce.html": {
+				"resources": [
+					"css/frozen.css",
+					"img/kes/a1.png",
+					"img/kes/a.png",
+					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/floorDistribution.html": {
+				"resources": [
+					"css/frozen.css",
+					"css/style.css",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/yuyueguahao/paymentMethod.html": {
+				"resources": [
+					"js/jquery-1.8.3.min.js",
+					"font/iconfont-full.ttf",
+					"css/frozen.css",
+					"css/style.css",
+					"js/Utils.js"
 				],
 				"refer": [],
 				"priority": 0

@@ -6,8 +6,10 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
-        <script src="../../lib/zepto.min.js"></script>
-        <script src="../../js/frozen.js"></script>
+        <!--<script src="../../lib/zepto.min.js"></script>-->
+        
+        <script src="../../js/jquery-1.8.3.min.js"></script>
+        <!--<script src="../../js/frozen.js"></script>-->
         <script src="../../js/Utils.js"></script>
 		<title>选择科室</title>
 		<style type="text/css">
@@ -33,13 +35,13 @@
 				<div>
 					<div class="ui-form-item ui-form-item-radio ">
                         <label class="ui-radio" for="radio">
-                            <input type="radio" checked="" value="1" name="radio" />
+                            <input type="radio" checked="" value="WX_APP" name="channel_radio" />
                         </label>
                         <p>微信</p>
                     </div>
                     <div class="ui-form-item ui-form-item-radio">
                         <label class="ui-radio" for="radio">
-                            <input type="radio" value="2" name="radio" />
+                            <input type="radio" value="ALI_APP" name="channel_radio" />
                         </label>
                         <p>支付宝</p>
                     </div>
@@ -53,101 +55,52 @@
 		</section>
 		<script type="text/javascript">
 			$(function(){
+				var pay_channels=null;
 				
-				var Request = new Object();
-				Request = Utils.getRequest();
-				//订单号
-				var outChargeNo = Request["hisOrdNum"];
-				//支付费用
-				var chargeAmt = Request["regFee"];
-				//支付渠道
-				var channel = "";
-				//商户支付日期
-				var outChargeTime = "";
-				var today = new Date();
-				var y = today.getFullYear();    
-		        var m = today.getMonth();    
-		        var d = today.getDate();
-				var h = today.getHours();
-				var mm = today.getMinutes();
-				var s = today.getSeconds();
-				//日期事件处理
-				function conver(s) {
-					return s < 10?'0' + s:s;
+				// 1. 获取支付通道
+				function plusReady(){
+				    // 获取支付通道
+				    plus.payment.getChannels(function(channels){
+				    	pay_channels = channels;
+				    },function(e){
+				        alert(JSON.stringify(e));
+				    });
 				}
-				outChargeTime = y + conver(m) + conver(d) + conver(h) + conver(mm) + conver(s);
-				console.log(outChargeTime);		
-				//订单名称
-				//var subject = "易联众-支付";
 				
-				$("#btn").on("click", function() {
-					//1、微信支付，WX_APP；2、支付宝支付，ALI_APP
-					var n = $("input[name='radio']:checked").val();
-					if (n == 1) {
-						console.log("选择的支付方式是-WX_APP-微信。");
-						channel = "WX_APP";
-					} else if (n == 2) {
-						console.log("选择的支付方式是-ALI_APP-支付宝。");
-						channel = "ALI_APP";
-					}
-					
-					//下单
-					var params={};
-					params.outChargeNo=outChargeNo;
-					params.chargeAmt = chargeAmt;
-					params.channel = channel;
-					params.outChargeTime = outChargeTime;
-					//params.subject = subject;
-					$.post(Utils.getRoot()+"/registerApp/registerPay",params,function(res){
+				document.addEventListener('plusready', plusReady, false);
+				
+				$("#btn").click(function(){
+					var a = $("input[name='channel_radio']:checked").val();
+					$.post(Utils.getRoot()+"/registerApp/registerPayV2", {
+	    				outChargeNo: new Date().getTime(),
+						chargeAmt: 1,
+						channel: a 
+	    			}, function(res){
 						if (res.success) {
-							/*
-							 返回出参
-							respCode 返回码 String
-							respMsg 返回说明 String
-							timestamp 返回时间戳 String
-							param 返回出参集合 JSON
-							sign 返回出参签名 String
-							signType 签名类型 String MD5
-							encryptType 加密类型 String DES/AES/PLAINTEXT
-							encryptData 加密数据
-							-----
-							出参集合(param)
-							chargeNo 支付平台订单号 String
-							qrCode 二维码路径 String
-							html 支付表单 String 银联网页支付返回表单
-							directUrl 支付地址 String 支付宝 PC、手机网页支付支付地址
-							channel 支付渠道 String
-							credential 支付凭证 
-							 * */
-							var data = new Object();
-							data = res.data;
-							console.log(data);
-							/*var resp = data.respCode;
-							var respMsg = data.respMsg;
-							var timestamp = data.timestamp;
-							var sign = data.sign;
-							var signType = data.signType;
-							var encryptType = data.encryptType;
-							var encryptData = data.encryptData;
+							//支付凭证 Map
+							var credential = res.data.credential[res.data.channel];
+							var pay_channel=null;
 							
-							console.log(resp+", "+respMsg+", "+timestamp+", "+sign+", "
-								+signType+", "+encryptType+", "+encryptData);*/
-							//集合
-							var param = new Object();
-							param = data.param;
-							var chargeNo = param.chargeNo;
-							var qrCode = param.qrCode;
-							var html = param.html;
-							var directUrl = param.directUrl;
-							var channel = param.channel;
-							var credential = param.credential;
+							pay_channels.forEach(function(channel){
+								console.log(channel)
+								if((channel.id == "wxpay" && 'WX_APP' == a) || (channel.id == "alipay" && 'ALI_APP' == a) ){
+									pay_channel = channel;
+								}
+							})
 							
-							console.log(chargeNo+", "+qrCode+", "+html+", "+
-								directUrl+", "+channel+", "+credential);
-								
+							plus.payment.request(pay_channel, credential,function(result){
+				                plus.nativeUI.alert("支付成功！",function(){
+				                    back();
+				                });
+				            },function(error){
+				                plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
+				            });
+
 							
 						} else {
-							alert("后台处理中...");
+							$(".ui-loading-block").hide();
+							$("#dialogText").html(res.message);
+							$(".ui-dialog").show();
 						}
 					});
 				});
