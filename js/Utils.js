@@ -6,7 +6,7 @@ Utils = {
 		/*return "http://112.93.117.28:8089/zjhospital-app";*/
 		/*return "http://172.18.30.16:8080/zjhospital-app";*/
 		return "http://219.137.32.146:8082/zjhospital-app";
-		//return "http://localhost:8088/zjhospital-app";
+		//return "http://192.168.0.100:8080/zjhospital-app";
 		
 	},
 	/**

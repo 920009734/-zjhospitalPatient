@@ -55,6 +55,8 @@
 			.data_guahao{margin-right: -3px;}
 			.guahao{display: block;float: left; width: 49%;border: 1px solid #000000;text-align: center;border: 1px solid #4CB6AC;border-radius: 2px;}
 			.guahao.active{background-color: #4CB6AC;color: #FFFFFF;}
+			.guahao1{display: block;float: left; width: 49%;border: 1px solid #000000;text-align: center;border: 1px solid #4CB6AC;border-radius: 2px;}
+			.guahao1.active{background-color: #4CB6AC;color: #FFFFFF;}
 			::-webkit-scrollbar{width:0;height:0}
 			
 			.hr_{display:block;float: left;width: 100%;height: 20px;margin: 10px 0 10px 0%;background-color: #F7F7F7;}
@@ -78,7 +80,7 @@
 						<!--icon-xiajiantou-->
 						<i class="iconfont icon-xiajiantou"></i>
 					</span>
-					<div > 
+					<div id="rq"> 
 						<span class="data_guahao guahao active">
 							<input type="hidden"value="xzDate">
 							按日期挂号 
@@ -88,7 +90,16 @@
 							按医生挂号
 						</span>
 					</div>
-					
+					<div id="zj"> 
+						<span class="data_guahao guahao1 active" id="0">
+							<input type="hidden"value="zjDoctor">
+							专家挂号
+						</span>
+						<span class="doct_guahao guahao1 " id="1">
+							<input type="hidden"value="myDoctor">
+							名医挂号
+						</span>
+					</div>
 				</div>
 				<div class="nav_date active">
 					<div class="date_item">
