@@ -187,7 +187,7 @@
 				getDay(rdata);
 				
 				//选择默认先专家挂号
-				var ghtype = $(".guahao.active").attr("id");				
+				var ghtype = $(".guahao.active").attr("id");
 				doctorGh(deptCode, nt, ghtype);
 				
 				//选择专家挂号，还是名医挂号
@@ -306,14 +306,18 @@
 				
 				//动态添加医生信息
 				function doctorGh(deptCode, nt, ghtype){
+					alert(deptCode+", "+nt+", "+ghtype);
 					$("#dortorList").html("");
 					var params={};
 					params.deptCode=deptCode;
 					params.dateTime = nt;
-					$.post(Utils.getRoot()+"/registerApp/selDoctor",params,function(data){
+					//$.post(Utils.getRoot()+"/registerApp/selDoctor",params,function(data){
+					$.post(Utils.getRoot()+"/registerApp/selclinicSchedule",params,function(data){
+						alert(JSON.stringify(data));
 						if (data.success) {
 							var dortorInfo = new Array();
 							dortorInfo= data.data;
+							alert(dortorInfo.length);
 							for (var i = 0; i < dortorInfo.length; i++) {
 								if (ghtype == "1") {
 									if (dortorInfo[i].clinicType == "普通号") {

@@ -160,11 +160,11 @@
 										var credential = res.data.credential[channel];
 										
 										var pay_channel=null;
-										if('ALI_APP' == page_channel){
-											pay_channel=pay_channels[0];
-										}else if('WX_APP' == page_channel){
-											pay_channel=pay_channels[1];
-										}
+										pay_channels.forEach(function(channel){
+											if((channel.id == "wxpay" && 'WX_APP' == page_channel) || (channel.id == "alipay" && 'ALI_APP' == page_channel) ){
+												pay_channel = channel;
+											}
+										})
 										
 									    // 获取支付通道
 								        plus.payment.request(pay_channel, credential, function(result){

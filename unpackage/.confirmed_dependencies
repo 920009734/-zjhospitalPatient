@@ -101,33 +101,64 @@
       "img/self/member.png",
       "pages/mySelf.html",
       "img/self/jiuzhenjilu.png",
-      "pages/hospitalization/inHospotalSearch.html"
+      "pages/hospitalization/inHospotalSearch.html",
+      "pages/lineUpSearch/paiduijiaohaoMenu.html",
+      "img/index/jilu.png",
+      "pages/lineUpSearch/menzhenSearch.html",
+      "fontIcon/iconfont.css",
+      "js/jquery-1.8.3.min.js",
+      "pages/dynamic.html",
+      "pages/divisionIntroduce.html",
+      "H5Js/immersed.js",
+      "H5Js/shortcut.js",
+      "pages/floorDistribution.html",
+      "img/index/floorDistribution.png"
     ],
     "refer": [
       "pages/yuyueguahao/choiceDepartment.html",
       "pages/consultation/choiceDepartment.html",
       "pages/lineUpSearch/jcbg_list.html",
       "pages/lineUpSearch/jybg_list.html",
-      "pages/hospitalization/inHospotalSearch.html"
+      "pages/hospitalization/inHospotalSearch.html",
+      "pages/lineUpSearch/paiduijiaohaoMenu.html",
+      "pages/dynamic.html",
+      "pages/divisionIntroduce.html",
+      "pages/floorDistribution.html"
     ]
   },
   "pages/yuyueguahao/choiceDepartment.html": {
     "resources": [
       "css/style.css",
-      "pages/main.html"
+      "pages/main.html",
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "pages/yuyueguahao/choiceDor.html",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "font/iconfont-full.ttf"
     ],
     "refer": [
-      "pages/main.html"
+      "pages/main.html",
+      "pages/yuyueguahao/choiceDor.html"
     ]
   },
   "pages/consultation/choiceDepartment.html": {
     "resources": [
       "img/online/u390.png",
       "img/docImg.png",
-      "pages/main.html"
+      "pages/main.html",
+      "pages/consultation/consultation.html",
+      "css/frozen.css",
+      "css/style.css",
+      "fontIcon/iconfont.css",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "js/Utils.js"
     ],
     "refer": [
-      "pages/main.html"
+      "pages/main.html",
+      "pages/consultation/consultation.html"
     ]
   },
   "pages/personal.html": {
@@ -179,7 +210,8 @@
   "pages/lineUpSearch/jianchabg_view.html": {
     "resources": [
       "css/frozen.css"
-    ]
+    ],
+    "refer": []
   },
   "pages/lineUpSearch/jybg_list.html": {
     "resources": [
@@ -218,5 +250,174 @@
       "pages/hospitalization/inhospitalRecord.html",
       "pages/main.html"
     ]
+  },
+  "pages/yuyueguahao/choiceDor.html": {
+    "resources": [
+      "fontIcon/iconfont.css",
+      "js/clinicSchedule.js",
+      "css/frozen.css",
+      "css/style.css",
+      "img/docImg.png",
+      "pages/yuyueguahao/choiceTime.html",
+      "pages/yuyueguahao/choiceDepartment.html",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "js/Utils.js"
+    ],
+    "refer": [
+      "pages/yuyueguahao/choiceTime.html",
+      "pages/yuyueguahao/choiceDepartment.html"
+    ]
+  },
+  "pages/yuyueguahao/choiceTime.html": {
+    "resources": [
+      "js/yysj.js",
+      "css/frozen.css",
+      "css/style.css",
+      "pages/yuyueguahao/comfirmMsg.html",
+      "pages/yuyueguahao/choiceDor.html",
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "js/Utils.js"
+    ],
+    "refer": [
+      "pages/yuyueguahao/comfirmMsg.html",
+      "pages/yuyueguahao/choiceDor.html"
+    ]
+  },
+  "pages/yuyueguahao/comfirmMsg.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "css/frozen.css",
+      "css/style.css",
+      "pages/yuyueguahao/choiceTime.html",
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/yuyueguahao/choiceTime.html",
+      "pages/main.html"
+    ]
+  },
+  "pages/lineUpSearch/paiduijiaohaoMenu.html": {
+    "resources": [
+      "pages/lineUpSearch/menzhenSearch.html",
+      "fontIcon/iconfont.css",
+      "img/index/jilu.png",
+      "css/frozen.css",
+      "img/index/tijain2.png",
+      "pages/lineUpSearch/paiduiSearch.html",
+      "css/style.css",
+      "pages/main.html",
+      "font/iconfont-full.ttf"
+    ],
+    "refer": [
+      "pages/lineUpSearch/menzhenSearch.html",
+      "pages/lineUpSearch/paiduiSearch.html",
+      "pages/main.html"
+    ]
+  },
+  "pages/lineUpSearch/menzhenSearch.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "pages/lineUpSearch/paiduijiaohaoMenu.html",
+      "fontIcon/iconfont.css",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js"
+    ],
+    "refer": [
+      "pages/lineUpSearch/paiduijiaohaoMenu.html"
+    ]
+  },
+  "pages/lineUpSearch/paiduiSearch.html": {
+    "resources": [
+      "pages/lineUpSearch/paiduijiaohaoMenu.html",
+      "font/iconfont-full.ttf"
+    ],
+    "refer": [
+      "pages/lineUpSearch/paiduijiaohaoMenu.html"
+    ]
+  },
+  "pages/consultation/consultation.html": {
+    "resources": [
+      "pages/consultation/consultation.html",
+      "img/online/u522.png",
+      "img/online/u576.png",
+      "css/frozen.css",
+      "img/online/u456.png",
+      "pages/consultation/onlineCons.html",
+      "img/myD.png",
+      "img/online/u574.png",
+      "pages/consultation/choiceDepartment.html",
+      "fontIcon/iconfont.css"
+    ],
+    "refer": [
+      "pages/consultation/onlineCons.html",
+      "pages/consultation/choiceDepartment.html"
+    ]
+  },
+  "pages/consultation/onlineCons.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "css/frozen.css",
+      "pages/consultation/onlineCons.html",
+      "img/online/u610.png"
+    ],
+    "refer": []
+  },
+  "pages/dynamic.html": {
+    "resources": [
+      "img/20180410152108.png",
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/divisionIntroduce.html": {
+    "resources": [
+      "css/frozen.css",
+      "img/kes/a1.png",
+      "img/kes/a.png",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/floorDistribution.html": {
+    "resources": [
+      "css/frozen.css",
+      "css/style.css",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/yuyueguahao/paymentMethod.html": {
+    "resources": [
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "js/jquery-1.8.3.min.js"
+    ],
+    "refer": []
   }
 }
