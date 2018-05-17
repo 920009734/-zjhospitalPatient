@@ -55,15 +55,16 @@
 		</section>
 		<script type="text/javascript">
 			$(function(){
-				$("#btn").click(function(){
+				$("#btn").click(function(){ 
 					var channel = $("input[name='channel_radio']:checked").val();
 					$.post(Utils.getRoot()+"/registerApp/registerPayV3", {
 	    				outChargeNo: new Date().getTime(),
-						chargeAmt: '0.1',
+						chargeAmt: '0.01',
 						channel: channel 
 	    			}, function(res){
 						if (res.success) {
-							location.href = res.data.directUrl;
+							console.log(JSON.stringify(res.data))
+							window.location.href = res.data.directUrl;
 						}
 					});
 				});

@@ -47,19 +47,7 @@
 		</style>
 		</style>
 		<script type="text/javascript">
-			var pay_channels = null;
-			// 1. 获取支付通道
-			function plusReady(){
-			    // 获取支付通道
-			    plus.payment.getChannels(function(channels){
-			    	pay_channels = channels;
-			    },function(e){
-			        plus.nativeUI.alert('系统异常，请稍后重试');
-			    });
-			}
-			document.addEventListener('plusready',plusReady,false);
-			
-			var outChargeNo = '';//支付订单号
+			var outChargeNo = '';//商户充值业务流水
         	$(function(){
         		
         		$("#jzrxz").click(function(){
@@ -144,38 +132,17 @@
 						//医院锁号，生成商户订单号
 						$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
 							if (data.success) {
-								var page_channel = $("input[name='channel_radio']:checked").val();
+								outChargeNo = data.data[0].hisOrdNum;
 			        			//统一支付下单，生产支付凭证
-			        			$.post(Utils.getRoot()+"/registerApp/registerPayV2", {
+			        			$.post(Utils.getRoot()+"/registerApp/recharge", {
 			        				outChargeNo: data.data[0].hisOrdNum,
 									chargeAmt: data.data[0].regFee,
-									channel: page_channel
+									channel: $("input[name='channel_radio']:checked").val()
 			        			}, function(res){
+			        				$(".ui-loading-block").hide();
 									if (res.success) {
-										//支付订单号
-										outChargeNo = res.data.outChargeNo;
-										//支付渠道
-										var channel = res.data.channel;
-										//支付凭证 Map
-										var credential = res.data.credential[channel];
-										
-										var pay_channel=null;
-										pay_channels.forEach(function(channel){
-											if((channel.id == "wxpay" && 'WX_APP' == page_channel) || (channel.id == "alipay" && 'ALI_APP' == page_channel) ){
-												pay_channel = channel;
-											}
-										})
-										
-									    // 获取支付通道
-								        plus.payment.request(pay_channel, credential, function(result){
-							                plus.nativeUI.alert("支付成功！",function(){
-							                    back();
-							                });
-							            },function(error){
-							                plus.nativeUI.alert("支付失败：" + JSON.stringify(error));
-							            });
+										window.location.href = res.data.directUrl;
 									} else {
-										$(".ui-loading-block").hide();
 										$("#dialogText").html(res.message);
 										$(".ui-dialog").show();
 									}
@@ -191,10 +158,9 @@
         	})
         	
         	//页面关闭时关闭交易订单
-        	window.onclose = function(){
+        	window.onunload = function(){
         		if(outChargeNo){
-        			//统一支付下单，生产支付凭证
-        			$.post(Utils.getRoot()+"/registerApp/closePay", {
+        			$.post(Utils.getRoot()+"/registerApp/rechargeClose", {
         				outChargeNo: outChargeNo
         			}, function(res){});
         		}
@@ -254,13 +220,13 @@
 				<div>
 					<div class="ui-form-item ui-form-itemd-radio ">
                         <label class="ui-radio" for="radio">
-                            <input type="radio" checked="" name="channel_radio" value="WX_APP" />
+                            <input type="radio" checked="" name="channel_radio" value="WX_WAP" />
                         </label>
                         <span>微信</span>
                     </div>
                     <div class="ui-form-item ui-form-item-radio">
                         <label class="ui-radio" for="radio">
-                            <input type="radio" name="channel_radio" value="ALI_APP" />
+                            <input type="radio" name="channel_radio" value="ALI_WAP" />
                         </label>
                         <span>支付宝</span>
                     </div>

@@ -1,1 +1,11 @@
-null
+{
+  "pages/yuyueguahao/paymentMethod2.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "font/iconfont-full.ttf",
+      "css/frozen.css",
+      "css/style.css",
+      "js/Utils.js"
+    ]
+  }
+}
