@@ -57,7 +57,7 @@
 			$(function(){
 				$("#btn").click(function(){ 
 					var channel = $("input[name='channel_radio']:checked").val();
-					$.post(Utils.getRoot()+"/registerApp/registerPayV3", {
+					$.post(Utils.getRoot()+"/registerApp/recharge", {
 	    				outChargeNo: new Date().getTime(),
 						chargeAmt: '0.01',
 						channel: channel 
