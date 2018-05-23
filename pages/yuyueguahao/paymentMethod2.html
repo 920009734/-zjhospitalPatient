@@ -64,7 +64,11 @@
 	    			}, function(res){
 						if (res.success) {
 							console.log(JSON.stringify(res.data))
-							window.location.href = res.data.directUrl;
+							//http://mstpay.com
+							location.href = res.data.directUrl;
+							//window.open(res.data.directUrl);		
+						}else{
+							alert(res.message)
 						}
 					});
 				});

@@ -85,6 +85,10 @@
 				</div>
 				<div class="cat_container_1">
 					<div class="catlog">
+						<label onclick="checkVersion()"><div class="pic"><img src="../img/self/bangzhu.png" /></div>
+						<div class="pic_w">版本更新</div></label>
+					</div>
+					<div class="catlog">
 						<div class="pic"><img src="../img/self/bangzhu.png" /></div>
 						<div class="pic_w">帮助和反馈</div>
 					</div>
@@ -100,6 +104,19 @@
 		</section>
 	</body>
 	<script type="text/javascript">
+		
+		function checkVersion(){
+			var inv = localStorage.getItem('isNewVersion');
+			if(inv){
+				var $eleForm = $("<form method='get'></form>");
+	            $eleForm.attr("action",Utils.getRoot() + "/version/update");
+	            $(document.body).append($eleForm);
+	            $eleForm.submit();
+			}else{
+				alert('当前已是最新版本');
+			}
+		}
+	
     	$(function(){
     		/**
     		 * 查询个人信息
