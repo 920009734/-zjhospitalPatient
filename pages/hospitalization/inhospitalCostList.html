@@ -8,28 +8,28 @@
         <link rel="stylesheet" href="../../css/style.css" />
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
-		<title>缴费详情</title>
+		<title>住院费用清单</title>
 		<style type="text/css">
 			html,body{background-color: #F3F3F3;}
 			.pay_detail{display: block;float: left;width: 100%;height: 100%;}
 			.pay_detail_top{display: block;float: left;width: 100%;height: auto;background-color: #FFFFFF;}
 			.list-item{display: block;float: left;width: 100%;min-height: 20px;max-height: 200px; padding:12px 0;background-color: #FFFFFF;font-size: 15px;}
-			.list-item:nth-child(1){margin-top: 8px;}
+			.list-item:nth-child(1){margin-top: 10px;}
 			.demo_name{display: block;float: left;width: 33%;padding-left: 3%;}
 			.demo_value{display: block;float: right;width: 61%; color: #999999;margin-right: 3%;}
 			.demo_value>span{display: block;float: right;}
 			.pay_detail_table{display: block;float: left; width: 100%;margin-top: 20px;border-top: 2px solid #2CA99D;}
 			.baogao_table{width:100%; background-color: #FFFFFF;}
 			table thead tr th{height: 40px;font-weight: 400;text-align: center;border: 1px solid #F6F6F6;color: #989898;font-size: 13px; }
-			table tbody tr td{padding: 10px 5px ;border: 1px solid #F6F6F6;font-size: 12px;text-align: center;}
+			table tbody tr td{padding: 10px 5px ;border: 1px solid #F6F6F6;font-size: 13px;text-align: center;}
 			.pay_btn{display: block;float: left;width: 100%;height: 100px;background-color: #FFFFFF;margin-top: 20px;}
-			.pay_btn>button{display: block;width: 90%;height: 44px;line-height: 44px;text-align: center; margin: 0 auto;background-color: #0066CC;border-radius: 2px;color: #FFFFFF;margin-top: 30px;}
+			.pay_btn>button{display: block;width: 90%;height: 44px;line-height: 44px;text-align: center; margin: 0 auto;background-color: #E51717;border-radius: 2px;color: #FFFFFF;margin-top: 30px;}
 		</style>
 	</head>
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;">已缴费详情</h4>
+			<h4 style="margin-left: 25px;">住院费用清单</h4>
 		</header>
 		
 		<section class="ui-container">
@@ -37,36 +37,72 @@
 				<div class="pay_detail">
 					<div class="pay_detail_top">
 						<div class="list-item">
-							<span class="demo_name">接诊科室</span>
+							<span class="demo_name">清单开始日期</span>
+							<span class="demo_value"><span>2018-05-20</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">清单结束日期</span>
+							<span class="demo_value"><span>2018-05-23</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">入院日期</span>
+							<span class="demo_value"><span>2018-05-20</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">出院日期</span>
+							<span class="demo_value"><span>2018-05-20</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">住院天数</span>
+							<span class="demo_value"><span>4天</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">住院科室</span>
 							<span class="demo_value"><span>内科</span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">接诊医生</span>
-							<span class="demo_value"><span>李医生</span></span>
+							<span class="demo_name">结算类别</span>
+							<span class="demo_value"><span>内科</span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">订单号</span>
-							<span class="demo_value"><span>0029101</span></span>
+							<span class="demo_name">病床号</span>
+							<span class="demo_value"><span>102</span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">缴费项</span>
-							<span class="demo_value"><span>体检</span></span>
+							<span class="demo_name">费用总金额</span>
+							<span class="demo_value"><span>2132元</span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">医保部分金额</span>
-							<span class="demo_value"><span>100元</span></span>
+							<span class="demo_name">甲类金额</span>
+							<span class="demo_value"><span>12元</span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">自费部分金额</span>
-							<span class="demo_value"><span>29元</span></span>
+							<span class="demo_name">乙类金额</span>
+							<span class="demo_value"><span>12元</span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">已缴总额</span>
-							<span class="demo_value"><span>129元</span></span>
+							<span class="demo_name">丙类金额</span>
+							<span class="demo_value"><span>12元</span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">缴费时间</span>
-							<span class="demo_value"><span>2018-05-23 15:12</span></span>
+							<span class="demo_name">床位费</span>
+							<span class="demo_value"><span>12元</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">西药费</span>
+							<span class="demo_value"><span>12元</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">成药费</span>
+							<span class="demo_value"><span>12元</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">草药费</span>
+							<span class="demo_value"><span>12元</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">诊疗费</span>
+							<span class="demo_value"><span>12元</span></span>
 						</div>
 					</div>
 					<div class="pay_detail_table">
@@ -112,9 +148,6 @@
 								</tr>
 							</tbody>
 						</table>
-					</div>
-					<div class="pay_btn">
-						<button >去退款</button>
 					</div>
 				</div>
 			</div>
