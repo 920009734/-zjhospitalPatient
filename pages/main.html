@@ -56,6 +56,29 @@
         </footer>
         
         <script type="text/javascript">	
+        	document.addEventListener( "plusready", function(){
+				plus.runtime.getProperty(plus.runtime.appid, function(info) {
+					var v = localStorage.getItem('version');
+					if(!v){
+						v = info.version;
+						localStorage.setItem('version', v);
+					}
+					//获取新版本
+					$.post(Utils.getRoot() + "/version/checkUpdate",{
+						v: v
+					}, function(res) {
+		    			if (res.success) {
+		    				if(res.data){//检测到新版本
+		    					localStorage.setItem('version', res.data.versionNumber);
+		    					localStorage.setItem('isNewVersion', 'true')
+		    				}else{
+		    					localStorage.setItem('isNewVersion', 'false')
+		    				}
+		    			}
+		    		});
+	            });
+			}, false );
+        	
         	function changeData(number, elementId){
         		if(number != 0){
 			    	$("#main_frame").contents().find("#"+elementId).html(number);
@@ -67,10 +90,7 @@
         	}
         	$(function(){
 				// 创建一个Socket实例
-//				var socket = new WebSocket('ws://http://localhost:8080/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
-				
-				//var socket = new WebSocket('ws://http://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
-				var socket = new WebSocket('ws://'+Utils.getRoot()+'/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
+				var socket = new WebSocket('ws://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
 				// 打开Socket
 				socket.onopen = function(event) {
 				  console.log('open', event); 
