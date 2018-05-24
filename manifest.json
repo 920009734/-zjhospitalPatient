@@ -5,7 +5,7 @@
 		"iPad"
 	],
 	"id": "H51826D79",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "珠江医院H",/*应用名称，程序桌面图标名称*/
+	"name": "珠江医院",/*应用名称，程序桌面图标名称*/
 	"version": {
 		"name": "1.0.0",/*应用版本名称*/
 		"code": "83"
@@ -381,7 +381,10 @@
 					"H5Js/immersed.js",
 					"H5Js/shortcut.js",
 					"pages/floorDistribution.html",
-					"img/index/floorDistribution.png"
+					"img/index/floorDistribution.png",
+					"pages/payment/depositPayment.html",
+					"img/u364.png",
+					"pages/login.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -660,6 +663,13 @@
 					"css/frozen.css",
 					"css/style.css",
 					"js/Utils.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/payment/depositPayment.html": {
+				"resources": [
+					"pages/main.html"
 				],
 				"refer": [],
 				"priority": 0

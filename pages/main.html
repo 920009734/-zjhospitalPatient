@@ -78,16 +78,7 @@
 		    		});
 	            });
 			}, false );
-        	
-        	function changeData(number, elementId){
-        		if(number != 0){
-			    	$("#main_frame").contents().find("#"+elementId).html(number);
-				    $("#main_frame").contents().find("#"+elementId).addClass("ui-badge-cornernum");
-			    }else{
-			    	$("#main_frame").contents().find("#"+elementId).html("");
-				    $("#main_frame").contents().find("#"+elementId).removeClass("ui-badge-cornernum");
-			    }
-        	}
+			
         	$(function(){
 				// 创建一个Socket实例
 				var socket = new WebSocket('ws://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
@@ -106,10 +97,10 @@
 				    	$("#message_number").html("");
 				    	$("#message_number").removeClass("msg_num");
 				    }
-				    changeData(obj.sx, "message_type_1");
-				    changeData(obj.tz, "message_type_2");
-				    changeData(obj.yy, "message_type_3");
-				    changeData(obj.jf, "message_type_4");
+				    localStorage.setItem('message_type_1', obj.sx);
+				    localStorage.setItem('message_type_2', obj.tz);
+				    localStorage.setItem('message_type_3', obj.yy);
+				    localStorage.setItem('message_type_4', obj.jf);
 				}
 				  // 监听Socket的关闭
 				socket.onclose = function(event) {
