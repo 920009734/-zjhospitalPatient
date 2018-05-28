@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../css/style.css" />
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
-        <script src="../js/Utils.js"></script>
+        <!--<script src="../js/Utils.js"></script>-->
 		<title></title>
 		<style type="text/css">
 		     body{background-color:#EDF3F3 ;font-family: "微软雅黑";}
@@ -32,6 +32,7 @@
 			.login_btn>button{border-radius:2px ;background: #FC4C25;font-size: 16px;font-weight: bold;border: none;}
 			.ui-btn-primary:before{border: none;}
 			.pic>img{width: 40px;height: 40px;}
+			.banben_new{display: block;float: right;width: 10px;height: 10px;background-color: #FF0000;margin-top: 20px;border-radius: 15px;margin-right: 15px;}
 		</style>
 	</head>
 	<body>
@@ -84,8 +85,11 @@
 				</div>
 				<div class="cat_container_1">
 					<div class="catlog">
-						<label onclick="checkVersion()"><div class="pic"><img src="../img/self/banben.png" /></div>
-						<div class="pic_w">版本更新</div></label>
+						<label onclick="checkVersion()">
+							<div class="pic"><img src="../img/self/banben.png" /></div>
+							<div class="pic_w">版本更新</div>
+							<span class="banben_new"></span>
+						</label>
 					</div>
 					<div class="catlog">
 						<div class="pic"><img src="../img/self/bangzhu.png" /></div>
