@@ -25,6 +25,14 @@
 			table tbody tr td{padding: 10px 5px ;border: 1px solid #F6F6F6;font-size: 12px;text-align: center;}
 			.pay_btn{display: block;float: left;width: 100%;height: 100px;background-color: #FFFFFF;margin-top: 20px;}
 			.pay_btn>button{display: block;width: 90%;height: 44px;line-height: 44px;text-align: center; margin: 0 auto;background-color: #E51717;border-radius: 2px;color: #FFFFFF;margin-top: 30px;}
+			
+			.person_msg{display: block;width: 100%;height: 105px;background-color: #1281E8;color: #FFFFFF;}
+			.jcbg_title{display: block;width: 100%;height: 40px;line-height: 40px; text-align: center;;}
+			.jcbg_con{display: block;float: left;width: 100%;font-size: 15px;}
+			.con_left, .con_center, .con_right{display: block;float: left;width: 32%;text-align: center;line-height: 27px;}
+			.con_left>span, .con_center>span, .con_right>span{display: block;float: left;width: 100%;}
+			.con_left>span:first-child,.con_center>span:first-child,.con_right>span:first-child{font-size: 13px;}
+			.hr_sex{display: block;float: left;width: 1px;height: 30px;margin-top: 10px;border-right: 1px solid #FFFFFF;}
 		</style>
 	</head>
 	<body ontouchstart>
@@ -35,6 +43,25 @@
 		
 		<section class="ui-container">
 			<div class="demo-block">
+				<div class="person_msg">
+					<div class="jcbg_title">缴费详情</div>
+					<div class="jcbg_con">
+						<div class="con_left">
+							<span>患者</span>
+							<span id="realname"></span>
+						</div>
+						<span class="hr_sex"></span>
+						<div class="con_center">
+							<span>性别</span>
+							<span id="sex"></span>
+						</div>
+						<span class="hr_sex"></span>
+						<div class="con_right">
+							<span>年龄</span>
+							<span id="age"></span>
+						</div>
+					</div>
+				</div>
 				<div class="pay_detail">
 					<div class="pay_detail_top">
 						<div class="list-item">
