@@ -54,25 +54,37 @@
 			</section>
 		</section>
 		<script type="text/javascript">
-			$(function(){
-				$("#btn").click(function(){ 
-					var channel = $("input[name='channel_radio']:checked").val();
-					$.post(Utils.getRoot()+"/registerApp/recharge", {
-	    				outChargeNo: new Date().getTime(),
-						chargeAmt: '0.01',
-						channel: channel 
-	    			}, function(res){
-						if (res.success) {
-							console.log(JSON.stringify(res.data))
-							//http://mstpay.com
-							location.href = res.data.directUrl;
-							//window.open(res.data.directUrl);		
-						}else{
-							alert(res.message)
-						}
+			var ws=null,embed=null;
+			document.addEventListener( "plusready", function(){
+				ws=plus.webview.currentWebview();
+				embed=plus.webview.create('http://m.weibo.cn/u/3196963860', '', {top:'46px',bottom:'0px'});
+				embed.loadURL('https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx24163627362039042d6ea0e41396349713&package=3929189673', {
+					"Referer": 'http://www.mstpay.com'
+				})
+				embed.show();
+				/*$(function(){
+					$("#btn").click(function(){ 
+						var channel = $("input[name='channel_radio']:checked").val();
+						$.post(Utils.getRoot()+"/registerApp/recharge", {
+		    				outChargeNo: new Date().getTime(),
+							chargeAmt: '0.01',
+							channel: channel 
+		    			}, function(res){
+							if (res.success) {
+								console.log(JSON.stringify(res.data))
+								//http://mstpay.com
+								//location.href = res.data.directUrl;
+								
+								embed.loadURL('res.data.directUrl', {
+									Referer: 'http://mstpay.com'
+								})
+							}else{
+								alert(res.message)
+							}
+						});
 					});
-				});
-			});
+				});*/
+			}, false );
 		</script>
 	</body>
 </html>
