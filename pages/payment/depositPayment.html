@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="../../css/style.css" />
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
         <title>诊间缴费</title>
         
         <style type="text/css">
@@ -16,10 +17,72 @@
         	.pay_tab{display: block;float: left;width: 100%; margin-bottom: 10px;height: 50px;line-height: 50px;color:#FFFFFF;background-color: #1281E8;}
         	.box_tab{display: block;float: left;width: 25%;margin-left: 16%; height: 48px;text-align: center;}
         	.box_tab.active{color: #FFFFFF;border-bottom: 2px solid #FFFFFF;}
-        	.pay_con{display: block;float: left;width: 100%;}
-        	.pay_item{display: block;float: left;width: 88%;margin-left: 3%; border-radius: 3px; min-height: 50px;max-height: 150px; margin-top: 8px;background-color: #FFFFFF;padding: 7px 3%;}
-        	.pay_item>span{display: block;line-height: 25px;font-size: 14px;color: #008080;width: 100%;}
+        	.wjf_con{display: block;float: left;width: 100%;}
+        	.wjf_item{display: block;float: left;width: 88%;margin-left: 3%; border-radius: 3px; min-height: 50px;max-height: 150px; margin-top: 8px;background-color: #FFFFFF;padding: 7px 3%;}
+        	.wjf_item>span{display: block;line-height: 25px;font-size: 14px;color: #008080;width: 100%;}
+        	.yjf_con{display: none;float: left;width: 100%;}
+        	.yjf_item{display: block;float: left;width: 88%;margin-left: 3%; border-radius: 3px; min-height: 50px;max-height: 150px; margin-top: 8px;background-color: #FFFFFF;padding: 7px 3%;}
+        	.yjf_item>span{display: block;line-height: 25px;font-size: 14px;color: #008080;width: 100%;}
+        	.list-item{display: block;float: left;width: 100%;min-height: 50px;max-height: 150px;background-color: #FFFFFF;border-bottom: 1px solid #F7F7F7;}
+        	.notData{color: #999999;text-align: center;line-height: 50px;}
         </style>
+        
+        <script type="text/javascript">
+        	$(function(){
+        		$(".box_tab").on("click",function(){
+					var a = $(this).hasClass("active");
+					if(!a){
+						$(this).addClass("active").siblings(".box_tab").removeClass("active");
+						if ($(this).attr("id")=="wjf") {
+							$(".yjf_con").html("");
+							$(".wjf_con").show();
+							wjfList();
+						} else{
+							$(".yjf_con").show();
+							$(".wjf_con").html("");
+						}
+					}
+				});
+				
+        		wjfList();
+        		
+        		function wjfList(){
+        			var params={};
+	        		$.post(Utils.getRoot()+"/outpatientPayment/selPayorder",params,function(data){
+						if (data.success) {
+							var listPayorder = new Array();
+							listPayorder= data.data;
+							for (var i = 0; i < listPayorder.length; i++) {
+								var totalAmt = parseInt(listPayorder[i].totalAmt)/100;
+								$("#wjfList").append(
+									"<div class='wjf_item' >"+
+										"<input type='hidden' name='listPayorder'  value='"+listPayorder[i]+"'/>"+
+										"<span class='box_type'>订单号："+listPayorder[i].hisOrdNum+"</span>"+
+										"<span class='box_type'>缴费项目："+listPayorder[i].payName+"</span>"+
+										"<span class='box_type'>科室姓名："+listPayorder[i].deptName+"</span>"+
+										"<span class='box_type'>医生姓名："+listPayorder[i].doctorName+"</span>"+
+										"<span class='box_money'>总费用："+totalAmt+" 元</span>"+
+									"</div>"
+								)
+							}
+						}else{
+							$("#wjfList").append(
+								"<div class='list-item '>"+
+									"<p class='notData'>暂无数据</p>"+
+								"</div>"
+							);
+						}
+					});
+        		}
+        		
+        		$("#wjfList").on("click",".wjf_item",function(){
+        			var listPayorder = $(this).children("input[name='listPayorder']").val();
+        			window.location.href="../payment/payDetail_view.html?listPayorder="+listPayorder;
+        		});
+        		
+        		
+        	})
+       </script>
 	</head>
 	<body>
 		<header class="ui-header ui-header-positive">
@@ -30,38 +93,31 @@
 			<div class="demo-block">
 				<div class="pay_list">
 					<div class="pay_tab">
-						<span class="box_tab active">未缴费</span>
-						<span class="box_tab ">已缴费</span>
+						<span class="box_tab active" id="wjf">未缴费</span>
+						<span class="box_tab " id="yjf">已缴费</span>
 					</div>
-					<div class="pay_con ">
-						<a href="payDetail_view.html">
-							<div class="pay_item">
-								<span class="box_type">接诊科室：内科门诊（未缴费）</span>
-								<span class="box_money">费用总额：129元</span>
-								<span class="box_time">订单时间：2018-05-21 15:22</span>
-							</div>
-						</a>
+					<div class="wjf_con" id="wjfList">
+						<!--<div class="wjf_item" >
+							<span class="box_type">订单号：456456456</span>
+							<span class="box_type">科室姓名：内科门诊</span>
+							<span class="box_type">医生姓名：张三</span>
+							<span class="box_money">总费用：129元</span>
+						</div>-->
+					</div>
+					
+					<div class="yjf_con">
 						<a href="payDetail_yjf_view.html">
-							<div class="pay_item">
+							<div class="yjf_item">
 								<span class="box_type">接诊科室：内科门诊（已缴费）</span>
 								<span class="box_money">已缴总额：129元</span>
 								<span class="box_time">缴费时间：2018-05-21 15:22</span>
 							</div>
 						</a>
 					</div>
+					
 				</div>
 			</div>
 		</section>
 		
-		<script type="text/javascript">
-			$(function(){
-				$(".box_tab").on("click",function(){
-					var a = $(this).hasClass("active");
-					if(!a){
-						$(this).addClass("active").siblings(".box_tab").removeClass("active");
-					}
-				});
-			})
-		</script>
 	</body>
 </html>
