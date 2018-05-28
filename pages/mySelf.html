@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../css/style.css" />
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
-        <!--<script src="../js/Utils.js"></script>-->
+        <script src="../js/Utils.js"></script>
 		<title></title>
 		<style type="text/css">
 		     body{background-color:#EDF3F3 ;font-family: "微软雅黑";}
@@ -48,10 +48,10 @@
 				        <img src="../img/self/self.png" width="60" height="60"/>	
 				    </div>
 				    <div class="top_center">
-				    	<!--<span class="top_right_t">测试</span>
-				    	<span class="top_right_i">男</span>
+				    	<span id="user_name_" class="top_right_t"></span>
+				    	<span id="user_sex_" class="top_right_i"></span>
 				    	<span class="top_right_j">|</span>
-				    	<span class="top_right_k">年龄</span>-->
+				    	<span id="user_age_" class="top_right_k"></span>
 				    </div>
 				    <div class="top-right">
 				    	<i class="ui-icon-arrow"></i>
@@ -88,7 +88,7 @@
 						<label onclick="checkVersion()">
 							<div class="pic"><img src="../img/self/banben.png" /></div>
 							<div class="pic_w">版本更新</div>
-							<span class="banben_new"></span>
+							<span id="banben_new_" class=""></span>
 						</label>
 					</div>
 					<div class="catlog">
@@ -121,10 +121,20 @@
 		}
 	
     	$(function(){
-    		/**
-    		 * 查询个人信息
-    		 */
-    		var queryMySelfUrl = Utils.getRoot()+"/patientApp/queryMySelf";
+    		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
+    		$("#user_name_").html(patientInfo.patientname);
+    		$("#user_sex_").html(patientInfo.sex == '1' ? '男' : '女');
+    		$("#user_age_").html(patientInfo.age);
+    		
+    		var inv = localStorage.getItem('isNewVersion');
+			if(inv){
+				$("#banben_new_").addClass('banben_new');
+			}else{
+				$("#banben_new_").removeClass('banben_new');
+			}
+    		
+    		//查询个人信息
+    		/*var queryMySelfUrl = Utils.getRoot()+"/patientApp/queryMySelf";
     		$.post(queryMySelfUrl, function(res) {
     			if (res.success) {
     				var s = '';
@@ -139,7 +149,7 @@
     			} else {
     				alert(res.message);
     			}
-    		});
+    		});*/
     		
     		$("#wdgz").click(function(){
     			top.location.href="myAttention.html";
@@ -167,11 +177,15 @@
     		$(".login_btn").click(function() {
     			var logoutUrl = Utils.getRoot()+"/patientApp/logout";
     			$.post(logoutUrl,{
-    				token: localStorage.getItem('token')
+    				token: patientInfo.token
     			}, function(res) {
 	    			if (res.success) {
-	    				localStorage.removeItem('token');
-	    				localStorage.removeItem('patientId');
+	    				localStorage.removeItem('patientInfo');
+	    				localStorage.removeItem('isNewVersion');
+	    				localStorage.removeItem('message_type_1');
+	    				localStorage.removeItem('message_type_2');
+	    				localStorage.removeItem('message_type_3');
+	    				localStorage.removeItem('message_type_4');
 	    				location.href="login.html";
 	    			} else {
 	    				alert(res.message);

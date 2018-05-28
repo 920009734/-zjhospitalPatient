@@ -42,18 +42,10 @@
 	<body>
     	<script>
     		window.onload = function(){
-    			$("#phone_").val(localStorage.getItem('user_phone'));
-    			//$("#password_").val(localStorage.getItem('user_pwd'));
-    			/*if(localStorage.getItem('auto_login')){
-    				$("#password_").val(localStorage.getItem('user_pwd'));
-    				$("#auto_login").prop("checked",true);
-    				//login();
-    			}else{
-    				$("#auto_login").prop("checked",false);
-    			}*/
-    			var token = localStorage.getItem('token');
-    			if(token){
-    				checkToken(token);
+    			var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
+    			if(patientInfo){
+    				$("#phone_").val(patientInfo.phone);
+    				checkToken(patientInfo.token);
     			}
     		}
     		
@@ -99,15 +91,7 @@
 					},
 					success: function(result){
 						if(result.success){
-							localStorage.setItem("user_phone", result.data.phone);
-							//localStorage.setItem("user_pwd", $("#password_").val());
-							localStorage.setItem("token",result.data.token)
-							localStorage.setItem("patientId",result.data.patientid)
-							/*var autoLogin = $("#auto_login").is(':checked');
-							if(autoLogin){
-								localStorage.setItem("auto_login", autoLogin);
-								localStorage.setItem("user_pwd", $("#password_").val());
-							}*/
+							localStorage.setItem('patientInfo', JSON.stringify(result.data));
 							location.href="main.html";
 						}else{
 							alert(result.message);

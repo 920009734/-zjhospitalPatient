@@ -82,8 +82,9 @@
         	document.addEventListener( "plusready", plusReady, false );
 			
         	$(function(){
+        		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
 				// 创建一个Socket实例
-				var socket = new WebSocket('ws://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + localStorage.getItem("patientId"));
+				var socket = new WebSocket('ws://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + patientInfo.patientid);
 				// 打开Socket
 				socket.onopen = function(event) {
 				  console.log('open', event); 
