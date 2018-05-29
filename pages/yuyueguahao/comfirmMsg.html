@@ -66,25 +66,7 @@
         		$(".close_dialog,.ui-dialog-close").click(function(){
 					$(".ui-dialog").hide();
 				});
-        		function GetRequest() {
-       			  var url = decodeURI(location.search); //获取url中"?"符后的字串
-       			   var theRequest = new Object();
-       			   if (url.indexOf("?") != -1) {
-       			      var str = url.substr(1);
-       			      strs = str.split("&");
-       			      for(var i = 0; i < strs.length; i ++) {
-       			         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
-       			      }
-       			   }
-       			   return theRequest;
-       			}
-        		var Request = new Object();
-        		Request = GetRequest();
-//				var patientname = Request["patientname"];
-//				var patientid = Request["patientid"];
-//				$("#patientid").val(patientid);
-//				$("#patientname").text(patientname);
-				
+        		var Request = Utils.getRequest();
         		
         		$("#deptName_").text(Request["deptName"]);
         		$("#doctorName_").text(Request["doctorName"]);
@@ -106,17 +88,10 @@
 						$(".ui-dialog").show();
 					}else{
 						var params={};
-//						params.patientId=Request["patientid"];
-//						params.patientName=Request["patientname"];
-//						params.patientGender=Request["gender"];
-//						params.patientIdcard=Request["idcard"];
-//						params.patientPhoneNumber=Request["phone"];
-//						params.patientCardNumber=Request["attendancecard"];
 						params.divisionName=$("#deptName_").text();
 						params.divisionId=$("input[name='deptCode_']").val();
 						params.doctorName=$("#doctorName_").text();
 						params.clinicType=$("#clinicType_").text();
-						//params.czDate = new Date(("input[name='scheduleDate_']").val().replace(/-/g,"/"));
 						params.bespeakTime=$("#fullTime_").text();
 						params.money=$("input[name='regFee_']").val();
 						params.doctorId=$("input[name='doctorCode_']").val();
@@ -129,30 +104,45 @@
 						
 						$(".ui-loading-block").show();
 						$(".ui-loading-block").css("margin","45% 0 0 31%");
-						//医院锁号，生成商户订单号
-						$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
-							if (data.success) {
-								outChargeNo = data.data[0].hisOrdNum;
-			        			//统一支付下单，生产支付凭证
-			        			$.post(Utils.getRoot()+"/registerApp/recharge", {
-			        				outChargeNo: data.data[0].hisOrdNum,
-									chargeAmt: data.data[0].regFee,
-									channel: $("input[name='channel_radio']:checked").val()
-			        			}, function(res){
-			        				$(".ui-loading-block").hide();
-									if (res.success) {
-										window.location.href = res.data.directUrl;
-									} else {
-										$("#dialogText").html(res.message);
+						
+						$.post(Utils.getRoot()+"/registerApp/getPatientInfoById", {patientId:$("#patientid").val()}, function(data){
+							if (data.patCardNo.length>3) {//挂号支付
+								//医院锁号，生成商户订单号
+								$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
+									if (data.success) {
+										outChargeNo = data.data[0].hisOrdNum;
+					        			//统一支付下单，生产支付凭证
+					        			$.post(Utils.getRoot()+"/registerApp/recharge", {
+					        				outChargeNo: data.data[0].hisOrdNum,
+											chargeAmt: data.data[0].regFee,
+											channel: $("input[name='channel_radio']:checked").val()
+					        			}, function(res){
+					        				$(".ui-loading-block").hide();
+											if (res.success) {
+												window.location.href = res.data.directUrl;
+											} else {
+												$("#dialogText").html(res.message);
+												$(".ui-dialog").show();
+											}
+										});
+									}else{
+										$(".ui-loading-block").hide();
+										$("#dialogText").html(data.message);
 										$(".ui-dialog").show();
 									}
 								});
-							}else{
-								$(".ui-loading-block").hide();
-								$("#dialogText").html(data.message);
-								$(".ui-dialog").show();
+							}else{//挂号不支付
+								$.post(Utils.getRoot()+"/registerApp/addbespeakInfoNoId", params, function(res){
+									if (res.success) {
+										alert(res.message);
+									}else{
+										alert(res.message);
+									}
+								});
 							}
 						});
+						
+						
 					}
         		});
         	})

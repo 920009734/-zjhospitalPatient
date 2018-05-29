@@ -29,6 +29,8 @@
         
         <script type="text/javascript">
         	$(function(){
+        		wjfList();
+        		
         		$(".box_tab").on("click",function(){
 					var a = $(this).hasClass("active");
 					if(!a){
@@ -44,14 +46,16 @@
 					}
 				});
 				
-        		wjfList();
+        		
         		
         		function wjfList(){
         			var params={};
 	        		$.post(Utils.getRoot()+"/outpatientPayment/selPayorder",params,function(data){
+							console.log(JSON.stringify(data));
 						if (data.success) {
 							var listPayorder = new Array();
 							listPayorder= data.data;
+							console.log(listPayorder);
 							for (var i = 0; i < listPayorder.length; i++) {
 								var totalAmt = parseInt(listPayorder[i].totalAmt)/100;
 								$("#wjfList").append(
