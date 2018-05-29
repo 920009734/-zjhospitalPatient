@@ -12,7 +12,8 @@
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
 		<title>选择科室</title>
-		<style type="text/css">
+		<style type="text/css"> 
+			html,body{width: 100%;height: 100%;background-color: #F1F0F8;}
 			header>h4>span,header>h4>i{display: block;float: left;}
 			header>h4>i{margin-top: 3px;}
 			.search_doc{display: block;width: 92%;height: 60px;margin: 0 auto;margin-top: 15px;}
@@ -20,23 +21,23 @@
 			.search_left{width: 87%;background-color: #FFFFFF;border-radius: 30px;}
 			.search_left>input,.search_left>i{display: block;float: left;}
 			.search_left>input{height: 33px;line-height: 35px;width: 80%;border: none;margin-left: 15px;}
-			.search_left>i{font-size: 40px;margin-right: -10px;margin-top: -4px;}
+			.search_left>i{font-size: 40px;margin-right: -10px;margin-top: -6px;}
 			.search_right{width: 13%;text-align: right;color: #199ED8;}
-			.ck_doc{display: block;width:92%;margin: 0 auto;margin-bottom:5px;height: 100px;background-color: #FFFFFF;border-radius: 2px;}
-			.ck_doc>div{display: block;float: left;}
-			.doc_left{width: 23%;height: 100%;}
-			.doc_left>img{display: block;margin: 0 auto;margin-top:15px ;}
-			.doc_right{width: 76%;height: 100%;margin-top: 5px;}
+			.ck_doc{display:block;width:92%;height: 70px; margin-left:4%;margin-bottom:5px;background-color: #FFFFFF;border-radius: 2px;padding: 7px 0px;}
+			.ck_doc>div{display: block;float: left;} 
+			.doc_left{width: 20%;height: 100%;}
+			.doc_left>img{display: block;margin: 0 auto;width: 40px;height: 40px;margin-top: 5px;}
+			.doc_right{width: 78%;height: 100%;}
 			.right_title>span{display: block;float: left;height: 30px;line-height: 30px;}
-			.right_name{width: 25%;}
-			.right_position{width:38%;font-size: 13px;}
-			.right_type{width: 37%;font-size: 13px;text-align: right;}
-			.right_detail{display: block;float: left;width: 100%;font-size: 13px;}
+			.right_name{width: 25%;}  
+			.right_position{width:28%;font-size: 12px;}
+			.right_type{width: 45%;font-size: 12px;text-align: right;margin-right: 2%;}
+			.right_detail{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;text-overflow:ellipsis;overflow:hidden;width: 100%;font-size: 13px;}
 			.department_show{display: block;width: 80%;min-height: 200px;max-height: 700px; background-color: #FFFFFF;margin: 0 auto;}
 			.ui-dialog-cnt{display: block; width: 90%;margin: 0 auto;border-radius:5px ;background-color: #FFFFFF;}
 			.dep_type{display: block;font-size: 15px;}
-			.type_left{display: block;float: left;width: 35%;height: 420px;overflow-y: auto;}
-			.type_right{display: block;float: left;width: 100%;height: 420px;overflow-y: auto;background-color: #F6F6F6;}
+			.type_left{display: block;float: left;width: 35%;height: 400px;overflow-y: auto;}
+			.type_right{display: block;float: left;width: 100%;height: 400px;overflow-y: auto;background-color: #F6F6F6;}
 			.left_item{display: block;width: 100%;height: 40px;line-height: 40px;border-bottom: 1px solid #F6F6F6;}
 			.left_item>span{margin-left: 7px;}
 			.left_item.active{background-color: #F6F6F6;}
@@ -45,6 +46,10 @@
 			.right_item{display: block;width: 94%;margin: 0 auto;height: 40px;line-height: 40px;background-color: #FFFFFF;border: 1px solid #E0E0E0; margin-top: 10px;text-align: center;border-radius: 5px;}
 			.right_item>span{margin-left: 10px;}
 			.depitem_list.all{padding-bottom: 5px;}
+			
+			#doctor_{display: block;float: left;width: 100%;height: 100%;}
+			
+			input[placeholder]{font-size: 13px;}
 		</style>
 	</head>
 	<body ontouchstart>
@@ -269,7 +274,7 @@
 								$("#doctor_").append(
 									"<div class='ck_doc'>"
 										+"<div class='doc_left'>"
-											+"<img src='../../img/docImg.png'/>"
+											+"<img src='../../img/index/personLogo@2x.png'/>"
 										+"</div>"
 										+"<div class='doc_right'>"
 											+"<div class='right_title'>"
