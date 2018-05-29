@@ -13,6 +13,7 @@
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
+        
 		<title>确认预约信息</title>
 		<style type="text/css">
 			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
@@ -51,7 +52,13 @@
         	$(function(){
         		
         		$("#jzrxz").click(function(){
-        			//缺少将自己的家人查询出来
+        			//查询的是单个就诊人信息， 后期需改为多个
+        			$.post(Utils.getRoot()+"/registerApp/selPatient", {}, function(data){
+        				$("#patientid_").val(data.patientid);//APP患者ID
+        				$("#patCardNo_").val(data.patCardNo);//医院患者ID
+	        			$("#patientname_").html(data.patientname);
+	        			$(".addPatient").hide();
+        			});
         			
         			$(".addPatient").show();
         		});
@@ -59,7 +66,8 @@
         			window.location.href="../yuyueguahao/addPerple.html"
         		});
         		$("#choosePeople_").click(function(){
-        			$("#patientid").val("myself");
+        			$("#patientid").val($("#patientid_").val());
+        			$("#patCardNo").val($("#patCardNo_").val());
         			$("#patientname").html($("#patientname_").html());
         			$(".addPatient").hide();
         		})
@@ -105,42 +113,42 @@
 						$(".ui-loading-block").show();
 						$(".ui-loading-block").css("margin","45% 0 0 31%");
 						
-						$.post(Utils.getRoot()+"/registerApp/getPatientInfoById", {patientId:$("#patientid").val()}, function(data){
-							if (data.patCardNo.length>3) {//挂号支付
-								//医院锁号，生成商户订单号
-								$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
-									if (data.success) {
-										outChargeNo = data.data[0].hisOrdNum;
-					        			//统一支付下单，生产支付凭证
-					        			$.post(Utils.getRoot()+"/registerApp/recharge", {
-					        				outChargeNo: data.data[0].hisOrdNum,
-											chargeAmt: data.data[0].regFee,
-											channel: $("input[name='channel_radio']:checked").val()
-					        			}, function(res){
-					        				$(".ui-loading-block").hide();
-											if (res.success) {
-												window.location.href = res.data.directUrl;
-											} else {
-												$("#dialogText").html(res.message);
-												$(".ui-dialog").show();
-											}
-										});
-									}else{
-										$(".ui-loading-block").hide();
-										$("#dialogText").html(data.message);
-										$(".ui-dialog").show();
-									}
-								});
-							}else{//挂号不支付
-								$.post(Utils.getRoot()+"/registerApp/addbespeakInfoNoId", params, function(res){
+						var patCardNo = $("#patCardNo").val();
+						
+						if (patCardNo.length>3) {//挂号支付
+							//医院锁号，生成商户订单号
+							$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
+								if (data.success) {
+									outChargeNo = data.data[0].hisOrdNum;
+				        			//统一支付下单，生产支付凭证
+				        			$.post(Utils.getRoot()+"/registerApp/recharge", {
+				        				outChargeNo: data.data[0].hisOrdNum,
+										chargeAmt: data.data[0].regFee,
+										channel: $("input[name='channel_radio']:checked").val()
+				        			}, function(res){
+				        				$(".ui-loading-block").hide();
+										if (res.success) {
+											window.location.href = res.data.directUrl;
+										} else {
+											$("#dialogText").html(res.message);
+											$(".ui-dialog").show();
+										}
+									});
+								}else{
+									$(".ui-loading-block").hide();
+									$("#dialogText").html(data.message);
+									$(".ui-dialog").show();
+								}
+							});
+						} else{//挂号不支付
+							$.post(Utils.getRoot()+"/registerApp/addbespeakInfoNoId", params, function(res){
 									if (res.success) {
 										alert(res.message);
 									}else{
 										alert(res.message);
 									}
 								});
-							}
-						});
+						}
 						
 						
 					}
@@ -169,6 +177,7 @@
 			<section id="list">
 				<div class="ck_doctor">
 					<span class="ck_doctor_name">就诊人:</span>
+					<input type="hidden" id="patCardNo" value="" >
 					<input type="hidden" id="patientid" value="" >
 					<span id="patientname" ></span>
 					<span class="ck_doctor_btn" id="jzrxz" ><i class="ui-icon ui-icon-add-people" ></i>
@@ -245,6 +254,8 @@
 					            	</span>
 					            </div>
 					            <div class="per_name" id="choosePeople_">
+					            	<input type="hidden" id="patientid_" value="" >
+					            	<input type="hidden" id="patCardNo_" value="" >
 					            	<span id="patientname_">测试人员</span>
 					            	<span class="per_relationship">本人</span>
 					            </div>
