@@ -121,11 +121,14 @@
 		}
 	
     	$(function(){
+    		//设置用户信息
     		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
-    		$("#user_name_").html(patientInfo.patientname);
-    		$("#user_sex_").html(patientInfo.sex == '1' ? '男' : '女');
-    		$("#user_age_").html(patientInfo.age);
-    		
+    		if(patientInfo){
+	    		$("#user_name_").html(patientInfo.patientname);
+	    		$("#user_sex_").html(patientInfo.sex == '1' ? '男' : '女');
+	    		$("#user_age_").html(patientInfo.age);
+    		}
+    		//标识是否有新版本
     		var inv = localStorage.getItem('isNewVersion');
 			if(inv){
 				$("#banben_new_").addClass('banben_new');
