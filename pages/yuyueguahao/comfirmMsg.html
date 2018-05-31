@@ -50,17 +50,34 @@
 		<script type="text/javascript">
 			var outChargeNo = '';//商户充值业务流水
         	$(function(){
-        		
-        		$("#jzrxz").click(function(){
-        			//查询的是单个就诊人信息， 后期需改为多个
-        			$.post(Utils.getRoot()+"/registerApp/selPatient", {}, function(data){
-        				$("#patientid_").val(data.patientid);//APP患者ID
-        				$("#patCardNo_").val(data.patCardNo);//医院患者ID
-	        			$("#patientname_").html(data.patientname);
-	        			$(".addPatient").hide();
-        			});
-        			
-        			$(".addPatient").show();
+	       		//选择就诊人
+        		$("#jzrxz").on("click", function(){
+        			$.post(Utils.getRoot()+"/registerApp/selPatient", function(res){
+	    				if (res.success) {
+	    					//alert("99999999999999999");
+	    					var data = new Object();
+	        				data = res.data;
+	        				for (var i = 0; i < data.length; i++) {
+	        					var n = data[i].patientid;
+		        				var m = data[i].patCardNo;
+		        				var l = data[i].patientname;
+		        				//$("#patientid_").val(data.patientid);//APP患者ID
+		        				//$("#patCardNo_").val(data.patCardNo);//医院患者ID
+			        			//$("#patientname_").html(data.patientname);
+			        			var tj = $("#tj");
+			        			tj.append("<div class='per_name' id='choosePeople_'>"+
+							            	"<input type='hidden' id='patientid_' value='"+n+"' >"+
+							            	"<input type='hidden' id='patCardNo_' value='"+m+"' >"+
+							            	"<span id='patientname_'>"+l+"</span>"+
+							            	"<span class='per_relationship'>本人</span>"+
+							            "</div>");
+	        				}
+						            
+						    $(".addPatient").show();
+					    } else {
+					    	console.log(res.message);
+					    }
+		       		});
         		});
         		$("#add_rela").click(function(){
         			window.location.href="../yuyueguahao/addPerple.html"
@@ -246,19 +263,19 @@
 			                    <h3>选择就诊人</h3>
 			                    <i class="ui-dialog-close" data-role="button"></i>
 			                </header>
-			                 <div class="ui-dialog-bd">
+			                <div class="ui-dialog-bd" id="tj">
 					            <div class="add_per">
 					            	<span id="add_rela">
 						            	<i class="ui-icon ui-icon-add-people"></i>
 						            	<span>添加就诊人</span>
 					            	</span>
 					            </div>
-					            <div class="per_name" id="choosePeople_">
+					            <!--<div class="per_name" id="choosePeople_">
 					            	<input type="hidden" id="patientid_" value="" >
 					            	<input type="hidden" id="patCardNo_" value="" >
 					            	<span id="patientname_">测试人员</span>
 					            	<span class="per_relationship">本人</span>
-					            </div>
+					            </div>-->
 					        </div>
 					    </div>        
 					</div>
