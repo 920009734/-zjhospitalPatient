@@ -18,11 +18,7 @@ $(function(){
 	$("#deptCode").val(Request["deptCode"]);
 	$("#deptName").text(Request["deptName"]);
 	doctorInfoList(nowdateTime);
-	//doctorGh($("#deptCode").val());
-	/*
-	 * var nt = new Date();
-	 * $("#nowTime").html(nt.getFullYear()+"-"+(doHandleMonth(nt.getMonth()+1))+"-"+nt.getDate());
-	 */
+	
 	//获取当前时间
 	var nowdate = new Date();
 	var nt = Utils.formatDateByLong(nowdate, "yyyy-MM-dd");
@@ -61,11 +57,9 @@ $(function(){
 	//条件选择
 	$(".show_tab_time").on("click",".guahao",function(){
 		if($(this).children("input").val()=="xzDate"){
-			//$("#doctorGh").hide();
 			$("#dateGh").show();
 			$(".nowTime").show();
 		}else{
-			//location.href = "doctorGuahao.html?rdata="+rdata+"&sdata="+sdata+"&deptCode="+deptCode+"&nowdate="+nowdate;
 			$("#rq").hide();
 			$("#zj").show();
 			tj = 1;
@@ -116,7 +110,8 @@ $(function(){
 	function getSevenDate(nt) {
 		var s = Utils.formatDateByLong(nt, "yyyy-MM-dd") + ",";
 		for (var i = 1; i < 7; i++) {
-			s += nt.getFullYear()+"-"+(doHandleMonth(nt.getMonth()+1))+"-"+(doHandleMonth(nt.getDate()+i)) + ",";
+			 nt.setDate(nt.getDate() + 1);
+			 s += nt.getFullYear()+"-"+(doHandleMonth(nt.getMonth()+1))+"-"+(doHandleMonth(nt.getDate())) + ",";
 		}
 		//去除最后一位
 		s = s.substring(0, s.length-1);
@@ -135,7 +130,7 @@ $(function(){
 	        tMonth = doHandleMonth(tMonth + 1);
 	        tDate = doHandleMonth(tDate);
 	        if(tday == 0){
-	        	tday = "天";
+	        	tday = "日";
 	        }else if(tday == 1){
 	        	tday = "一";
 	        }else if(tday == 2){
@@ -152,19 +147,18 @@ $(function(){
 	        var showday = new Date();
 	        if(tDate == doHandleMonth(showday.getDate())){
 	        	if (tDate == data[i].dataday) {
-	        		if (data[i].status == 1) {
+	        		if (data[i].status == 1) {//有号
 	        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
 							+'<h3 class="dep_name">'+tday+'</h3>'
 							+'<p class="dep_addr">'+tDate+'(有)</p>'
 							+'</div>');
-	        		} else {
+	        		} else {//无号
 	        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
 							+'<h3 class="dep_name">'+tday+'</h3>'
 							+'<p class="dep_addr">'+tDate+'(无)</p>'
 							+'</div>');
 	        		}
 	        	}
-	        	
 	        }else{
 	        	if (tDate == data[i].dataday) {
 	        		if (data[i].status == 1) {
@@ -208,11 +202,9 @@ $(function(){
 				break;
 			}
 		}
-		
 		$("#nowTime").html("");
 		$("#nowTime").html(topTime);
 		doctorInfoList(topTime);
-		//doctorGh($("#deptCode").val());
 	}
 	
 	//清空append追加的数据
@@ -452,21 +444,22 @@ $(function(){
 					);
 				}
 			}else{
-				$("#swinfoList").append(
-						"<div class='list-item '>"+
-							"<p class='notData'>暂无数据</p>"+
-						"</div>"
-					);
-					$("#xwinfoList").append(
-						"<div class='list-item '>"+
-							"<p class='notData'>暂无数据</p>"+
-						"</div>"
-					);
+				alert(data.message);
+				/*$("#swinfoList").append(
+					"<div class='list-item '>"+
+						"<p class='notData'>暂无数据</p>"+
+					"</div>"
+				);
+				$("#xwinfoList").append(
+					"<div class='list-item '>"+
+						"<p class='notData'>暂无数据</p>"+
+					"</div>"
+				);
 				$("#wsinfoList").append(
-						"<div class='list-item '>"+
-							"<p class='notData'>暂无数据</p>"+
-						"</div>"
-					);
+					"<div class='list-item '>"+
+						"<p class='notData'>暂无数据</p>"+
+					"</div>"
+				);*/
 			}
 		});
 	}
