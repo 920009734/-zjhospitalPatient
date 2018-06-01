@@ -17,7 +17,7 @@ $(function(){
 	Request = Utils.getRequest();
 	$("#deptCode").val(Request["deptCode"]);
 	$("#deptName").text(Request["deptName"]);
-	doctorInfoList(nowdateTime);
+	
 	
 	//获取当前时间
 	var nowdate = new Date();
@@ -31,11 +31,29 @@ $(function(){
 	createTime(dateTime, deptCode);
 	
 	$(".date_item").on("click",".date_list",function(){
-		var a = $(this).hasClass("active");
-		if(!a){
-			$(this).addClass("active").siblings(".date_list").removeClass("active");
-			
+		cleanDiv();
+		
+		var a = $(this).attr("class");
+		if(a=="date_list"){
+			$(this).addClass("active").siblings(".date_list.active").removeClass("active");
 			exditTopDate();
+		}else{
+			
+			$("#swinfoList").append(
+				"<div class='list-item '>"+
+					"<p class='notData'>暂无数据</p>"+
+				"</div>"
+			);
+			$("#xwinfoList").append(
+				"<div class='list-item '>"+
+					"<p class='notData'>暂无数据</p>"+
+				"</div>"
+			);
+			$("#wsinfoList").append(
+				"<div class='list-item '>"+
+					"<p class='notData'>暂无数据</p>"+
+				"</div>"
+			);
 		}
 	});
 	
@@ -75,15 +93,6 @@ $(function(){
 	
 	//按医生选择
 	$(".show_tab_time").on("click",".guahao1",function(){
-		/*if($(this).children("input").val()=="zjDoctor"){
-			ghtype = $(".guahao1.active").attr("id");
-			var nt = $("#nowTime").text();
-			doctorInfoList(nt);
-		}else{
-			ghtype = $(".guahao1.active").attr("id");
-			var nt = $("#nowTime").text();
-			doctorInfoList(nt);
-		}*/
 		var a = $(this).hasClass("active");
 		if(!a){
 			$(this).addClass("active").siblings("span").removeClass("active");
@@ -153,7 +162,7 @@ $(function(){
 							+'<p class="dep_addr">'+tDate+'(有)</p>'
 							+'</div>');
 	        		} else {//无号
-	        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
+	        			$(".date_item").append('<div class="date_list noactive" id="'+tDate+'" >'
 							+'<h3 class="dep_name">'+tday+'</h3>'
 							+'<p class="dep_addr">'+tDate+'(无)</p>'
 							+'</div>');
@@ -162,12 +171,12 @@ $(function(){
 	        }else{
 	        	if (tDate == data[i].dataday) {
 	        		if (data[i].status == 1) {
-	        			$(".date_item").append('<div class="date_list " id="'+tDate+'">'
+	        			$(".date_item").append('<div class="date_list" id="'+tDate+'">'
 							+'<h3 class="dep_name">'+tday+'</h3>'
 							+'<p class="dep_addr">'+tDate+'(有)</p>'
 							+'</div>');
 	        		} else {
-	        			$(".date_item").append('<div class="date_list " id="'+tDate+'">'
+	        			$(".date_item").append('<div class="date_list noactive" id="'+tDate+'">'
 							+'<h3 class="dep_name">'+tday+'</h3>'
 							+'<p class="dep_addr">'+tDate+'(无)</p>'
 							+'</div>');
@@ -176,6 +185,7 @@ $(function(){
 	        	
 	        }
 		}
+		exditTopDate();
 	}  
 	function doHandleMonth(month){    
       	var m = month;    
@@ -187,7 +197,6 @@ $(function(){
 	
 	function exditTopDate() {
 		var day = $(".date_list.active").attr("id");
-		
 		var topTime = "";
 		
 		var nowdate = new Date();
@@ -226,7 +235,6 @@ $(function(){
 		//刚添加，尚未用到doctorCode字段，默认为null
 		params.doctorCode = "";
 		$.post(Utils.getRoot()+"/registerApp/selclinicSchedule",params,function(data){
-			console.log(JSON.stringify(data));
 			if (data.success) {
 				var dortorInfo = new Array();
 				dortorInfo= data.data;
