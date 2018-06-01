@@ -54,6 +54,7 @@
         		$("#jzrxz").on("click", function(){
         			$.post(Utils.getRoot()+"/registerApp/selPatient", function(res){
 	    				if (res.success) {
+	    					$("#tj").empty();
 	    					//alert("99999999999999999");
 	    					var data = new Object();
 	        				data = res.data;
