@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-null
-=======
+
 {
   "pages/login.html": {
     "resources": [
@@ -424,4 +422,3 @@ null
     "refer": []
   }
 }
->>>>>>> branch 'master' of https://gitee.com/laiyw/zjhospitalPatient.git
