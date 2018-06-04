@@ -70,13 +70,14 @@
 	    				outChargeNo: new Date().getTime(),
 						chargeAmt: '0.01',
 						channel: channel 
-	    			}, function(res){
+	    	}, function(res){ 
 						if (res.success) { 
 							console.log(JSON.stringify(res.data))
 							//location.href = res.data.directUrl;
 							//redirect_url 回调地址，与H5支付授权域名相同
 							/*var directUrl = res.data.directUrl+"&redirect_url=http%3A%2F%2Fzjyy.com.cn"
 							embed.loadURL(directUrl,{Referer:"http://zjyy.com.cn"});*/
+							
 							
 							//支付跳转地址
 							var htData = "<script>window.location.href=\"" + res.data.directUrl + "\";<\/script>";
