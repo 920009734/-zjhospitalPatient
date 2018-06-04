@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-null
-=======
 {
   "pages/yuyueguahao/paymentMethod2.html": {
     "resources": [
@@ -8,8 +5,8 @@ null
       "font/iconfont-full.ttf",
       "css/frozen.css",
       "css/style.css",
+      "lib/zepto.min.js",
       "js/Utils.js"
     ]
   }
 }
->>>>>>> branch 'master' of https://gitee.com/laiyw/zjhospitalPatient.git
