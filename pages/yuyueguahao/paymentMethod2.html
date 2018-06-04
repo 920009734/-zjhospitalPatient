@@ -69,9 +69,7 @@
 	    	}, function(res){ 
 						if (res.success) { 
 							console.log(JSON.stringify(res.data))
-							//location.href = res.data.directUrl;
-							//H5支付授权域名
-							ws.loadURL(res.data.directUrl,{Referer:"http://zjyy.com.cn"});
+							ws.loadURL(res.data.directUrl,{"Referer":"http://zjyy.com.cn"});
 							//支付跳转地址
 							/*var htData = "<script>window.location.href=\"" + res.data.directUrl + "\";<\/script>";
 							var options = {baseURL:"http://zjyy.com.cn",mimeType:"text/html",encoding:"utf-8"};
