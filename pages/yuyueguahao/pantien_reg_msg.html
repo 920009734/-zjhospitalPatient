@@ -71,6 +71,7 @@
 					if (data.success) {
 						var Patient = data.data;
 						var patientGender = Patient.patientGender=="1"?"男":"女";
+						$("#hisPatientId").val(Patient.hisPatientId);
 						$("#patientname").val(Patient.patientName);
 						$("#sex").val(patientGender);
 						$("#idcard").val(Patient.patientIdcard);
@@ -108,16 +109,51 @@
 					params.serialNumber = $("#serialNumber").val();
 					params.cancelReason = $("#cancelReason").val();
 					
+					//取消未支付的预约信息，先取消预约，取消锁号
+					if($("#hisPatientId").val()==null || $("#hisPatientId").val()==""){
+						$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(data){
+							if (data.success) {
+								alert(data.message);
+							}else{
+								alert(data.message);
+							}
+						});
+					}else{//取消已支付的预约信息，先取消预约，取消锁号
+						$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(data){
+							if (data.success) {
+								//最后再退款
+								/*outChargeNo 支付订单号 String(32) N
+								outRefundNo 退款流水号 String(32) N
+								refundAmt 退款金额，单位为分 Number(12) N*/
+								$.post(Utils.getRoot()+"/registerApp/refund", {
+									outChargeNo: $("#hisOrdNum").val(),
+									outRefundNo: $("#serialNumber").val(),
+									refundAmt: $("#money").val() * 100
+								}, function(res) {
+									if (res.success) {
+										alert(res.message);
+									}else{
+										alert(res.message);
+									}
+								});
+							} else {
+								alert(data.message);
+							}
+						});
+					}
+					
+					
+					
 					//第三方支付方，退款
 					/*outChargeNo 支付订单号 String(32) N
 					outRefundNo 退款流水号 String(32) N
 					refundAmt 退款金额，单位为分 Number(12) N*/
-					$.post(Utils.getRoot()+"/registerApp/refund", {
+				/*	$.post(Utils.getRoot()+"/registerApp/refund", {
 						outChargeNo: $("#hisOrdNum").val(),
 						outRefundNo: $("#serialNumber").val(),
 						refundAmt: $("#money").val() * 100
-					}, function() {
-						if (res.success) {
+					}, function(data) {
+						if (data.success) {
 							//医院方，取消预约
 							$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(res){
 								if (res.success) {
@@ -127,9 +163,9 @@
 								}
 							});
 						} else {
-							alert("");
+							alert(data.message);
 						}
-					});
+					});*/
 					
 					
 				}
@@ -141,7 +177,7 @@
 		<header class="ui-header ui-header-positive">
         <i class="ui-icon ui-icon-return" onclick="history.back()"></i><h4 style="margin-left: 25px;margin-top: -3px;">预约挂号详情 </h4>
 		</header>
-  
+  		<input type="hidden" id="hisPatientId" value="">
         <div class="name">
         		<span class="nam_left" >姓名：</span>
         		<input type="text"  disabled="disabled"  id="patientname"  value="" />

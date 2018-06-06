@@ -13,6 +13,7 @@
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
+        
 		<title>确认预约信息</title>
 		<style type="text/css">
 			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
@@ -49,42 +50,49 @@
 		<script type="text/javascript">
 			var outChargeNo = '';//商户充值业务流水
         	$(function(){
-        		
-        		$("#jzrxz").click(function(){
-        			//缺少将自己的家人查询出来
-        			
-        			$(".addPatient").show();
+	       		//选择就诊人
+        		$("#jzrxz").on("click", function(){
+        			$.post(Utils.getRoot()+"/registerApp/selPatient", function(res){
+	    				if (res.success) {
+	    					$("#tj").empty();
+	    					//alert("99999999999999999");
+	    					var data = new Object();
+	        				data = res.data;
+	        				for (var i = 0; i < data.length; i++) {
+	        					var n = data[i].patientid;
+		        				var m = data[i].patCardNo;
+		        				var l = data[i].patientname;
+		        				//$("#patientid_").val(data.patientid);//APP患者ID
+		        				//$("#patCardNo_").val(data.patCardNo);//医院患者ID
+			        			//$("#patientname_").html(data.patientname);
+			        			var tj = $("#tj");
+			        			tj.append("<div class='per_name' id='choosePeople_'>"+
+							            	"<input type='hidden' id='patientid_' value='"+n+"' >"+
+							            	"<input type='hidden' id='patCardNo_' value='"+m+"' >"+
+							            	"<span id='patientname_'>"+l+"</span>"+
+							            	"<span class='per_relationship'>本人</span>"+
+							            "</div>");
+	        				}
+						            
+						    $(".addPatient").show();
+					    } else {
+					    	console.log(res.message);
+					    }
+		       		});
         		});
         		$("#add_rela").click(function(){
         			window.location.href="../yuyueguahao/addPerple.html"
         		});
         		$("#choosePeople_").click(function(){
-        			$("#patientid").val("myself");
+        			$("#patientid").val($("#patientid_").val());
+        			$("#patCardNo").val($("#patCardNo_").val());
         			$("#patientname").html($("#patientname_").html());
         			$(".addPatient").hide();
         		})
         		$(".close_dialog,.ui-dialog-close").click(function(){
 					$(".ui-dialog").hide();
 				});
-        		function GetRequest() {
-       			  var url = decodeURI(location.search); //获取url中"?"符后的字串
-       			   var theRequest = new Object();
-       			   if (url.indexOf("?") != -1) {
-       			      var str = url.substr(1);
-       			      strs = str.split("&");
-       			      for(var i = 0; i < strs.length; i ++) {
-       			         theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
-       			      }
-       			   }
-       			   return theRequest;
-       			}
-        		var Request = new Object();
-        		Request = GetRequest();
-//				var patientname = Request["patientname"];
-//				var patientid = Request["patientid"];
-//				$("#patientid").val(patientid);
-//				$("#patientname").text(patientname);
-				
+        		var Request = Utils.getRequest();
         		
         		$("#deptName_").text(Request["deptName"]);
         		$("#doctorName_").text(Request["doctorName"]);
@@ -106,17 +114,10 @@
 						$(".ui-dialog").show();
 					}else{
 						var params={};
-//						params.patientId=Request["patientid"];
-//						params.patientName=Request["patientname"];
-//						params.patientGender=Request["gender"];
-//						params.patientIdcard=Request["idcard"];
-//						params.patientPhoneNumber=Request["phone"];
-//						params.patientCardNumber=Request["attendancecard"];
 						params.divisionName=$("#deptName_").text();
 						params.divisionId=$("input[name='deptCode_']").val();
 						params.doctorName=$("#doctorName_").text();
 						params.clinicType=$("#clinicType_").text();
-						//params.czDate = new Date(("input[name='scheduleDate_']").val().replace(/-/g,"/"));
 						params.bespeakTime=$("#fullTime_").text();
 						params.money=$("input[name='regFee_']").val();
 						params.doctorId=$("input[name='doctorCode_']").val();
@@ -129,30 +130,45 @@
 						
 						$(".ui-loading-block").show();
 						$(".ui-loading-block").css("margin","45% 0 0 31%");
-						//医院锁号，生成商户订单号
-						$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
-							if (data.success) {
-								outChargeNo = data.data[0].hisOrdNum;
-			        			//统一支付下单，生产支付凭证
-			        			$.post(Utils.getRoot()+"/registerApp/recharge", {
-			        				outChargeNo: data.data[0].hisOrdNum,
-									chargeAmt: data.data[0].regFee,
-									channel: $("input[name='channel_radio']:checked").val()
-			        			}, function(res){
-			        				$(".ui-loading-block").hide();
+						
+						var patCardNo = $("#patCardNo").val();
+						
+						if (patCardNo.length>3) {//挂号支付
+							//医院锁号，生成商户订单号
+							$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
+								if (data.success) {
+									outChargeNo = data.data[0].hisOrdNum;
+				        			//统一支付下单，生产支付凭证
+				        			$.post(Utils.getRoot()+"/registerApp/recharge", {
+				        				outChargeNo: data.data[0].hisOrdNum,
+										chargeAmt: data.data[0].regFee,
+										channel: $("input[name='channel_radio']:checked").val()
+				        			}, function(res){
+				        				$(".ui-loading-block").hide();
+										if (res.success) {
+											window.location.href = res.data.directUrl;
+										} else {
+											$("#dialogText").html(res.message);
+											$(".ui-dialog").show();
+										}
+									});
+								}else{
+									$(".ui-loading-block").hide();
+									$("#dialogText").html(data.message);
+									$(".ui-dialog").show();
+								}
+							});
+						} else{//挂号不支付
+							$.post(Utils.getRoot()+"/registerApp/addbespeakInfoNoId", params, function(res){
 									if (res.success) {
-										window.location.href = res.data.directUrl;
-									} else {
-										$("#dialogText").html(res.message);
-										$(".ui-dialog").show();
+										alert(res.message);
+									}else{
+										alert(res.message);
 									}
 								});
-							}else{
-								$(".ui-loading-block").hide();
-								$("#dialogText").html(data.message);
-								$(".ui-dialog").show();
-							}
-						});
+						}
+						
+						
 					}
         		});
         	})
@@ -179,6 +195,7 @@
 			<section id="list">
 				<div class="ck_doctor">
 					<span class="ck_doctor_name">就诊人:</span>
+					<input type="hidden" id="patCardNo" value="" >
 					<input type="hidden" id="patientid" value="" >
 					<span id="patientname" ></span>
 					<span class="ck_doctor_btn" id="jzrxz" ><i class="ui-icon ui-icon-add-people" ></i>
@@ -247,17 +264,19 @@
 			                    <h3>选择就诊人</h3>
 			                    <i class="ui-dialog-close" data-role="button"></i>
 			                </header>
-			                 <div class="ui-dialog-bd">
+			                <div class="ui-dialog-bd" id="tj">
 					            <div class="add_per">
 					            	<span id="add_rela">
 						            	<i class="ui-icon ui-icon-add-people"></i>
 						            	<span>添加就诊人</span>
 					            	</span>
 					            </div>
-					            <div class="per_name" id="choosePeople_">
+					            <!--<div class="per_name" id="choosePeople_">
+					            	<input type="hidden" id="patientid_" value="" >
+					            	<input type="hidden" id="patCardNo_" value="" >
 					            	<span id="patientname_">测试人员</span>
 					            	<span class="per_relationship">本人</span>
-					            </div>
+					            </div>-->
 					        </div>
 					    </div>        
 					</div>
