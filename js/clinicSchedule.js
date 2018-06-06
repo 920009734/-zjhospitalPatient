@@ -239,7 +239,7 @@ $(function(){
 				var dortorInfo = new Array();
 				dortorInfo= data.data;
 				sdata = JSON.stringify(dortorInfo);
-				console.log(JSON.stringify(dortorInfo));
+				console.log("dortorInfo:"+JSON.stringify(dortorInfo));
 				var s=0,x=0,w=0;
 				for (var i = 0; i < dortorInfo.length; i++) {
 					//按照日期
