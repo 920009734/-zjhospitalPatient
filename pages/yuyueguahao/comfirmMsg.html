@@ -146,7 +146,11 @@
 				        			}, function(res){
 				        				$(".ui-loading-block").hide();
 										if (res.success) {
-											window.location.href = res.data.directUrl;
+											if(channel=="ALI_WAP"){//支付宝支付
+												window.location.href = res.data.directUrl;
+											}else{//微信支付
+												ws.loadURL(res.data.directUrl,{"Referer":"http://zjyy.com.cn"});
+											}
 										} else {
 											$("#dialogText").html(res.message);
 											$(".ui-dialog").show();

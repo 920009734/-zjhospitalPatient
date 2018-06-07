@@ -68,13 +68,13 @@
 						channel: channel 
 	    	}, function(res){ 
 						if (res.success) { 
-							console.log(JSON.stringify(res.data))
-							ws.loadURL(res.data.directUrl,{"Referer":"http://zjyy.com.cn"});
-							//支付跳转地址
-							/*var htData = "<script>window.location.href=\"" + res.data.directUrl + "\";<\/script>";
-							var options = {baseURL:"http://zjyy.com.cn",mimeType:"text/html",encoding:"utf-8"};
-							ws.loadData(htData,options);*/
-//							embed.loadData(htData,options);
+							console.log(JSON.stringify(res.data));
+							if(channel=="ALI_WAP"){//支付宝支付
+								window.location.href = res.data.directUrl;
+							}else{//微信支付
+								ws.loadURL(res.data.directUrl,{"Referer":"http://zjyy.com.cn"});
+							}
+							
 						}else{
 							alert(res.message);
 						}
