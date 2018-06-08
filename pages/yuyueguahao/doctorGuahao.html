@@ -27,12 +27,8 @@
 			.date_list:last-child{border-right: 1px solid #4CB6AC;}
 			.date_list.active{background-color: #4CB6AC;color: #FFFFFF;}
 			
-			.show_tab_time{display: block;float: left;width: 94%;margin-left:3%;height: 40px;}
-			.show_tab_time>span{height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;width: 40%;}
+			.show_tab_time{display: block;float: left;width: 94%;margin-left:3%;height: 50px;}
 			.show_tab_time>div{display: block;float: right; width:60%; height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;}
-			.nowTime{display: block;float: left;width: 35%;color: #4CB6AC;}
-			.nowTime>span{display: block;float: left;height: 30px;line-height: 30px;}
-			.nowTime>i{display: block;float: left; font-size: 16px;height:30px;line-height: 30px; margin-left: 5px;color: #4CB6AC;}
 			.data_guahao{margin-right: -3px;}
 			.guahao{display: block;float: left; width: 49%;border: 1px solid #000000;text-align: center;border: 1px solid #4CB6AC;border-radius: 2px;}
 			.guahao.active{background-color: #4CB6AC;color: #FFFFFF;}
@@ -45,13 +41,9 @@
 			.doc_item_img>img{display: block;margin: 0 auto;width: 40px;height: 40px;margin-top: 15px;}
 			.doc_item_content{width: 65%;margin-top: 12px;}
 			.doc_item_content>div{}
-			.doc_item_yuhao{width: 15%;text-align: center;margin-top: 12px;font-size: 14px;}
 			.doc_item:last-child{margin-bottom: 10px;}
 			.doc_time{font-size: 13px;color: #999999;line-height: 25px;}
-			.yuhao{color: #4CB6AC;}
-			.yuhao_num{color: #008D00;font-size: 15px;}
-			.doc_name>span:nth-child(2){font-size: 13px;color: #008080;padding-left: 5px;}
-			.doc_time>span:nth-child(1){padding-left:5px ;}
+			.doc_time>span:nth-child(1){color: #008080;}
 		</style>
 		
 	</head>
@@ -67,11 +59,11 @@
 		<section class="ui-container"> 
 			<section id="list">
 				<div class="show_tab_time">
-					<span class="nowTime ">
+					<!--<span class="nowTime ">
 						<span id="nowTime"></span>
 						<!--icon-xiajiantou-->
-						<!--<i class="iconfont icon-xiajiantou"></i>-->
-					</span>
+						<!--<i class="iconfont icon-xiajiantou"></i>
+					</span>-->
 					<div>
 						<span class="zhuanjia_guahao guahao active" id="1">
 							<input type="hidden" value="xzDate">
@@ -84,10 +76,10 @@
 					</div>
 				</div>
 				<!-- 选择时间 -->
-				<div class="nav_date active">
+				<!--<div class="nav_date active">
 					<div class="date_item">
 					</div>
-				</div>
+				</div>-->
 				
 				<div class="doc_content" id="dortorList">
 					<!--<div class="doc_item">
@@ -97,16 +89,10 @@
 						<div class="doc_item_content">
 							<div class="doc_name">
 								<span>董方明</span>
-								<span>主治医生(专家、名医)</span>
 							</div>
 							<div class="doc_time"> 
-								<span>2018-04-11</span>
-								<span>普通门诊</span>
+								<span>主治医生(专家、名医)</span>
 							</div>
-						</div>
-						<div class="doc_item_yuhao">
-							<div class="yuhao">余号</div>
-							<div class="yuhao_num">18</div>
 						</div>
 					</div>
 					<div class="doc_item">
@@ -116,16 +102,10 @@
 						<div class="doc_item_content">
 							<div class="doc_name">
 								<span>董方明</span>
-								<span>主治医生(专家、名医)</span>
 							</div>
 							<div class="doc_time"> 
-								<span>2018-04-11</span>
-								<span>普通门诊</span>
+								<span>主治医生(专家、名医)</span>
 							</div>
-						</div>
-						<div class="doc_item_yuhao">
-							<div class="yuhao">余号</div>
-							<div class="yuhao_num">18</div>
 						</div>
 					</div>-->
 				</div>	
@@ -333,18 +313,16 @@
 																	'<input type="hidden" value="'+dortorInfo[i].clinicType+'" name="clinicType">'+
 																	'<input type="hidden" value="'+dortorInfo[i].deptName+'" name="deptName">'+
 																	'<span>'+dortorInfo[i].doctorName+'</span>'+
-																	'<span>'+dortorInfo[i].doctorTitle+'</span>'+
 																'</div>'+
 																'<div class="doc_time"> '+
-																	'<span>2018-04-11</span>'+
-																	'<span>'+dortorInfo[i].clinicType+'</span>'+
+																	'<span>'+dortorInfo[i].doctorTitle+'</span>'+
 																'</div>'+
 															'</div>'+
-															'<div class="doc_item_yuhao">'+
+/*															'<div class="doc_item_yuhao">'+
 																'<div class="yuhao">余号</div>'+
 																'<div class="yuhao_num">'+dortorInfo[i].leftNum+'</div>'+
 															'</div>'+
-														'</div>');
+*/														'</div>');
 									}
 								} else {
 									if (dortorInfo[i].clinicType != "普通号") {
@@ -360,17 +338,15 @@
 																	'<input type="hidden" value="'+dortorInfo[i].clinicType+'" name="clinicType">'+
 																	'<input type="hidden" value="'+dortorInfo[i].deptName+'" name="deptName">'+
 																	'<span>'+dortorInfo[i].doctorName+'</span>'+
-																	'<span>'+dortorInfo[i].doctorTitle+'</span>'+
 																'</div>'+
 																'<div class="doc_time"> '+
-																	'<span>2018-04-11</span>'+
-																	'<span>'+dortorInfo[i].clinicType+'</span>'+
+																	'<span>'+dortorInfo[i].doctorTitle+'</span>'+
 																'</div>'+
 															'</div>'+
-															'<div class="doc_item_yuhao">'+
+															/*'<div class="doc_item_yuhao">'+
 																'<div class="yuhao">余号</div>'+
 																'<div class="yuhao_num">'+dortorInfo[i].leftNum+'</div>'+
-															'</div>'+
+															'</div>'+*/
 														'</div>');
 									}
 								}
