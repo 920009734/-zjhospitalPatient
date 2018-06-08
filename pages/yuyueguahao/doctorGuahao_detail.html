@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
+        <!--<script src="../../js/doctorGuahao.js"></script>-->
+        
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
+		<title>医生挂号</title>
+		<style type="text/css">
+			.box_detail{display: block;float: left;width: 100%;min-height: 50px;max-height: 500px;background-color: #FFFFFF;padding: 10px 0;}
+			.box_detail_img{display: block;float: left;width: 22%;}
+			.box_detail_img>img{display: block;width: 45px;height: 45px;margin: 0 auto;}
+			.box_detail_name{display: block;float: left;height: 45px;line-height: 45px;}
+			.box_detail_dep{display: block;float: left;margin-left: 10px;height: 45px;line-height: 45px;color: #999999;}
+			.box_shanchang{display: block;float: left;width: 100%;margin-top: 15px;}
+			.box_shanchang>span{display: block; padding: 5px 10px;color: #008080;}
+			.box_shanchang>p{padding: 5px 10px;text-indent: 25px;font-size: 14px;line-height: 21px;color: #999999;}
+			.box_ckTime{display: block;float: left;width: 100%;margin-top: 10px;}
+			.box_item{display: block;float: left;width: 100%;background-color: #ffffff;margin-top: 10px;}
+			.box_date{display: block;float: left;width: 100%;height: 40px;line-height: 40px;border-bottom: 1px solid #e7e7e7;}
+			.box_date>span{padding-left: 10px;font-size: 14px;color: #999999;}
+			.box_time_item{display:block;float:left;width:100%;height:50px;line-height:50px;font-size: 15px;border-bottom: 1px solid #E7E7E7;}
+			.box_time_item:last-child{border: none;}
+			.box_time_item>span{display: block;float: left;border-radius: 2px;}
+			.box_time_item>span:nth-child(1){padding-left:10px;width: 45%;}
+			.box_yuhao{width: 23%; background-color: #3B92A6;border-radius: 2px; height: 30px;line-height: 30px;margin-top: 10px;margin-right: 4%;color: #FFFFFF;font-size: 13px;text-align: center;}
+			.box_ghf{width: 23%; background-color: #E04141;height: 30px;line-height: 30px;margin-top: 10px;color: #FFFFFF;font-size: 13px;text-align: center;}
+		</style>
+		
+	</head>
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">
+				<span id="deptName">医生挂号</span>
+				<span class="reflash_item"><i class="iconfont icon-switch"></i></span>
+			</h4>
+		</header>
+		<section class="ui-container"> 
+			<div class="demo-block">
+				<div class="box_detail">
+					<div>
+						<span class="box_detail_img"><img src="../../img/index/personLogo@2x.png"/></span>
+						<span class="box_detail_name">李元芳</span>
+						<!--<span class="box_detail_dep">内分泌科门诊</span>-->
+					</div>
+					<div class="box_shanchang">
+						<span>特长：</span>
+						<p class="wenzi ">从事呼吸内科和呼吸监护室临床
+							教学和科研工作近20年，具有丰富
+							的临床经验。擅长慢性阻塞性肺疾
+							病、支气管哮喘、支气管扩张症
+							肺部感染、胸膜疾病、肺部肿瘤等
+							呼吸科疾病的诊断和治疗，熟练掌
+							握呼吸科各种介入性手术，包括常
+							规支气管镜检查和治疗、气道内球
+							囊扩张术、微小球囊止血术、经支
+							气管镜肺活检术、气道内电消融术
+							等等。
+						</p>
+					</div>
+				</div>
+				
+				<div class="box_ckTime">
+					<div class="box_item">
+						<div class="box_date"><span>2018-06-09</span></div>
+						<div class="box_time_item">
+							<span>09:30~11:30</span>
+							<span class="box_yuhao">余号：11</span>
+							<span class="box_ghf">￥20元</span>
+						</div>
+						<div class="box_time_item">
+							<span>14:30~16:30</span>
+							<span class="box_yuhao">余号：4</span>
+							<span class="box_ghf">￥20元</span>
+						</div>
+					</div>
+					<div class="box_item">
+						<div class="box_date"><span>2018-06-09</span></div>
+						<div class="box_time_item">
+							<span>09:30~11:30</span>
+							<span class="box_yuhao">余号：11</span>
+							<span class="box_ghf">￥20元</span>
+						</div>
+						<div class="box_time_item">
+							<span>14:30~16:30</span>
+							<span class="box_yuhao">余号：4</span>
+							<span class="box_ghf">￥20元</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--刷新-->
+		<section id="actionsheet">
+			<div class="demo-item">
+				<div class="demo-block">
+					<div class="ui-actionsheet ">  
+						<div class="ui-actionsheet-cnt">
+							<button class="reflash_btn">刷新</button>  
+							<button class="actionsheetClose">取消</button> 
+						</div>         
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<script type="text/javascript">
+			$(function(){
+				//刷新页面
+				$(".reflash_item").on("click",function(){
+					$(".ui-actionsheet").addClass("show");
+				});
+				$(".actionsheetClose").on("click",function(){
+					$(".ui-actionsheet").removeClass("show");
+				});
+				$(".reflash_btn").on("click",function(){
+					location.reload();
+					$(".ui-actionsheet").removeClass("show");
+				});
+			});	
+		</script>
+	</body>
+</html>
