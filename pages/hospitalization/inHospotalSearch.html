@@ -10,11 +10,17 @@
         <script src="../../js/frozen.js"></script>
         <title>住院记录查询</title>
         <style type="text/css">
-        	html,body{width: 100%;background-color: #FFFFFF;font-family: "微软雅黑";}
-        	.search_hospital{display: block;float: left;width: 90%;margin-left: 5%;height: 60px;margin-top: 20px;}
-        	.search_hospital>input{display: block;width: 95%;height: 40px;line-height: 40px;font-size: 15px;border: 1px solid #E6E6E6;border-radius: 2px;}
-        	.search_hospital>button{display: block;float: left; width: 99.3%;height: 40px;line-height: 40px;margin-top: 25px; border-radius: 2px;background: #0066CC;border: 1px solid #0066CC;color: #FFFFFF;}
+        	html,body{width: 100%;}
+        	.search_hospital{display: block;float: left;width: 100%;height:130px;background-color: #FFFFFF;padding-top: 25px;}
+        	.search_hospital>input{display: block;float: left; width: 86%;margin-left: 5%; height: 40px;line-height: 40px;font-size: 15px;border: 1px solid #E6E6E6;border-radius: 2px;}
+        	.search_hospital>button{display: block;float: left; width: 90%;margin-left:5%;height: 40px;line-height: 40px;margin-top: 20px; border-radius: 2px;background: #0066CC;border: 1px solid #0066CC;color: #FFFFFF;}
         	input[placeholder]{padding-left: 4%;}
+        	.search_con{display: block;float: left;width: 100%;height: auto;margin-top: 15px;}
+        	.search_item{display: block;float: left;width: 90%;margin-left: 3%;height: 60px;line-height: 60px;background-color: #FFFFFF;padding: 0 2%;margin-top: 5px;border-radius: 2px;}
+        	.search_item>span{display: block;}
+        	.con_name{float: left;font-size: 15px;}
+        	.con_type{float: left;margin-left: 10px;font-size: 15px;}
+        	.con_time{display: block;float: right;font-size: 13px;color: #999999;}
         </style>
         
 	</head>
@@ -30,11 +36,34 @@
 					<input type="text" class="inp_" placeholder="请输入身份证号码" />
 					<button id="hos_btn">查询</button>
 				</div>
+				<!-- 查询出的内容 -->
+				<div class="search_con">
+					<div class="search_item">
+						<span class="con_name">李杰</span>
+						<span class="con_type">内可内科呢可</span>
+						<span class="con_time">2018-05-15</span>
+					</div>
+					<div class="search_item">
+						<span class="con_name">李杰</span>
+						<span class="con_type">内可内科呢可</span>
+						<span class="con_time">2018-05-15</span>
+					</div>
+					<div class="search_item">
+						<span class="con_name">李杰</span>
+						<span class="con_type">内可内科呢可</span>
+						<span class="con_time">2018-05-15</span>
+					</div>
+					<div class="search_item">
+						<span class="con_name">李杰</span>
+						<span class="con_type">内可内科呢可</span>
+						<span class="con_time">2018-05-15</span>
+					</div>
+				</div>
 			</div>
 		</section>
 		
 		<script type="text/javascript">
-			$("#hos_btn").click(function(){
+			$(".search_item").click(function(){
 				location.href = "inhospitalRecord.html";
 			});
 		</script>
