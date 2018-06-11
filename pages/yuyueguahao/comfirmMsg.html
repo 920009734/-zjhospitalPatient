@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../../css/style.css" />
         <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
         
-        <script src="../../js/jquery-1.8.3.min.js"></script>
+        <!--<script src="../../js/jquery-1.8.3.min.js"></script>-->
         <script>$.noConflict();</script>
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
@@ -67,9 +67,9 @@
 			        			//$("#patientname_").html(data.patientname);
 			        			var tj = $("#tj");
 			        			tj.append("<div class='per_name' id='choosePeople_'>"+
-							            	"<input type='hidden' id='patientid_' value='"+n+"' >"+
-							            	"<input type='hidden' id='patCardNo_' value='"+m+"' >"+
-							            	"<span id='patientname_'>"+l+"</span>"+
+							            	"<input type='hidden' class='patientid_' value='"+n+"' >"+
+							            	"<input type='hidden' class='patCardNo_' value='"+m+"' >"+
+							            	"<span class='patientname_'>"+l+"</span>"+
 							            	"<span class='per_relationship'>本人</span>"+
 							            "</div>");
 	        				}
@@ -83,10 +83,14 @@
         		$("#add_rela").click(function(){
         			window.location.href="../yuyueguahao/addPerple.html"
         		});
-        		$("#choosePeople_").click(function(){
-        			$("#patientid").val($("#patientid_").val());
-        			$("#patCardNo").val($("#patCardNo_").val());
-        			$("#patientname").html($("#patientname_").html());
+        		$("#tj").on("click",".per_name", function(){
+        			var a = $(this).children(".patientid_").val();
+        			var b = $(this).children(".patCardNo_").val();
+        			var c = $(this).children(".patientname_").text();
+        			//console.log(a+"，"+b+","+c);
+        			$("#patientid").val(a);
+        			$("#patCardNo").val(b);
+        			$("#patientname").html(c);
         			$(".addPatient").hide();
         		})
         		$(".close_dialog,.ui-dialog-close").click(function(){
