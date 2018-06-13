@@ -1,12 +1,12 @@
 $(function(){
 	//选择日期还是医生
-	$("#rq").show();
+//	$("#rq").show();
 	//选择专家还是名医
-	$("#zj").hide();
+//	$("#zj").hide();
 	//判断条件参数，按日期还是医生挂号
-	var tj = 0;
+//	var tj = 0;
 	//判断条件参数，按名专家还是名医
-	var ghtype = "1";
+//	var ghtype = "1";
 	//储存数据
 	var sdata = new Object();//号源数据
 	var rdata = new Object();//日期数据
@@ -73,7 +73,7 @@ $(function(){
 		
 	});
 	//条件选择
-	$(".show_tab_time").on("click",".guahao",function(){
+	/*$(".show_tab_time").on("click",".guahao",function(){
 		if($(this).children("input").val()=="xzDate"){
 			$("#dateGh").show();
 			$(".nowTime").show();
@@ -89,10 +89,16 @@ $(function(){
 		if(!a){
 			$(this).addClass("active");
 		}
-	});
-	
+	});*/
 	//按医生选择
-	$(".show_tab_time").on("click",".guahao1",function(){
+	$(".show_tab_time").on("click","#ysgh",function(){
+		var deptCode = $("#deptCode").val();
+		var deptName = $("#deptName").text();
+		window.location.href="../yuyueguahao/doctorGuahao.html?deptCode="+deptCode+"&deptName="+deptName;
+		
+	});
+	//按医生选择
+	/*$(".show_tab_time").on("click",".guahao1",function(){
 		var a = $(this).hasClass("active");
 		if(!a){
 			$(this).addClass("active").siblings("span").removeClass("active");
@@ -100,7 +106,7 @@ $(function(){
 			var nt = $("#nowTime").text();
 			doctorInfoList(nt);
 		}
-	});
+	});*/
 	
 	//创建日期
 	function createTime(dateTime, deptCode) {
@@ -162,7 +168,7 @@ $(function(){
 							+'<p class="dep_addr">'+tDate+'(有)</p>'
 							+'</div>');
 	        		} else {//无号
-	        			$(".date_item").append('<div class="date_list noactive" id="'+tDate+'" >'
+	        			$(".date_item").append('<div class="nodate_list noactive" id="'+tDate+'" >'
 							+'<h3 class="dep_name">'+tday+'</h3>'
 							+'<p class="dep_addr">'+tDate+'(无)</p>'
 							+'</div>');
@@ -176,7 +182,7 @@ $(function(){
 							+'<p class="dep_addr">'+tDate+'(有)</p>'
 							+'</div>');
 	        		} else {
-	        			$(".date_item").append('<div class="date_list noactive" id="'+tDate+'">'
+	        			$(".date_item").append('<div class="nodate_list noactive" id="'+tDate+'">'
 							+'<h3 class="dep_name">'+tday+'</h3>'
 							+'<p class="dep_addr">'+tDate+'(无)</p>'
 							+'</div>');
@@ -243,67 +249,66 @@ $(function(){
 				var s=0,x=0,w=0;
 				for (var i = 0; i < dortorInfo.length; i++) {
 					//按照日期
-					if (tj == 0) {
-						if (dortorInfo[i].timeFlag==1) {//上午
-							s++;
-							$("#swcount").text(s+"人");
-							$("#swinfoList").append(
-								"<div class='con_doc'>"+
-									 "<div class='doc_img'><img src='../../img/docImg.png'></div>"+
-									 "<div class='doc_detail'>"+
-										"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
-										"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
-										"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
-										"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
-										"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
-									"</div>"+
-									"<div class='doc_yynum'>"+
-										"<span class='yhao'>余号</span>"+
-										"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
-									"</div>"+
-								"</div>"
-							);
-						} else if(dortorInfo[i].timeFlag==2) {//下午
-							x++;
-							$("#xwcount").text(x+"人");
-							$("#xwinfoList").append(
-								"<div class='con_doc' >"+
-									"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
-									 "<div class='doc_detail'>"+
-										"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
-										"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
-										"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
-										"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
-										"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
-									"</div>"+
-									"<div class='doc_yynum'>"+
-										"<span class='yhao'>余号</span>"+
-										"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
-									"</div>"+
-								"</div>"
-							);
-						}else if(dortorInfo[i].timeFlag==3){//晚上
-							w++;
-							$("#wscount").text(w+"人");
-							$("#wsinfoList").append(
-								"<div class='con_doc'>"+
-									"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
-									 "<div class='doc_detail'>"+
-										"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
-										"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
-										"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
-										"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
-										"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
-									"</div>"+
-									"<div class='doc_yynum'>"+
-										"<span class='yhao'>余号</span>"+
-										"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
-									"</div>"+
-								"</div>"
-							);
-						}
+					if (dortorInfo[i].timeFlag==1) {//上午
+						s++;
+						$("#swcount").text(s+"人");
+						$("#swinfoList").append(
+							"<div class='con_doc'>"+
+								 "<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+								 "<div class='doc_detail'>"+
+									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
+									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+									"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
+									"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+									"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
+								"</div>"+
+								"<div class='doc_yynum'>"+
+									"<span class='yhao'>余号</span>"+
+									"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+								"</div>"+
+							"</div>"
+						);
+					} else if(dortorInfo[i].timeFlag==2) {//下午
+						x++;
+						$("#xwcount").text(x+"人");
+						$("#xwinfoList").append(
+							"<div class='con_doc' >"+
+								"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+								 "<div class='doc_detail'>"+
+									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
+									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+									"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
+									"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+									"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
+								"</div>"+
+								"<div class='doc_yynum'>"+
+									"<span class='yhao'>余号</span>"+
+									"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+								"</div>"+
+							"</div>"
+						);
+					}else if(dortorInfo[i].timeFlag==3){//晚上
+						w++;
+						$("#wscount").text(w+"人");
+						$("#wsinfoList").append(
+							"<div class='con_doc'>"+
+								"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+								 "<div class='doc_detail'>"+
+									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
+									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+									"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
+									"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+									"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
+								"</div>"+
+								"<div class='doc_yynum'>"+
+									"<span class='yhao'>余号</span>"+
+									"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+								"</div>"+
+							"</div>"
+						);
+					}
 					//还是按照医生
-					} else {
+					/*else {
 						if (ghtype=="0") {
 							if (dortorInfo[i].clinicType == "普通号") {
 								if (dortorInfo[i].timeFlag==1) {//上午
@@ -427,7 +432,7 @@ $(function(){
 								}	
 							}
 						}
-					}
+					}*/
 					
 				}
 				if (s == 0) {
@@ -453,21 +458,6 @@ $(function(){
 				}
 			}else{
 				alert(data.message);
-				/*$("#swinfoList").append(
-					"<div class='list-item '>"+
-						"<p class='notData'>暂无数据</p>"+
-					"</div>"
-				);
-				$("#xwinfoList").append(
-					"<div class='list-item '>"+
-						"<p class='notData'>暂无数据</p>"+
-					"</div>"
-				);
-				$("#wsinfoList").append(
-					"<div class='list-item '>"+
-						"<p class='notData'>暂无数据</p>"+
-					"</div>"
-				);*/
 			}
 		});
 	}
@@ -485,40 +475,5 @@ $(function(){
 	
 	
 	
-	/*function doctorGh(deptCode){
-		$("#dortorList").html("");
-		var params={};
-		params.deptCode=deptCode;
-		$.post(Utils.getRoot()+"/registerApp/selDoctor",params,function(data){
-			if (data.success) {
-				var dortorInfo = new Array();
-				dortorInfo= data.data;
-				for (var i = 0; i < dortorInfo.length; i++) {
-					$("#dortorList").append(
-						"<div class='con_doc' >"+
-							"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
-							"<div class='doc_detail'>"+
-								"<input type='hidden' value='ysid' id='ysid'>"+
-								"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
-								"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
-								"<input type='hidden' value='"+dortorInfo[i].deptCode+"' name='deptCode'>"+
-								"<span class='doc_name'>"+dortorInfo[i].doctorName+"<span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
-							"</div>"+
-						"</div>"
-					);
-				}
-			}
-		});
-		
-	}
-	$("#dortorList").on("click",".con_doc",function(){
-		var doctorCode = $(this).children(".doc_detail").children("input[name='doctorCode']").val();
-		var clinicType = $(this).children(".doc_detail").children("input[name='clinicType']").val();
-		var deptCode = $("#deptCode").val();
-		var deptName = $("#deptName").text();
-		var dateTime = $("#nowTime").text();
-		var timeFlag = "";
-		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;;
-	});*/
 		
 });

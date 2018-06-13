@@ -45,8 +45,9 @@
 			.date_list{display: block;float: left;width: 70px;height:60px;text-align: center;border: 1px solid #4CB6AC;border-right: none;}
 			.date_list:last-child{border-right: 1px solid #4CB6AC;}
 			.date_list.active{background-color: #4CB6AC;color: #FFFFFF;}
-			.date_list.noactive{background-color: #ececec; color: black;}
-			
+			.nodate_list{display: block;float: left;width: 70px;height:60px;text-align: center;border: 1px solid #4CB6AC;border-right: none;}
+			.nodate_list.noactive{background-color: #ececec; color: black;}
+			 
 			.show_tab_time{display: block;float: left;width: 94%;margin-left:3%;height: 40px;}
 			.show_tab_time>span{height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;width: 40%;}
 			.show_tab_time>div{display: block;float: right; width:60%; height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;}
@@ -86,12 +87,12 @@
 							<input type="hidden"value="xzDate">
 							按日期挂号 
 						</span>
-						<span class="doct_guahao guahao ">
+						<span class="doct_guahao guahao " id="ysgh">
 							<input type="hidden"value="xzDoctor">
 							按医生挂号
 						</span>
 					</div>
-					<div id="zj"> 
+					<!--<div id="zj"> 
 						<span class="data_guahao guahao1 active" id="0">
 							<input type="hidden"value="zjDoctor">
 							专家挂号
@@ -100,7 +101,7 @@
 							<input type="hidden"value="myDoctor">
 							名医挂号
 						</span>
-					</div>
+					</div>-->
 				</div>
 				<div class="nav_date active">
 					<div class="date_item">
