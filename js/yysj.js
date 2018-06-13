@@ -19,7 +19,7 @@ $(function(){
 			doctorInfo= data.data;
 			var s=0,x=0,w=0;
 			for (var i = 0; i < doctorInfo.length; i++) {
-				if (timeFlag==null || timeFlag=="") {//按医生选择进入
+				/*if (timeFlag==null || timeFlag=="") {//按医生选择进入
 					$("#ysgh").show();
 					$("#rqgh").hide();
 					
@@ -113,9 +113,10 @@ $(function(){
 						}
 					}
 					
-				} else{//按日期选择进入
+				} else{*/
+					//按日期选择进入
 					$("#rqgh").show();
-					$("#ysgh").hide();
+//					$("#ysgh").hide();
 					if(doctorInfo[i].timeFlag==timeFlag){
 						if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
 							//把挂号费转为元，原本是分
@@ -142,7 +143,7 @@ $(function(){
 							);
 						}
 					}
-				}
+//				}
 			}
 			
 		}
@@ -165,7 +166,7 @@ $(function(){
 		}
 	});
 	
-	$("#swdateTime,#xwdateTime,#wsdateTime").on("click",".ck_dateTime",function(){//按医生选择
+/*	$("#swdateTime,#xwdateTime,#wsdateTime").on("click",".ck_dateTime",function(){//按医生选择
 		if($(this).children().children(".yuhao").children(".yuhao_").text()>0){
 			var deptCode = $("#deptCode").val();
 			var deptName = $("#deptName").text();
@@ -179,5 +180,5 @@ $(function(){
 			var timeFlag = $(this).children().find("input[name='timeFlag_']").val();
 			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType; 
 		}
-	});
+	});*/
 });

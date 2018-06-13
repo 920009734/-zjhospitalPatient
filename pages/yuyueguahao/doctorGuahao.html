@@ -6,12 +6,11 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
-        <!--<script src="../../js/doctorGuahao.js"></script>-->
         
-        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
 		<title>医生挂号</title>
 		<style type="text/css">
 			html,body{background-color: #FFFFFF;}
@@ -27,12 +26,8 @@
 			.date_list:last-child{border-right: 1px solid #4CB6AC;}
 			.date_list.active{background-color: #4CB6AC;color: #FFFFFF;}
 			
-			.show_tab_time{display: block;float: left;width: 94%;margin-left:3%;height: 40px;}
-			.show_tab_time>span{height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;width: 40%;}
+			.show_tab_time{display: block;float: left;width: 94%;margin-left:3%;height: 50px;}
 			.show_tab_time>div{display: block;float: right; width:60%; height: 30px;line-height: 30px;font-size: 15px;margin-top: 10px;}
-			.nowTime{display: block;float: left;width: 35%;color: #4CB6AC;}
-			.nowTime>span{display: block;float: left;height: 30px;line-height: 30px;}
-			.nowTime>i{display: block;float: left; font-size: 16px;height:30px;line-height: 30px; margin-left: 5px;color: #4CB6AC;}
 			.data_guahao{margin-right: -3px;}
 			.guahao{display: block;float: left; width: 49%;border: 1px solid #000000;text-align: center;border: 1px solid #4CB6AC;border-radius: 2px;}
 			.guahao.active{background-color: #4CB6AC;color: #FFFFFF;}
@@ -45,13 +40,9 @@
 			.doc_item_img>img{display: block;margin: 0 auto;width: 40px;height: 40px;margin-top: 15px;}
 			.doc_item_content{width: 65%;margin-top: 12px;}
 			.doc_item_content>div{}
-			.doc_item_yuhao{width: 15%;text-align: center;margin-top: 12px;font-size: 14px;}
 			.doc_item:last-child{margin-bottom: 10px;}
 			.doc_time{font-size: 13px;color: #999999;line-height: 25px;}
-			.yuhao{color: #4CB6AC;}
-			.yuhao_num{color: #008D00;font-size: 15px;}
-			.doc_name>span:nth-child(2){font-size: 13px;color: #008080;padding-left: 5px;}
-			.doc_time>span:nth-child(1){padding-left:5px ;}
+			.doc_time>span:nth-child(1){color: #008080;}
 		</style>
 		
 	</head>
@@ -60,36 +51,26 @@
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
 			<h4 style="margin-left: 25px;">
 				<input type="hidden" value="" id="deptCode">
-				<span id="deptName">医生挂号</span>
+				<span id="deptName"></span>
 				<span class="reflash_item"><i class="iconfont icon-switch"></i></span>
 			</h4>
 		</header>
 		<section class="ui-container"> 
 			<section id="list">
 				<div class="show_tab_time">
-					<span class="nowTime ">
-						<span id="nowTime"></span>
-						<!--icon-xiajiantou-->
-						<!--<i class="iconfont icon-xiajiantou"></i>-->
-					</span>
 					<div>
-						<span class="zhuanjia_guahao guahao active" id="1">
+						<span class="zhuanjia_guahao guahao active" id="zjgh">
 							<input type="hidden" value="xzDate">
 							专家挂号 
 						</span>
-						<span class="mingyi_guahao guahao " id="2">
+						<span class="mingyi_guahao guahao " id="mygh">
 							<input type="hidden" value="xzDoctor">
 							名医挂号
 						</span>
 					</div>
 				</div>
-				<!-- 选择时间 -->
-				<div class="nav_date active">
-					<div class="date_item">
-					</div>
-				</div>
 				
-				<div class="doc_content" id="dortorList">
+				<div class="doc_content" id="zjList" >
 					<!--<div class="doc_item">
 						<div class="doc_item_img">
 							<img src="../../img/kes/a1.png" />
@@ -97,38 +78,17 @@
 						<div class="doc_item_content">
 							<div class="doc_name">
 								<span>董方明</span>
-								<span>主治医生(专家、名医)</span>
 							</div>
 							<div class="doc_time"> 
-								<span>2018-04-11</span>
-								<span>普通门诊</span>
+								<span>普通号</span>
 							</div>
-						</div>
-						<div class="doc_item_yuhao">
-							<div class="yuhao">余号</div>
-							<div class="yuhao_num">18</div>
-						</div>
-					</div>
-					<div class="doc_item">
-						<div class="doc_item_img">
-							<img src="../../img/kes/a1.png" />
-						</div>
-						<div class="doc_item_content">
-							<div class="doc_name">
-								<span>董方明</span>
-								<span>主治医生(专家、名医)</span>
-							</div>
-							<div class="doc_time"> 
-								<span>2018-04-11</span>
-								<span>普通门诊</span>
-							</div>
-						</div>
-						<div class="doc_item_yuhao">
-							<div class="yuhao">余号</div>
-							<div class="yuhao_num">18</div>
 						</div>
 					</div>-->
 				</div>	
+				
+				<div class="doc_content" id="myList" style="display: none;">
+				</div>	
+				
 			</section>
 		</section>
 		<!--刷新-->
@@ -159,240 +119,92 @@
 					$(".ui-actionsheet").removeClass("show");
 				});
 				
-				//$("#nowTime").html(Utils.formatDateByLong(new Date(),"yyyy-MM-dd"));
-				//获取当前时间
-				var nowdate = new Date();
-				var nt = Utils.formatDateByLong(nowdate, "yyyy-MM-dd");
-				$("#nowTime").html(nt);
-				//加载出来的七天日期，点击触发事件
-				$(".date_item").on("click",".date_list",function(){
-					var a = $(this).hasClass("active");
-					if(!a){
-						$(this).addClass("active").siblings(".date_list").removeClass("active");
-						exditTopDate();
-					}
-				});
 				
-				//储存数据
-				var sdata = new Object();//号源数据
-				var rdata = new Object();//日期数据
-								
-				var Request = new Object();
-				Request = Utils.getRequest();
-				sdata = JSON.parse(Request["sdata"]);
-				rdata = JSON.parse(Request["rdata"]);
-				var deptCode = Request["deptCode"];
-				var nowdate2 = Request["nowdate"];
-				
-				getDay(rdata);
-				
-				//选择默认先专家挂号
-				var ghtype = $(".guahao.active").attr("id");
-				doctorGh(deptCode, nt, ghtype);
-				
-				//选择专家挂号，还是名医挂号
-				$(".guahao").on("click",function(){
+				$(".show_tab_time").on("click",".guahao",function(){
 					var a = $(this).hasClass("active");
 					if(!a){
 						$(this).addClass("active").siblings("span").removeClass("active");
-						ghtype = $(".guahao.active").attr("id");
-						doctorGh(deptCode, nt, ghtype);
+						var ghtype = $(".guahao.active").attr("id");
+						if(ghtype=="mygh"){
+							$("#myList").show();
+							$("#zjList").hide();
+						}else{
+							$("#zjList").show();
+							$("#myList").hide();
+						}
 					}
 				});
 				
-				//动态创建日期
-				function getDay(data){
-					for (var i = 0; i < data.length; i++) {
-						var today = new Date();
-			        	var targetday_milliseconds = today.getTime() + 1000*60*60*24*i;
-			        	today.setTime(targetday_milliseconds); //注意，这行是关键代码
-				        var tYear = today.getFullYear();    
-				        var tMonth = today.getMonth();    
-				        var tDate = today.getDate();
-				        var tday = today.getDay();
-				        tMonth = doHandleMonth(tMonth + 1);
-				        tDate = doHandleMonth(tDate);
-				        if(tday == 0){
-				        	tday = "天";
-				        }else if(tday == 1){
-				        	tday = "一";
-				        }else if(tday == 2){
-				        	tday = "二";
-				        }else if(tday == 3){ 
-				        	tday = "三";
-				        }else if(tday == 4){
-				        	tday = "四";
-				        }else if(tday == 5){
-				        	tday = "五";
-				        }else if(tday == 6){
-				        	tday = "六";
-				        }
-				        var showday = new Date();
-				        if(tDate == doHandleMonth(showday.getDate())){
-				        	if (tDate == data[i].dataday) {
-				        		if (data[i].status == 1) {
-				        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
-										+'<h3 class="dep_name">'+tday+'</h3>'
-										+'<p class="dep_addr">'+tDate+'(有)</p>'
-										+'</div>');
-				        		} else {
-				        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
-										+'<h3 class="dep_name">'+tday+'</h3>'
-										+'<p class="dep_addr">'+tDate+'(无)</p>'
-										+'</div>');
-				        		}
-				        	}
-				        	
-				        }else{
-				        	if (tDate == data[i].dataday) {
-				        		if (data[i].status == 1) {
-				        			$(".date_item").append('<div class="date_list " id="'+tDate+'">'
-										+'<h3 class="dep_name">'+tday+'</h3>'
-										+'<p class="dep_addr">'+tDate+'(有)</p>'
-										+'</div>');
-				        		} else {
-				        			$(".date_item").append('<div class="date_list " id="'+tDate+'">'
-										+'<h3 class="dep_name">'+tday+'</h3>'
-										+'<p class="dep_addr">'+tDate+'(无)</p>'
-										+'</div>');
-				        		}
-				        	}
-				        	
-				        }
-					}
-				}
-				//月份处理
-				function doHandleMonth(month){    
-			      	var m = month;    
-				    if(month.toString().length == 1){    
-				        m = "0" + month;    
-				    }    
-			        return m;    
-				}
-				//返回七天的字符串
-				function getSevenDate(nt) {
-					var s = Utils.formatDateByLong(nt, "yyyy-MM-dd") + ",";
-					for (var i = 1; i < 7; i++) {
-						s += nt.getFullYear()+"-"+(doHandleMonth(nt.getMonth()+1))+"-"+(doHandleMonth(nt.getDate()+i)) + ",";
-					}
-					//去除最后一位
-					s = s.substring(0, s.length-1);
-					return s;
-				}
-				//选择日期事件
-				function exditTopDate() {
-					var day = $(".date_list.active").attr("id");
-					
-					var topTime = "";
-					
-					var nowdate = new Date();
-					var s = getSevenDate(nowdate);
-					
-					var ss = new Array();
-					ss = s.split(",");
-					for (var i = 0; i < ss.length; i++) {
-						var sss = ss[i].substring(ss[i].length-2, ss[i].length);
-						if (day == sss) {
-							topTime = ss[i];
-							break;
-						}
-					}
-					
-					$("#nowTime").html("");
-					$("#nowTime").html(topTime);
-					
-					doctorGh($("#deptCode").val(), topTime, $(".guahao.active").attr("id"));
-				}
 				
-				//动态添加医生信息
-				function doctorGh(deptCode, nt, ghtype){
-					alert(deptCode+", "+nt+", "+ghtype);
-					$("#dortorList").html("");
-					var params={};
-					params.deptCode=deptCode;
-					params.dateTime = nt;
-					//$.post(Utils.getRoot()+"/registerApp/selDoctor",params,function(data){
-					$.post(Utils.getRoot()+"/registerApp/selclinicSchedule",params,function(data){
-						alert(JSON.stringify(data));
-						if (data.success) {
-							var dortorInfo = new Array();
-							dortorInfo= data.data;
-							alert(dortorInfo.length);
-							for (var i = 0; i < dortorInfo.length; i++) {
-								if (ghtype == "1") {
-									if (dortorInfo[i].clinicType == "普通号") {
-										$("#dortorList").append('<div class="doc_item">'+
-															'<div class="doc_item_img">'+
-																'<img src="../../img/kes/a1.png" />'+
-															'</div>'+
-															'<div class="doc_item_content">'+
-																'<div class="doc_name">'+
-																	'<input type="hidden" value="'+dortorInfo[i].doctorCode+'" name="doctorCode">'+
-																	'<input type="hidden" value="'+dortorInfo[i].doctorName+'" name="doctorName">'+
-																	'<input type="hidden" value="'+dortorInfo[i].deptCode+'" name="deptCode">'+
-																	'<input type="hidden" value="'+dortorInfo[i].clinicType+'" name="clinicType">'+
-																	'<input type="hidden" value="'+dortorInfo[i].deptName+'" name="deptName">'+
-																	'<span>'+dortorInfo[i].doctorName+'</span>'+
-																	'<span>'+dortorInfo[i].doctorTitle+'</span>'+
-																'</div>'+
-																'<div class="doc_time"> '+
-																	'<span>2018-04-11</span>'+
-																	'<span>'+dortorInfo[i].clinicType+'</span>'+
-																'</div>'+
-															'</div>'+
-															'<div class="doc_item_yuhao">'+
-																'<div class="yuhao">余号</div>'+
-																'<div class="yuhao_num">'+dortorInfo[i].leftNum+'</div>'+
-															'</div>'+
-														'</div>');
-									}
-								} else {
-									if (dortorInfo[i].clinicType != "普通号") {
-										$("#dortorList").append('<div class="doc_item">'+
-															'<div class="doc_item_img">'+
-																'<img src="../../img/kes/a1.png" />'+
-															'</div>'+
-															'<div class="doc_item_content">'+
-																'<div class="doc_name">'+
-																	'<input type="hidden" value="'+dortorInfo[i].doctorCode+'" name="doctorCode">'+
-																	'<input type="hidden" value="'+dortorInfo[i].doctorName+'" name="doctorName">'+
-																	'<input type="hidden" value="'+dortorInfo[i].deptCode+'" name="deptCode">'+
-																	'<input type="hidden" value="'+dortorInfo[i].clinicType+'" name="clinicType">'+
-																	'<input type="hidden" value="'+dortorInfo[i].deptName+'" name="deptName">'+
-																	'<span>'+dortorInfo[i].doctorName+'</span>'+
-																	'<span>'+dortorInfo[i].doctorTitle+'</span>'+
-																'</div>'+
-																'<div class="doc_time"> '+
-																	'<span>2018-04-11</span>'+
-																	'<span>'+dortorInfo[i].clinicType+'</span>'+
-																'</div>'+
-															'</div>'+
-															'<div class="doc_item_yuhao">'+
-																'<div class="yuhao">余号</div>'+
-																'<div class="yuhao_num">'+dortorInfo[i].leftNum+'</div>'+
-															'</div>'+
-														'</div>');
-									}
-								}
+				var Request = Utils.getRequest();
+				
+				$("#deptCode").val(Request["deptCode"]);
+				$("#deptName").text(Request["deptName"]);
+				var beginDate = Utils.formatDate(new Date());
+				var endDate = Utils.getDateStr(7);
+				
+				var params = {};
+				params.beginDate = beginDate;
+				params.endDate = endDate;
+				params.deptCode = $("#deptCode").val();
+				
+				//挂号
+				$.post(Utils.getRoot()+"/registerApp/selDoctorListDetail",params,function(data){
+					if (data.success) {
+						var dortorInfo = new Array();
+						dortorInfo= data.data;
+						console.log("医生挂号："+JSON.stringify(dortorInfo));
+						for (var i = 0; i < dortorInfo.length; i++) {
+							if(dortorInfo[i].clinicType=="名医号"){//名医挂号 
+								$("#myList").append(
+									"<div class='doc_item'>"+
+										"<div class='doc_item_img'>"+
+											"<img src='../../img/kes/a1.png' />"+
+										"</div>"+
+										"<div class='doc_item_content'>"+
+											"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
+											"<div class='doc_name'>"+
+												"<span>"+dortorInfo[i].doctorName+"</span>"+
+											"</div>"+
+											"<div class='doc_time'>"+
+												"<span>"+dortorInfo[i].clinicType+"</span>"+
+											"</div>"+
+										"</div>"+
+									"</div>"
+								);
+							}else{//专家挂号
+								$("#zjList").append(
+									"<div class='doc_item'>"+
+										"<div class='doc_item_img'>"+
+											"<img src='../../img/kes/a1.png' />"+
+										"</div>"+
+										"<div class='doc_item_content'>"+
+											"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
+											"<div class='doc_name'>"+
+												"<span class='doctorName'>"+dortorInfo[i].doctorName+"</span>"+
+											"</div>"+
+											"<div class='doc_time'>"+
+												"<span>"+dortorInfo[i].clinicType+"</span>"+
+											"</div>"+
+										"</div>"+
+									"</div>"
+								);
 							}
 						}
-					});
-				}	
-				
-				$("#dortorList").on("click",".doc_item",function(){
-					var doctorCode = $(this).children(".doc_item_content").children(".doc_name").children("input[name='doctorCode']").val();
-					var doctorName = $(this).children(".doc_item_content").children(".doc_name").children("input[name='doctorName']").val();
-					var clinicType = $(this).children(".doc_item_content").children(".doc_name").children("input[name='clinicType']").val();
-					var deptCode = $(this).children(".doc_item_content").children(".doc_name").children("input[name='deptCode']").val();
-					var deptName = $(this).children(".doc_item_content").children(".doc_name").children("input[name='deptName']").val();
-					var dateTime = $("#nowTime").text();
-					var timeFlag = "";
-					
-					alert(deptCode + ", " + clinicType + ", " + deptCode + ", " + doctorName + ", " + deptName + ", " + dateTime);
-					
-					window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;;
+					}else{
+						alert(data.message);
+					}
 				});
-			});
+				
+				
+				$("#zjList,#mjList").on("click",".doc_item",function(){
+					var deptCode = $("#deptCode").val();
+					var deptName = $("#deptName").text();
+					var doctorCode = $(this).children(".doc_item_content").children("input[name='doctorCode']").val();
+					var doctorName = $(this).children(".doc_item_content").children(".doc_name").children(".doctorName").text();
+					window.location.href="../yuyueguahao/doctorGuahao_detail.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&doctorName="+doctorName+"&ghlx='专家挂号'";
+				});
+			});	
 		</script>
 	</body>
 </html>

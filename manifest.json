@@ -676,6 +676,22 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"pages/csogin.html": {
+				"resources": [
+					"pages/yuyueguahao/paymentMethod2.html",
+					"font/iconfont-full.ttf",
+					"fontIcon/iconfont.css",
+					"img/u364.png",
+					"js/frozen.js",
+					"css/frozen.css",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {

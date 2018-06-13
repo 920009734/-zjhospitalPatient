@@ -45,6 +45,48 @@ Utils = {
 		return date.format(pattern);
 	},
 	/**
+	 * 把Date类型转为yyyy-MM-dd格式的字符串
+	 * 
+	 * @param l
+	 *            Date类型
+	 * 
+	 * @return 日期字符串
+	 */
+	formatDate : function (date){
+		// 获取当前月份
+		var nowMonth = date.getMonth() + 1;
+		// 获取当前是号数
+		var strDate = date.getDate();
+		// 添加分隔符“-”
+		var seperator = "-";
+		// 对月份进行处理，1-9月在前面添加一个“0”
+		if (nowMonth >= 1 && nowMonth <= 9) {
+		   nowMonth = "0" + nowMonth;
+		}
+		// 对月份进行处理，1-9号在前面添加一个“0”
+		if (strDate >= 0 && strDate <= 9) {
+		   strDate = "0" + strDate;
+		}
+		// 最后拼接字符串，得到一个格式为(yyyy-MM-dd)的日期
+		return date.getFullYear() + seperator + nowMonth + seperator + strDate;
+	},
+	/**
+	 * 获取当前日期后某天的日期
+	 * 
+	 * @param l
+	 *            addDayCount值，后多少天的日期。
+	 * 
+	 * @return 日期字符串(yyyy-MM-dd)
+	 */
+	getDateStr : function(addDayCount) {   
+	   var dd = new Date();  
+	   dd.setDate(dd.getDate()+addDayCount);//获取AddDayCount天后的日期  
+	   var y = dd.getFullYear();   
+	   var m = (dd.getMonth()+1)<10?"0"+(dd.getMonth()+1):(dd.getMonth()+1);//获取当前月份的日期，不足10补0  
+	   var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate();//获取当前几号，不足10补0  
+	   return y+"-"+m+"-"+d;   
+	},
+	/**
 	 * 身份证号合法性验证 
 	 * 支持15位和18位身份证号
 	 * 支持地址编码、出生日期、校验位验证
