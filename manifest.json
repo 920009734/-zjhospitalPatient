@@ -283,7 +283,9 @@
 					"fontIcon/iconfont.css",
 					"css/style.css",
 					"pages/regist.html",
-					"pages/main.html"
+					"pages/main.html",
+					"/pages/yuyueguahao/paymentMethod2.html",
+					"pages/yuyueguahao/paymentMethod2.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -384,7 +386,8 @@
 					"img/index/floorDistribution.png",
 					"pages/payment/depositPayment.html",
 					"img/u364.png",
-					"pages/login.html"
+					"pages/login.html",
+					"img/self/banben.png"
 				],
 				"refer": [],
 				"priority": 0

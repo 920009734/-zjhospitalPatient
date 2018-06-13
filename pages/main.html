@@ -81,33 +81,10 @@
         	document.addEventListener( "plusready", plusReady, false );
 			
         	$(function(){
-        		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
-				// 创建一个Socket实例
-				var socket = new WebSocket('ws://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + patientInfo.patientid);
-				// 打开Socket
-				socket.onopen = function(event) {
-				  console.log('open', event); 
-				}
-				  // 监听消息
-				socket.onmessage = function(event) {
-				    console.log(event.data, event)
-				    var obj = JSON.parse(event.data);
-				    if(obj.zs != 0){
-				    	$("#message_number").html(obj.zs);
-				    	$("#message_number").addClass("msg_num");
-				    }else{
-				    	$("#message_number").html("");
-				    	$("#message_number").removeClass("msg_num");
-				    }
-				    localStorage.setItem('message_type_1', obj.sx);
-				    localStorage.setItem('message_type_2', obj.tz);
-				    localStorage.setItem('message_type_3', obj.yy);
-				    localStorage.setItem('message_type_4', obj.jf);
-				}
-				  // 监听Socket的关闭
-				socket.onclose = function(event) {
-				  //console.log('closed', event); 
-				};
+        		var isConnect = localStorage.getItem('socket_is_connect')
+        		if(!isConnect || isConnect != 'true'){
+        			initSocket();
+        		}
         		
         		$(".footer_item").click(function(){
         			var a = $(this).hasClass(("active"));
@@ -128,6 +105,35 @@
         			}
         		})
         	});
+        	
+        	function initSocket(){
+        		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
+				// 创建一个Socket实例
+				var socket = new WebSocket('ws://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + patientInfo.patientid);
+				// 打开Socket
+				socket.onopen = function(event) {
+				  localStorage.setItem('socket_is_connect','true');
+				}
+				  // 监听消息
+				socket.onmessage = function(event) {
+				    var obj = JSON.parse(event.data);
+				    if(obj.zs != 0){
+				    	$("#message_number").html(obj.zs);
+				    	$("#message_number").addClass("msg_num");
+				    }else{
+				    	$("#message_number").html("");
+				    	$("#message_number").removeClass("msg_num");
+				    }
+				    localStorage.setItem('message_type_1', obj.sx);
+				    localStorage.setItem('message_type_2', obj.tz);
+				    localStorage.setItem('message_type_3', obj.yy);
+				    localStorage.setItem('message_type_4', obj.jf);
+				}
+				  // 监听Socket的关闭
+				socket.onclose = function(event) {
+				  localStorage.removeItem('socket_is_connect');
+				};
+        	}
         	
         	var as='pop-in';// 默认窗口动画
 			function plusReady(){
