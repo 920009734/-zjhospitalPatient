@@ -107,9 +107,17 @@
 		</section>
 	</body>
 	<script type="text/javascript">
+		var plus = plus;
+		if(!plus){
+			plus = top.plus;
+		}
 		function checkVersion(){
 			if(localStorage.getItem('isNewVersion')){
-				Utils.installNewVersion();
+				plus.nativeUI.confirm('是否确认升级到最新版本?', function(e) {
+                    if(e.index == 0){
+                        Utils.installNewVersion();
+                    }
+                }, "", ["升级", "取消"]);
 			}else{
 				alert("当前已是最新版本！");
 			}
