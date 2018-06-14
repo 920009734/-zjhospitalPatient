@@ -107,14 +107,6 @@
 		</section>
 	</body>
 	<script type="text/javascript">
-		function plusReady(){
-			if(localStorage.getItem('isNewVersion')){
-				$("#banben_new_").addClass('banben_new');
-			}else{
-				$("#banben_new_").removeClass('banben_new');
-			}
-		}
-		
 		function checkVersion(){
 			if(localStorage.getItem('isNewVersion')){
 				Utils.installNewVersion();
@@ -123,10 +115,10 @@
 			}
 		}
     	$(function(){
-			if(window.plus){
-				plusReady();
+			if(localStorage.getItem('isNewVersion')){
+				$("#banben_new_").addClass('banben_new');
 			}else{
-				document.addEventListener('plusready',plusReady,false);
+				$("#banben_new_").removeClass('banben_new');
 			}
 			
     		//设置用户信息

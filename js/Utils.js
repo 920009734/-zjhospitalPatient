@@ -170,8 +170,11 @@ Utils = {
 	},
 	
 	installNewVersion: function(){
+		var plus = plus;
+		if(!plus){
+			plus = top.plus;
+		}
 		var wait = plus.nativeUI.showWaiting("下载更新文件...");
-		console.log(localStorage.getItem('update_path'))
 		var dtask = plus.downloader.createDownload( Utils.getRoot() + "/" + localStorage.getItem('update_path'), {method:"GET"} );
 		var downloadedSize,totalSize,showString;
 	    dtask.addEventListener("statechanged", function(task,status){
@@ -184,7 +187,7 @@ Utils = {
 	    			break;
 	    		case 4:	// 下载完成
 	    			wait.close();
-	    			plus.nativeUI.showWaiting("安装更新文件...");
+	    			plus.nativeUI.showWaiting("整合资源文件...");
 				    plus.runtime.install(task.filename, {force: true}, function(){
 				        plus.nativeUI.closeWaiting();
 				        plus.nativeUI.alert("应用资源更新完成！",function(){

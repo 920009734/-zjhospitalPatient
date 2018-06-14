@@ -699,7 +699,8 @@
 			"pages/hospitalization/inhospitalCostList.html": {
 				"resources": [
 					"pages/main.html",
-					"css/frozen.css"
+					"css/frozen.css",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
