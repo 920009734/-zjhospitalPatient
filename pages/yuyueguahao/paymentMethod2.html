@@ -74,8 +74,8 @@
 							if(channel=="ALI_WAP"){//支付宝支付
 								window.location.href = res.data.directUrl;
 							}else{//微信支付
-								var url="https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx071217368284668b67a1a1411944981725&package=3106238433";
-								$('#getBrandWCPayRequest').attr("href",url+'&&redirect_url=http%3a%2f%2fwxpay.wxutil.com%2fmch%2fpay%2fh5jumppage.php');
+//								var url="https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx071217368284668b67a1a1411944981725&package=3106238433";
+								$('#getBrandWCPayRequest').attr("href",res.data.directUrl+'&redirect_url=http%3a%2f%2f219.137.32.146:8082%2fzjhospital-app%2fpaySuccess%2fpaymentSuccess.html');
 								console.log($('#getBrandWCPayRequest').attr("href"));
 //								ws.loadURL(res.data.directUrl,{"Referer":"http://zjyy.com.cn"});
 							}
