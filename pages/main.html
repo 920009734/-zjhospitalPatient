@@ -55,31 +55,7 @@
              </ul>
         </footer>
         
-        <script type="text/javascript">	
-        	function plusReady(){
-				plus.runtime.getProperty(plus.runtime.appid, function(info) {
-					var v = localStorage.getItem('version');
-					if(!v){
-						v = info.version;
-						localStorage.setItem('version', v);
-					}
-					//获取新版本
-					$.post(Utils.getRoot() + "/version/checkUpdate",{
-						v: v
-					}, function(res) {
-		    			if (res.success) {
-		    				if(res.data){//检测到新版本
-		    					localStorage.setItem('version', res.data.versionNumber);
-		    					localStorage.setItem('isNewVersion', 'true')
-		    				}else{
-		    					localStorage.setItem('isNewVersion', 'false')
-		    				}
-		    			}
-		    		});
-	            });
-        	}
-        	document.addEventListener( "plusready", plusReady, false );
-			
+        <script type="text/javascript">
         	$(function(){
         		var isConnect = localStorage.getItem('socket_is_connect')
         		if(!isConnect || isConnect != 'true'){
@@ -108,6 +84,8 @@
         	
         	function initSocket(){
         		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
+        		if(!patientInfo)
+        			return;
 				// 创建一个Socket实例
 				var socket = new WebSocket('ws://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + patientInfo.patientid);
 				// 打开Socket
@@ -135,23 +113,6 @@
 				};
         	}
         	
-        	var as='pop-in';// 默认窗口动画
-			function plusReady(){
-				// 隐藏滚动条
-				plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
-				// Android处理返回键
-				plus.key.addEventListener('backbutton',function(){
-					if(confirm('确认退出？')){
-						plus.runtime.quit();
-					}
-				},false);
-				compatibleAdjust();
-			}
-			if(window.plus){
-				plusReady();
-			}else{
-				document.addEventListener('plusready',plusReady,false);
-			}
         </script>
         
     </body>

@@ -387,7 +387,10 @@
 					"pages/payment/depositPayment.html",
 					"img/u364.png",
 					"pages/login.html",
-					"img/self/banben.png"
+					"img/self/banben.png",
+					"img/kefu1.png",
+					"img/sjx.png",
+					"pages/hospitalization/inhospitalCostList.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -689,6 +692,14 @@
 					"lib/zepto.min.js",
 					"js/Utils.js",
 					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/hospitalization/inhospitalCostList.html": {
+				"resources": [
+					"pages/main.html",
+					"css/frozen.css"
 				],
 				"refer": [],
 				"priority": 0

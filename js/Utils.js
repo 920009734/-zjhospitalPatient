@@ -167,6 +167,38 @@ Utils = {
 			}
 		}
 		return true;
+	},
+	
+	installNewVersion: function(){
+		var wait = plus.nativeUI.showWaiting("下载更新文件...");
+		console.log(localStorage.getItem('update_path'))
+		var dtask = plus.downloader.createDownload( Utils.getRoot() + "/" + localStorage.getItem('update_path'), {method:"GET"} );
+		var downloadedSize,totalSize,showString;
+	    dtask.addEventListener("statechanged", function(task,status){
+	    	switch(task.state) {
+	    		case 3:	// 已接收到数据
+	    			downloadedSize = task.downloadedSize/1024/1024;
+	    			totalSize = task.totalSize/1024/1024;
+	    			showString = downloadedSize.toFixed(2) + "/" + totalSize.toFixed(2) + "M"
+	    			wait.setTitle('下载更新文件...\n' + showString);
+	    			break;
+	    		case 4:	// 下载完成
+	    			wait.close();
+	    			plus.nativeUI.showWaiting("安装更新文件...");
+				    plus.runtime.install(task.filename, {force: true}, function(){
+				        plus.nativeUI.closeWaiting();
+				        plus.nativeUI.alert("应用资源更新完成！",function(){
+				        	localStorage.clear();
+				            plus.runtime.restart();
+				        });
+				    },function(e){
+				        plus.nativeUI.closeWaiting();
+				        alert("安装更新文件失败");
+				    });
+	    			break;
+	    	}
+	    } );
+	    dtask.start();
 	}
 }
 

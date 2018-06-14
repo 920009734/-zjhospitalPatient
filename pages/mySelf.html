@@ -107,20 +107,28 @@
 		</section>
 	</body>
 	<script type="text/javascript">
-		
-		function checkVersion(){
-			var inv = localStorage.getItem('isNewVersion');
-			if(inv){
-				var $eleForm = $("<form method='get'></form>");
-	            $eleForm.attr("action",Utils.getRoot() + "/version/update");
-	            $(document.body).append($eleForm);
-	            $eleForm.submit();
+		function plusReady(){
+			if(localStorage.getItem('isNewVersion')){
+				$("#banben_new_").addClass('banben_new');
 			}else{
-				alert('当前已是最新版本');
+				$("#banben_new_").removeClass('banben_new');
 			}
 		}
-	
+		
+		function checkVersion(){
+			if(localStorage.getItem('isNewVersion')){
+				Utils.installNewVersion();
+			}else{
+				alert("当前已是最新版本！");
+			}
+		}
     	$(function(){
+			if(window.plus){
+				plusReady();
+			}else{
+				document.addEventListener('plusready',plusReady,false);
+			}
+			
     		//设置用户信息
     		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
     		if(patientInfo){
@@ -128,13 +136,6 @@
 	    		$("#user_sex_").html(patientInfo.sex == '1' ? '男' : '女');
 	    		$("#user_age_").html(patientInfo.age);
     		}
-    		//标识是否有新版本
-    		var inv = localStorage.getItem('isNewVersion');
-			if(inv){
-				$("#banben_new_").addClass('banben_new');
-			}else{
-				$("#banben_new_").removeClass('banben_new');
-			}
     		
     		//查询个人信息
     		/*var queryMySelfUrl = Utils.getRoot()+"/patientApp/queryMySelf";
@@ -174,28 +175,22 @@
     		$("#cyzyjl").click(function(){
     			alert("没有查询到您的出院住院信息！");
     		});
-    		/**
-    		 * 退出
-    		 */
+    		
+    		//退出
     		$(".login_btn").click(function() {
     			var logoutUrl = Utils.getRoot()+"/patientApp/logout";
     			$.post(logoutUrl,{
     				token: patientInfo.token
     			}, function(res) {
 	    			if (res.success) {
-	    				localStorage.removeItem('patientInfo');
-	    				localStorage.removeItem('isNewVersion');
-	    				localStorage.removeItem('message_type_1');
-	    				localStorage.removeItem('message_type_2');
-	    				localStorage.removeItem('message_type_3');
-	    				localStorage.removeItem('message_type_4');
-	    				localStorage.removeItem('socket_is_connect');
+	    				localStorage.clear();
 	    				top.location.href='login.html'
 	    			} else {
 	    				alert(res.message);
 	    			}
 	    		});
     		});
+    		
     	});
     </script>
 </html>

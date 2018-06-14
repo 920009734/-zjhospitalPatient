@@ -7,7 +7,8 @@
       "css/style.css",
       "lib/zepto.min.js",
       "js/Utils.js"
-    ]
+    ],
+    "refer": []
   },
   "pages/login.html": {
     "resources": [
@@ -71,10 +72,47 @@
       "img/self/zixunjilu.png",
       "img/index/yuyueRecord.png",
       "img/self/jiaofeijilui.png",
-      "img/self/banben.png"
+      "img/self/banben.png",
+      "img/kefu1.png",
+      "pages/message1.html",
+      "img/yuyuexiao@2x.png",
+      "pages/detailMsg.html",
+      "img/sjx.png",
+      "img/tongzhixiao@2x.png",
+      "img/xiaofeixiao@2x.png",
+      "img/sixinxxiao@2x.png",
+      "font/iconfont-full.ttf",
+      "lib/zepto.min.js",
+      "js/frozen.js",
+      "js/Utils.js",
+      "pages/hospitalization/inhospitalCostList.html",
+      "pages/floorDistribution.html",
+      "pages/lineUpSearch/paiduijiaohaoMenu.html",
+      "fontIcon/iconfont.css",
+      "img/index/jilu.png",
+      "img/index/tijain2.png"
     ],
     "refer": [
-      "pages/login.html"
+      "pages/login.html",
+      "pages/hospitalization/inhospitalCostList.html",
+      "pages/floorDistribution.html"
+    ]
+  },
+  "pages/hospitalization/inhospitalCostList.html": {
+    "resources": [
+      "pages/main.html",
+      "css/frozen.css"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/floorDistribution.html": {
+    "resources": [
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
     ]
   }
 }
