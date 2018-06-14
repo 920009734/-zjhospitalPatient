@@ -55,22 +55,32 @@
         			$.post(Utils.getRoot()+"/registerApp/selPatient", function(res){
 	    				if (res.success) {
 	    					$("#tj").empty();
-	    					//alert("99999999999999999");
+	    					
 	    					var data = new Object();
 	        				data = res.data;
 	        				for (var i = 0; i < data.length; i++) {
-	        					var n = data[i].patientid;
-		        				var m = data[i].patCardNo;
-		        				var l = data[i].patientname;
-		        				//$("#patientid_").val(data.patientid);//APP患者ID
-		        				//$("#patCardNo_").val(data.patCardNo);//医院患者ID
-			        			//$("#patientname_").html(data.patientname);
+	        					var patientid = data[i].patientid;
+		        				var patCardNo = data[i].patCardNo;
+		        				var patientname = data[i].patientname;
+		        				var gxlx = data[i].relationshiptype;
+		        				if(gxlx==null || gxlx==""){
+		        					gxlx="本人";
+		        				}else if(gxlx==2){
+		        					gxlx="父母";
+		        				}else if(gxlx==3){
+		        					gxlx="伴侣";
+		        				}else if(gxlx==4){
+		        					gxlx="子女";
+		        				}else{
+		        					gxlx="其他";
+		        				}
+		        				
 			        			var tj = $("#tj");
 			        			tj.append("<div class='per_name' id='choosePeople_'>"+
-							            	"<input type='hidden' class='patientid_' value='"+n+"' >"+
-							            	"<input type='hidden' class='patCardNo_' value='"+m+"' >"+
-							            	"<span class='patientname_'>"+l+"</span>"+
-							            	"<span class='per_relationship'>本人</span>"+
+							            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
+							            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
+							            	"<span class='patientname_'>"+patientname+"</span>"+
+							            	"<span class='per_relationship'>"+gxlx+"</span>"+
 							            "</div>");
 	        				}
 						            

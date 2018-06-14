@@ -22,6 +22,7 @@
             .msg_left>img{display: block;margin: 0 auto;margin-top: 15px;}
             .notData{color: #999999; text-align: center;}
  			.msg_right{display: block;width:70%;float: left;margin-top: 25px;}
+ 			.nomsg_right{display: block;width:70%;float: left;margin-top: 30px;}
             .doc_name{display: block;float:left;font-size: 20px;width:40%;}
             .doc_age{display: block;float:left;font-size: 20px;width:20%;}
             .dep_sec{display: block;float:left;font-size: 20px;width:40%;}
@@ -29,12 +30,6 @@
 		</style>
 		<script type="text/javascript">
         	$(function(){
-				$("#yyList").on("click",".msg_right",function(){
-					var bespeakId = $(this).children("#bespeakId").val();
-					var hisOrdNum = $(this).children("#hisOrdNum").val();
-					var serialNumber = $(this).children("#serialNumber").val();
-					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?bespeakId="+bespeakId+"&serialNumber="+serialNumber+"&hisOrdNum="+hisOrdNum;
-				})
 				
 				var params={};
         		$.post(Utils.getRoot()+"/registerApp/selyyjl",params,function(data){
@@ -70,7 +65,7 @@
 						}else{
 							$("#yyList").append(
 								"<div class='msg'>"+
-						       		"<div class='msg_right'>"+"<p class='notData'>无挂号记录</p>"+
+						       		"<div class='nomsg_right'>"+"<p class='notData'>暂无挂号记录</p>"+
 							   	   " </div>"+
 						        "</div>"
 					        )
@@ -78,6 +73,13 @@
 						
 					}
 				});
+				
+				$("#yyList").on("click",".msg_right",function(){
+					var bespeakId = $(this).children("#bespeakId").val();
+					var hisOrdNum = $(this).children("#hisOrdNum").val();
+					var serialNumber = $(this).children("#serialNumber").val();
+					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?bespeakId="+bespeakId+"&serialNumber="+serialNumber+"&hisOrdNum="+hisOrdNum;
+				})
 				
         	})
         </script>
