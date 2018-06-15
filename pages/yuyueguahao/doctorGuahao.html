@@ -158,11 +158,13 @@
 							if(dortorInfo[i].clinicType=="名医号"){//名医挂号 
 								$("#myList").append(
 									"<div class='doc_item'>"+
+										"<input type='hidden' name='ghType' value='2'>"+
 										"<div class='doc_item_img'>"+
 											"<img src='../../img/kes/a1.png' />"+
 										"</div>"+
 										"<div class='doc_item_content'>"+
 											"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
+											"<input type='hidden' name='clinicType' value='"+dortorInfo[i].clinicType+"'>"+
 											"<div class='doc_name'>"+
 												"<span>"+dortorInfo[i].doctorName+"</span>"+
 											"</div>"+
@@ -175,11 +177,13 @@
 							}else{//专家挂号
 								$("#zjList").append(
 									"<div class='doc_item'>"+
+										"<input type='hidden' name='ghType' value='1'>"+
 										"<div class='doc_item_img'>"+
 											"<img src='../../img/kes/a1.png' />"+
 										"</div>"+
 										"<div class='doc_item_content'>"+
 											"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
+											"<input type='hidden' name='clinicType' value='"+dortorInfo[i].clinicType+"'>"+
 											"<div class='doc_name'>"+
 												"<span class='doctorName'>"+dortorInfo[i].doctorName+"</span>"+
 											"</div>"+
@@ -198,11 +202,13 @@
 				
 				
 				$("#zjList,#mjList").on("click",".doc_item",function(){
+					var ghType = $(this).children("input[name='ghType']").val();
 					var deptCode = $("#deptCode").val();
 					var deptName = $("#deptName").text();
 					var doctorCode = $(this).children(".doc_item_content").children("input[name='doctorCode']").val();
+					var clinicType = $(this).children(".doc_item_content").children("input[name='clinicType']").val();
 					var doctorName = $(this).children(".doc_item_content").children(".doc_name").children(".doctorName").text();
-					window.location.href="../yuyueguahao/doctorGuahao_detail.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&doctorName="+doctorName+"&ghlx='专家挂号'";
+					window.location.href="../yuyueguahao/doctorGuahao_detail.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&doctorName="+doctorName+"&ghType="+ghType+"&clinicType="+clinicType;
 				});
 			});	
 		</script>

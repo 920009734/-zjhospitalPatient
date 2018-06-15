@@ -30,7 +30,8 @@
 			.box_time_item:last-child{border: none;}
 			.box_time_item>span{display: block;float: left;border-radius: 2px;}
 			.box_time_item>span:nth-child(1){padding-left:10px;width: 45%;}
-			.box_yuhao{width: 23%; background-color: #3B92A6;border-radius: 2px; height: 30px;line-height: 30px;margin-top: 10px;margin-right: 4%;color: #FFFFFF;font-size: 13px;text-align: center;}
+			.box_sj{margin-left: 4%;}
+			.box_yuhao{width: 23%; background-color: #3B92A6;border-radius: 2px; height: 30px;line-height: 30px;margin-top: 10px;margin-right: 4%;color: #FFFFFF;font-size: 13px;text-align: center;margin-left: 4%;}
 			.box_ghf{width: 23%; background-color: #E04141;height: 30px;line-height: 30px;margin-top: 10px;color: #FFFFFF;font-size: 13px;text-align: center;}
 		</style>
 		
@@ -48,11 +49,12 @@
 			<div class="demo-block">
 				<div class="box_detail">
 					<div>
+						<input type="hidden" id="ghType" value="">
+						<input type="hidden" id="clinicType" value="">
 						<span class="box_detail_img"><img src="../../img/index/personLogo@2x.png"/></span>
 						<input type="hidden" id="doctorCode" value=""/>
 						<span class="box_detail_name" id="doctorName"></span>
 						<span class="box_detail_dep" id="doctorTitle"></span>
-						<span class="box_detail_dep" id="ghlx"></span>
 						
 					</div>
 					<div class="box_shanchang">
@@ -62,27 +64,6 @@
 				</div>
 				
 				<div class="box_ckTime" id="dateList">
-					<!--<div class="box_item" >
-						<div class="box_date"><span class="sj">2018-06-09</span></div>
-						<div class="box_time_item">
-							<span ><span>09:30</span>~<span class="endTime_">11:30</span></span>
-							<span class="box_yuhao" class="leftNum">余号：<span class='yuhao_'>11</span></span>
-							<span class="box_ghf"><span>￥</span><span class='regFee'>20元</span></span>
-						</div>
-					</div>-->
-					<!--<div class="box_item">
-						<div class="box_date"><span>2018-06-09</span></div>
-						<div class="box_time_item">
-							<span>09:30~11:30</span>
-							<span class="box_yuhao">余号：11</span>
-							<span class="box_ghf">￥20元</span>
-						</div>
-						<div class="box_time_item">
-							<span>14:30~16:30</span>
-							<span class="box_yuhao">余号：4</span>
-							<span class="box_ghf">￥20元</span>
-						</div>
-					</div>-->
 				</div>
 			</div>
 		</section>
@@ -121,7 +102,9 @@
 				$("#deptName").text(Request["deptName"]);
 				$("#doctorCode").val(Request["doctorCode"]);
 				$("#doctorName").text(Request["doctorName"]);
-				$("#ghlx").text(Request["ghlx"]);
+				$("#clinicType").val(Request["clinicType"]);
+				
+				$("#ghType").val(Request["ghType"]);
 				var beginDate = Utils.formatDate(new Date());
 				var endDate = Utils.getDateStr(7);
 				
@@ -149,11 +132,12 @@
 				params.endDate = endDate;
 				params.deptCode = $("#deptCode").val();
 				params.doctorCode = $("#doctorCode").val();
-				
+				params.ghType = $("#ghType").val();
 				$.post(Utils.getRoot()+"/registerApp/selDoctorListDetail",params,function(data){
 					if (data.success) {
-						var dortorInfo = new Array();
-						dortorInfo= data.data;
+						var doctorInfo = new Array();
+						doctorInfo= data.data;
+						console.log("info:"+JSON.stringify(doctorInfo))
 						var timeGroupBy;
 						for (var i = 0; i < doctorInfo.length; i++) {
 							if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
@@ -167,7 +151,8 @@
 									var regFee = parseInt(timeGroupBy[j].regFee)/100;
 									$("#hsTime"+i).append(
 										"<div class='box_time_item'>"+
-											"<span ><span clsdd='beginTime'>"+timeGroupBy[j].beginTime+"</span>"+
+											"<input type='hidden' name='timeFlag' value=''>"+
+											"<span class='box_sj'><span class='beginTime'>"+timeGroupBy[j].beginTime+"</span>"+
 											" ~ <span class='endTime'>"+timeGroupBy[j].endTime+"</span></span>"+
 											"<span class='box_yuhao' >余号：<span class='leftNum'>"+timeGroupBy[j].leftNum+"</span></span>"+
 											"<span class='box_ghf'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
@@ -176,6 +161,25 @@
 								}
 							}
 						}	
+					}else{
+						alert(data.message);
+					}
+				});
+				
+				$("#dateList").on("click",".box_time_item",function(){//按日期选择
+					if($(this).children(".box_yuhao").children(".leftNum").text()>0){
+						
+						var deptCode = $("#deptCode").val();
+						var deptName = $("#deptName").text();
+						var doctorCode = $("#doctorCode").val();
+						var clinicType = $("#clinicType").val();
+						var doctorName = $("#doctorName").text();
+						var dateTime = $(this).siblings(".box_date").children(".sj").text();
+						var regFee = $(this).children(".box_ghf").children(".regFee").text();
+						var beginTime = $(this).children(".box_sj").children(".beginTime").text();
+						var endTime = $(this).children(".box_sj").children(".endTime").text();
+						var timeFlag = $(this).children("input[name='timeFlag']").val();
+						window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;            
 					}
 				});
 				

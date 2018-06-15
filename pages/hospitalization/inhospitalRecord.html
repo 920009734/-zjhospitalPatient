@@ -6,6 +6,7 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
         
         <script src="../../lib/zepto.min.js">  </script>
         <script src="../../js/frozen.js"></script>
@@ -19,6 +20,14 @@
 			.demo_value>span{display: block;float: right;}
 			a{color: #000000;}
 			.zy_money{color: #F21C30;font-weight: bold;}
+			
+			.hos_tab{display: block;float: left;position: fixed;top: 50px; width: 100%;height: 50px;line-height: 50px;color:#FFFFFF;background-color: #1281E8;}
+        	.box_tab{display: block;float: left;width: 50%;height: 50px;text-align: center;}
+        	.box_tab.active{color: #FFFFFF;border-bottom: 1px solid #FFFFFF;}
+        	.box_tab>i{display: none;}
+        	.box_tab.active>i{display: block;position: relative;top: -25px;font-size: 20px;color: #FFFFFF;}
+        	.hos_con{display: block;float: left;width: 100%;margin-top: 50px;}
+        	.hospital_record,.hospital_money{display: block;float: left;width: 100%;}
 		</style>
 	</head>
 	<body ontouchstart> 
@@ -29,54 +38,155 @@
 		
 		<section class="ui-container">
 			<section class="list">
-				<div class="demo-block">
-					<div class="list-item">
-						<span class="demo_name">住院人</span>
-						<span class="demo_value"><span>李杰</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">住院科室</span>
-						<span class="demo_value"><span>内科</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">主治医师</span>
-						<span class="demo_value"><span>林坚</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">诊疗卡号/住院号</span>
-						<span class="demo_value"><span>031540</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">病床号</span>
-						<span class="demo_value"><span>102</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">住院状态</span>
-						<span class="demo_value"><span>已出院</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">入院日期</span>
-						<span class="demo_value"><span>2018-05-15</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">出院日期</span>
-						<span class="demo_value"><span>2018-05-20</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">住院总费用</span>
-						<span class="demo_value"><span class="zy_money">2345元</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">住院押金余额</span>
-						<span class="demo_value"><span class="zy_money">120元</span></span>
-					</div>
-					<div class="list-item">
-						<span class="demo_name">其他说明</span>
-						<span class="demo_value"><span>少油腻，多清淡，多吃水果</span></span>
-					</div>
-					
+				<div class="hos_tab">
+					<span class="box_tab active" id="hos_record">
+						住院记录
+						<i class="ui-icon icon-shangjiantou"></i>
+					</span>
+					<span class="box_tab " id="hos_money">
+						费用清单
+						<i class="ui-icon icon-shangjiantou"></i>
+					</span>
 				</div>
+				<div class="hos_con">
+					<div class="hospital_record">
+						<div class="list-item">
+							<span class="demo_name">住院人</span>
+							<span class="demo_value"><span>李杰</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">住院科室</span>
+							<span class="demo_value"><span>内科</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">主治医师</span>
+							<span class="demo_value"><span>林坚</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">诊疗卡号/住院号</span>
+							<span class="demo_value"><span>031540</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">病床号</span>
+							<span class="demo_value"><span>102</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">住院状态</span>
+							<span class="demo_value"><span>已出院</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">入院日期</span>
+							<span class="demo_value"><span>2018-05-15</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">出院日期</span>
+							<span class="demo_value"><span>2018-05-20</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">住院总费用</span>
+							<span class="demo_value"><span class="zy_money">2345元</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">住院押金余额</span>
+							<span class="demo_value"><span class="zy_money">120元</span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">其他说明</span>
+							<span class="demo_value"><span>少油腻，多清淡，多吃水果</span></span>
+						</div>
+					</div>
+					<div class="hospital_money">
+						<div class="pay_detail_top">
+							<div class="list-item">
+								<span class="demo_name">清单开始日期</span>
+								<span class="demo_value"><span>2018-05-20</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">清单结束日期</span>
+								<span class="demo_value"><span>2018-05-23</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">入院日期</span>
+								<span class="demo_value"><span>2018-05-20</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">出院日期</span>
+								<span class="demo_value"><span>2018-05-20</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">住院天数</span>
+								<span class="demo_value"><span>4天</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">住院科室</span>
+								<span class="demo_value"><span>内科</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">结算类别</span>
+								<span class="demo_value"><span>内科</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">病床号</span>
+								<span class="demo_value"><span>102</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">费用总金额</span>
+								<span class="demo_value"><span>2132元</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">甲类金额</span>
+								<span class="demo_value"><span>12元</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">乙类金额</span>
+								<span class="demo_value"><span>12元</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">丙类金额</span>
+								<span class="demo_value"><span>12元</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">床位费</span>
+								<span class="demo_value"><span>12元</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">西药费</span>
+								<span class="demo_value"><span>12元</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">成药费</span>
+								<span class="demo_value"><span>12元</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">草药费</span>
+								<span class="demo_value"><span>12元</span></span>
+							</div>
+							<div class="list-item">
+								<span class="demo_name">诊疗费</span>
+								<span class="demo_value"><span>12元</span></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 			</section>	
 		</section>
+		
+		<script type="text/javascript">
+			$(".hospital_money").hide();
+			$(".box_tab").on("click",function(){
+					var a = $(this).hasClass("active");
+					if(!a){
+						$(this).addClass("active").siblings(".box_tab").removeClass("active");
+						if ($(this).attr("id")=="hos_record") {
+							$(".hospital_record").show();
+							$(".hospital_money").hide();
+						} else{
+							$(".hospital_money").show();
+							$(".hospital_record").hide();
+						}
+					}
+				});
+		</script>
 	</body>
 </html>

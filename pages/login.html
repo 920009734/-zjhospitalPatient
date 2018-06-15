@@ -40,66 +40,6 @@
 		</style>
 	</head>
 	<body>
-    	<script>
-    		window.onload = function(){
-    			var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
-    			if(patientInfo){
-    				$("#phone_").val(patientInfo.phone);
-    				checkToken(patientInfo.token);
-    			}
-    		}
-    		
-    		function checkToken(token){
-    			$.ajax({
-					type: "post",
-					url: Utils.getRoot()+"/common/checkToken",
-					async: false,
-					data: {
-						token: token,
-						type: 'PATIENT'
-					},
-					success: function(result){
-						if(result.success){
-							if(result.data){
-								location.href="main.html";
-							}else{
-								localStorage.removeItem('token');
-								localStorage.removeItem('patientId');
-								alert(result.message)
-							}
-						}else{
-							alert(result.message);
-						}
-					}
-				});
-    		}
-    		
-    		function login(){
-				var phone = $("#phone_").val();
-				var password = $("#password_").val();
-				if(!phone || !password){
-					alert('账号密码不能为空');
-					return false;
-				}
-				$.ajax({
-					type: "post",
-					url: Utils.getRoot()+"/patientApp/login",
-					async: false,
-					data: {
-						phone: phone,
-						password: password
-					},
-					success: function(result){
-						if(result.success){
-							localStorage.setItem('patientInfo', JSON.stringify(result.data));
-							location.href="main.html";
-						}else{
-							alert(result.message);
-						}
-					}
-				});
-			}
-    	</script>
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i><h4 style="margin-left: 25px;">请登录</h4>
 		</header>
@@ -137,4 +77,64 @@
 			</section>
 		</section>
 	</body>
+	<script>
+		window.onload = function(){
+			var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
+			if(patientInfo){
+				$("#phone_").val(patientInfo.phone);
+				checkToken(patientInfo.token);
+			}
+		}
+		
+		function checkToken(token){
+			$.ajax({
+				type: "post",
+				url: Utils.getRoot()+"/common/checkToken",
+				async: false,
+				data: {
+					token: token,
+					type: 'PATIENT'
+				},
+				success: function(result){
+					if(result.success){
+						if(result.data){
+							location.href="main.html";
+						}else{
+							localStorage.removeItem('token');
+							localStorage.removeItem('patientId');
+							alert(result.message)
+						}
+					}else{
+						alert(result.message);
+					}
+				}
+			});
+		}
+		
+		function login(){
+			var phone = $("#phone_").val();
+			var password = $("#password_").val();
+			if(!phone || !password){
+				alert('账号密码不能为空');
+				return false;
+			}
+			$.ajax({
+				type: "post",
+				url: Utils.getRoot()+"/patientApp/login",
+				async: false,
+				data: {
+					phone: phone,
+					password: password
+				},
+				success: function(result){
+					if(result.success){
+						localStorage.setItem('patientInfo', JSON.stringify(result.data));
+						location.href="main.html";
+					}else{
+						alert(result.message);
+					}
+				}
+			});
+		}
+	</script>
 </html>
