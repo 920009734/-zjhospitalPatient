@@ -34,6 +34,40 @@
 			</section>
 		</section>
 		<script>
+			var plus = plus;
+			if(!plus){
+				plus = top.plus;
+			}
+			
+			loadNotice();
+			
+			function loadNotice(){
+				plus.nativeUI.showWaiting('数据加载中...');
+				$.ajax({
+					type:"post",
+					url:Utils.getRoot()+"/messagePush/listHistoryMessageByUT",
+					async:false,
+					data: {
+						pageNum: 1,
+						pageSize: 999,
+						type: window.location.href.split("=")[1]
+					},
+					success: function(result){
+						plus.nativeUI.closeWaiting();
+						if(result.success){
+							updateLookStatus();
+							$("#message_items").empty();
+							$.each(result.data.list, function(ind,val) {
+								$("#message_items").append('<div class="msg_list">'+
+							    '<span class="msg_time"><p>发送时间：'+val.date+'</p></span>'+
+							    '<span class="msg_img"><img src="../img/kefu1.png"/></span>'+
+							    '<span class="msg_icon"><img src="../img/sjx.png"/></span>'+
+							    '<span class="msg_con">'+val.data+'</span></div>');
+							});
+						}
+					}
+				});
+			}
 			function updateLookStatus(){
 				$.ajax({
 					type:"post",
@@ -44,29 +78,6 @@
 					}
 				});
 			}
-			$.ajax({
-				type:"post",
-				url:Utils.getRoot()+"/messagePush/listHistoryMessageByUT",
-				async:false,
-				data: {
-					pageNum: 1,
-					pageSize: 999,
-					type: window.location.href.split("=")[1]
-				},
-				success: function(result){
-					if(result.success){
-						updateLookStatus();
-						$("#message_items").empty();
-						$.each(result.data.list, function(ind,val) {
-							$("#message_items").append('<div class="msg_list">'+
-						    '<span class="msg_time"><p>发送时间：'+val.date+'</p></span>'+
-						    '<span class="msg_img"><img src="../img/kefu1.png"/></span>'+
-						    '<span class="msg_icon"><img src="../img/sjx.png"/></span>'+
-						    '<span class="msg_con">'+val.data+'</span></div>');
-						});
-					}
-				}
-			});
 		</script>
 	</body>
 </html>
