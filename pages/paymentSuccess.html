@@ -16,6 +16,17 @@
         	.pay_item{display: block;float:left;width: 86%;height: 180px;margin-left: 7%;background-color: #FFFFFF;border-radius: 3px;box-shadow: 2px 2px 3px #909090;}
         	.pay_item>p{text-align: center;line-height: 150px;font-size: 18px;font-weight: bold;}
         </style>
+        <script type="text/javascript">
+			Request = {
+				QueryString : function(item){
+					var svalue = location.search.match(new RegExp("[\?\&]" + item + "=([^\&]*)(\&?)","i"));
+					return svalue ? svalue[1] : svalue;
+				}
+			}
+			
+			String order_no = Request.getParameter("out_trade_no");
+			alert("order_no:"+order_no);
+		< /script>
 	</head>
 	<body ontoustart>
 		<header class="ui-header ui-header-positive">

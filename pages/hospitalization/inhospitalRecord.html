@@ -10,6 +10,7 @@
         
         <script src="../../lib/zepto.min.js">  </script>
         <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
 		<title>住院记录</title>
 		
 		<style type="text/css">
@@ -28,6 +29,10 @@
         	.box_tab.active>i{display: block;position: relative;top: -25px;font-size: 20px;color: #FFFFFF;}
         	.hos_con{display: block;float: left;width: 100%;margin-top: 50px;}
         	.hospital_record,.hospital_money{display: block;float: left;width: 100%;}
+        	.pay_detail_table{display: block;float: left; width: 100%;margin-top: 20px;border-top: 2px solid #2CA99D;}
+			.baogao_table{width:100%; background-color: #FFFFFF;}
+			table thead tr th{height: 40px;font-weight: 400;text-align: center;border: 1px solid #F6F6F6;color: #989898;font-size: 13px; }
+			table tbody tr td{padding: 10px 5px ;border: 1px solid #F6F6F6;font-size: 13px;text-align: center;}
 		</style>
 	</head>
 	<body ontouchstart> 
@@ -40,130 +45,107 @@
 			<section class="list">
 				<div class="hos_tab">
 					<span class="box_tab active" id="hos_record">
-						住院记录
+						住院记录详情
 						<i class="ui-icon icon-shangjiantou"></i>
 					</span>
 					<span class="box_tab " id="hos_money">
-						费用清单
+						费用清单明细
 						<i class="ui-icon icon-shangjiantou"></i>
 					</span>
 				</div>
 				<div class="hos_con">
 					<div class="hospital_record">
+						<input type="hidden" id="patId" value=""/>
 						<div class="list-item">
-							<span class="demo_name">住院人</span>
-							<span class="demo_value"><span>李杰</span></span>
+							<span class="demo_name">第几次住院</span>
+							<span class="demo_value"><span class="visitld"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">住院科室</span>
-							<span class="demo_value"><span>内科</span></span>
+							<span class="demo_name">入院时间</span>
+							<span class="demo_value"><span class="admsDateTime"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">主治医师</span>
-							<span class="demo_value"><span>林坚</span></span>
+							<span class="demo_name">入院科室</span>
+							<span class="demo_value"><span class="admsDeptName"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">诊疗卡号/住院号</span>
-							<span class="demo_value"><span>031540</span></span>
+							<span class="demo_name">出院时间</span>
+							<span class="demo_value"><span class="dscgDeptName"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">病床号</span>
-							<span class="demo_value"><span>102</span></span>
+							<span class="demo_name">出院科室</span>
+							<span class="demo_value"><span class="dscgDeptName"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">住院状态</span>
-							<span class="demo_value"><span>已出院</span></span>
-						</div>
-						<div class="list-item">
-							<span class="demo_name">入院日期</span>
-							<span class="demo_value"><span>2018-05-15</span></span>
-						</div>
-						<div class="list-item">
-							<span class="demo_name">出院日期</span>
-							<span class="demo_value"><span>2018-05-20</span></span>
+							<span class="demo_name">剩余预交金</span>
+							<span class="demo_value"><span class="prepayAmount"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">住院总费用</span>
-							<span class="demo_value"><span class="zy_money">2345元</span></span>
+							<span class="demo_value"><span class="totalCosts"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">住院押金余额</span>
-							<span class="demo_value"><span class="zy_money">120元</span></span>
+							<span class="demo_name">未结算费用</span>
+							<span class="demo_value"><span class="unsettleCosts"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">其他说明</span>
-							<span class="demo_value"><span>少油腻，多清淡，多吃水果</span></span>
+							<span class="demo_name">已结算费用</span>
+							<span class="demo_value"><span class="settledCosts"></span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">医保/公医记账金额</span>
+							<span class="demo_value"><span class="insurPay"></span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">自付金额</span>
+							<span class="demo_value"><span class="selfPay"></span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">备注</span>
+							<span class="demo_value"><span class="remark"></span></span>
 						</div>
 					</div>
+					
 					<div class="hospital_money">
-						<div class="pay_detail_top">
-							<div class="list-item">
-								<span class="demo_name">清单开始日期</span>
-								<span class="demo_value"><span>2018-05-20</span></span>
+						<div class="pay_detail">
+							<div class="pay_detail_top">
+								<button >一日清单明细</button>
+								<!--<div class="list-item">
+									<span class="demo_name">住院天数</span>
+									<span class="demo_value"><span>4天</span></span>
+								</div>-->
 							</div>
-							<div class="list-item">
-								<span class="demo_name">清单结束日期</span>
-								<span class="demo_value"><span>2018-05-23</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">入院日期</span>
-								<span class="demo_value"><span>2018-05-20</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">出院日期</span>
-								<span class="demo_value"><span>2018-05-20</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">住院天数</span>
-								<span class="demo_value"><span>4天</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">住院科室</span>
-								<span class="demo_value"><span>内科</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">结算类别</span>
-								<span class="demo_value"><span>内科</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">病床号</span>
-								<span class="demo_value"><span>102</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">费用总金额</span>
-								<span class="demo_value"><span>2132元</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">甲类金额</span>
-								<span class="demo_value"><span>12元</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">乙类金额</span>
-								<span class="demo_value"><span>12元</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">丙类金额</span>
-								<span class="demo_value"><span>12元</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">床位费</span>
-								<span class="demo_value"><span>12元</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">西药费</span>
-								<span class="demo_value"><span>12元</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">成药费</span>
-								<span class="demo_value"><span>12元</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">草药费</span>
-								<span class="demo_value"><span>12元</span></span>
-							</div>
-							<div class="list-item">
-								<span class="demo_name">诊疗费</span>
-								<span class="demo_value"><span>12元</span></span>
+							<div class="pay_detail_table">
+								<table class="baogao_table">
+									<thead>
+										<tr>
+											<th style="width: 10%;">序号</th>
+											<th style="width: 15%;">名称</th>
+											<th style="width: 15%;">类别</th>
+											<th style="width: 15%;">规格</th>
+											<th style="width: 15%;">数量</th>
+											<th style="width: 15%;">单位</th>
+											<th style="width: 15%;">单价(元)</th>
+											<th style="width: 15%;">金额(元)</th>
+											<th style="width: 15%;">医保类别</th>
+											<th style="width: 15%;">收据号</th>
+										</tr>
+									</thead>
+									<tbody id="xqList">
+										<!--<tr>
+											<td>878</td>
+											<td>中心静脉导管(双腔  艾贝尔)</td>
+											<td>治疗费</td>
+											<td>/</td>
+											<td>100</td>
+											<td>套</td>
+											<td>247500分</td>
+											<td>-24750分</td>
+											<td>乙类</td>
+											<td>84110128</td>
+										</tr>-->
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -173,20 +155,77 @@
 		</section>
 		
 		<script type="text/javascript">
-			$(".hospital_money").hide();
-			$(".box_tab").on("click",function(){
+			$(function(){
+				$(".hospital_money").hide();
+				$(".box_tab").on("click",function(){
 					var a = $(this).hasClass("active");
 					if(!a){
 						$(this).addClass("active").siblings(".box_tab").removeClass("active");
 						if ($(this).attr("id")=="hos_record") {
 							$(".hospital_record").show();
+							$("#xqList").html("");
 							$(".hospital_money").hide();
 						} else{
 							$(".hospital_money").show();
+							fyqd();
 							$(".hospital_record").hide();
 						}
 					}
 				});
+				
+				var Request = Utils.getRequest();
+				var hospitaldetail = {};
+				hospitaldetail = Request["hospitaldetail"];
+				console.log(hospitaldetail);
+				
+				/*住院记录详情*/
+				$("#patId").val(hospitaldetail.patId);
+				$("#visitld").text(hospitaldetail.visitld);
+				$("#admsDateTime").text(hospitaldetail.admsDateTime);
+				$("#dscgDateTime").text(hospitaldetail.dscgDateTime);
+				$("#admsDeptName").text(hospitaldetail.admsDeptName);
+				$("#dscgDeptName").text(hospitaldetail.dscgDeptName);
+				$("#prepayAmount").text(parseInt(hospitaldetail.prepayAmount)/100+"元");
+				$("#totalCosts").text(parseInt(hospitaldetail.totalCosts)/100+"元");
+				$("#unsettleCosts").text(parseInt(hospitaldetail.unsettleCosts)/100+"元");
+				$("#settledCosts").text(parseInt(hospitaldetail.settledCosts)/100+"元");
+				$("#insurPay").text(parseInt(hospitaldetail.insurPay)/100+"元");
+				$("#selfPay").text(parseInt(hospitaldetail.selfPay)/100+"元");
+				$("#remark").text(hospitaldetail.remark);
+				
+				
+				/**
+				 * 住院费用清单明细
+				 */
+				function fyqd(){
+					var params = {};
+					params.patId = $("#patId").val();
+					params.visitld = $("#visitld").text();
+					$.post(Utils.getRoot()+"/hospitalService/selCostDetail",params,function(data){
+						var costDetail = new Array();
+						costDetail= data.data;
+						for (var i = 0; i < costDetail.length; i++) {
+							$("#xqList").append(
+								"<tr>"+
+									"<td>"+costDetail[i].itemNo+"</td>"+
+									"<td>"+costDetail[i].itemName+"</td>"+
+									"<td>"+costDetail[i].feeclass+"</td>"+
+									"<td>"+costDetail[i].itemSpec+"</td>"+
+									"<td>"+costDetail[i].amount+"</td>"+
+									"<td>"+costDetail[i].units+"</td>"+
+									"<td>"+(parseInt(costDetail[i].price)/100)+"</td>"+
+									"<td>"+(parseInt(costDetail[i].charges)/100)+"</td>"+
+									"<td>"+costDetail[i].insuClass+"</td>"+
+									"<td>"+costDetail[i].rcptNo+"</td>"+
+								"</tr>"
+							);
+						}
+					});
+				}
+				
+				
+			});
+			
 		</script>
 	</body>
 </html>

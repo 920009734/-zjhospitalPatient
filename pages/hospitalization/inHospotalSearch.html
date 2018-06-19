@@ -32,13 +32,10 @@
 		</header>
 		<section class="ui-container">
 			<div class="demo-block">
-				<!--<div class="search_hospital">
-					<input type="text" class="inp_" placeholder="请输入身份证号码" />
-					<button id="hos_btn">查询</button>
-				</div>-->
 				<!-- 查询出的内容 -->
-				<div class="search_con">
-					<div class="search_item">
+				<div class="search_con" id="hospitalList">
+					
+					<!--<div class="search_item">
 						<span class="con_name">李杰</span>
 						<span class="con_type">内可内科呢可</span>
 						<span class="con_time">2018-05-15</span>
@@ -52,41 +49,40 @@
 						<span class="con_name">李杰</span>
 						<span class="con_type">内可内科呢可</span>
 						<span class="con_time">2018-05-15</span>
-					</div>
-					<div class="search_item">
-						<span class="con_name">李杰</span>
-						<span class="con_type">内可内科呢可</span>
-						<span class="con_time">2018-05-15</span>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</section>
 		
 		<script type="text/javascript">
 			$(function(){
-				/*var params={};
-        		$.post(Utils.getRoot()+"/registerApp/selDivision",params,function(data){
+				
+        		$.post(Utils.getRoot()+"/hospitalService/selhospitaldetail",{},function(data){
 					if (data.success) {
-						var deptInfo = new Array();
-						deptInfo= data.data;
-						for (var i = 0; i < deptInfo.length; i++) {
-							$("#deptInfoList").append(
-								"<div class='dep_list' >"+
-								  "<input type='hidden' value='"+deptInfo[i].deptCode+"' name='deptCode'>"+
-								  "<span class='dep_name' name='deptName'>"+deptInfo[i].deptName+"</span>"+
-								  "<i class='ui-icon ui-icon-arrow'></i>"+
+						var hospitaldetail = new Array();
+						hospitaldetail= data.data;
+						for (var i = 0; i < hospitaldetail.length; i++) {
+							console.log("hospitaldetail:"+JSON.stringify(hospitaldetail[i]));
+							$("#hospitalList").append(
+								"<div class='search_item'>"+
+									"<span class='hospitaldetail'>"+JSON.stringify(hospitaldetail[i])+"</span>"+
+									"<span class='con_name'>第<span class='visitld'>"+hospitaldetail[i].visitld+"</span>次住院</span>"+
+									"<span class='con_type'>"+hospitaldetail[i].admsDeptName+"</span>"+
+									"<span class='con_time'>"+hospitaldetail[i].admsDateTime+"</span>"+
 								"</div>"
 							);
 						}
 					}else{
-						alert(data.message);
+//						alert(data.message);
+						alert("暂无住院记录");
 					}
-				});*/
-				
-				
-				$(".search_item").click(function(){
-					location.href = "inhospitalRecord.html";
 				});
+				
+				
+				$("#hospitalList").on("click",".search_item",function(){
+        			var hospitaldetail = $(this).children(".hospitaldetail").text();
+        			window.location.href="../hospitalization/inhospitalRecord.html?hospitaldetail="+hospitaldetail;
+        		});
 			});
 			
 		</script>
