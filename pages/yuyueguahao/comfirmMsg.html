@@ -160,6 +160,7 @@
 				        			}, function(res){
 				        				$(".ui-loading-block").hide();
 										if (res.success) {
+											console.log("data:"+JSON.stringify(res.data));
 											if(channel=="ALI_WAP"){//支付宝支付
 												window.location.href = res.data.directUrl;
 											}else{//微信支付
