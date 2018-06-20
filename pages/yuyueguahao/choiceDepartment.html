@@ -15,17 +15,17 @@
 		<title>选择科室</title>
 		<style type="text/css">
 			html,body{font-family: "微软雅黑";}
-			.dep_item{display: block; width: 100%;}
+			.dep_item{display: block; width: 100%;margin-top: 90px;}
 			.dep_con{display: block;width: 100%; min-height: 50px;max-height: 2000px;}
 			
 			.dep_list{display: block;width: 100%;height: 50px;line-height: 50px; margin-bottom: 5px;background-color: #FFFFFF;}
 			.dep_list>span{display: block;float: left;width: 84%;padding-left: 15px;}
 			.dep_list>i{display: block;float: right;line-height: 50px;width: 10%;color: #8B8B8B;}
 			
-			.search_dep{display: block;width: 100%;height: 70px;background-color: #FFFFFF;margin-bottom: 15px;}
+			.search_dep{display: block;width: 100%;height: 80px;position: fixed;top: 50px; background-color: #FFFFFF;margin-bottom: 15px;}
 			.huanzhe_search{display: block;float:left;width: 90%;height: 40px;margin-left:5%;margin-top: 15px;margin-bottom: 10px; line-height: 40px;background-color: #FAFAFA;border: 1px solid #49B6AC;border-radius: 5px;}
 			.huanzhe_search>input{display: block;float: left; width: 87%;border: none;height: 30px;margin-top: 5px;background-color: #FAFAFA;}
-			.huanzhe_search>i{display: block;float: left;width: 7%;font-size: 22px;line-height: 40px;color: #49B6AC;}
+			.huanzhe_search>i{display: block;float: left;width: 7%;font-size: 26px;line-height: 40px;color: #49B6AC;}
 			input[placeholder]{font-size: 14px;padding-left:10px;}
 		</style>
 		 <script type="text/javascript">
@@ -67,7 +67,27 @@
 					$(".ui-actionsheet").removeClass("show");
 				});
         		
-        	})
+        	});
+        	function changeVal(){
+        		var showVal = $("#chazhao").val();
+        		var a = new Array();
+        		var b = new Array();
+        		$(".dep_name").each(function(ind,val){ 
+        			a.push($(this).text());
+        			b.push($(this));
+        		}); 
+        		for(var i = 0;i<a.length;i++){
+        			if(showVal != null && showVal != ""){
+        				if(a[i].match(".*"+showVal+".*")){
+	        				b[i].parent().show();
+	        			}else{ 
+	        				b[i].parent().hide();
+	        			}
+        			}else{
+        				b[i].parent().show();
+        			}
+        		}
+        	}
         </script>
 	</head>
 	<body ontouchstart>
@@ -81,7 +101,7 @@
 				<div class="search_dep">
 					<div class="huanzhe_search">
 						<input type="text" id="chazhao" placeholder="查找科室" />
-						<i class="ui-icon icon-search" id="searchp"></i>
+						<i class="ui-icon icon-search" id="searchp" onclick="changeVal()" ></i>
 					</div>
 				</div>
 				<div class="dep_item">

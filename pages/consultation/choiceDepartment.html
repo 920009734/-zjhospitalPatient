@@ -15,13 +15,13 @@
 		<style type="text/css"> 
 			html,body{width: 100%;height: 100%;background-color: #F1F0F8;}
 			header>h4>span,header>h4>i{display: block;float: left;}
-			header>h4>i{margin-top: 3px;}
+			header>h4>i{margin-top: 1px;}
 			.search_doc{display: block;width: 92%;height: 60px;margin: 0 auto;margin-top: 15px;}
 			.search_doc>div{display: block;float: left;height: 35px;line-height: 35px;} 
 			.search_left{width: 87%;background-color: #FFFFFF;border-radius: 30px;}
 			.search_left>input,.search_left>i{display: block;float: left;}
-			.search_left>input{height: 33px;line-height: 35px;width: 80%;border: none;margin-left: 15px;}
-			.search_left>i{font-size: 40px;margin-right: -10px;margin-top: -6px;}
+			.search_left>input{height: 35px;line-height: 35px;width: 80%;border: none;margin-left: 15px;}
+			.search_left>i{font-size: 40px;margin-right: -10px;margin-top: -6px;color: #199ED8;}
 			.search_right{width: 13%;text-align: right;color: #199ED8;}
 			.ck_doc{display:block;width:92%;height: 70px; margin-left:4%;margin-bottom:5px;background-color: #FFFFFF;border-radius: 2px;padding: 7px 0px;}
 			.ck_doc>div{display: block;float: left;} 
@@ -64,10 +64,10 @@
 			<section>
 				<div class="search_doc">
 					<div class="search_left">
-						<input type="text" placeholder="输入医生姓名搜索医生" />
-						<i class="ui-icon ui-icon-search"></i>
+						<input type="text" placeholder="输入医生姓名搜索医生" id="docName_id"/>
+						<i class="ui-icon ui-icon-search" onclick="changeVal()"></i>
 					</div>
-					<div class="search_right">搜索</div>
+					<div class="search_right" onclick="changeVal()">搜索</div>
 				</div>
 				<div id="doctor_"></div>
 				
@@ -314,6 +314,27 @@
 					$(".ui-actionsheet").removeClass("show");
 				});
 			});
+			
+			function changeVal(){
+        		var showVal = $("#docName_id").val();
+        		var a = new Array();
+        		var b = new Array();
+        		$(".right_name").each(function(ind,val){ 
+        			a.push($(this).text());
+        			b.push($(this));
+        		}); 
+        		for(var i = 0;i<a.length;i++){
+        			if(showVal != null && showVal != ""){
+        				if(a[i].match(".*"+showVal+".*")){
+	        				b[i].parent().parent().parent().show();
+	        			}else{ 
+	        				b[i].parent().parent().parent().hide();
+	        			}
+        			}else{
+        				b[i].parent().parent().parent().show();
+        			}
+        		}
+        	}
 		</script>
 	</body>
 </html>
