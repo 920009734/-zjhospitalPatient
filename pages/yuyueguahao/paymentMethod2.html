@@ -11,7 +11,7 @@
         <script src="../../js/jquery-1.8.3.min.js"></script>
         <!--<script src="../../js/frozen.js"></script>-->
         <script src="../../js/Utils.js"></script>
-        <script src="../../js/fingerprint2.min.1.4.1.js"></script>
+        <!--<script src="../../js/fingerprint2.min.1.4.1.js"></script>-->
 		<title>选择科室</title>
 		<style type="text/css">
 			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
@@ -55,6 +55,24 @@
 				</div>
 			</section>
 		</section>
+		<!--<script type="text/javascript">
+            var fp=new Fingerprint2();
+            fp.get(function(result){
+//          	alert(JSON.stringify(result))
+				$.getJSON(Utils.getRoot()+"/registerApp/recharge",{
+		    				outChargeNo: new Date().getTime(),
+							chargeAmt: '0.01',
+							channel: "WX_WAP" 
+		    	},function(res){
+				    if(res.success){
+				        $('#getBrandWCPayRequest').attr("href",res.data.directUrl+'&redirect_url=http%3a%2f%2f219.137.32.146:8082%2fzjhospital-app%2fpaySuccess%2fpaymentSuccess.html');
+				     }else{
+				      alert(res.message);
+				                                
+					}
+				});                                                            
+			});
+        </script>-->
 		<script type="text/javascript">
 			var ws=null,embed=null;
 			document.addEventListener('plusready', plusReady, false);
@@ -70,14 +88,14 @@
 						channel: channel 
 	    	}, function(res){ 
 						if (res.success) { 
-							console.log(JSON.stringify(res.data));
+							console.log("data:"+JSON.stringify(res.data));
 							if(channel=="ALI_WAP"){//支付宝支付
 								window.location.href = res.data.directUrl;
 							}else{//微信支付
 //								var url="https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx071217368284668b67a1a1411944981725&package=3106238433";
-								$('#getBrandWCPayRequest').attr("href",res.data.directUrl+'&redirect_url=http%3a%2f%2f219.137.32.146:8082%2fzjhospital-app%2fpaySuccess%2fpaymentSuccess.html');
-								console.log($('#getBrandWCPayRequest').attr("href"));
-//								ws.loadURL(res.data.directUrl,{"Referer":"http://zjyy.com.cn"});
+								/*$('#getBrandWCPayRequest').attr("href",res.data.directUrl+'&redirect_url=http%3a%2f%2f219.137.32.146:8082%2fzjhospital-app%2fpaySuccess%2fpaymentSuccess.html');
+								console.log($('#getBrandWCPayRequest').attr("href"));*/
+								ws.loadURL(res.data.directUrl+'&redirect_url=http%3a%2f%2f219.137.32.146:8082%2fzjhospital-app%2fpaySuccess%2fpaymentSuccess.html',{Referer:"http://zjyy.com.cn"});
 							}
 							
 						}else{
