@@ -78,9 +78,6 @@
 			document.addEventListener('plusready', plusReady, false);
 			function plusReady(){
 				ws=plus.webview.currentWebview();
-				var dqUrl = window.location.href;//获取当前地址
-				embed=plus.webview.create(dqUrl, "", {additionalHttpHeaders:{Referer:"http://onepay.zjyy.com.cn"}});
-				embed.show();
 			}
 			$(function(){
 				$("#btn").click(function(){ 
@@ -95,6 +92,10 @@
 							if(channel=="ALI_WAP"){//支付宝支付
 								window.location.href = res.data.directUrl;
 							}else{//微信支付
+								
+								var dqUrl = window.location.href;//获取当前地址
+								embed=plus.webview.create(res.data.directUrl, "支付", {additionalHttpHeaders:{Referer:"http://onepay.zjyy.com.cn"}});
+								embed.show();
 								/*$.ajax({
 									url:res.data.directUrl,
 									type:"GET",
@@ -116,7 +117,7 @@
 								
 								console.log($('#getBrandWCPayRequest').attr("href"));*/
 //								ws.loadURL(res.data.directUrl,{Referer:"http://onepay.zjyy.com.cn"});
-								embed.loadURL(res.data.directUrl, {Referer:"http://onepay.zjyy.com.cn"});
+//								embed.loadURL(res.data.directUrl, {Referer:"http://onepay.zjyy.com.cn"});
 							}
 							
 						}else{
