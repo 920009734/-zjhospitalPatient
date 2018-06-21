@@ -52,7 +52,8 @@
 						<button class="ui-btn ui-btn-lg ui-btn-primary" id="btn">确认</button>
 					</div>
 				 
-				<form action="" id="H5Pay">
+				<form action="" method="post" id="Form">
+					<input type="hidden" value="" name="redirect_url" id="redirect_url">
 				</form>
 			</section>
 		</section>
@@ -72,12 +73,12 @@
 							if(channel=="ALI_WAP"){//支付宝支付
 								window.location.href = res.data.directUrl;
 							}else{//微信支付
-								var redirect_url = encodeURIComponent("http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentSuccess.html");
-								var directUrl = res.data.directUrl+"&redirect_url="+redirect_url
-								$("#H5Pay").attr("action",directUrl);
-								alert($("#H5Pay").attr("action"));
+								console.log("data:"+JSON.stringify(res.data.directUrl));
+//								$("#redirect_url").val("http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentSuccess.html");
+								$("#Form").attr("action",res.data.directUrl);
+//								console.log("action:"+$("#Form").attr("action"));
 								
-								$("#H5Pay").submit();
+								$("#Form").submit();
 							}
 							
 						}else{
