@@ -79,7 +79,7 @@
 			function plusReady(){
 				ws=plus.webview.currentWebview();
 //					var dqUrl = window.location.href;//获取当前地址
-				embed=plus.webview.create("http://onepay.zjyy.com.cn", "支付", { top:'300px',bottom:'0px',additionalHttpHeaders:{Referer:"http://onepay.zjyy.com.cn"}});
+				embed=plus.webview.create("http://onepay.zjyy.com.cn:8060/onepay-web", "支付", { top:'300px',bottom:'0px',additionalHttpHeaders:{Referer:"http://onepay.zjyy.com.cn"}});
 				embed.show();
 			}
 			$(function(){
@@ -106,7 +106,7 @@
 								
 								console.log($('#getBrandWCPayRequest').attr("href"));*/
 //								ws.loadURL(res.data.directUrl,{Referer:"http://onepay.zjyy.com.cn"});
-								embed.loadURL("http://120.78.95.98:10010/test/comservice", {Referer:"http://onepay.zjyy.com.cn"});
+								embed.loadURL("http://120.78.95.98:10010/test/comservice", {Referer:"http://onepay.zjyy.com.cn:8060/onepay-web"});
 							}
 							
 						}else{
