@@ -1,0 +1,169 @@
+{
+<<<<<<< HEAD
+  "pages/login.html": {
+    "resources": [
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "img/u364.png",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/main.html": {
+    "resources": [
+      "img/index/zjyy.png",
+      "img/index/dongtai.png",
+      "img/index/menzhenIcon.png",
+      "img/index/zhuyuanIcon.png",
+      "css/frozen.css",
+      "img/index/zyfyqd.png",
+      "img/index/logo@2x.png",
+      "img/index/paiduijiaohao.png",
+      "img/index/bgcx2.png",
+      "img/index/zhuanjiajs.png",
+      "img/u112.png",
+      "img/index/zongheIcon.png",
+      "pages/index.html",
+      "img/index/zhuanjiazixun.png",
+      "css/style.css",
+      "img/index/floorDistribution.png",
+      "img/index/zjLogo.png",
+      "H5Js/immersed.js",
+      "img/index/cydy.png",
+      "img/index/bgcx3.png",
+      "H5Js/shortcut.js",
+      "img/index/kesjs.png",
+      "img/index/yjbj.png",
+      "img/index/yygh.png",
+      "img/index/chuyuanxiaojie.png",
+      "img/index/zyjlcx.png",
+      "img/index/baogcxun.png",
+      "img/index/bgcx1.png",
+      "img/index/zwjf.png",
+      "img/self/shezhi.png",
+      "pages/message1.html",
+      "img/self/wodeguanzhu.png",
+      "img/self/bangzhu.png",
+      "img/self/self.png",
+      "img/self/member.png",
+      "pages/mySelf.html",
+      "img/self/jiuzhenjilu.png",
+      "img/sixinxxiao@2x.png",
+      "img/self/zixunjilu.png",
+      "img/index/yuyueRecord.png",
+      "img/self/jiaofeijilui.png",
+      "img/self/banben.png",
+      "img/yuyuexiao@2x.png",
+      "img/tongzhixiao@2x.png",
+      "img/xiaofeixiao@2x.png",
+      "pages/login.html"
+    ],
+    "refer": [
+      "pages/login.html"
+    ]
+  },
+  "pages/yuyueguahao/paymentMethod2.html": {
+=======
+  "pages/cslogin.html": {
+>>>>>>> branch 'master' of https://gitee.com/laiyw/zjhospitalPatient.git
+    "resources": [
+<<<<<<< HEAD
+      "js/jquery-1.8.3.min.js",
+      "font/iconfont-full.ttf",
+      "css/frozen.css",
+      "css/style.css",
+      "js/Utils.js"
+    ]
+=======
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "img/u364.png",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "pages/main.html",
+      "js/Utils.js",
+      "pages/yuyueguahao/paymentMethod2.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/login.html": {
+    "resources": [
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "css/style.css",
+      "pages/main.html"
+    ],
+    "refer": []
+  },
+  "pages/main.html": {
+    "resources": [
+      "img/index/zjyy.png",
+      "img/self/shezhi.png",
+      "img/self/wodeguanzhu.png",
+      "img/self/self.png",
+      "img/self/member.png",
+      "img/index/dongtai.png",
+      "img/self/jiuzhenjilu.png",
+      "img/index/menzhenIcon.png",
+      "img/index/zhuyuanIcon.png",
+      "css/frozen.css",
+      "img/index/zyfyqd.png",
+      "img/index/logo@2x.png",
+      "img/index/paiduijiaohao.png",
+      "img/index/bgcx2.png",
+      "img/index/zhuanjiajs.png",
+      "img/u112.png",
+      "img/index/zongheIcon.png",
+      "pages/index.html",
+      "img/index/floorDistribution.png",
+      "img/index/zhuanjiazixun.png",
+      "img/index/zjLogo.png",
+      "img/self/bangzhu.png",
+      "pages/login.html",
+      "pages/mySelf.html",
+      "H5Js/immersed.js",
+      "img/index/cydy.png",
+      "img/index/bgcx3.png",
+      "img/self/zixunjilu.png",
+      "img/index/yuyueRecord.png",
+      "img/self/jiaofeijilui.png",
+      "H5Js/shortcut.js",
+      "img/self/banben.png",
+      "img/index/yjbj.png",
+      "img/index/kesjs.png",
+      "img/index/yygh.png",
+      "img/index/chuyuanxiaojie.png",
+      "img/index/zyjlcx.png",
+      "img/index/baogcxun.png",
+      "img/index/bgcx1.png",
+      "img/index/zwjf.png",
+      "css/style.css"
+    ],
+    "refer": [
+      "pages/login.html"
+    ]
+  },
+  "pages/yuyueguahao/paymentMethod2.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "css/frozen.css",
+      "css/style.css",
+      "font/iconfont-full.ttf",
+      "js/Utils.js",
+      "js/fingerprint2.min.1.4.1.js.js"
+    ],
+    "refer": []
+>>>>>>> branch 'master' of https://gitee.com/laiyw/zjhospitalPatient.git
+  }
+}

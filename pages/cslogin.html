@@ -115,7 +115,7 @@
 				success: function(result){
 					if(result.success){
 						if(result.data){
-							location.href="main.html";
+							location.href="yuyueguahao/paymentMethod2.html";
 						}else{
 							localStorage.removeItem('token');
 							localStorage.removeItem('patientId');
@@ -148,7 +148,7 @@
 //					plus.nativeUI.closeWaiting();
 					if(result.success){
 						localStorage.setItem('patientInfo', JSON.stringify(result.data));
-						location.href="main.html";
+						location.href="yuyueguahao/paymentMethod2.html";
 					}else{
 						alert(result.message);
 					}

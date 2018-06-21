@@ -13,6 +13,12 @@
 		
 		<style type="text/css">
 			html,body{background-color: #F1F0F8}
+			.paysuc{display: block;float:left;width: 100%;height: 100%;}
+        	.pay_list{display: block;float: left;width: 100%;height: 100%;margin-top: 30px;}
+        	.pay_time{display: block;width: 100px;height: 20px;line-height: 20px; font-size: 12px;color: #999999;text-align: center;margin: 0 auto; margin-bottom: 10px;border-radius: 2px; background-color: #FFFFFF;}
+        	.pay_item{display: block;float:left;width: 86%;height: 180px;margin-left: 7%;background-color: #FFFFFF;border-radius: 3px;box-shadow: 2px 2px 3px #909090;}
+        	.pay_item>p{text-align: center;line-height: 150px;font-size: 15px;font-weight: bold;}
+      
 			.yuue_suc{display: block;float: left;width: 100%;height: 100%;}
 			.suc_msg{display: block;float: left;width: 100%;padding-top: 5px;margin-bottom: 15px;  min-height: 90px; max-height: 230px;background-color: #FFFFFF;text-align: center;}
 			.suc_msg>span{display: block;float: left; width: 100%;}
@@ -24,6 +30,48 @@
 			.suc_item>label{display: block;float: left;margin-left: 3%;font-size: 15px;color: #595959;}
 			.suc_item>span{display: block;float: right;margin-right: 3%;color: #999999;font-size: 13px;}
 		</style>
+		
+		 <script type="text/javascript">
+         	$(function(){
+	         	 var Request = Utils.getRequest();
+	         	 var outChargeNo = Request["outChargeNo"];//充值订单号(医院订单号)；
+	         	 var timestamp = Request["timestamp"].substring(0, 14);//支付时间（取前12为）如：20180620110948596
+	 			 var pattern = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/;
+				 var formatedDate = timestamp.replace(pattern, '$1-$2-$3 $4:$5:$6');
+	 			 $("#pay_time").text(timestamp);
+	 			 window.setTimeout(bespeakInfo(),3000);
+	 			 
+	 			 function bespeakInfo(){
+	 			 	
+	 			 	 var params = {};
+		 			 params.outChargeNo = outChargeNo;
+		 			 params.timestamp = timestamp;
+		 			 $.post(Utils.getRoot()+"/registerApp/registerPay",params, function(data){ 
+		 			 	$(".pay_list").hide();
+		 			 	if(data.success){
+		 			 		$("#info").show();
+		 			 		var bespeakInfo = data.data;
+			 			 	$("#serialNum").text(bespeakInfo.serialNum);
+			 			 	$("#bespeakTime").text(bespeakInfo.bespeakTime);
+			 			 	$("#patientName").text(bespeakInfo.patientName);
+			 			 	$("#divisionName").text(bespeakInfo.divisionName);
+			 			 	$("#doctorName").text(bespeakInfo.doctorName);
+			 			 	$("#visitPosition").text(bespeakInfo.visitPosition);
+			 			 	$("#visitDesc").text(bespeakInfo.visitDesc);
+			 			 	$("#serialNumber").text(bespeakInfo.serialNumber);
+			 			 	$("#money").text(parseInt(bespeakInfo.money)/100+"元");
+			 			 	$("#receiptNum").text(bespeakInfo.receiptNum);
+		 			 	}else{
+		 			 		alert(data.message);
+		 			 		$("#yysb").show();
+		 			 	}
+		 			 	
+			    	 });
+	 			 }
+	        	 
+         	});
+        	
+		</script>
 	</head>
 	<body>
 		<header class="ui-header ui-header-positive">
@@ -31,24 +79,35 @@
 			<h4 style="margin-left: 25px;">预约成功</h4>
 		</header>
 		<section class="ui-container"> 
-			<section id="list">
+			<div class="pay_list">
+				<span class="pay_time" id="pay_time"></span>
+				<div class="pay_item">
+					<p>支付成功,3秒后自动跳转预约信息页面</p>
+				</div>
+			</div>
+			
+			<section id="info" style="display: none;">
 				<div class="yuue_suc">
 					<div class="suc_msg">
 						<span>
 							<i class="iconfont icon-success"></i>
 							<span class="suc_msg_title">预约挂号成功</span>
-							<span class="suc_msg_time">2018-06-05 16:30:33</span>
+							<span class="suc_msg_time"></span>
 						</span>
-						<p>您已预约成功，请于预约当天提前15分钟到医院挂号科室，在就诊科室分诊台报到后才能进入排队系统。</p>
+						<p>您已预约成功，请于预约当天提前20分钟到医院取号，取号后到医院挂号科室就诊科室分诊台报到，报到后才能进入排队系统。</p>
 					</div>
 					
 					<div class="suc_item ">
+						<label>就诊序号</label>
+						<span id="serialNum"></span>
+					</div>
+					<div class="suc_item ">
 						<label>就诊时段</label>
-						<span>2018-06-10 09:00~10:00</span>
+						<span id="bespeakTime"></span>
 					</div>
 					<div class="suc_item">
 						<label>就诊人</label>
-						<span>李四</span>
+						<span id="patientName"></span>
 					</div>
 					<div class="suc_item" style="margin-top: 15px;">
 						<label>费用类型</label>
@@ -56,23 +115,44 @@
 					</div>
 					<div class="suc_item">
 						<label>就诊科室</label>
-						<span>血液内科门诊</span>
+						<span id="divisionName"></span>
 					</div>
 					<div class="suc_item">
 						<label>医生姓名</label>
-						<span>宋朝阳</span>
+						<span id="doctorName"></span>
 					</div>
 					<div class="suc_item">
-						<label>医生职称</label>
-						<span>主治医师</span>
+						<label>就诊位置</label>
+						<span id="visitPosition"></span>
+					</div>
+					<div class="suc_item">
+						<label>就诊说明</label>
+						<span id="visitDesc"></span>
 					</div>
 					<div class="suc_item " style="margin-top: 15px;">
 						<label>平台单号</label>
-						<span>003923820323902</span>
+						<span id="serialNumber"></span>
+					</div>
+					<div class="suc_item ">
+						<label>医院收据号</label>
+						<span id="receiptNum"></span>
 					</div>
 					<div class="suc_item ">
 						<label>交易金额</label>
-						<span>￥0.00</span>
+						<span id="money"></span>
+					</div>
+				</div>
+			</section>
+			
+			<section id="yysb" style="display: none;">
+				<div class="yuue_suc">
+					<div class="suc_msg">
+						<span>
+							<i class="iconfont ui-icon-close-page"></i>
+							<span class="suc_msg_title">预约挂号失败</span>
+							<span class="suc_msg_time"></span>
+						</span>
+						<p>预约挂号失败，如已支付会原路退回费用。</p>
 					</div>
 					
 				</div>
