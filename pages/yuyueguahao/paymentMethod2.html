@@ -52,12 +52,7 @@
 						<button class="ui-btn ui-btn-lg ui-btn-primary" id="btn">确认</button>
 					</div>
 				 
-					<div style="display: block;float: left;width: 100%;height: 130px; background-color: #FFFFFF;">
-						<div class="login_btn">
-							<button class="ui-btn ui-btn-lg ui-btn-primary" id="btn">确认</button>
-						</div>
-					</div>
-					<form action="" id="H5Pay">
+				<form action="" id="H5Pay">
 				</form>
 			</section>
 		</section>
@@ -73,26 +68,16 @@
 					
 					$.post(Utils.getRoot()+"/registerApp/recharge", params, function(res){ 
 						if (res.success) { 
+							console.log("data:"+JSON.stringify(res.data));
 							if(channel=="ALI_WAP"){//支付宝支付
 								window.location.href = res.data.directUrl;
 							}else{//微信支付
-								if (res.success) { 
-									console.log("data:"+JSON.stringify(res.data));
-									if(channel=="ALI_WAP"){//支付宝支付
-										window.location.href = res.data.directUrl;
-									}else{//微信支付
-										var redirect_url = encodeURIComponent("http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentSuccess.html");
-										var directUrl = res.data.directUrl+"&redirect_url="+redirect_url
-										$("#H5Pay").attr("action",directUrl);
-										alert($("#H5Pay").attr("action"));
-										
-										$("#H5Pay").submit();
-									}
-									
-								}else{
-									alert(res.message);
-								}
-						
+								var redirect_url = encodeURIComponent("http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentSuccess.html");
+								var directUrl = res.data.directUrl+"&redirect_url="+redirect_url
+								$("#H5Pay").attr("action",directUrl);
+								alert($("#H5Pay").attr("action"));
+								
+								$("#H5Pay").submit();
 							}
 							
 						}else{
