@@ -668,7 +668,8 @@
 					"font/iconfont-full.ttf",
 					"css/frozen.css",
 					"css/style.css",
-					"js/Utils.js"
+					"js/Utils.js",
+					"js/fingerprint2.min.1.4.1.js.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -701,6 +702,22 @@
 					"pages/main.html",
 					"css/frozen.css",
 					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/cslogin.html": {
+				"resources": [
+					"font/iconfont-full.ttf",
+					"fontIcon/iconfont.css",
+					"img/u364.png",
+					"js/frozen.js",
+					"css/frozen.css",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"pages/main.html",
+					"js/Utils.js",
+					"pages/yuyueguahao/paymentMethod2.html"
 				],
 				"refer": [],
 				"priority": 0

@@ -6,7 +6,7 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
-        <!--<script src="../../lib/zepto.min.js"></script>-->
+        <script src="../../lib/zepto.min.js"></script>
         
         <script src="../../js/jquery-1.8.3.min.js"></script>
         <!--<script src="../../js/frozen.js"></script>-->
@@ -92,10 +92,28 @@
 							if(channel=="ALI_WAP"){//支付宝支付
 								window.location.href = res.data.directUrl;
 							}else{//微信支付
-//								var url="https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx071217368284668b67a1a1411944981725&package=3106238433";
-								/*$('#getBrandWCPayRequest').attr("href",res.data.directUrl+'&redirect_url=http%3a%2f%2f219.137.32.146:8082%2fzjhospital-app%2fpaySuccess%2fpaymentSuccess.html');
+								
+								/*$.ajax({
+									url:res.data.directUrl,
+									type:"GET",
+									dataType: 'JSONP',
+									async:false,
+									headers: {
+							            "Referer":"http://onepay.zjyy.com.cn"
+							        }*/
+									/*
+									xhrFields: {  
+									    withCredentials: true // 设置运行跨域操作  
+									  }, */ 
+								});
+							    /*var referrer = document.referrer;
+							    alert("referrer:"+window.VBArray)
+								var redirect_url = encodeURIComponent("http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentSuccess.html");
+								$('#getBrandWCPayRequest').attr("href",res.data.directUrl+"&redirect_url="+redirect_url);
+								alert($('#getBrandWCPayRequest').attr("href"));
+								
 								console.log($('#getBrandWCPayRequest').attr("href"));*/
-								ws.loadURL(res.data.directUrl+'&redirect_url=http%3a%2f%2f219.137.32.146:8082%2fzjhospital-app%2fpaySuccess%2fpaymentSuccess.html',{Referer:"http://zjyy.com.cn"});
+								ws.loadURL(res.data.directUrl,{Referer:"http://onepay.zjyy.com.cn"});
 							}
 							
 						}else{

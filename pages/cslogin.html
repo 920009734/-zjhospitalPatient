@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+		<script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+        <link rel="stylesheet" href="../css/frozen.css">
+        <link rel="stylesheet" href="../css/style.css" />
+        
+        <link rel="stylesheet" href="../fontIcon/iconfont.css" />
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+        <script src="../js/Utils.js"></script>
+		<title></title>
+		<style type="text/css">
+		body{background-color: #FFFFFF;}
+			.login_img{display: block;width: 100%;}
+			.login_img>img{display: block;margin: 0 auto;margin-top: 50px;}
+			.login-inp{display: block;width: 100%;margin-top: 20px;}
+			.login_user{display: block;width: 90%;height: 45px;margin:0 auto;border-bottom: 1px solid #E7E7E7;}
+			.login_user>span{display: block;float: left;}
+			.user_icon{display: block;width: 15%;}
+			.user_inp{display: block;width: 80%;}
+			.user_inp>input{width: 100%;height: 35px;line-height:35px;margin-top: 3px;border: none;}
+			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;}
+			.login_btn>button{border-radius:5px ;background: #0066CC;}
+			.login-detai{display: block;width: 89%;margin: 0 auto;margin-top:10px;font-size: 16px;color: #00A5E0;}
+			.login-reg{float: right;}
+			
+			.auto_logo{display: block; height: 30px;width: 90%;margin-left:5%;margin-top: 10px;}
+			
+			.ui-switch input{height: 20px;}
+			.ui-switch input:before{height: 20px;}
+			.ui-switch input:checked:after{left: 31px;}
+			.ui-switch input:after{width: 20px;height: 20px;}
+			.ui-switch{margin-top: -12px;right: 0px;}
+			.ui-form-item{padding: 0;}
+			.ui-form-item>span{color: #00A5E0;}
+		</style>
+	</head>
+	<body>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i><h4 style="margin-left: 25px;">请登录</h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div  class="login_img" id="login_img">
+					<img src="../img/u364.png" />
+				</div>
+				<div class="login-inp">
+					<div class="login_user">
+						<span class="user_icon"><i class="ui-icon icon-people"></i></span>
+						<span class="user_inp"><input id="phone_" type="text" placeholder="请输入账户名" class=""/></span>
+					</div>
+					<div class="login_user">
+						<span class="user_icon"><i class="ui-icon icon-lock"></i></span>
+						<span class="user_inp"><input id="password_" type="password" placeholder="请输入密码" class=""/></span>
+					</div>
+				</div>
+				
+				<div class="login_btn">
+					<button onclick="login()" class="ui-btn ui-btn-lg ui-btn-primary">登录</button>
+				</div>
+				<div class="login-detai">
+					<span><a href="##"> 忘记密码？</a></span>
+					<a href="regist.html" class="login-reg">立即注册</a>
+				</div>
+				<!--<div class="auto_logo">
+					<div class="ui-form-item ui-form-item-switch">
+                        <span>自动登录 </span>
+                        <label class="ui-switch">
+                            <input id="auto_login" type="checkbox" />
+                        </label>
+                    </div>
+				</div>-->
+			</section>
+		</section>
+	</body>
+	<script>
+		function plusReady(){
+			// 隐藏滚动条
+			plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
+			// Android处理返回键
+			plus.key.addEventListener('backbutton',function(){
+				if(confirm('确认退出？')){
+					plus.runtime.quit();
+				}
+			},false);
+		}
+	
+		if(window.plus){
+			plusReady();
+		}else{
+			document.addEventListener('plusready',plusReady,false);
+		}
+		
+		window.onload = function(){
+			var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
+			if(patientInfo){
+				$("#phone_").val(patientInfo.phone);
+				checkToken(patientInfo.token);
+			}
+		}
+		
+		function checkToken(token){
+			$.ajax({
+				type: "post",
+				url: Utils.getRoot()+"/common/checkToken",
+				async: false,
+				data: {
+					token: token,
+					type: 'PATIENT'
+				},
+				success: function(result){
+					if(result.success){
+						if(result.data){
+							location.href="yuyueguahao/paymentMethod2.html";
+						}else{
+							localStorage.removeItem('token');
+							localStorage.removeItem('patientId');
+							alert(result.message)
+						}
+					}else{
+						alert(result.message);
+					}
+				}
+			});
+		}
+		
+		function login(){
+			var phone = $("#phone_").val();
+			var password = $("#password_").val();
+			if(!phone || !password){
+				alert('账号密码不能为空');
+				return false;
+			}
+//			plus.nativeUI.showWaiting('APP登录中...');
+			$.ajax({
+				type: "post",
+				url: Utils.getRoot()+"/patientApp/login",
+				async: false,
+				data: {
+					phone: phone,
+					password: password
+				},
+				success: function(result){
+//					plus.nativeUI.closeWaiting();
+					if(result.success){
+						localStorage.setItem('patientInfo', JSON.stringify(result.data));
+						location.href="yuyueguahao/paymentMethod2.html";
+					}else{
+						alert(result.message);
+					}
+				}
+			});
+		}
+	</script>
+</html>
