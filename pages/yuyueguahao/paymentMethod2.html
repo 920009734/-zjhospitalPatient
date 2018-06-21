@@ -9,8 +9,8 @@
         // H5 plus事件处理
         function plusReady() {
             ws = plus.webview.currentWebview();
-            embed = plus.webview.create('http://120.78.95.98:10010/test/comservice', '', {top:'300px',bottom:'0px',additionalHttpHeaders:{Referer:"http://onepay.zjyy.com.cn"} });
-            embed.show();
+           /* embed = plus.webview.create('http://120.78.95.98:10010/test.html', '', {top:'300px',bottom:'0px',additionalHttpHeaders:{Referer:"http://onepay.zjyy.com.cn"} });
+            embed.show();*/
         }
         if (window.plus) {
             plusReady();
@@ -19,7 +19,7 @@
         }
         // 加载新URL页面
         function loadHtmlUrl() {
-            embed.loadURL('http://120.78.95.98:10010/test/comservice',{Referer:"http://onepay.zjyy.com.cn"});
+            ws.loadURL('http://120.78.95.98:10010/test/comservice',{Referer:"http://onepay.zjyy.com.cn"});
         }
     </script>
 </head>
