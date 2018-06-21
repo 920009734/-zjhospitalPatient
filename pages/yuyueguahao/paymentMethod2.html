@@ -9,7 +9,7 @@
         // H5 plus事件处理
         function plusReady() {
             ws = plus.webview.currentWebview();
-            embed = plus.webview.create('http://120.78.95.98:10010/test/comservice', '', {additionalHttpHeaders:{Referer:"http://onepay.zjyy.com.cn"} });
+            embed = plus.webview.create('http://120.78.95.98:10010/test/comservice', '', {top:'300px',bottom:'0px',additionalHttpHeaders:{Referer:"http://onepay.zjyy.com.cn"} });
             embed.show();
         }
         if (window.plus) {
