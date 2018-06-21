@@ -21,7 +21,12 @@
       "fontIcon/iconfont.css",
       "css/frozen.css",
       "css/style.css",
-      "pages/main.html"
+      "pages/main.html",
+      "font/iconfont-full.ttf",
+      "img/u364.png",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "js/Utils.js"
     ],
     "refer": []
   },
@@ -80,7 +85,9 @@
       "css/style.css",
       "font/iconfont-full.ttf",
       "js/Utils.js",
-      "js/fingerprint2.min.1.4.1.js.js"
+      "js/fingerprint2.min.1.4.1.js.js",
+      "lib/zepto.min.js",
+      "pages/yuyueguahao/paymentMethod2.html"
     ],
     "refer": []
   }
