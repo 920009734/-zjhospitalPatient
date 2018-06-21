@@ -317,23 +317,22 @@
 			
 			function changeVal(){
         		var showVal = $("#docName_id").val();
-        		var a = new Array();
-        		var b = new Array();
+        		var class_value = new Array();
+        		var class_name = new Array();
         		$(".right_name").each(function(ind,val){ 
-        			a.push($(this).text());
-        			b.push($(this));
-        		}); 
-        		for(var i = 0;i<a.length;i++){
+        			class_value.push($(this).text());
+        			class_name.push($(this));
+        			
         			if(showVal != null && showVal != ""){
-        				if(a[i].match(".*"+showVal+".*")){
-	        				b[i].parent().parent().parent().show();
+        				if(class_value[ind].match(".*"+showVal+".*")){
+	        				class_name[ind].parent().parent().parent().show();
 	        			}else{ 
-	        				b[i].parent().parent().parent().hide();
+	        				class_name[ind].parent().parent().parent().hide();
 	        			}
         			}else{
-        				b[i].parent().parent().parent().show();
+        				class_name[ind].parent().parent().parent().show();
         			}
-        		}
+        		}); 
         	}
 		</script>
 	</body>

@@ -70,23 +70,22 @@
         	});
         	function changeVal(){
         		var showVal = $("#chazhao").val();
-        		var a = new Array();
-        		var b = new Array();
+        		var class_value = new Array();
+        		var class_name = new Array();
         		$(".dep_name").each(function(ind,val){ 
-        			a.push($(this).text());
-        			b.push($(this));
-        		}); 
-        		for(var i = 0;i<a.length;i++){
+        			class_value.push($(this).text());
+        			class_name.push($(this));
+        			
         			if(showVal != null && showVal != ""){
-        				if(a[i].match(".*"+showVal+".*")){
-	        				b[i].parent().show();
+        				if(class_value[ind].match(".*"+showVal+".*")){
+	        				class_name[ind].parent().show();
 	        			}else{ 
-	        				b[i].parent().hide();
+	        				class_name[ind].parent().hide();
 	        			}
         			}else{
-        				b[i].parent().show();
+        				class_name[ind].parent().show();
         			}
-        		}
+        		}); 
         	}
         </script>
 	</head>
