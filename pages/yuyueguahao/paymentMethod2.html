@@ -67,6 +67,7 @@
 					params.chargeAmt = "0.01";
 					params.channel = channel;
 					
+					
 					$.post(Utils.getRoot()+"/registerApp/recharge", params, function(res){ 
 						if (res.success) { 
 							if(channel=="ALI_WAP"){//支付宝支付
