@@ -51,7 +51,7 @@
 					<div class="login_btn">
 						<button class="ui-btn ui-btn-lg ui-btn-primary" id="btn">确认</button>
 					</div>
-					<!--<a class="btn-green" id="getBrandWCPayRequest" href="#">立即购买</a>-->
+					<a class="btn-green" id="getBrandWCPayRequest" href="#">立即购买</a>
 				</div>
 			</section>
 		</section>
@@ -78,6 +78,9 @@
 			document.addEventListener('plusready', plusReady, false);
 			function plusReady(){
 				ws=plus.webview.currentWebview();
+					var dqUrl = window.location.href;//获取当前地址
+					embed=plus.webview.create(dqUrl, "支付", {additionalHttpHeaders:{Referer:"http://onepay.zjyy.com.cn"}});
+					embed.show();
 			}
 			$(function(){
 				$("#btn").click(function(){ 
@@ -93,21 +96,20 @@
 								window.location.href = res.data.directUrl;
 							}else{//微信支付
 								
-							/*	var dqUrl = window.location.href;//获取当前地址
-								embed=plus.webview.create(res.data.directUrl, "支付", {additionalHttpHeaders:{Referer:"http://onepay.zjyy.com.cn"}});
-								embed.show();*/
-								$.ajax({
+							
+								/*$.ajax({
 									url:"http://120.78.95.98:10010/test/comservice",
 									type:"GET",
 									dataType: 'JSONP',
 									async:false,
 									headers: {
 							            "Referer":"http://onepay.zjyy.com.cn"
-							        },
+							        }*/
+									/*
 									xhrFields: {  
 									    withCredentials: true // 设置运行跨域操作  
 									  }, 
-								}); 
+								});*/ 
 							    /*var referrer = document.referrer;
 							    alert("referrer:"+window.VBArray)
 								var redirect_url = encodeURIComponent("http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentSuccess.html");
@@ -116,7 +118,7 @@
 								
 								console.log($('#getBrandWCPayRequest').attr("href"));*/
 //								ws.loadURL(res.data.directUrl,{Referer:"http://onepay.zjyy.com.cn"});
-//								embed.loadURL(res.data.directUrl, {Referer:"http://onepay.zjyy.com.cn"});
+								embed.loadURL(res.data.directUrl, {Referer:"http://onepay.zjyy.com.cn"});
 							}
 							
 						}else{
