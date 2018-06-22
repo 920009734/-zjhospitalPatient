@@ -6,12 +6,8 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
-        <!--<script src="../../lib/zepto.min.js"></script>-->
-        
         <script src="../../js/jquery-1.8.3.min.js"></script>
-        <!--<script src="../../js/frozen.js"></script>-->
         <script src="../../js/Utils.js"></script>
-        <!--<script src="../../js/fingerprint2.min.1.4.1.js"></script>-->
 		<title>选择科室</title>
 		<style type="text/css">
 			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
@@ -31,9 +27,9 @@
 		<section class="ui-container"> 
 			<section id="list">
 				<div class="comfirm_item menz">
-					<span class="item_name">支付方式</span>
+					<a id="tz">支付方式选择</a>
 				</div>
-				<div>
+				<!--<div>
 					<div class="ui-form-item ui-form-item-radio ">
                         <label class="ui-radio" for="radio">
                             <input type="radio" checked="" value="WX_WAP" name="channel_radio" />
@@ -52,16 +48,19 @@
 						<button class="ui-btn ui-btn-lg ui-btn-primary" id="btn">确认</button>
 					</div>
 				 
-				 
-				<form action="" method="post" id="Form">
-					<!--<input type="hidden" value="" name="redirect_url" id="redirect_url">-->
-				</form>
+				<form action="" method="post" id="H5Pay">
+					<input type="hidden" value="" name="redirect_url" id="redirect_url">
+				</form>-->
 			</section>
 		</section>
 		<script type="text/javascript">
 			$(function(){
-				$("#btn").click(function(){ 
-					var channel = $("input[name='channel_radio']:checked").val();
+				$("#tz").click(function(){ 
+					var outChargeNo = new Date().getTime();
+					var chargeAmt = "0.01";
+					window.location.href = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod2.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+localStorage.getItem("patientInfo").patientid;
+					
+					/*var channel = $("input[name='channel_radio']:checked").val();
 					var params = {};
 					params.outChargeNo = new Date().getTime();
 					params.chargeAmt = "0.01";
@@ -75,17 +74,19 @@
 								window.location.href = res.data.directUrl;
 							}else{//微信支付
 								console.log("data:"+JSON.stringify(res.data.directUrl));
+								var redirect_url = encodeURIComponent("http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentSuccess.html");
 //								$("#redirect_url").val("http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentSuccess.html");
-								$("#Form").attr("action",res.data.directUrl);
-//								console.log("action:"+$("#Form").attr("action"));
+								var directUrl = res.data.directUrl+"&redirect_url="+redirect_url
+								$("#H5Pay").attr("action",directUrl);
+								console.log("action:"+$("#H5Pay").attr("action"));
 								
-								$("#Form").submit();
+								$("#H5Pay").submit();
 							}
 							
 						}else{
 							alert(res.message);
 						}
-					});
+					});*/
 				});
 				
 			});
