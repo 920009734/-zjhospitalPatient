@@ -8,29 +8,30 @@
         <link rel="stylesheet" href="../../css/style.css" />
         <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
         
-        <!--<script src="../../js/jquery-1.8.3.min.js"></script>-->
+        <script src="../../js/jquery-1.8.3.min.js"></script>
         <script>$.noConflict();</script>
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
+        
         
 		<title>确认预约信息</title>
 		<style type="text/css">
 			html,body{font-family: "微软雅黑";height: 100%;width: 100%;}
 			.ck_doctor{display: block;width: 100%;height: 60px;background-color: #FFFFFF; line-height:60px;margin-top: 5px;}
 			.ck_doctor_name{margin-left: 10px;}
-			.ck_doctor_btn{display: block;float: right;width: 100px;border: 1px solid #00BA7F;height: 30px;line-height: 30px;border-radius: 2px;margin-top: 15px;margin-right: 10px;}
+			.ck_doctor_btn{display: block;float: right;width: 100px;border: 1px solid #0066CC;height: 30px;line-height: 30px;border-radius: 2px;margin-top: 15px;margin-right: 10px;}
 			.ck_doctor_btn>i, .ck_doctor_btn>span{display: block;float:left ;color: #0066CC;}
-			.ck_doctor_btn>i{font-size: 24px;margin-top: -7px;color: #00BA7F;}
-			.ck_doctor_btn>span{font-size: 14px;color: #00BA7F;}
+			.ck_doctor_btn>i{font-size: 24px;margin-top: -7px;color: #0066CC;}
+			.ck_doctor_btn>span{font-size: 14px;color: #0066CC;}
 			.comfirm_item{display: block;width: 100%;height: 50px;border-bottom: 1px solid #EEEAEB;background-color: #FFFFFF;line-height: 50px;}
 			.item_name{display: block;float: left; margin-left: 10px;width: 28%;}
 			.item_value{display: block;float: left;width: 65%;text-align: right;height: 50px;line-height: 50px;}
 			.item_value>i{display: block;float: right;margin-top: 2px;margin-right: -10px;}
 			.comfirm_item.menz{margin-top: 0;margin-top: 10px;margin-bottom: 10px;border-bottom:none}
 			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;background-color: #FFFFFF;}
-			.login_btn>button{background: #167F3B;font-size: 16px;}
-			.ui-radio input:checked:after{background: #167F3B;}
+			.login_btn>button{background: #0066CC;font-size: 16px;}
+			.ui-radio input:checked:after{background: #0066CC;}
 			
 			.img_item{margin-left: 10px;}
 			.login_btn>span{display: block;width: 60%;margin: 0 auto;font-size: 14px;margin-top: 10px;}
@@ -38,8 +39,8 @@
 			.ui-dialog-bd{background-color: #F7F7F7;padding: 0 10px;min-height:200px;max-height: 450px;border-radius: 3px;-webkit-box-pack:inherit;}
 			.add_per{display: block;width: 100%;height: 50px;line-height: 50px;background-color: #FFFFFF;margin-top: 15px;}
 			.add_per>span{display: block;width: 45%;height: 100%;margin: 0 auto;}
-			.add_per>span>i,.add_per>span>span{display: block;float:left ;color: #00BA7F;}
-			.add_per>span>i{font-size: 30px;margin-top: 3px;color: #00BA7F;}
+			.add_per>span>i,.add_per>span>span{display: block;float:left ;color: #0066CC;}
+			.add_per>span>i{font-size: 30px;margin-top: 3px;color: #0066CC;}
 			.per_name{display: block;width: 90%;margin:0 auto;background-color: #FFFFFF;margin-top: 10px;height: 35px;line-height: 35px;}
 			.per_name>span{display: block;float: left;width: 44%;margin-left: 10px;}
 			.per_relationship{text-align: right;}
@@ -48,13 +49,17 @@
 		</style>
 		</style>
 		<script type="text/javascript">
-			var outChargeNo = '';//商户充值业务流水
+			
         	$(function(){
+        		var outChargeNo = '';//商户充值业务流水
+        		document.addEventListener('plusready', plusReady, false);
+	       		// H5 plus事件处理
+				function plusReady(){}
 	       		//选择就诊人
         		$("#jzrxz").on("click", function(){
         			$.post(Utils.getRoot()+"/registerApp/selPatient", function(res){
 	    				if (res.success) {
-	    					$("#tj").empty();
+	    					$("#tj").empty();//移除添加就诊人
 	    					
 	    					var data = new Object();
 	        				data = res.data;
@@ -63,36 +68,36 @@
 		        				var patCardNo = data[i].patCardNo;
 		        				var patientname = data[i].patientname;
 		        				var gxlx = data[i].relationshiptype;
-		        				if(gxlx==null || gxlx==""){
-		        					gxlx="本人";
-		        				}else if(gxlx==2){
-		        					gxlx="父母";
+		        				if(gxlx==2){
+		        					gxlx="儿童";
 		        				}else if(gxlx==3){
-		        					gxlx="伴侣";
-		        				}else if(gxlx==4){
-		        					gxlx="子女";
-		        				}else{
 		        					gxlx="其他";
+		        				}else{
+		        					gxlx="本人";
 		        				}
 		        				
-			        			var tj = $("#tj");
-			        			tj.append("<div class='per_name' id='choosePeople_'>"+
-							            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
-							            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
-							            	"<span class='patientname_'>"+patientname+"</span>"+
-							            	"<span class='per_relationship'>"+gxlx+"</span>"+
-							            "</div>");
+			        			$("#tj").append(
+		        					"<div class='per_name' id='choosePeople_'>"+
+						            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
+						            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
+						            	"<span class='patientname_'>"+patientname+"</span>"+
+						            	"<span class='per_relationship'>"+gxlx+"</span>"+
+						            "</div>"
+						        );
 	        				}
 						            
 						    $(".addPatient").show();
 					    } else {
-					    	console.log(res.message);
+					    	$("#dialogText").html(res.message);
+							$(".ui-dialog").show();
 					    }
 		       		});
         		});
+        		
         		$("#add_rela").click(function(){
         			window.location.href="../yuyueguahao/addPerple.html"
         		});
+        		
         		$("#tj").on("click",".per_name", function(){
         			var a = $(this).children(".patientid_").val();
         			var b = $(this).children(".patCardNo_").val();
@@ -151,9 +156,20 @@
 							//医院锁号，生成商户订单号
 							$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
 								if (data.success) {
-									outChargeNo = data.data[0].hisOrdNum;
+									outChargeNo = data.data[0].hisOrdNum;//订单号
+									var chargeAmt = data.data[0].regFee;//挂号金额（单位：元）
+									var patientid = $("#patientid").val();
+								/*	var patientname = $("#patientname").text();
+									var doctorName=$("#doctorName_").text();
+									var deptName = $("#deptName_").text();
+									var bespeakTime=$("#fullTime_").text();*/
+//									window.location.href="../yuyueguahao/orderInfo.html?outChargeNo="+outChargeNo+"&deptName="+deptName+"&chargeAmt="+chargeAmt+"&doctorName="+doctorName+"&bespeakTime="+bespeakTime+"&patientid="+patientid+"&patientname="+patientname;            
+				        			var url = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod2.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
+									var w = plus.webview.open(url);
+									w.show(); // 显示窗口
+									
 				        			//统一支付下单，生产支付凭证
-				        			$.post(Utils.getRoot()+"/registerApp/recharge", {
+				        			/*$.post(Utils.getRoot()+"/registerApp/recharge", {
 				        				outChargeNo: data.data[0].hisOrdNum,
 										chargeAmt: data.data[0].regFee,
 										channel: $("input[name='channel_radio']:checked").val()
@@ -170,7 +186,7 @@
 											$("#dialogText").html(res.message);
 											$(".ui-dialog").show();
 										}
-									});
+									});*/
 								}else{
 									$(".ui-loading-block").hide();
 									$("#dialogText").html(data.message);
@@ -180,9 +196,11 @@
 						} else{//挂号不支付
 							$.post(Utils.getRoot()+"/registerApp/addbespeakInfoNoId", params, function(res){
 									if (res.success) {
-										alert(res.message);
+										$("#dialogText").html(res.message);
+										$(".ui-dialog").show();
 									}else{
-										alert(res.message);
+										$("#dialogText").html(res.message);
+										$(".ui-dialog").show();
 									}
 								});
 						}
@@ -192,14 +210,6 @@
         		});
         	})
         	
-        	//页面关闭时关闭交易订单
-        	window.onunload = function(){
-        		if(outChargeNo){
-        			$.post(Utils.getRoot()+"/registerApp/rechargeClose", {
-        				outChargeNo: outChargeNo
-        			}, function(res){});
-        		}
-        	}
        </script>
 	</head>
 	<body ontouchstart>
@@ -249,24 +259,25 @@
 					<input type="hidden" name="regFee_" />
 					<span class="item_value" id="CNregFee_"></span>
 				</div>
-				
-				<div class="comfirm_item menz">
-					<span class="item_name">支付方式</span>
-				</div>
-				<div>
-					<div class="ui-form-item ui-form-itemd-radio ">
-                        <label class="ui-radio" for="radio">
-                            <input type="radio" checked="" name="channel_radio" value="WX_WAP" />
-                        </label>
-                        <span>微信</span>
-                    </div>
-                    <div class="ui-form-item ui-form-item-radio">
-                        <label class="ui-radio" for="radio">
-                            <input type="radio" name="channel_radio" value="ALI_WAP" />
-                        </label>
-                        <span>支付宝</span>
-                    </div>
-				</div>
+				<!--<div id="zffs">
+					<div class="comfirm_item menz">
+						<span class="item_name">支付方式</span>
+					</div>
+					<div>
+						<div class="ui-form-item ui-form-itemd-radio ">
+	                        <label class="ui-radio" for="radio">
+	                            <input type="radio" checked="" name="channel_radio" value="WX_WAP" />
+	                        </label>
+	                        <span>微信</span>
+	                    </div>
+	                    <div class="ui-form-item ui-form-item-radio">
+	                        <label class="ui-radio" for="radio">
+	                            <input type="radio" name="channel_radio" value="ALI_WAP" />
+	                        </label>
+	                        <span>支付宝</span>
+	                    </div>
+					</div>
+				</div>-->
 				<div style="display: block;float: left;width: 100%;height: 130px; background-color: #FFFFFF;">
 					<div class="login_btn">
 						<button class="ui-btn ui-btn-lg ui-btn-primary" id="zf">确认预约</button>

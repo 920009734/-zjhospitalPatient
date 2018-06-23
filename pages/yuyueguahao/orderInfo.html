@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css" />
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
+        
+        <script src="../../js/jquery-1.8.3.min.js"></script>
+        <script src="../../js/Utils.js"></script>
+		<title>预约信息</title>
+		
+		<style type="text/css">
+			html,body{background-color: #F1F0F8}
+      		.comfirm_item{display: block;width: 100%;height: 50px;border-bottom: 1px solid #EEEAEB;background-color: #FFFFFF;line-height: 50px;}
+			.item_name{display: block;float: left; margin-left: 10px;width: 28%;}
+			.comfirm_item.menz{margin-top: 0;margin-bottom: 10px;border-bottom:none}
+			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;background-color: #FFFFFF;}
+			.login_btn>button{border-radius:2px ;background: #0066CC;font-size: 16px;}
+			.ui-radio input:checked:after{background: #0066CC;}
+			.yuue_suc{display: block;float: left;width: 100%;height: 100%;}
+			.suc_msg{display: block;float: left;width: 100%;padding-top: 5px;margin-bottom: 15px;  min-height: 90px; max-height: 230px;background-color: #FFFFFF;text-align: center;}
+			.suc_msg>span{display: block;float: left; width: 100%;}
+			.suc_msg>span>i{display: block;float: left;margin-left: 28%; height: 35px;line-height: 38px; font-size: 30px;color: #1281E8;}
+			.suc_msg_title{display: block;float: left; display: block;height: 35px;line-height: 35px;color: #1281E8;}
+			.suc_msg_time{display: block;float: left; font-size: 13px;color: #999999;width: 100%; }
+			.suc_msg>p{display: block;float: left;width: 94%;margin-left: 3%;font-size: 14px;text-align: left;color: #595959;padding: 8px 0 10px 0;}
+			.suc_item{display: block;float: left;width: 100%;min-height: 20px;max-height: 100px;padding: 12px 0;background-color: #FFFFFF;}
+			.suc_item>label{display: block;float: left;margin-left: 3%;font-size: 15px;color: #595959;}
+			.suc_item>span{display: block;float: right;margin-right: 3%;color: #999999;font-size: 13px;}
+		</style>
+		
+	</head>
+	<body>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;float: left;">预约挂号订单</h4>
+			<a href="../main.html" style="float: right;">返回首页</a>
+		</header>
+		<section class="ui-container"> 
+			
+			<section id="info" >
+				<div class="yuue_suc">
+					<div class="suc_msg">
+						<span>
+							<i class="iconfont"></i>
+							<span class="suc_msg_title">预约挂号详情</span>
+							<span class="suc_msg_time"></span>
+						</span>
+						<p>预约订单已生成，请在5分钟之内完成订单支付，超过时间将自动取消该订单。</p>
+					</div>
+					<div class="suc_item ">
+						<label>订单号</label>
+						<span id="outChargeNo"></span>
+					</div>
+					<div class="suc_item ">
+						<label>下单时间</label>
+						<span id="xdsj"></span>
+					</div>
+					<div class="suc_item">
+						<label>预约人</label>
+						<span id="patientName"></span>
+					</div>
+					<div class="suc_item">
+						<label>预约日期</label>
+						<span id="bespeakTime"></span>
+					</div>
+					<div class="suc_item">
+						<label>预约科室</label>
+						<span id="deptName"></span>
+					</div>
+					<div class="suc_item">
+						<label>预约医生</label>
+						<span id="doctorName"></span>
+					</div>
+					<div class="suc_item">
+						<label>挂号费用</label>
+						<span id="chargeAmt"></span>
+					</div>
+					<div class="suc_item">
+						<label>订单状态</label>
+						<span>待支付</span>
+					</div>
+					
+				</div>
+			</section>
+			
+			<section id="list" >
+				<div class="comfirm_item menz" >
+					<span class="item_name">支付方式</span>
+				</div>
+				<div>
+					<div class="ui-form-item ui-form-item-radio ">
+                        <label class="ui-radio" for="radio">
+                            <input type="radio" checked="" value="WX_WAP" name="channel_radio" />
+                        </label>
+                        <p>微信</p>
+                    </div>
+                    <div class="ui-form-item ui-form-item-radio">
+                        <label class="ui-radio" for="radio">
+                            <input type="radio" value="ALI_WAP" name="channel_radio" />
+                        </label>
+                        <p>支付宝</p>
+                    </div>
+				</div>
+				<div style="display: block;float: left;width: 100%;height: 130px; background-color: #FFFFFF;">
+					<div class="login_btn">
+						<button class="ui-btn ui-btn-lg ui-btn-primary" id="btn">确认</button>
+					</div>
+				 
+				<form action="" method="post" id="H5Pay">
+				</form>
+			</section>
+			
+		</section>
+		
+		
+		<script type="text/javascript">
+			$(function(){
+				 var Request = Utils.getRequest();
+	         	 var patientid = Request["patientid"];//ID
+	         	 var patientName = Request["patientname"];//ID
+	         	 var chargeAmt = Request["chargeAmt"];//金额
+	         	 var outChargeNo = Request["outChargeNo"];//订单号
+	         	 var doctorName = Request["doctorName"];//ID
+	         	 var deptName = Request["deptName"];//ID
+	         	 var bespeakTime = Request["bespeakTime"];//ID
+	         	 
+	         	 $("#outChargeNo").text(outChargeNo);
+	         	 $("#xdsj").text(Utils.formatDateStr("yyyy-MM-dd hh:mm:ss",new Date()));
+	         	 $("#patientName").text(patientName);
+	         	 $("#bespeakTime").text(bespeakTime);
+	         	 $("#deptName").text(deptName);
+	         	 $("#doctorName").text(doctorName);
+	         	 $("#chargeAmt").text(chargeAmt);
+	         	
+				$("#btn").click(function(){
+					
+					
+					
+					
+					
+					var channel = $("input[name='channel_radio']:checked").val();
+					var params = {};
+					params.outChargeNo = outChargeNo;
+					params.chargeAmt = chargeAmt;
+					params.channel = channel;
+					params.patientid = patientid;
+					
+					$.post(Utils.getRoot()+"/registerApp/recharge", params, function(res){ 
+						if (res.success) { 
+							if(channel=="ALI_WAP"){//支付宝支付
+								window.location.href = res.data.directUrl;
+							}else{//微信支付
+								var redirect_url = encodeURIComponent("http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentSuccess.html");
+								var directUrl = res.data.directUrl+"&redirect_url="+redirect_url;
+								$("#H5Pay").attr("action",directUrl);
+								$("#H5Pay").submit();
+							}
+						}else{
+							alert(res.message);
+						}
+					});
+				});
+				
+				
+				//页面关闭时关闭交易订单
+	        	window.onunload = function(){
+	        		if(outChargeNo){
+	        			$.post(Utils.getRoot()+"/registerApp/rechargeClose", {
+	        				outChargeNo: outChargeNo
+	        			}, function(res){});
+	        		}
+	        	}
+				
+			});
+		</script>
+	</body>
+</html>

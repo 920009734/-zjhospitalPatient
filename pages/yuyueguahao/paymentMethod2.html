@@ -58,7 +58,7 @@
 				$("#tz").click(function(){ 
 					var outChargeNo = new Date().getTime();
 					var chargeAmt = "0.01";
-					window.location.href = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod2.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+localStorage.getItem("patientInfo").patientid;
+					window.location.href = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod2.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+JSON.parse(localStorage.getItem("patientInfo")).patientid;
 					
 					/*var channel = $("input[name='channel_radio']:checked").val();
 					var params = {};
