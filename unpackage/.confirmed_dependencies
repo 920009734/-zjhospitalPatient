@@ -90,5 +90,16 @@
       "pages/yuyueguahao/paymentMethod2.html"
     ],
     "refer": []
+  },
+  "pages/hospitalization/oneDayCostList.html": {
+    "resources": [
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js"
+    ]
   }
 }

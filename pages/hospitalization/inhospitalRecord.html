@@ -29,10 +29,13 @@
         	.box_tab.active>i{display: block;position: relative;top: -25px;font-size: 20px;color: #FFFFFF;}
         	.hos_con{display: block;float: left;width: 100%;margin-top: 50px;}
         	.hospital_record,.hospital_money{display: block;float: left;width: 100%;}
-        	.pay_detail_table{display: block;float: left; width: 100%;margin-top: 20px;border-top: 2px solid #2CA99D;}
-			.baogao_table{width:100%; background-color: #FFFFFF;}
+        	
+        	.pay_detail_table{display: block;float: left; width: 100%; overflow-x: auto;margin-top: 20px;border-top: 2px solid #2CA99D;}
+			.baogao_table{background-color: #FFFFFF;width: 1200px; overflow-x: auto;}
 			table thead tr th{height: 40px;font-weight: 400;text-align: center;border: 1px solid #F6F6F6;color: #989898;font-size: 13px; }
 			table tbody tr td{padding: 10px 5px ;border: 1px solid #F6F6F6;font-size: 13px;text-align: center;}
+			
+			.pay_detail_top>button{display: block;width:90%;height: 40px;line-height: 40px;background-color: #1281E8;color: #FFFFFF;border-radius: 2px;margin-top: 20px;margin-left: 5%;}
 		</style>
 	</head>
 	<body ontouchstart> 
@@ -44,11 +47,11 @@
 		<section class="ui-container">
 			<section class="list">
 				<div class="hos_tab">
-					<span class="box_tab active" id="hos_record">
+					<span class="box_tab " id="hos_record">
 						住院记录详情
 						<i class="ui-icon icon-shangjiantou"></i>
 					</span>
-					<span class="box_tab " id="hos_money">
+					<span class="box_tab active" id="hos_money">
 						费用清单明细
 						<i class="ui-icon icon-shangjiantou"></i>
 					</span>
@@ -109,41 +112,25 @@
 					<div class="hospital_money">
 						<div class="pay_detail">
 							<div class="pay_detail_top">
-								<button >一日清单明细</button>
-								<!--<div class="list-item">
-									<span class="demo_name">住院天数</span>
-									<span class="demo_value"><span>4天</span></span>
-								</div>-->
+								<button  id="oneDayCostLsit">一日清单明细</button>
 							</div>
 							<div class="pay_detail_table">
 								<table class="baogao_table">
 									<thead>
 										<tr>
-											<th style="width: 10%;">序号</th>
-											<th style="width: 15%;">名称</th>
-											<th style="width: 15%;">类别</th>
-											<th style="width: 15%;">规格</th>
-											<th style="width: 15%;">数量</th>
-											<th style="width: 15%;">单位</th>
-											<th style="width: 15%;">单价(元)</th>
-											<th style="width: 15%;">金额(元)</th>
-											<th style="width: 15%;">医保类别</th>
-											<th style="width: 15%;">收据号</th>
+											<th style="">序号</th>
+											<th style="">名称</th>
+											<th style="">类别</th>
+											<th style="">规格</th>
+											<th style="">数量</th>
+											<th style="">单位</th>
+											<th style="">单价(元)</th>
+											<th style="">金额(元)</th>
+											<th style="">医保类别</th>
+											<th style="">收据号</th>
 										</tr>
 									</thead>
 									<tbody id="xqList">
-										<!--<tr>
-											<td>878</td>
-											<td>中心静脉导管(双腔  艾贝尔)</td>
-											<td>治疗费</td>
-											<td>/</td>
-											<td>100</td>
-											<td>套</td>
-											<td>247500分</td>
-											<td>-24750分</td>
-											<td>乙类</td>
-											<td>84110128</td>
-										</tr>-->
 									</tbody>
 								</table>
 							</div>
@@ -156,7 +143,7 @@
 		
 		<script type="text/javascript">
 			$(function(){
-				$(".hospital_money").hide();
+				$(".hospital_record").hide();
 				$(".box_tab").on("click",function(){
 					var a = $(this).hasClass("active");
 					if(!a){
@@ -171,6 +158,10 @@
 							$(".hospital_record").hide();
 						}
 					}
+				});
+				
+				$("#oneDayCostLsit").click(function(){
+					location.href = "oneDayCostList.html";
 				});
 				
 				var Request = Utils.getRequest();
@@ -222,7 +213,6 @@
 						}
 					});
 				}
-				
 				
 			});
 			
