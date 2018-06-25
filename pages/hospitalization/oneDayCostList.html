@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../../css/frozen.css">
+        <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
+        
+        <script src="../../lib/zepto.min.js">  </script>
+        <script src="../../js/frozen.js"></script>
+        <script src="../../js/Utils.js"></script>
+		<title>一日清单明细</title>
+		
+		<style type="text/css">
+			html,body{font-family: "微软雅黑";}
+        	.hos_con{display: block;float: left;width: 100%;margin-top: 20px;}
+        	.pay_detail_table{display: block;float: left; width: 100%; overflow-x: auto;border-top: 2px solid #2CA99D;}
+			.baogao_table{background-color: #FFFFFF;width: 1200px; overflow-x: auto;}
+			table thead tr th{height: 40px;font-weight: 400;text-align: center;border: 1px solid #F6F6F6;color: #989898;font-size: 13px; }
+			table tbody tr td{padding: 10px 5px ;border: 1px solid #F6F6F6;font-size: 13px;text-align: center;}
+			
+		</style>
+	</head>
+	<body ontouchstart> 
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;" id="dep_type" ><span>一日清单明细</span></h4>
+		</header>
+		
+		<section class="ui-container">
+			<section class="list">
+				<div class="hos_con">
+					<div class="hospital_money">
+						<div class="pay_detail">
+							<div class="pay_detail_table">
+								<table class="baogao_table">
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>名称</th>
+											<th>类别</th>
+											<th>规格</th>
+											<th>数量</th>
+											<th>单位</th>
+											<th>单价(元)</th>
+											<th>金额(元)</th>
+											<th>医保类别</th>
+											<th>收据号</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</section>	
+		</section>
+		
+	</body>
+</html>
