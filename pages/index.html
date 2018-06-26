@@ -70,14 +70,62 @@
 			
         </style>   
     </head> 
-    
+    <script>
+    	$(function(){
+    		
+    		loadMenus();
+    		
+    		$("#list").on('click', '.pageJump' , function(){
+    			var state = $(this).data('state');
+    			if( state == '2'){
+    				alert('功能开发中...');
+    				return;
+    			}
+    			var url = $(this).data('url');
+    			if(url){
+    				top.location.href = url;
+    			}else{
+    				alert('功能无指向地址...');
+    			}
+    		});
+    		
+    		function loadMenus(){
+    			var root = Utils.getRoot() + "/";
+	    		$.ajax({
+	    			type:"get",
+	    			url:root + "appmenu/mentTree",
+	    			success: function(rootMenus){
+	    				var tempHtml = '';
+			    		$.each(rootMenus, function(ind, menus) {
+			    			tempHtml += '<div class="fun_item">';
+			    				tempHtml += '<div class="fun_title "> ';
+				    				tempHtml += '<span class="item_img"><img src="'+(root + menus.icon)+'" width="23" height="23"></span>';
+				    				tempHtml += '<span class="item_title">'+menus.menuName+'</span>';
+			    				tempHtml += '</div>';
+				    			tempHtml += '<div class="fun_item_list" >';
+				    			$.each(menus.childs, function(i, menu) {
+				    				tempHtml += '<a class="pageJump" data-state='+menu.isHidden+' data-url='+menu.menuUrl+' href="javaScript:void(0);">';
+					    				tempHtml += '<div class="item_list">';
+					    					tempHtml += '<span class="list_icon"><img src="'+(root + menu.icon)+'"/></span>';
+					    					tempHtml += '<span class="list_title">'+menu.menuName+'</span>';
+					    				tempHtml += '</div>';
+				    				tempHtml += '</a>';
+				    			});
+				    			tempHtml += '</div>';
+			    			tempHtml += '</div>';
+			    		});
+			    		$("#logo_").after(tempHtml);
+	    			}
+	    		});
+    		}
+    		
+    	});
+    </script>
     <body ontouchstart>
         <section class="ui-container">
 			<section id="list">
-				<div class="tab_img">
+				<div id="logo_" class="tab_img">
 					<img src="../img/index/zjLogo.png" />
-					<!--<img src="../img/zjlogo3.png" />-->
-					<!--i class="fa-adjust"></i>-->
 					<div class="tab_yiyuan">
 						<span class="yiyuan_icon">
 							<img src="../img/index/logo@2x.png" />
@@ -85,13 +133,11 @@
 						<span class="yiyuan_name">
 							<img src="../img/index/zjyy.png" />
 						</span>
-						<!--<span class="yiyuan_per">
-							<img src="../img/index/personLogo@2x.png" />
-						</span>-->
 					</div>
 				</div>
 				
 				<!-- 功能块 -->
+				
 				<div class="fun_item">
 					<div class="fun_title "> 
 						<span class="item_img"><img src="../img/index/menzhenIcon.png" width="23" height="23"></span>	
@@ -139,10 +185,6 @@
 							<span class="list_icon"><img src="../img/index/yjbj.png"/></span>
 							<span class="list_title">住院押金补缴</span>
 						</div>
-						<!--<div class="item_list" id="zyfyqd">
-							<span class="list_icon"><img src="../img/index/zyfyqd.png"/></span>
-							<span class="list_title">住院费用清单</span>
-						</div>-->
 						<div class="item_list">
 							<span class="list_icon"><img src="../img/index/cydy.png"/></span>
 							<span class="list_title">出院带药</span>
