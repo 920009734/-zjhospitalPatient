@@ -75,6 +75,7 @@
 			"img/index/bgcx1.png",
 			"img/index/zwjf.png",
 			"css/style.css",
+<<<<<<< HEAD
 			"pages/yuyueguahao/choiceDepartment.html"
 		],
 		"refer": [
@@ -159,6 +160,96 @@
 			"css/style.css",
 			"lib/zepto.min.js",
 			"js/Utils.js"
+=======
+			"pages/consultation/choiceDepartment.html",
+			"pages/yuyueguahao/choiceDepartment.html",
+			"pages/lineUpSearch/paiduijiaohaoMenu.html",
+			"pages/lineUpSearch/jybg_list.html",
+			"pages/hospitalization/inHospotalSearch.html"
+		],
+		"refer": [
+			"pages/login.html",
+			"pages/consultation/choiceDepartment.html",
+			"pages/yuyueguahao/choiceDepartment.html",
+			"pages/lineUpSearch/paiduijiaohaoMenu.html",
+			"pages/lineUpSearch/jybg_list.html",
+			"pages/hospitalization/inHospotalSearch.html"
+		]
+	},
+	"pages/yuyueguahao/paymentMethod2.html": {
+		"resources": [
+			"js/jquery-1.8.3.min.js",
+			"css/frozen.css",
+			"css/style.css",
+			"font/iconfont-full.ttf",
+			"js/Utils.js",
+			"js/fingerprint2.min.1.4.1.js.js",
+			"lib/zepto.min.js",
+			"pages/yuyueguahao/paymentMethod2.html"
+		],
+		"refer": []
+	},
+	"pages/hospitalization/oneDayCostList.html": {
+		"resources": [
+			"font/iconfont-full.ttf",
+			"fontIcon/iconfont.css",
+			"js/frozen.js",
+			"css/frozen.css",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js"
+		]
+	},
+	"pages/consultation/choiceDepartment.html": {
+		"resources": [
+			"fontIcon/iconfont.css",
+			"css/frozen.css",
+			"css/style.css",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html"
+		]
+	},
+	"pages/yuyueguahao/choiceDepartment.html": {
+		"resources": [
+			"fontIcon/iconfont.css",
+			"css/frozen.css",
+			"css/style.css",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html"
+		]
+	},
+	"pages/lineUpSearch/paiduijiaohaoMenu.html": {
+		"resources": [
+			"fontIcon/iconfont.css",
+			"img/index/jilu.png",
+			"css/frozen.css",
+			"img/index/tijain2.png",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html"
+		]
+	},
+	"pages/lineUpSearch/jybg_list.html": {
+		"resources": [
+			"js/jquery-1.8.3.min.js",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html"
+		]
+	},
+	"pages/hospitalization/inHospotalSearch.html": {
+		"resources": [
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html"
+>>>>>>> branch 'master' of https://gitee.com/laiyw/zjhospitalPatient.git
 		]
 	}
 }
