@@ -53,6 +53,8 @@
 	        		params.startTime = startTime;
 	        		params.endTime = endTime;
 	        		$.post(Utils.getRoot()+"/reportQuery/selLabItems",params,function(data){
+						alert("df")
+						console.log("data:"+data)
 						if (data.success) {
 							var labItemsInfo = new Array();
 							labItemsInfo= data.data;
@@ -66,7 +68,6 @@
 											"<span class='ckName'>"+labItemsInfo[i].inspectName+"</span>"+
 											"<span class='ckTime'>"+labItemsInfo[i].inspectTime+"</span>"+
 										"<div>"+
-										/*"<i class='ui-icon ui-icon-arrow'></i>"+*/
 									"</div>"
 								)
 							}

@@ -80,8 +80,34 @@
 						$("#divisionName").val(Patient.divisionName);
 						$("#doctorName").val(Patient.doctorName);
 						$("#money").val(Patient.money/100);
-						
 						$("#czDate").val(Patient.bespeakTime);
+						var status = Patient.yyStatus;
+						var yyStatus;
+						switch (status){
+							case "0":
+								yyStatus="已预约";
+								$("#cancel").show();//显示按钮
+								break;
+							case "1":
+								yyStatus="已预约,待支付";
+								break;
+							case "2":
+								yyStatus="已预约,已支付";
+								$("#cancel").show();//显示按钮
+								break;
+							case "3":
+								yyStatus="已取消";
+								break;
+							case "4":
+								yyStatus="已取消,未退款";
+								$("#refund").show();
+								break;
+							case "5":
+								yyStatus="已取消,已退款";
+								break;
+						}
+						$("#status").val(status);
+						$("#yyStatus").val(yyStatus);
 					}
 				});
 				
@@ -100,6 +126,7 @@
 					cancel();
 				});
 				
+				
 				//取消预约
 				function cancel() {
 					//医院取消预约
@@ -108,17 +135,20 @@
 					params.hisOrdNum = $("#hisOrdNum").val();
 					params.serialNumber = $("#serialNumber").val();
 					params.cancelReason = $("#cancelReason").val();
-					
 					//取消未支付的预约信息，先取消预约，取消锁号
-					if($("#hisPatientId").val()==null || $("#hisPatientId").val()==""){
+					if($("#status").val()==0){
 						$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(data){
 							if (data.success) {
+								$(".login_btn").hide();
 								alert(data.message);
+								$("#yyStatus").val("已取消");//改变状态
+								$("#cancel").hide();//隐藏按钮
 							}else{
 								alert(data.message);
 							}
 						});
-					}else{//取消已支付的预约信息，先取消预约，取消锁号
+					}else if($("#status").val()==2){
+						//取消已支付的预约信息，先取消预约，取消锁号
 						$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(data){
 							if (data.success) {
 								//最后再退款
@@ -130,10 +160,16 @@
 									outRefundNo: $("#serialNumber").val(),
 									refundAmt: $("#money").val() * 100
 								}, function(res) {
-									if (res.success) {
+									if (res.success) {//退款成功
+										$(".login_btn").hide();
 										alert(res.message);
-									}else{
+										$("#yyStatus").val("已取消,已退款");//改变状态
+										$("#cancel").hide();//隐藏按钮
+									}else{//退款失败
 										alert(res.message);
+										$("#yyStatus").val("已取消,未退款");//改变状态
+										$("#cancel").hide();//隐藏按钮
+										$("#refund").show();
 									}
 								});
 							} else {
@@ -142,33 +178,37 @@
 						});
 					}
 					
-					
-					
-					//第三方支付方，退款
-					/*outChargeNo 支付订单号 String(32) N
-					outRefundNo 退款流水号 String(32) N
-					refundAmt 退款金额，单位为分 Number(12) N*/
-				/*	$.post(Utils.getRoot()+"/registerApp/refund", {
-						outChargeNo: $("#hisOrdNum").val(),
-						outRefundNo: $("#serialNumber").val(),
-						refundAmt: $("#money").val() * 100
-					}, function(data) {
-						if (data.success) {
-							//医院方，取消预约
-							$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(res){
-								if (res.success) {
-									alert(res.message);
-								} else {
-									alert(res.message);
-								}
-							});
-						} else {
-							alert(data.message);
-						}
-					});*/
-					
-					
 				}
+				
+				$("#refund").click(function(){
+					$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(data){
+							if (data.success) {
+								//最后再退款
+								/*outChargeNo 支付订单号 String(32) N
+								outRefundNo 退款流水号 String(32) N
+								refundAmt 退款金额，单位为分 Number(12) N*/
+								$.post(Utils.getRoot()+"/registerApp/refund", {
+									outChargeNo: $("#hisOrdNum").val(),
+									outRefundNo: $("#serialNumber").val(),
+									refundAmt: $("#money").val() * 100
+								}, function(res) {
+									if (res.success) {
+										$(".login_btn").hide();
+										alert(res.message);
+										$("#yyStatus").val("已取消,已退款");//改变状态
+										$("#cancel").hide();//隐藏按钮
+									}else{
+										alert(res.message);
+										$("#yyStatus").val("已取消,未退款");//改变状态
+										$("#cancel").hide();//隐藏按钮
+										$("#refund").show();
+									}
+								});
+							} else {
+								alert(data.message);
+							}
+						});
+				});
 			});
 		</script>
 	</head>
@@ -221,12 +261,20 @@
         		<span class="nam_left">就诊时间：</span>
 				<input type="text" disabled="disabled" id="czDate" value="" />
         </div>
-		
+        
+        <b>
+	        <div class="nam_c" style="color: red;">
+	        		<span class="nam_left">状态：</span>
+					<input type="text" disabled="disabled" id="yyStatus" value="" />
+					<input type="hidden" disabled="disabled" id="status" value="" />
+	        </div>
+		</b>
 		<div class="login_btn">
 			<input type="hidden"  id="bespeakId" value=""/>
 			<input type="hidden"  id="hisOrdNum" value=""/>
 	       	<input type="hidden"  id="serialNumber" value=""/>
-			<button id="cancel" class="ui-btn ui-btn-lg ui-btn-primary">取消预约</button>
+			<button id="cancel" class="ui-btn ui-btn-lg ui-btn-primary" style="display: none;">取消预约</button>
+			<button id="refund" class="ui-btn ui-btn-lg ui-btn-primary" style="display: none;">退款</button>
 		</div>
 		
 		<!-- 取消预约窗口-->

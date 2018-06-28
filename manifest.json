@@ -520,7 +520,8 @@
 					"pages/yuyueguahao/choiceDepartment.html",
 					"js/frozen.js",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"js/jquery-1.8.3.min.js"
 				],
 				"refer": [],
 				"priority": 0

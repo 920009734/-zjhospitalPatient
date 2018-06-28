@@ -47,170 +47,7 @@
 			.hidden{display: none;}
 			.ui-dialog-cnt{margin:50% auto;}
 		</style>
-		</style>
-		<script type="text/javascript">
-			
-        	$(function(){
-        		var outChargeNo = '';//商户充值业务流水
-        		document.addEventListener('plusready', plusReady, false);
-	       		// H5 plus事件处理
-				function plusReady(){}
-	       		//选择就诊人
-        		$("#jzrxz").on("click", function(){
-        			$.post(Utils.getRoot()+"/registerApp/selPatient", function(res){
-	    				if (res.success) {
-	    					$("#tj").empty();//移除添加就诊人
-	    					
-	    					var data = new Object();
-	        				data = res.data;
-	        				for (var i = 0; i < data.length; i++) {
-	        					var patientid = data[i].patientid;
-		        				var patCardNo = data[i].patCardNo;
-		        				var patientname = data[i].patientname;
-		        				var gxlx = data[i].relationshiptype;
-		        				if(gxlx==2){
-		        					gxlx="儿童";
-		        				}else if(gxlx==3){
-		        					gxlx="其他";
-		        				}else{
-		        					gxlx="本人";
-		        				}
-		        				
-			        			$("#tj").append(
-		        					"<div class='per_name' id='choosePeople_'>"+
-						            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
-						            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
-						            	"<span class='patientname_'>"+patientname+"</span>"+
-						            	"<span class='per_relationship'>"+gxlx+"</span>"+
-						            "</div>"
-						        );
-	        				}
-						            
-						    $(".addPatient").show();
-					    } else {
-					    	$("#dialogText").html(res.message);
-							$(".ui-dialog").show();
-					    }
-		       		});
-        		});
-        		
-        		$("#add_rela").click(function(){
-        			window.location.href="../yuyueguahao/addPerple.html"
-        		});
-        		
-        		$("#tj").on("click",".per_name", function(){
-        			var a = $(this).children(".patientid_").val();
-        			var b = $(this).children(".patCardNo_").val();
-        			var c = $(this).children(".patientname_").text();
-        			//console.log(a+"，"+b+","+c);
-        			$("#patientid").val(a);
-        			$("#patCardNo").val(b);
-        			$("#patientname").html(c);
-        			$(".addPatient").hide();
-        		})
-        		$(".close_dialog,.ui-dialog-close").click(function(){
-					$(".ui-dialog").hide();
-				});
-        		var Request = Utils.getRequest();
-        		
-        		$("#deptName_").text(Request["deptName"]);
-        		$("#doctorName_").text(Request["doctorName"]);
-        		$("#clinicType_").text(Request["clinicType"])
-        		$("#fullTime_").text(Request["dateTime"]+" "+Request["beginTime"]+"~"+Request["endTime"]);
-        		$("#CNregFee_").text("￥"+""+Request["regFee"]+"元");
-				$("input[name='deptCode_']").val(Request["deptCode"]);
-				$("input[name='doctorCode_']").val(Request["doctorCode"]);
-				$("input[name='scheduleDate_']").val(Request["dateTime"]);
-				$("input[name='timeFlag_']").val(Request["timeFlag"]);
-				$("input[name='beginTime_']").val(Request["beginTime"]);
-				$("input[name='endTime_']").val(Request["endTime"]);
-        		$("input[name='regFee_']").val(parseInt(Request["regFee"])*100);
-        		
-        		
-        		$("#zf").click(function(){//支付成功后添加信息
-        			if ($("#patientid").val()=="") {
-        				$("#dialogText").html("请选择就诊人！");
-						$(".ui-dialog").show();
-					}else{
-						var params={};
-						params.divisionName=$("#deptName_").text();
-						params.divisionId=$("input[name='deptCode_']").val();
-						params.doctorName=$("#doctorName_").text();
-						params.clinicType=$("#clinicType_").text();
-						params.bespeakTime=$("#fullTime_").text();
-						params.money=$("input[name='regFee_']").val();
-						params.doctorId=$("input[name='doctorCode_']").val();
-						params.patientId=$("#patientid").val();
-						params.scheduleDate=$("input[name='scheduleDate_']").val();
-						params.timeFlag=$("input[name='timeFlag_']").val();
-						params.beginTime=$("input[name='beginTime_']").val();
-						params.endTime=$("input[name='endTime_']").val();
-						params.regFee=$("input[name='regFee_']").val();
-						
-						$(".ui-loading-block").show();
-						$(".ui-loading-block").css("margin","45% 0 0 31%");
-						
-						var patCardNo = $("#patCardNo").val();
-						
-						if (patCardNo.length>3) {//挂号支付
-							//医院锁号，生成商户订单号
-							$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
-								if (data.success) {
-									outChargeNo = data.data[0].hisOrdNum;//订单号
-									var chargeAmt = data.data[0].regFee;//挂号金额（单位：元）
-									var patientid = $("#patientid").val();
-								/*	var patientname = $("#patientname").text();
-									var doctorName=$("#doctorName_").text();
-									var deptName = $("#deptName_").text();
-									var bespeakTime=$("#fullTime_").text();*/
-//									window.location.href="../yuyueguahao/orderInfo.html?outChargeNo="+outChargeNo+"&deptName="+deptName+"&chargeAmt="+chargeAmt+"&doctorName="+doctorName+"&bespeakTime="+bespeakTime+"&patientid="+patientid+"&patientname="+patientname;            
-				        			var url = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod2.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
-									var w = plus.webview.open(url);
-									w.show(); // 显示窗口
-									
-				        			//统一支付下单，生产支付凭证
-				        			/*$.post(Utils.getRoot()+"/registerApp/recharge", {
-				        				outChargeNo: data.data[0].hisOrdNum,
-										chargeAmt: data.data[0].regFee,
-										channel: $("input[name='channel_radio']:checked").val()
-				        			}, function(res){
-				        				$(".ui-loading-block").hide();
-										if (res.success) {
-											console.log("data:"+JSON.stringify(res.data));
-											if(channel=="ALI_WAP"){//支付宝支付
-												window.location.href = res.data.directUrl;
-											}else{//微信支付
-												ws.loadURL(res.data.directUrl,{"Referer":"http://zjyy.com.cn"});
-											}
-										} else {
-											$("#dialogText").html(res.message);
-											$(".ui-dialog").show();
-										}
-									});*/
-								}else{
-									$(".ui-loading-block").hide();
-									$("#dialogText").html(data.message);
-									$(".ui-dialog").show();
-								}
-							});
-						} else{//挂号不支付
-							$.post(Utils.getRoot()+"/registerApp/addbespeakInfoNoId", params, function(res){
-									if (res.success) {
-										$("#dialogText").html(res.message);
-										$(".ui-dialog").show();
-									}else{
-										$("#dialogText").html(res.message);
-										$(".ui-dialog").show();
-									}
-								});
-						}
-						
-						
-					}
-        		});
-        	})
-        	
-       </script>
+		
 	</head>
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
@@ -301,12 +138,6 @@
 						            	<span>添加就诊人</span>
 					            	</span>
 					            </div>
-					            <!--<div class="per_name" id="choosePeople_">
-					            	<input type="hidden" id="patientid_" value="" >
-					            	<input type="hidden" id="patCardNo_" value="" >
-					            	<span id="patientname_">测试人员</span>
-					            	<span class="per_relationship">本人</span>
-					            </div>-->
 					        </div>
 					    </div>        
 					</div>
@@ -343,8 +174,8 @@
 		</section>
 		
 		<script type="text/javascript">
-			$(function(){
-				//刷新页面
+        	$(function(){
+        		//刷新页面
 				$(".reflash_item").on("click",function(){
 					$(".ui-actionsheet").addClass("show");
 				});
@@ -355,8 +186,147 @@
 					location.reload();
 					$(".ui-actionsheet").removeClass("show");
 				});
+        		var outChargeNo = '';//商户充值业务流水
+        		document.addEventListener('plusready', plusReady, false);
+	       		// H5 plus事件处理
+				function plusReady(){}
+	       		//选择就诊人
+        		$("#jzrxz").on("click", function(){
+        			$.post(Utils.getRoot()+"/registerApp/selPatient", function(res){
+	    				if (res.success) {
+	    					$("#tj").empty();//移除添加就诊人
+	    					
+	    					var data = new Object();
+	        				data = res.data;
+	        				for (var i = 0; i < data.length; i++) {
+	        					var patientid = data[i].patientid;
+		        				var patCardNo = data[i].patCardNo;
+		        				var patientname = data[i].patientname;
+		        				var gxlx = data[i].relationshiptype;
+		        				if(gxlx==2){
+		        					gxlx="儿童";
+		        				}else if(gxlx==3){
+		        					gxlx="其他";
+		        				}else{
+		        					gxlx="本人";
+		        				}
+		        				
+			        			$("#tj").append(
+		        					"<div class='per_name' id='choosePeople_'>"+
+						            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
+						            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
+						            	"<span class='patientname_'>"+patientname+"</span>"+
+						            	"<span class='per_relationship'>"+gxlx+"</span>"+
+						            "</div>"
+						        );
+	        				}
+						            
+						    $(".addPatient").show();
+					    } else {
+					    	$("#dialogText").html(res.message);
+							$(".ui-dialog").show();
+					    }
+		       		});
+        		});
         		
-			});
-		</script>
+        		$("#add_rela").click(function(){
+        			window.location.href="../yuyueguahao/addPerple.html"
+        		});
+        		
+        		$("#tj").on("click",".per_name", function(){
+        			var a = $(this).children(".patientid_").val();
+        			var b = $(this).children(".patCardNo_").val();
+        			var c = $(this).children(".patientname_").text();
+        			//console.log(a+"，"+b+","+c);
+        			$("#patientid").val(a);
+        			$("#patCardNo").val(b);
+        			$("#patientname").text(c);
+        			$(".addPatient").hide();
+        		})
+        		$(".close_dialog,.ui-dialog-close").click(function(){
+					$(".ui-dialog").hide();
+				});
+        		var Request = Utils.getRequest();
+        		
+        		$("#deptName_").text(Request["deptName"]);
+        		$("#doctorName_").text(Request["doctorName"]);
+        		$("#clinicType_").text(Request["clinicType"])
+        		$("#fullTime_").text(Request["dateTime"]+" "+Request["beginTime"]+"~"+Request["endTime"]);
+        		$("#CNregFee_").text("￥"+""+Request["regFee"]+"元");
+				$("input[name='deptCode_']").val(Request["deptCode"]);
+				$("input[name='doctorCode_']").val(Request["doctorCode"]);
+				$("input[name='scheduleDate_']").val(Request["dateTime"]);
+				$("input[name='timeFlag_']").val(Request["timeFlag"]);
+				$("input[name='beginTime_']").val(Request["beginTime"]);
+				$("input[name='endTime_']").val(Request["endTime"]);
+        		$("input[name='regFee_']").val(parseInt(Request["regFee"])*100);
+        		
+        		
+        		$("#zf").click(function(){//支付成功后添加信息
+        			if ($("#patientid").val()=="") {
+        				$("#dialogText").html("请选择就诊人！");
+						$(".ui-dialog").show();
+					}else{
+						var params={};
+						params.divisionName=$("#deptName_").text();
+						params.divisionId=$("input[name='deptCode_']").val();
+						params.doctorName=$("#doctorName_").text();
+						params.clinicType=$("#clinicType_").text();
+						params.bespeakTime=$("#fullTime_").text();
+						params.money=$("input[name='regFee_']").val();
+						params.doctorId=$("input[name='doctorCode_']").val();
+						params.patientId=$("#patientid").val();
+						params.scheduleDate=$("input[name='scheduleDate_']").val();
+						params.timeFlag=$("input[name='timeFlag_']").val();
+						params.beginTime=$("input[name='beginTime_']").val();
+						params.endTime=$("input[name='endTime_']").val();
+						params.regFee=$("input[name='regFee_']").val();
+						
+						$(".ui-loading-block").show();
+						$(".ui-loading-block").css("margin","45% 0 0 31%");
+						
+						var patCardNo = $("#patCardNo").val();
+						
+						if (patCardNo!="null" && patCardNo!=null && patCardNo!="" ) {//挂号支付
+							//医院锁号，生成商户订单号
+							$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
+								if (data.success) {
+									console.log(JSON.stringify(data.data.hisOrdNum) );
+									outChargeNo = data.data.hisOrdNum;//订单号
+//									var chargeAmt =  parseInt(data.data.regFee)/100; 
+									var chargeAmt = "0.01";
+									var patientid = $("#patientid").val();
+				        			var url = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod2.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
+									var w = plus.webview.open(url);
+									w.show(); // 显示窗口
+									
+								}else{
+									$(".ui-loading-block").hide();
+									$("#dialogText").html(data.message);
+									$(".ui-dialog").show();
+								}
+							});
+						} else{//挂号不支付
+							$.post(Utils.getRoot()+"/registerApp/addbespeakInfoNoId", params, function(res){
+									if (res.success) {
+										console.log("hisOrdNum:"+res.data[0].hisOrdNum);
+										$("#dialogText").html(res.message);
+										$(".ui-dialog").show();
+										 window.setTimeout(function(){
+											window.location.href = "../paymentSuccess.html?deptName="+$("#deptName_").text()+"&doctorName="+$("#doctorName_").text()+"&bespeakTime="+$("#fullTime_").text()+"&patientName="+$("#patientname").html()+"&outChargeNo="+res.data[0].hisOrdNum;
+										 },3000);
+									}else{
+										$("#dialogText").html(res.message);
+										$(".ui-dialog").show();
+									}
+								});
+						}
+						
+						
+					}
+        		});
+        });
+        	
+       </script>
 	</body>
 </html>

@@ -25,20 +25,38 @@ $(function(){
 						if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
 							//把挂号费转为元，原本是分
 							var regFee = parseInt(doctorInfo[i].regFee)/100;
-							$("#dateTimeDiv").append(
-								"<div class='ck_dateTime'>"+
-									"<div class='slot_item'>"+
-										"<input type='hidden' name='timeFlag_' value='"+doctorInfo[i].timeFlag+"' />"+
-										"<span class='time_slot'>"+
-											"<span class='beginTime_'>"+doctorInfo[i].beginTime+"</span>"+
-											"~"+
-											"<span class='endTime_'>"+doctorInfo[i].endTime+"</span>"+
-										"</span>"+
-										"<span class='yuhao'>余号：<span class='yuhao_'>"+doctorInfo[i].leftNum+"</span></span>"+
-										"<span class='ghmoney'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
-									"</div>"+
-								"</div>"
-							);
+							if (doctorInfo[i].leftNum==0) {//余号为0
+								$("#dateTimeDiv").append(
+									"<div class='nock_dateTime'>"+
+										"<div class='slot_item'>"+
+											"<input type='hidden' name='timeFlag_' value='"+doctorInfo[i].timeFlag+"' />"+
+											"<span class='time_slot'>"+
+												"<span class='beginTime_'>"+doctorInfo[i].beginTime+"</span>"+
+												"~"+
+												"<span class='endTime_'>"+doctorInfo[i].endTime+"</span>"+
+											"</span>"+
+											"<span class='yuhao'>余号：<span class='yuhao_'>"+doctorInfo[i].leftNum+"</span></span>"+
+											"<span class='ghmoney'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
+										"</div>"+
+									"</div>"
+								);
+							}else{
+								$("#dateTimeDiv").append(
+									"<div class='ck_dateTime'>"+
+										"<div class='slot_item'>"+
+											"<input type='hidden' name='timeFlag_' value='"+doctorInfo[i].timeFlag+"' />"+
+											"<span class='time_slot'>"+
+												"<span class='beginTime_'>"+doctorInfo[i].beginTime+"</span>"+
+												"~"+
+												"<span class='endTime_'>"+doctorInfo[i].endTime+"</span>"+
+											"</span>"+
+											"<span class='yuhao'>余号：<span class='yuhao_'>"+doctorInfo[i].leftNum+"</span></span>"+
+											"<span class='ghmoney'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
+										"</div>"+
+									"</div>"
+								);
+							}
+							
 						}else{
 							$("#dateTimeDiv").append(
 								"<div class='slot_item'>"+
