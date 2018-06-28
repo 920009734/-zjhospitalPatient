@@ -62,8 +62,13 @@
 							);
 						}
 					}else{
-						$("#dialogText").html(data.message);
-						$(".ui-dialog").show();
+						$("#jzhzInfo_").append(
+							"<div class='houzhen_content'>"
+								+"<p style='text-align: center;'>暂无体检排队信息</p>"
+							+"</div>"
+						);
+						/*$("#dialogText").html(data.message);
+						$(".ui-dialog").show();*/
 					}
 				});
 				$(".close_dialog,.ui-dialog-close").click(function(){

@@ -72,9 +72,9 @@
 	//根据是否回复状态查看列表（0：已回复，1：未回复）
 	function checkIsReply(replayState){
 		$.post(Utils.getRoot()+"/inquiry/searchMessages", {
-			sender:"测试人员",
+			sender:"袁也",
 			isReply:replayState,
-			parentId:" "
+			parentId:"D7BB131564844D498EB7C89CEA95EF4F"
 		} ,function(result){
 			if(result.success){
 				$(".second").empty();

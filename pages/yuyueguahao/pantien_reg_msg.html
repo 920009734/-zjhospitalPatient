@@ -64,7 +64,6 @@
         		$("#bespeakId").val(Request["bespeakId"]);
         		$("#hisOrdNum").val(Request["hisOrdNum"]);
         		$("#serialNumber").val(Request["serialNumber"]);
-        		
 				var params={};
 				params.bespeakId=Request["bespeakId"];
         		$.post(Utils.getRoot()+"/registerApp/selPatientYYInfo",params,function(data){
@@ -137,7 +136,7 @@
 					params.cancelReason = $("#cancelReason").val();
 					//取消未支付的预约信息，先取消预约，取消锁号
 					if($("#status").val()==0){
-						$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(data){
+						$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfoNo",params,function(data){
 							if (data.success) {
 								$(".login_btn").hide();
 								alert(data.message);
@@ -151,6 +150,7 @@
 						//取消已支付的预约信息，先取消预约，取消锁号
 						$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(data){
 							if (data.success) {
+								
 								//最后再退款
 								/*outChargeNo 支付订单号 String(32) N
 								outRefundNo 退款流水号 String(32) N

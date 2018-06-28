@@ -114,7 +114,10 @@
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name" id="shenfenz">患者</span>
-					<span class="item_value" id="huanzhe" ><span id="huanzhe_">请选择患者</span> <i class="ui-icon ui-icon-arrow"></i></span>
+					<span class="item_value" id="huanzhe" >
+						<span id="huanzhe_">请选择患者</span> 
+						<i class="ui-icon ui-icon-arrow"></i>
+					</span>
 					<input type="hidden" id="huanzhe_id" value="">
 				</div>
 				<div class="comfirm_item hidden">
@@ -152,20 +155,20 @@
 					<div class="ui-dialog addPatient">
 					    <div class="ui-dialog-cnt">
 						    <header class="ui-dialog-hd ui-border-b">
-			                    <h3>修改就诊人</h3>
+			                    <h3>选择就诊人</h3>
 			                    <i class="ui-dialog-close" data-role="button"></i>
 			                </header>
 			                 <div class="ui-dialog-bd">
-					            <div class="add_per">
+								<div class="add_per" id="tj">
 					            	<span>
 						            	<i class="ui-icon ui-icon-add-people"></i>
 						            	<span>添加就诊人</span>
 					            	</span>
 					            </div>
-					            <div class="per_name" id="choosePeople_">
-					            	<span id="patientname_">测试人员</span>
-					            	<span class="per_relationship">本人</span>
-					            </div>
+					            <!--<div class="per_name" id="choosePeople_">
+					            	<span id="patientname_"></span>
+					            	<span class="per_relationship"></span>
+					            </div>-->
 					        </div>
 					    </div>        
 					</div>
@@ -195,13 +198,55 @@
 				var doctorName = Request["doctorName"];
 				$("#doctorName_").html(doctorName);
 				
-				$("#huanzhe").click(function(){
-				    $(".addPatient").show();
-				})
-				$("#choosePeople_").click(function(){
-					$("#huanzhe_").html($("#patientname_").html());
+				//选择就诊人
+        		$("#huanzhe").on("click", function(){
+        			$.post(Utils.getRoot()+"/registerApp/selPatient", function(res){
+	    				if (res.success) {
+	    					$("#tj").empty();//移除添加就诊人
+	    					
+	    					var data = new Object();
+	        				data = res.data;
+	        				for (var i = 0; i < data.length; i++) {
+	        					var patientid = data[i].patientid;
+		        				var patCardNo = data[i].patCardNo;
+		        				var patientname = data[i].patientname;
+		        				var gxlx = data[i].relationshiptype;
+		        				if(gxlx==2){
+		        					gxlx="儿童";
+		        				}else if(gxlx==3){
+		        					gxlx="其他";
+		        				}else{
+		        					gxlx="本人";
+		        				}
+		        				
+			        			$("#tj").append(
+		        					"<div class='per_name' id='choosePeople_'>"+
+						            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
+						            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
+						            	"<span class='patientname_'>"+patientname+"</span>"+
+						            	"<span class='per_relationship'>"+gxlx+"</span>"+
+						            "</div>"
+						        );
+	        				}
+						            
+						    $(".addPatient").show();
+					    } else {
+					    	$("#dialogText").html(res.message);
+							$(".ui-dialog").show();
+					    }
+		       		});
+        		});
+        		
+        		$("#tj").on("click",".per_name", function(){
+        			var a = $(this).children(".patientid_").val();
+        			var b = $(this).children(".patCardNo_").val();
+        			var c = $(this).children(".patientname_").text();
+        			/*$("#patientid").val(a);
+        			$("#patCardNo").val(b);*/
+        			$("#huanzhe_").text(c);
 					$(".addPatient").hide();
-				})
+        		})
+        		
 				$(".close_dialog,.ui-dialog-close").click(function(){
 					$(".ui-dialog").hide();
 				});
@@ -293,18 +338,18 @@
 		$("#submitbt").click(function(){
 			var formData = new FormData();
 		    formData.append("receiver", getQueryString("doctorCode"));
-		    formData.append("sender", $("#huanzhe_").html());
+		    formData.append("sender", $("#huanzhe_").text());
 		    formData.append("content", $("#describe_").val());
-		    formData.append("parentId", " ");
+		    formData.append("parentId", "D7BB131564844D498EB7C89CEA95EF4F");
 		    for(var i = 0 ; i < files.length ; i ++){
 		    	formData.append("files", files[i]);
 		    }
-		    if($("#doctorName_").html()==""){
+		    if($("#doctorName_").text()==""){
 				$("#dialogText").html("请重新选择医生!");
 				$(".ui-dialog").show();
 				return false;
 			}
-			if($("#huanzhe_").html()=="请选择患者" || $("#huanzhe_").html()=="" ){
+			if($("#huanzhe_").text()=="请选择患者" || $("#huanzhe_").text()=="" ){
 				$("#dialogText").html("请选择患者!");
 				$(".ui-dialog").show();
 				return false;
@@ -314,19 +359,6 @@
 				$(".ui-dialog").show();
 				return false;
 			}
-		    
-		    /*alert("90909");
-		    location.href = "../main.html";*/
-		    //后台处理
-		    /*var addInquiryUrl = Utils.getRoot()+"/inquiry/addInquiry";
-		    $.post(addInquiryUrl, formData, function(res) {
-		    	if (res.success) {
-		    		location.href = "../main.html";
-		    	} else {
-		    		$("#dialogText").html(res.message);
-					$(".ui-dialog").show();
-		    	}
-		    });*/
 		    
 			$.ajax({
 	             url: Utils.getRoot()+"/inquiry/addInquiry" ,  

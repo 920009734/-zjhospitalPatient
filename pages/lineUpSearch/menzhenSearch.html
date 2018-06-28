@@ -13,22 +13,22 @@
         <script src="../../js/Utils.js"></script>
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
-		<title>门诊候诊信息查询</title>
+		<title>门诊候诊排队查询</title>
 		
 		<style type="text/css">
 			html,body{font-family: "微软雅黑";}
 			.huozhenTime{display: block;width: 30%;height:20px;line-height: 20px;font-size: 12px;text-align: center;border-radius: 20px; background: #F2F2F2;margin: 0 auto;margin-top: 15px;color: #999999;}
 			.houzhen_content{display: block;width: 84%;margin: 0 auto;min-height: 50px;max-height: 300px;margin-top: 10px;border-radius: 3px;background-color: #1A86B2;border: 1px solid #1A86B2; padding: 3% 3%;color: #FFFFFF;overflow-y: auto ;}
 			::-webkit-scrollbar{width:0;height:0}
-			
 			.ui-dialog-cnt{margin:50% auto;}
+			/*.notData{color: #999999;text-align: center;}*/
 		</style>
 	</head>
 	<body ontouchstart> 
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
 			<h4 style="margin-left: 25px;" id="dep_type" >
-				<span>门诊候诊信息查询</span>
+				<span>门诊候诊排队查询</span>
 				<span class="reflash_item"><i class="iconfont icon-switch"></i></span>
 			</h4>
 		</header>
@@ -72,14 +72,19 @@
 						info= data.data;
 						for (var i = 0; i < info.length; i++) {
 							$("#jzhzInfo_").append(
-								"<div class='houzhen_content'>"
-									+"<p>&nbsp;&nbsp;&nbsp;&nbsp;您预约的"+info[i].expectTime+"时段"+info[i].doctorName+"医生"+info[i].deptName+"门诊，"+info[i].deptLocation+",你的候诊号"+info[i].currentNum+"，前面候诊人"+info[i].frontNum+"，请准时到达门诊间候诊。</p>"
-								+"</div>"
+								"<div class='houzhen_content'>"+
+									"<p>&nbsp;&nbsp;&nbsp;&nbsp;您预约的"+info[i].expectTime+"时段"+info[i].doctorName+"医生"+info[i].deptName+"门诊，"+info[i].deptLocation+",你的候诊号"+info[i].currentNum+"，前面候诊人"+info[i].frontNum+"，请准时到达门诊间候诊。</p>"+
+								"</div>"
 							);
 						}
 					}else{
-						$("#dialogText").html(data.message);
-						$(".ui-dialog").show();
+						$("#jzhzInfo_").append(
+							"<div class='houzhen_content'>"+
+								"<p class='notData'>暂无排队信息，请先去就诊科室分诊台报到</p>"+
+							"</div>"
+						);
+						/*$("#dialogText").html(data.message);
+						$(".ui-dialog").show();*/
 					}
 				});
 				$(".close_dialog,.ui-dialog-close").click(function(){

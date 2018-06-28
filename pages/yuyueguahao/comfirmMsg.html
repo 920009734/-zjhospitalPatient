@@ -64,7 +64,8 @@
 					<input type="hidden" id="patCardNo" value="" >
 					<input type="hidden" id="patientid" value="" >
 					<span id="patientname" ></span>
-					<span class="ck_doctor_btn" id="jzrxz" ><i class="ui-icon ui-icon-add-people" ></i>
+					<span class="ck_doctor_btn" id="jzrxz" >
+						<i class="ui-icon ui-icon-add-people" ></i>
 						<span>选择就诊人</span>
 					</span>
 				</div>
@@ -296,9 +297,9 @@
 //									var chargeAmt =  parseInt(data.data.regFee)/100; 
 									var chargeAmt = "0.01";
 									var patientid = $("#patientid").val();
-				        			var url = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod2.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
-									var w = plus.webview.open(url);
-									w.show(); // 显示窗口
+				        			window.location.href = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod2.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
+									/*var w = plus.webview.open(url);
+									w.show(); // 显示窗口*/
 									
 								}else{
 									$(".ui-loading-block").hide();
@@ -309,11 +310,10 @@
 						} else{//挂号不支付
 							$.post(Utils.getRoot()+"/registerApp/addbespeakInfoNoId", params, function(res){
 									if (res.success) {
-										console.log("hisOrdNum:"+res.data[0].hisOrdNum);
 										$("#dialogText").html(res.message);
 										$(".ui-dialog").show();
 										 window.setTimeout(function(){
-											window.location.href = "../paymentSuccess.html?deptName="+$("#deptName_").text()+"&doctorName="+$("#doctorName_").text()+"&bespeakTime="+$("#fullTime_").text()+"&patientName="+$("#patientname").html()+"&outChargeNo="+res.data[0].hisOrdNum;
+											window.location.href = "../paymentSuccess.html?deptName="+$("#deptName_").text()+"&doctorName="+$("#doctorName_").text()+"&bespeakTime="+$("#fullTime_").text()+"&patientName="+$("#patientname").text()+"&outChargeNo="+res.data[0].hisOrdNum;
 										 },3000);
 									}else{
 										$("#dialogText").html(res.message);

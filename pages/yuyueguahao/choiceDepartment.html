@@ -28,8 +28,54 @@
 			.huanzhe_search>i{display: block;float: left;width: 7%;font-size: 26px;line-height: 40px;color: #49B6AC;}
 			input[placeholder]{font-size: 14px;padding-left:10px;}
 		</style>
-		 <script type="text/javascript">
+		 
+	</head>
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" id="closeWindows"></i>
+			<h4 style="margin-left: 25px;"><span>南方医科大学珠江医院</span><span class="reflash_item"><i class="iconfont icon-switch"></i></span></h4>
+			
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="search_dep">
+					<div class="huanzhe_search">
+						<input type="text" id="chazhao" placeholder="查找科室" />
+						<i class="ui-icon icon-search" id="searchp" onclick="changeVal()" ></i>
+					</div>
+				</div>
+				<div class="dep_item">
+					<div class="dep_con" id="deptInfoList">
+					</div>
+				</div>
+				
+			</section>
+		</section>
+		<!--刷新-->
+		<section id="actionsheet">
+			<div class="demo-item">
+				<div class="demo-block">
+					<div class="ui-actionsheet ">  
+						<div class="ui-actionsheet-cnt">
+							<button class="reflash_btn">刷新</button>  
+							<button class="actionsheetClose">取消</button> 
+						</div>         
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		
+		<script type="text/javascript">
         	$(function(){
+        		document.addEventListener('plusready', plusReady, false);
+	       		// H5 plus事件处理
+				function plusReady(){}
+				$("#closeWindows").click(function(){
+					var ws=plus.webview.currentWebview();
+					plus.webview.close(ws);
+				});
+        		
         		var params={};
         		$.post(Utils.getRoot()+"/registerApp/selDivision",params,function(data){
 					if (data.success) {
@@ -88,40 +134,5 @@
         		}); 
         	}
         </script>
-	</head>
-	<body ontouchstart>
-		<header class="ui-header ui-header-positive">
-			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;"><span>南方医科大学珠江医院</span><span class="reflash_item"><i class="iconfont icon-switch"></i></span></h4>
-			
-		</header>
-		<section class="ui-container"> 
-			<section id="list">
-				<div class="search_dep">
-					<div class="huanzhe_search">
-						<input type="text" id="chazhao" placeholder="查找科室" />
-						<i class="ui-icon icon-search" id="searchp" onclick="changeVal()" ></i>
-					</div>
-				</div>
-				<div class="dep_item">
-					<div class="dep_con" id="deptInfoList">
-					</div>
-				</div>
-				
-			</section>
-		</section>
-		<!--刷新-->
-		<section id="actionsheet">
-			<div class="demo-item">
-				<div class="demo-block">
-					<div class="ui-actionsheet ">  
-						<div class="ui-actionsheet-cnt">
-							<button class="reflash_btn">刷新</button>  
-							<button class="actionsheetClose">取消</button> 
-						</div>         
-					</div>
-				</div>
-			</div>
-		</section>
 	</body>
 </html>

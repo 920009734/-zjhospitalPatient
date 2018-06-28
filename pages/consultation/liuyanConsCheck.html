@@ -317,12 +317,14 @@
 				id:getQueryString("id")
 			} ,function(result){
 				if(result.success){
+					console.log(JSON.stringify(result.data) )
 					$("#doctorName_in").val(result.data.receiver);
 					$("#huanzhe_in").val(result.data.sender);
 				    $("#doctorName_").html(result.data.receiver);
 				    $("#askTime_").html(Utils.formatDateByLong(result.data.sendTime));
 				    $("#huanzhe_").html(result.data.sender);
 				    //$("#ask_").val(result.data.content);
+				    
 				    var attr=result.data.imgPath.split(",");
 					for (var i=0; i<attr.length; i++){
 						//alert(attr[i]);
@@ -337,11 +339,13 @@
 		$("#record_").click(function(){
 			var parentId = getQueryString("id");
 			$.post(Utils.getRoot()+"/inquiry/chatrecord", {
-				parentId:getQueryString("id")
+				parentId:"parentId"
 			} ,function(result){
 				if(result.success){
+					console.log(JSON.stringify(result));
 					$(".dialog_bd").empty();
 					for (var i=0; i<result.data.length; i++){
+						alert("1")
 					    if(result.data[i].sender==$("#huanzhe_in").val()){
 					    	$(".dialog_bd").append(
 					    		"<div class='dialog_right'>"
