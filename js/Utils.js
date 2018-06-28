@@ -3,10 +3,8 @@ Utils = {
 	 * 获取项目根目录
 	 */
 	getRoot : function() {
-		/*return "http://112.93.117.28:8089/zjhospital-app";*/
-		/*return "http://172.18.30.16:8080/zjhospital-app";*/
 		return "http://onepay.zjyy.com.cn:8082/zjhospital-app";
-		//return "http://192.168.0.100:8080/zjhospital-app";
+		//return "http://localhost:8080/zjhospital-app";
 		
 	},
 	/**
