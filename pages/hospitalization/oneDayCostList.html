@@ -27,17 +27,17 @@
 	<body ontouchstart> 
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;" id="dep_type" ><span>一日清单明细</span></h4>
+			<h4 style="margin-left: 25px;float: left;" id="dep_type" ><span>一日清单明细</span></h4>
+			<a href="../main.html" style="margin-left: 25px;float: right;" >返回首页</a>
 		</header>
-		
 		<section class="ui-container">
 			<section class="list">
 				<div class="hos_con">
 					<div class="hospital_money">
 						<div class="pay_detail">
 							<div class="pay_detail_top">
-								<input type="button" id="startTime" onclick="pickDate(this)" />
-								<button> 查询 </button>
+								<input type="button" id="startTime"  />
+								<button id="selqd"> 查询 </button>
 							</div>
 							<div class="pay_detail_table">
 								<table class="baogao_table">
@@ -52,10 +52,11 @@
 											<th>单价(元)</th>
 											<th>金额(元)</th>
 											<th>医保类别</th>
-											<th>收据号</th>
+											<th>收据号</th>.
+											<th>收费时间</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id="xqList">
 									</tbody>
 								</table>
 							</div>
@@ -68,15 +69,49 @@
 		
 	<script type="text/javascript">
 		$(function(){
+			var Request = Utils.getRequest();
 			var day = new Date();
 			$('#startTime').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
+		
+			$("#startTime").click(function(){
+				plus.nativeUI.pickDate( function(e) {
+					var d = e.date;
+					$("#startTime").val(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
+				});
+			})
+			
+			$("#selqd").click(function(){
+				var params = {};
+				params.patID = Request["patID"];
+				params.visitID = Request["visitID"];
+				params.toDate = $("#startTime").val();
+				console.log("params:"+JSON.stringify(params));
+				$.post(Utils.getRoot()+"/hospitalService/selCostDetail",params,function(data){
+					var costDetail = data.data;
+					for (var i = 0; i < costDetail.length; i++) {
+						console.log("data:"+JSON.stringify(costDetail[i]));
+						$("#xqList").append(
+							"<tr>"+
+								"<td>"+costDetail[i].itemNo+"</td>"+
+								"<td>"+costDetail[i].itemName+"</td>"+
+								"<td>"+costDetail[i].feeClass+"</td>"+
+								"<td>"+costDetail[i].itemSpec+"</td>"+
+								"<td>"+costDetail[i].Amount+"</td>"+
+								"<td>"+costDetail[i].Units+"</td>"+
+								"<td>"+(parseInt(costDetail[i].Price)/100)+"</td>"+
+								"<td>"+(parseInt(costDetail[i].Charges)/100)+"</td>"+
+								"<td>"+costDetail[i].insuClass+"</td>"+
+								"<td>"+costDetail[i].rcptNo+"</td>"+
+								"<td>"+costDetail[i].billingDateTime+"</td>"+
+							"</tr>"
+						);
+					}
+				});
+			})
+			
+		
 		});
-		function pickDate(item) {
-			plus.nativeUI.pickDate( function(e) {
-				var d = e.date;
-				$(item).val(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
-			});
-		}
+		
 	</script>
 	</body>
 </html>

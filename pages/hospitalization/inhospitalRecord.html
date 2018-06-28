@@ -47,11 +47,11 @@
 		<section class="ui-container">
 			<section class="list">
 				<div class="hos_tab">
-					<span class="box_tab " id="hos_record">
+					<span class="box_tab active" id="hos_record">
 						住院记录详情
 						<i class="ui-icon icon-shangjiantou"></i>
 					</span>
-					<span class="box_tab active" id="hos_money">
+					<span class="box_tab" id="hos_money">
 						费用清单明细
 						<i class="ui-icon icon-shangjiantou"></i>
 					</span>
@@ -61,51 +61,51 @@
 						<input type="hidden" id="patId" value=""/>
 						<div class="list-item">
 							<span class="demo_name">第几次住院</span>
-							<span class="demo_value"><span class="visitld"></span></span>
+							<span class="demo_value"><span id="visitId"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">入院时间</span>
-							<span class="demo_value"><span class="admsDateTime"></span></span>
+							<span class="demo_value"><span id="admsDateTime"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">入院科室</span>
-							<span class="demo_value"><span class="admsDeptName"></span></span>
+							<span class="demo_value"><span id="admsDeptName"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">出院时间</span>
-							<span class="demo_value"><span class="dscgDeptName"></span></span>
+							<span class="demo_value"><span id="dscgDateTime"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">出院科室</span>
-							<span class="demo_value"><span class="dscgDeptName"></span></span>
+							<span class="demo_value"><span id="dscgDeptName"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">剩余预交金</span>
-							<span class="demo_value"><span class="prepayAmount"></span></span>
+							<span class="demo_value"><span id="prepayAmount"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">住院总费用</span>
-							<span class="demo_value"><span class="totalCosts"></span></span>
+							<span class="demo_value"><span id="totalCosts"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">未结算费用</span>
-							<span class="demo_value"><span class="unsettleCosts"></span></span>
+							<span class="demo_value"><span id="unsettleCosts"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">已结算费用</span>
-							<span class="demo_value"><span class="settledCosts"></span></span>
+							<span class="demo_value"><span id="settledCosts"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">医保/公医记账金额</span>
-							<span class="demo_value"><span class="insurPay"></span></span>
+							<span class="demo_value"><span id="insurPay"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">自付金额</span>
-							<span class="demo_value"><span class="selfPay"></span></span>
+							<span class="demo_value"><span id="selfPay"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">备注</span>
-							<span class="demo_value"><span class="remark"></span></span>
+							<span class="demo_value"><span id="remark"></span></span>
 						</div>
 					</div>
 					
@@ -128,6 +128,7 @@
 											<th style="">金额(元)</th>
 											<th style="">医保类别</th>
 											<th style="">收据号</th>
+											<th style="">收费时间</th>
 										</tr>
 									</thead>
 									<tbody id="xqList">
@@ -143,35 +144,14 @@
 		
 		<script type="text/javascript">
 			$(function(){
-				$(".hospital_record").hide();
-				$(".box_tab").on("click",function(){
-					var a = $(this).hasClass("active");
-					if(!a){
-						$(this).addClass("active").siblings(".box_tab").removeClass("active");
-						if ($(this).attr("id")=="hos_record") {
-							$(".hospital_record").show();
-							$("#xqList").html("");
-							$(".hospital_money").hide();
-						} else{
-							$(".hospital_money").show();
-							fyqd();
-							$(".hospital_record").hide();
-						}
-					}
-				});
-				
-				$("#oneDayCostLsit").click(function(){
-					location.href = "oneDayCostList.html";
-				});
+				$(".hospital_money").hide();
 				
 				var Request = Utils.getRequest();
-				var hospitaldetail = {};
-				hospitaldetail = Request["hospitaldetail"];
-				console.log(hospitaldetail);
+				var hospitaldetail = JSON.parse(Request["hospitaldetail"]);
 				
 				/*住院记录详情*/
 				$("#patId").val(hospitaldetail.patId);
-				$("#visitld").text(hospitaldetail.visitld);
+				$("#visitId").text(hospitaldetail.visitId);
 				$("#admsDateTime").text(hospitaldetail.admsDateTime);
 				$("#dscgDateTime").text(hospitaldetail.dscgDateTime);
 				$("#admsDeptName").text(hospitaldetail.admsDeptName);
@@ -190,30 +170,54 @@
 				 */
 				function fyqd(){
 					var params = {};
-					params.patId = $("#patId").val();
-					params.visitld = $("#visitld").text();
+					params.patID = $("#patId").val();
+					params.visitID = $("#visitId").text();
+					params.toDate = "";
 					$.post(Utils.getRoot()+"/hospitalService/selCostDetail",params,function(data){
-						var costDetail = new Array();
-						costDetail= data.data;
+						var costDetail = data.data;
+						
 						for (var i = 0; i < costDetail.length; i++) {
 							$("#xqList").append(
 								"<tr>"+
 									"<td>"+costDetail[i].itemNo+"</td>"+
 									"<td>"+costDetail[i].itemName+"</td>"+
-									"<td>"+costDetail[i].feeclass+"</td>"+
+									"<td>"+costDetail[i].feeClass+"</td>"+
 									"<td>"+costDetail[i].itemSpec+"</td>"+
-									"<td>"+costDetail[i].amount+"</td>"+
-									"<td>"+costDetail[i].units+"</td>"+
-									"<td>"+(parseInt(costDetail[i].price)/100)+"</td>"+
-									"<td>"+(parseInt(costDetail[i].charges)/100)+"</td>"+
+									"<td>"+costDetail[i].Amount+"</td>"+
+									"<td>"+costDetail[i].Units+"</td>"+
+									"<td>"+(parseInt(costDetail[i].Price)/100)+"</td>"+
+									"<td>"+(parseInt(costDetail[i].Charges)/100)+"</td>"+
 									"<td>"+costDetail[i].insuClass+"</td>"+
 									"<td>"+costDetail[i].rcptNo+"</td>"+
+									"<td>"+costDetail[i].billingDateTime+"</td>"+
 								"</tr>"
 							);
 						}
 					});
 				}
 				
+				
+				$(".box_tab").on("click",function(){
+					var a = $(this).hasClass("active");
+					if(!a){
+						$(this).addClass("active").siblings(".box_tab").removeClass("active");
+						if ($(this).attr("id")=="hos_record") {
+							$(".hospital_record").show();
+							$("#xqList").html("");
+							$(".hospital_money").hide();
+						} else{
+							$(".hospital_money").show();
+							fyqd();
+							$(".hospital_record").hide();
+						}
+					}
+				});
+				
+				$("#oneDayCostLsit").click(function(){
+					var patID = $("#patId").val();
+					var visitID = $("#visitId").text();
+					location.href = "oneDayCostList.html?patID="+patID+"&visitID="+visitID;
+				});
 			});
 			
 		</script>

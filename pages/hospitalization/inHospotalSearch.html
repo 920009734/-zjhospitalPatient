@@ -64,11 +64,10 @@
 						var hospitaldetail = new Array();
 						hospitaldetail= data.data;
 						for (var i = 0; i < hospitaldetail.length; i++) {
-							console.log("hospitaldetail:"+JSON.stringify(hospitaldetail[i]));
 							$("#hospitalList").append(
 								"<div class='search_item'>"+
-									"<span class='hospitaldetail'>"+JSON.stringify(hospitaldetail[i])+"</span>"+
-									"<span class='con_name'>第<span class='visitld'>"+hospitaldetail[i].visitld+"</span>次住院</span>"+
+									"<span class='hospitaldetail' style='display: none;'>"+JSON.stringify(hospitaldetail[i])+"</span>"+
+									"<span class='con_name'>第<span class='visitId'>"+hospitaldetail[i].visitId+"</span>次住院</span>"+
 									"<span class='con_type'>"+hospitaldetail[i].admsDeptName+"</span>"+
 									"<span class='con_time'>"+hospitaldetail[i].admsDateTime+"</span>"+
 								"</div>"
