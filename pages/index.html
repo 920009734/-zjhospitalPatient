@@ -73,7 +73,7 @@
     <script>
     	$(function(){
     		
-    		//loadMenus();
+    		loadMenus();
     		
     		$("#list").on('click', '.pageJump' , function(){
     			var state = $(this).data('state');
@@ -93,8 +93,9 @@
     			var root = Utils.getRoot() + "/";
 	    		$.ajax({
 	    			type:"get",
-	    			url:root + "appmenu/mentTree",
+	    			url:root + "appmenu/getAppMenus",
 	    			success: function(rootMenus){
+	    				console.log(JSON.stringify(rootMenus))
 	    				var tempHtml = '';
 			    		$.each(rootMenus, function(ind, menus) {
 			    			tempHtml += '<div class="fun_item">';
@@ -138,7 +139,7 @@
 				
 				<!-- 功能块 -->
 				
-				<div class="fun_item">
+				<!--<div class="fun_item">
 					<div class="fun_title "> 
 						<span class="item_img"><img src="../img/index/menzhenIcon.png" width="23" height="23"></span>	
 						<span class="item_title">门诊服务</span>
@@ -169,9 +170,9 @@
 							</div>
 						</a>
 					</div>
-				</div>
+				</div>-->
 				<!-- 医院 -->
-				<div class="fun_item">
+				<!--<div class="fun_item">
 					<div class="fun_title ">
 						<span class="item_img"><img src="../img/index/zhuyuanIcon.png" width="22" height="23"></span>	
 						<span class="item_title">住院服务</span>
@@ -194,9 +195,9 @@
 							<span class="list_title">出院小结</span>
 						</div>
 					</div> 
-				</div> 
+				</div> -->
 				<!-- 体检 -->
-				<div class="fun_item">
+				<!--<div class="fun_item">
 					<div class="fun_title " >
 						<span class="item_img"><img src="../img/index/baogcxun.png" width="22" height="23"></span>	
 						<span class="item_title">报告查询</span>
@@ -211,14 +212,14 @@
 							<span class="list_title">检验报告查询</span>
 						</div>
 						<div class="item_list" > 
-							<!--id="tjbg"-->
+							id="tjbg"
 							<span class="list_icon"><img src="../img/index/bgcx3.png"/></span>
 							<span class="list_title">体检报告查询</span>
 						</div>
 					</div>
-				</div>
+				</div>-->
 				<!-- 综合 -->
-				<div class="fun_item">
+				<!--<div class="fun_item">
 					<div class="fun_title ui-border-b">
 						<span class="item_img"><img src="../img/index/zongheIcon.png" width="22" height="23"></span>	
 						<span class="item_title">综合</span>
@@ -239,7 +240,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>-->
 				 
 				<!-- 动态 -->
 				<div class="notice_item" id="new_item">
