@@ -294,8 +294,8 @@
 								if (data.success) {
 									console.log(JSON.stringify(data.data.hisOrdNum) );
 									outChargeNo = data.data.hisOrdNum;//订单号
-//									var chargeAmt =  parseInt(data.data.regFee)/100; 
-									var chargeAmt = "0.01";
+									var chargeAmt =  parseInt(data.data.regFee)/100; 
+//									var chargeAmt = "0.01";
 									var patientid = $("#patientid").val();
 				        			window.location.href = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod2.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
 									/*var w = plus.webview.open(url);

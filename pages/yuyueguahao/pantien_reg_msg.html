@@ -150,7 +150,6 @@
 						//取消已支付的预约信息，先取消预约，取消锁号
 						$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(data){
 							if (data.success) {
-								
 								//最后再退款
 								/*outChargeNo 支付订单号 String(32) N
 								outRefundNo 退款流水号 String(32) N
@@ -158,13 +157,14 @@
 								$.post(Utils.getRoot()+"/registerApp/refund", {
 									outChargeNo: $("#hisOrdNum").val(),
 									outRefundNo: $("#serialNumber").val(),
-									refundAmt: $("#money").val() * 100
+									refundAmt: $("#money").val()
 								}, function(res) {
 									if (res.success) {//退款成功
 										$(".login_btn").hide();
 										alert(res.message);
 										$("#yyStatus").val("已取消,已退款");//改变状态
 										$("#cancel").hide();//隐藏按钮
+										
 									}else{//退款失败
 										alert(res.message);
 										$("#yyStatus").val("已取消,未退款");//改变状态
@@ -181,33 +181,23 @@
 				}
 				
 				$("#refund").click(function(){
-					$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfo",params,function(data){
-							if (data.success) {
-								//最后再退款
-								/*outChargeNo 支付订单号 String(32) N
-								outRefundNo 退款流水号 String(32) N
-								refundAmt 退款金额，单位为分 Number(12) N*/
-								$.post(Utils.getRoot()+"/registerApp/refund", {
-									outChargeNo: $("#hisOrdNum").val(),
-									outRefundNo: $("#serialNumber").val(),
-									refundAmt: $("#money").val() * 100
-								}, function(res) {
-									if (res.success) {
-										$(".login_btn").hide();
-										alert(res.message);
-										$("#yyStatus").val("已取消,已退款");//改变状态
-										$("#cancel").hide();//隐藏按钮
-									}else{
-										alert(res.message);
-										$("#yyStatus").val("已取消,未退款");//改变状态
-										$("#cancel").hide();//隐藏按钮
-										$("#refund").show();
-									}
-								});
-							} else {
-								alert(data.message);
-							}
-						});
+					$.post(Utils.getRoot()+"/registerApp/refund", {
+						outChargeNo: $("#hisOrdNum").val(),
+						outRefundNo: $("#serialNumber").val(),
+						refundAmt: $("#money").val()
+					}, function(res) {
+						if (res.success) {
+							$(".login_btn").hide();
+							alert(res.message);
+							$("#yyStatus").val("已取消,已退款");//改变状态
+							$("#cancel").hide();//隐藏按钮
+						}else{
+							alert(res.message);
+							$("#yyStatus").val("已取消,未退款");//改变状态
+							$("#cancel").hide();//隐藏按钮
+							$("#refund").show();
+						}
+					});
 				});
 			});
 		</script>
