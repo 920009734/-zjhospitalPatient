@@ -72,22 +72,45 @@
     </head> 
     <script>
     	$(function(){
+    		var state,url,id;
+    		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
     		
     		loadMenus();
     		
     		$("#list").on('click', '.pageJump' , function(){
-    			var state = $(this).data('state');
+    			state = $(this).data('state');
     			if( state == '2'){
     				alert('功能开发中...');
     				return;
     			}
-    			var url = $(this).data('url');
+    			url = $(this).data('url');
     			if(url){
-    				top.location.href = url;
+    				if(patientInfo.authStatus == '0'){
+    					checkAction($(this).data('id'));
+    				}else{
+    					top.location.href = url;
+    				}
     			}else{
     				alert('功能无指向地址...');
     			}
     		});
+    		
+    		function checkAction(id){
+    			$.ajax({
+	    			type:"post",
+	    			data: {
+	    				actionId: id
+	    			},
+	    			url:Utils.getRoot() + "/appmenu/checkAction",
+	    			success: function(data){
+	    				if(data){
+    						top.location.href = url;
+    					}else{
+    						alert('请先实名认证再使用该功能')
+    					}
+	    			}
+	    		});
+    		}
     		
     		function loadMenus(){
     			var root = Utils.getRoot() + "/";
@@ -104,7 +127,7 @@
 			    				tempHtml += '</div>';
 				    			tempHtml += '<div class="fun_item_list" >';
 				    			$.each(menus.childs, function(i, menu) {
-				    				tempHtml += '<a class="pageJump" data-state='+menu.isHidden+' data-url='+menu.menuUrl+' href="javaScript:void(0);">';
+				    				tempHtml += '<a class="pageJump" data-id='+menu.id+' data-state='+menu.isHidden+' data-url='+menu.menuUrl+' href="javaScript:void(0);">';
 					    				tempHtml += '<div class="item_list">';
 					    					tempHtml += '<span class="list_icon"><img src="'+(root + menu.icon)+'"/></span>';
 					    					tempHtml += '<span class="list_title">'+menu.menuName+'</span>';
