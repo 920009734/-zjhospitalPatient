@@ -95,7 +95,6 @@
 	    			type:"get",
 	    			url:root + "appmenu/getAppMenus",
 	    			success: function(rootMenus){
-	    				console.log(JSON.stringify(rootMenus))
 	    				var tempHtml = '';
 			    		$.each(rootMenus, function(ind, menus) {
 			    			tempHtml += '<div class="fun_item">';
