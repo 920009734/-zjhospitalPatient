@@ -115,11 +115,14 @@
     		function loadMenus(){
     			var root = Utils.getRoot() + "/";
 	    		$.ajax({
-	    			type:"get",
-	    			url:root + "appmenu/getAppMenus",
-	    			success: function(rootMenus){
+	    			type: "get",
+	    			url: root + "appmenu/getAppMenus",
+	    			success: function(data){
+	    				if(!data.data){
+	    					return;
+	    				}
 	    				var tempHtml = '';
-			    		$.each(rootMenus, function(ind, menus) {
+			    		$.each(data.data, function(ind, menus) {
 			    			tempHtml += '<div class="fun_item">';
 			    				tempHtml += '<div class="fun_title "> ';
 				    				tempHtml += '<span class="item_img"><img src="'+(root + menus.icon)+'" width="23" height="23"></span>';
