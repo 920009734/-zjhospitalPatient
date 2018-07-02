@@ -5,56 +5,38 @@
 		<meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="format-detection" content="telephone=no">
-		<script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
         <link rel="stylesheet" href="../../css/frozen.css">
-          <script src="../../js/jquery-1.8.3.min.js"></script>
-          <script>$.noConflict();</script>
+        <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
+        
+        <script src="../../js/jquery-1.8.3.min.js"></script>
+        <script>$.noConflict();</script>
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
 		<title></title>
 		<style type="text/css">
-			body{background-color: #F7F7F7;}
-			.ui-container{margin-top: 5px;}
-			.ui-header.ui-header-positive{height: 50px;line-height:50px;background-color: #0066cc;}
-            .name{display: block;width: 100%;height: 50px;margin-top: 50px;background-color: #FFFFFF;}
-            .nam_c{display: block;width: 100%;height: 50px;margin-top: 2px;background-color: #FFFFFF;}
-            .nam_left{display: block;width: 40%;height:50px;line-height:50px;margin-left:20px;float: left;}
-            .name>input{display: block;width: 45%;height:50px;line-height:50px;float: left;text-align: right;border: none;background:none;}
+			html,body{background-color: #ffffff;}
+			.name_container{display: block;float: left;width: 100%;}
+            .nam_c{display: block;float: left; width:94%;margin-left: 3%; height: 50px;border-bottom: 1px solid #EEEAEB;}
+            .nam_left{display: block;float: left; width: 40%; height:50px;line-height:50px;}
             .nam_c>input{display: block;width: 50%;height:50px;line-height:50px;float: left;text-align: right;border: none;background:none;}
-            .namw_m{display: block;width: 45%;float: left;height:50px;line-height:50px;margin-top:10px;}
-            .ther{display: block;width: 100%;height: 50px;margin-top: 2px;background-color: #FFFFFF;}
-            .namw_m>span{float: right;color: #BBBBBB;margin-top: -10px;}
-            .ther_j{margin-right: 10px;}
-            .nam_i{display: block;width: 100%;height: 50px;margin-top: 2px;background-color: #FFFFFF;}
-            .nam_i>span{display: block;float: left;}
-            .nam_left_i{display: block;width: 45%;height:50px;line-height:50px;margin-left:20px;margin-top: -8px;}
-            .nam_right{display: block;width: 38%;height:50px;line-height:50px;margin-left:20px;margin-top: -8px;text-align: right;}
-            .nam_j{display: block;width: 100%;height: 50px;margin-top: 2px;background-color: #FFFFFF;}
-            .nam_j>span{display: block;float: left;margin-top: 2px;}	
-			.nam_right_y{display: block;width: 38%;height:50px;line-height:50px;margin-left:20px;margin-top: -8px;text-align: right;}
 			
-			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;}
-			.login_btn>button{border-radius:2px ;background: #0066CC;}
+			.login_btn{display: block;float: left; width: 94%;margin-left: 3%;margin-top: 25px;}
+			.login_btn>button{border-radius:2px ;background: #0066CC;font-size: 16px;}
 			
-			.dialog_message,.dialog_groupMsg{display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.4);}
-			.dialog_message_cnt, .dialog_sendMsg_cnt{display: block;width: 80%;min-height: 100px;max-height: 800px;background-color: #FFFFFF;position: relative;margin-left: 10%;margin-top: 50%;border-radius: 5px;}
-			.dialog_sendMsg_cnt{margin-top: 10%;}
+			.dialog_groupMsg{display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.4);}
+			.dialog_sendMsg_cnt{display: block;width: 80%;min-height: 100px;max-height: 800px;background-color: #FFFFFF;position: relative;margin-left: 10%;margin-top: 20%;border-radius: 5px;}
+			.ui-dialog-ft .close_groupMsg{color: red;}
 			input{padding-left: 5px;}
-			.group_sendMsg{display: block;float: right; width: 34%;text-align: right;height: 40px;line-height: 40px;color: #0066CC; margin-top: 10px; padding: 10px 0px;}
-			.group_sendMsg>i{display:block;float: left;line-height: 40px;margin-left: 5%;margin-right: 5%;}
-			.group_sendMsg>span{display:block;float: left; height: 40px; line-height: 40px;}
 			
-			.ck_group_item{display: block;float: left; height: 40px;line-height: 40px; width: 100%;color: #999999;}
-			.ck_group_item.active{color: #0066CC;}
-			.ck_group_item>span{display: block;float: left;}
-			.ck_group_item>i{display: block;float: right;font-size: 25px;color: #0066CC;}
-			.ck_group{display: none; font-size: 14px;margin-left: 20px;min-height:40px;max-height: 80px;overflow: auto;}
-			.ck_group.open{display: block;}
 			.group_textArea{width: 94%;height: 70px;padding: 3% 3%;font-size: 14px;resize:none;border: 1px solid #5EB6CB;}
-			.ck_group_title{display: block;width: 100%;margin-top: -17px;height: 40px;line-height: 40px;color: #0066CC;}
-			.ck_group_title>i{line-height: 40px;font-size: 16px;}
-			.ck_group_title>span{display: block;float: left;height: 40px;line-height: 40px;margin-right: 10px;}
+			.radio_con{display: block;width: 100%;margin-top: -18px;}
+			.radio_item{display: block;float: left;width: 100%;height: 40px;line-height: 40px;border-bottom: 1px solid #EEEAEB;color: #999999;}
+			.radio_item.active{color: #5EB6CB;}
+			.radio_item>i{display: block;float: left;width: 12%;}
+			.radio_item>span{display: block;float: right;width: 88%;font-size: 15px;}
+			
 		</style>
 		<script type="text/javascript">
         	$(function(){
@@ -199,93 +181,128 @@
 						}
 					});
 				});
+				
+				$(".radio_con").on("click",".radio_item",function(){
+					var a = $(this).hasClass("active");
+					if(!a){
+						$(this).addClass("active").siblings(".radio_item").removeClass("active");
+						$(this).children("i").addClass("icon-zhengquewancheng").parent(".radio_item").siblings(".radio_item").children("i").removeClass("icon-zhengquewancheng");
+					}
+					
+				});
 			});
 		</script>
 	</head>
 	<body>
-    
 		<header class="ui-header ui-header-positive">
-        <i class="ui-icon ui-icon-return" onclick="history.back()"></i><h4 style="margin-left: 25px;margin-top: -3px;">预约挂号详情 </h4>
+	        <i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+	        <h4 style="margin-left: 25px;">预约挂号详情 </h4>
 		</header>
-  		<input type="hidden" id="hisPatientId" value="">
-        <div class="name">
-        		<span class="nam_left" >姓名：</span>
-        		<input type="text"  disabled="disabled"  id="patientname"  value="" />
-        </div>
-        
-        <div class="nam_c">
-        		<span class="nam_left">性别：</span>
-        		<input type="text" disabled="disabled" id="sex" value=""  />
-        </div>
-        
-        <div class="nam_c">
-        		<span class="nam_left">身份证号码：</span>
-        		<input type="text" disabled="disabled" id="idcard" value="" />
-        </div>
-        
-        <div class="nam_c">
-        		<span class="nam_left">手机号码：</span>
-        		<input type="text" disabled="disabled" id="phone"value="" />
-        </div>
-        <div class="nam_c">
-        		<span class="nam_left">就诊卡号：</span>
-        		<input type="text" disabled="disabled" id="attendancecard" value="" />
-        </div>
-        
-        <div class="nam_c">
-        		<span class="nam_left">科室：</span>
-        		<input type="text" disabled="disabled" id="divisionName" value="" />
-        </div>
-        
-        <div class="nam_c">
-        		<span class="nam_left">医生</span>
-        		<input type="text" disabled="disabled" id="doctorName" value="" />
-        </div>
-        
-        <div class="nam_c">
-        		<span class="nam_left">金额（单位：元）：</span>
-				<input type="text" disabled="disabled" id="money" value="" />
-        </div>
-
-        <div class="nam_c">
-        		<span class="nam_left">就诊时间：</span>
-				<input type="text" disabled="disabled" id="czDate" value="" />
-        </div>
-        
-        <b>
-	        <div class="nam_c" style="color: red;">
-	        		<span class="nam_left">状态：</span>
-					<input type="text" disabled="disabled" id="yyStatus" value="" />
-					<input type="hidden" disabled="disabled" id="status" value="" />
-	        </div>
-		</b>
-		<div class="login_btn">
-			<input type="hidden"  id="bespeakId" value=""/>
-			<input type="hidden"  id="hisOrdNum" value=""/>
-	       	<input type="hidden"  id="serialNumber" value=""/>
-			<button id="cancel" class="ui-btn ui-btn-lg ui-btn-primary" style="display: none;">取消预约</button>
-			<button id="refund" class="ui-btn ui-btn-lg ui-btn-primary" style="display: none;">退款</button>
-		</div>
+		<section class="ui-container">
+			<input type="hidden" id="hisPatientId" value="">
+			<div class="name_container">
+				<div class="nam_c">
+		    		<span class="nam_left" >姓名：</span>
+		    		<input type="text"  disabled="disabled"  id="patientname"  value="" />
+		        </div>
+		        <div class="nam_c">
+		    		<span class="nam_left">性别：</span>
+		    		<input type="text" disabled="disabled" id="sex" value=""  />
+		        </div>
+		        
+		        <div class="nam_c">
+		    		<span class="nam_left">身份证号码：</span>
+		    		<input type="text" disabled="disabled" id="idcard" value="" />
+		        </div>
+		        
+		        <div class="nam_c">
+		    		<span class="nam_left">手机号码：</span>
+		    		<input type="text" disabled="disabled" id="phone"value="" />
+		        </div>
+		        <div class="nam_c">
+		    		<span class="nam_left">就诊卡号：</span>
+		    		<input type="text" disabled="disabled" id="attendancecard" value="" />
+		        </div>
+		        
+		        <div class="nam_c">
+		    		<span class="nam_left">科室：</span>
+		    		<input type="text" disabled="disabled" id="divisionName" value="" />
+		        </div>
+		        
+		        <div class="nam_c">
+		    		<span class="nam_left">医生：</span>
+		    		<input type="text" disabled="disabled" id="doctorName" value="" />
+		        </div>
+		        
+		        <div class="nam_c">
+		    		<span class="nam_left">金额(单位/元)：</span>
+					<input type="text" disabled="disabled" id="money" value="" />
+		        </div>
 		
-		<!-- 取消预约窗口-->
-		<div class="dialog_groupMsg">
-			<div class="dialog_sendMsg_cnt">
-				<div class="ui-dialog-hd ui-border-b">
-					<h4>取消预约原因</h4> 
-				</div>
-				
-				<div class="ui-dialog-bd">
-					<!-- 编辑群发信息 -->
-					<div class="edit_sendMsg ">
-						<span style="line-height: 40px;">取消理由：</span>
-						<textarea class="group_textArea" id="cancelReason"></textarea>
+		        <div class="nam_c">
+		    		<span class="nam_left">就诊时间：</span>
+					<input type="text" disabled="disabled" id="czDate" value="" />
+		        </div>
+		        
+		        <b>
+			        <div class="nam_c" style="color: red;">
+		        		<span class="nam_left">状态：</span>
+						<input type="text" disabled="disabled" id="yyStatus" value="" />
+						<input type="hidden" disabled="disabled" id="status" value="" />
+			        </div>
+				</b>
+			</div>
+	        
+			<div class="login_btn">
+				<input type="hidden"  id="bespeakId" value=""/>
+				<input type="hidden"  id="hisOrdNum" value=""/>
+		       	<input type="hidden"  id="serialNumber" value=""/>
+				<button id="cancel" class="ui-btn ui-btn-lg ui-btn-primary" style="display: none;">取消预约</button>
+				<button id="refund" class="ui-btn ui-btn-lg ui-btn-primary" style="display: none;">退款</button>
+			</div>
+			
+			<!-- 取消预约窗口-->
+			<div class="dialog_groupMsg">
+				<div class="dialog_sendMsg_cnt">
+					<div class="ui-dialog-hd ui-border-b">
+						<h4>取消预约原因</h4> 
+					</div>
+					
+					<div class="ui-dialog-bd">
+						<div class="radio_con">
+							<div class="radio_item active">
+		                     	<i class="iconfont icon-zhengquewancheng"></i> 
+		                     	<span>下错单了</span>
+		                    </div>
+							<div class="radio_item">
+		                     	<i class="iconfont "></i> 
+		                     	<span>下错单了</span>
+		                    </div>
+							<div class="radio_item">
+		                     	<i class="iconfont "></i> 
+		                     	<span>下错单了</span>
+		                    </div>
+							<div class="radio_item">
+		                     	<i class="iconfont "></i> 
+		                     	<span>下错单了</span>
+		                    </div>
+							<div class="radio_item">
+		                     	<i class="iconfont "></i> 
+		                     	<span>其他</span>
+		                    </div>
+						</div>
+						<!-- 编辑取消预约原因 -->
+						<div class="edit_sendMsg ">
+							<span style="line-height: 40px;">取消理由：</span>
+							<textarea class="group_textArea" id="cancelReason"></textarea>
+						</div>
+					</div>
+					<div class="ui-dialog-ft">
+						<button type="button" data-role="button" class="close_groupMsg">关闭</button>
+						<button type="button" data-role="button" id="queren">确认</button>
 					</div>
 				</div>
-				<div class="ui-dialog-ft">
-					<button type="button" data-role="button" class="close_groupMsg">关闭</button>
-					<button type="button" data-role="button" id="queren">确认</button>
-				</div>
 			</div>
-		</div>
+		</section>
 	</body>
 </html>
