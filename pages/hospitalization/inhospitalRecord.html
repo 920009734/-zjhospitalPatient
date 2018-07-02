@@ -127,7 +127,6 @@
 											<th style="">单价(元)</th>
 											<th style="">金额(元)</th>
 											<th style="">医保类别</th>
-											<th style="">收据号</th>
 											<th style="">收费时间</th>
 										</tr>
 									</thead>
@@ -183,12 +182,11 @@
 									"<td>"+costDetail[i].itemName+"</td>"+
 									"<td>"+costDetail[i].feeClass+"</td>"+
 									"<td>"+costDetail[i].itemSpec+"</td>"+
-									"<td>"+costDetail[i].Amount+"</td>"+
+									"<td>"+(parseInt(costDetail[i].Amount)/100)+"</td>"+
 									"<td>"+costDetail[i].Units+"</td>"+
-									"<td>"+(parseInt(costDetail[i].Price)/100)+"</td>"+
+									"<td>"+(parseInt(costDetail[i].Price)/1000)+"</td>"+
 									"<td>"+(parseInt(costDetail[i].Charges)/100)+"</td>"+
 									"<td>"+costDetail[i].insuClass+"</td>"+
-									"<td>"+costDetail[i].rcptNo+"</td>"+
 									"<td>"+costDetail[i].billingDateTime+"</td>"+
 								"</tr>"
 							);

@@ -23,7 +23,7 @@ $(function(){
 					$("#rqgh").show();
 					if(doctorInfo[i].timeFlag==timeFlag){
 						if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
-							//把挂号费转为元，原本是分
+							//把诊查费转为元，原本是分
 							var regFee = parseInt(doctorInfo[i].regFee)/100;
 							if (doctorInfo[i].leftNum==0) {//余号为0
 								$("#dateTimeDiv").append(

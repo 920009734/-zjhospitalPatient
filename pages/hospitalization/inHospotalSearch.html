@@ -19,6 +19,8 @@
         	.search_con{display: block;float: left;width: 100%;height: auto;margin-top: 15px;}
         	.search_item{display: block;float: left;width: 90%;margin-left: 3%;height: 60px;line-height: 60px;background-color: #FFFFFF;padding: 0 2%;margin-top: 5px;border-radius: 2px;}
         	.search_item>span{display: block;}
+        	.nosearch_item{display: block;float: left;width: 90%;margin-left: 3%;height: 60px;line-height: 60px;background-color: #FFFFFF;padding: 0 2%;margin-top: 5px;border-radius: 2px;}
+        	.nosearch_item>span{display: block;}
         	.con_name{float: left;font-size: 15px;}
         	.con_type{float: left;margin-left: 10px;font-size: 15px;}
         	.con_time{display: block;float: right;font-size: 13px;color: #999999;}
@@ -50,21 +52,6 @@
 				<!-- 查询出的内容 -->
 				<div class="search_con" id="hospitalList">
 					
-					<!--<div class="search_item">
-						<span class="con_name">李杰</span>
-						<span class="con_type">内可内科呢可</span>
-						<span class="con_time">2018-05-15</span>
-					</div>
-					<div class="search_item">
-						<span class="con_name">李杰</span>
-						<span class="con_type">内可内科呢可</span>
-						<span class="con_time">2018-05-15</span>
-					</div>
-					<div class="search_item">
-						<span class="con_name">李杰</span>
-						<span class="con_type">内可内科呢可</span>
-						<span class="con_time">2018-05-15</span>
-					</div>-->
 				</div>
 			</div>
 		</section>
@@ -89,7 +76,7 @@
 					}else{
 //						alert(data.message);
 						$("#hospitalList").append(
-							"<div class='search_item'>"+
+							"<div class='nosearch_item'>"+
 								"<p class='notData'>暂无住院记录</p>"+
 							"</div>"
 						);
