@@ -58,30 +58,42 @@
 		
 		<script type="text/javascript">
 			$(function(){
+				$('#startTime').val("2017-11-21");
+				$('#endTime').val("2018-04-01");
 				
-        		$.post(Utils.getRoot()+"/hospitalService/selhospitaldetail",{},function(data){
-					if (data.success) {
-						var hospitaldetail = new Array();
-						hospitaldetail= data.data;
-						for (var i = 0; i < hospitaldetail.length; i++) {
+				function pickDate(item) {
+					plus.nativeUI.pickDate( function(e) {
+						var d = e.date;
+						$(item).val(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
+					});
+				}
+				
+				$("#searchp").click(function(){
+					
+					$.post(Utils.getRoot()+"/hospitalService/selhospitaldetail",{},function(data){
+						if (data.success) {
+							var hospitaldetail = new Array();
+							hospitaldetail= data.data;
+							for (var i = 0; i < hospitaldetail.length; i++) {
+								$("#hospitalList").append(
+									"<div class='search_item'>"+
+										"<span class='hospitaldetail' style='display: none;'>"+JSON.stringify(hospitaldetail[i])+"</span>"+
+										"<span class='con_name'>第<span class='visitId'>"+hospitaldetail[i].visitId+"</span>次住院</span>"+
+										"<span class='con_type'>"+hospitaldetail[i].admsDeptName+"</span>"+
+										"<span class='con_time'>"+hospitaldetail[i].admsDateTime+"</span>"+
+									"</div>"
+								);
+							}
+						}else{
 							$("#hospitalList").append(
-								"<div class='search_item'>"+
-									"<span class='hospitaldetail' style='display: none;'>"+JSON.stringify(hospitaldetail[i])+"</span>"+
-									"<span class='con_name'>第<span class='visitId'>"+hospitaldetail[i].visitId+"</span>次住院</span>"+
-									"<span class='con_type'>"+hospitaldetail[i].admsDeptName+"</span>"+
-									"<span class='con_time'>"+hospitaldetail[i].admsDateTime+"</span>"+
+								"<div class='nosearch_item'>"+
+									"<p class='notData'>暂无住院记录</p>"+
 								"</div>"
 							);
 						}
-					}else{
-//						alert(data.message);
-						$("#hospitalList").append(
-							"<div class='nosearch_item'>"+
-								"<p class='notData'>暂无住院记录</p>"+
-							"</div>"
-						);
-					}
+					});
 				});
+        		
 				
 				
 				$("#hospitalList").on("click",".search_item",function(){
@@ -90,14 +102,7 @@
         		});
 			});
 			
-			$('#startTime').val("2017-11-21");
-			$('#endTime').val("2018-04-01");
-			function pickDate(item) {
-				plus.nativeUI.pickDate( function(e) {
-					var d = e.date;
-					$(item).val(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
-				});
-			}
+			
 		</script>
 	</body>
 </html>
