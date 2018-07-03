@@ -58,8 +58,11 @@
 		
 		<script type="text/javascript">
 			$(function(){
-				$('#startTime').val("2017-11-21");
-				$('#endTime').val("2018-04-01");
+				hsopotalSearch({});
+				
+				var day = new Date();
+				$('#startTime').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
+				$('#endTime').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
 				
 				function pickDate(item) {
 					plus.nativeUI.pickDate( function(e) {
@@ -69,8 +72,16 @@
 				}
 				
 				$("#searchp").click(function(){
-					
-					$.post(Utils.getRoot()+"/hospitalService/selhospitaldetail",{},function(data){
+					var params = {};
+					params.admsStart = $('#startTime').val();//入院时间
+					params.admsEnd = $('#endTime').val();//出院时间
+					hsopotalSearch(params);
+				});
+        		
+				
+				
+				function hsopotalSearch(params){
+					$.post(Utils.getRoot()+"/hospitalService/selhospitaldetail",params,function(data){
 						if (data.success) {
 							var hospitaldetail = new Array();
 							hospitaldetail= data.data;
@@ -92,8 +103,7 @@
 							);
 						}
 					});
-				});
-        		
+				}
 				
 				$("#hospitalList").on("click",".search_item",function(){
         			var hospitaldetail = $(this).children(".hospitaldetail").text();

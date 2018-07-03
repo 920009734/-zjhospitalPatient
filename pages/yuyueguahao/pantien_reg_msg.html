@@ -20,7 +20,7 @@
 			.name_container{display: block;float: left;width: 100%;}
             .nam_c{display: block;float: left; width:94%;margin-left: 3%; height: 50px;border-bottom: 1px solid #EEEAEB;}
             .nam_left{display: block;float: left; width: 40%; height:50px;line-height:50px;}
-            .nam_c>input{display: block;width: 50%;height:50px;line-height:50px;float: left;text-align: right;border: none;background:none;}
+            .nam_c>input{display: block;width: 55%;height:50px;line-height:50px;float: left;text-align: right;border: none;background:none;}
 			
 			.login_btn{display: block;float: left; width: 94%;margin-left: 3%;margin-top: 25px;}
 			.login_btn>button{border-radius:2px ;background: #0066CC;font-size: 16px;}
@@ -46,6 +46,7 @@
         		$("#bespeakId").val(Request["bespeakId"]);
         		$("#hisOrdNum").val(Request["hisOrdNum"]);
         		$("#serialNumber").val(Request["serialNumber"]);
+        		alert(Request["czDate"]);
 				var params={};
 				params.bespeakId=Request["bespeakId"];
         		$.post(Utils.getRoot()+"/registerApp/selPatientYYInfo",params,function(data){
@@ -61,30 +62,23 @@
 						$("#divisionName").val(Patient.divisionName);
 						$("#doctorName").val(Patient.doctorName);
 						$("#money").val(Patient.money/100);
-						$("#czDate").val(Patient.bespeakTime);
+						$("#bespeakTime").val(Patient.bespeakTime);
 						var status = Patient.yyStatus;
 						var yyStatus;
 						switch (status){
 							case "0":
-								yyStatus="已预约";
+								yyStatus="预约";
 								$("#cancel").show();//显示按钮
 								break;
 							case "1":
-								yyStatus="已预约,待支付";
+								yyStatus="取消";
 								break;
 							case "2":
-								yyStatus="已预约,已支付";
+								yyStatus="取号";
 								$("#cancel").show();//显示按钮
 								break;
 							case "3":
-								yyStatus="已取消";
-								break;
-							case "4":
-								yyStatus="已取消,未退款";
-								$("#refund").show();
-								break;
-							case "5":
-								yyStatus="已取消,已退款";
+								yyStatus="退约";
 								break;
 						}
 						$("#status").val(status);
@@ -103,24 +97,34 @@
 				});
 				
 				$("#queren").click(function(){
-					$(".dialog_groupMsg").hide();
-					cancel();
+					var active = $(".radio_con").children(".active");
+					if($(active).attr("id")=="qtsm"){
+						if ($("#cancelReason").val().length>5) {
+							$(".dialog_groupMsg").hide();
+							cancel($("#cancelReason").text());
+						}else{
+							alert("其他原因说明至少5个字以上");
+						}
+					}else{
+						cancel($(active).children("span").text());
+					}
+//					
 				});
 				
 				
 				//取消预约
-				function cancel() {
+				function cancel(cancelReason) {
 					//医院取消预约
 					var params={};
 					params.bespeakId = $("#bespeakId").val();
 					params.hisOrdNum = $("#hisOrdNum").val();
 					params.serialNumber = $("#serialNumber").val();
-					params.cancelReason = $("#cancelReason").val();
+					params.cancelReason = cancelReason;
 					//取消未支付的预约信息，先取消预约，取消锁号
 					if($("#status").val()==0){
 						$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfoNo",params,function(data){
 							if (data.success) {
-								$(".login_btn").hide();
+//								$(".login_btn").hide();
 								alert(data.message);
 								$("#yyStatus").val("已取消");//改变状态
 								$("#cancel").hide();//隐藏按钮
@@ -139,17 +143,18 @@
 								$.post(Utils.getRoot()+"/registerApp/refund", {
 									outChargeNo: $("#hisOrdNum").val(),
 									outRefundNo: $("#serialNumber").val(),
-									refundAmt: $("#money").val()
+									refundAmt: $("#money").val(),
+									czDate:Request["czDate"],//预约日期
+									createTime:createTime//创建日期
 								}, function(res) {
 									if (res.success) {//退款成功
-										$(".login_btn").hide();
+//										$(".login_btn").hide();
 										alert(res.message);
-										$("#yyStatus").val("已取消,已退款");//改变状态
+										$("#yyStatus").val("退约");//改变状态
 										$("#cancel").hide();//隐藏按钮
-										
 									}else{//退款失败
 										alert(res.message);
-										$("#yyStatus").val("已取消,未退款");//改变状态
+										$("#yyStatus").val("退约");//改变状态
 										$("#cancel").hide();//隐藏按钮
 										$("#refund").show();
 									}
@@ -169,13 +174,13 @@
 						refundAmt: $("#money").val()
 					}, function(res) {
 						if (res.success) {
-							$(".login_btn").hide();
+//							$(".login_btn").hide();
 							alert(res.message);
-							$("#yyStatus").val("已取消,已退款");//改变状态
+							$("#yyStatus").val("退约");//改变状态
 							$("#cancel").hide();//隐藏按钮
 						}else{
 							alert(res.message);
-							$("#yyStatus").val("已取消,未退款");//改变状态
+							$("#yyStatus").val("退约");//改变状态
 							$("#cancel").hide();//隐藏按钮
 							$("#refund").show();
 						}
@@ -187,9 +192,16 @@
 					if(!a){
 						$(this).addClass("active").siblings(".radio_item").removeClass("active");
 						$(this).children("i").addClass("icon-zhengquewancheng").parent(".radio_item").siblings(".radio_item").children("i").removeClass("icon-zhengquewancheng");
+						if ($(this).attr("id")=="qtsm") {
+							$(".edit_sendMsg").show();
+						}else{
+							$("#cancelReason").html("");
+							$(".edit_sendMsg").hide();
+						}
 					}
 					
 				});
+				
 			});
 		</script>
 	</head>
@@ -241,7 +253,7 @@
 		
 		        <div class="nam_c">
 		    		<span class="nam_left">就诊时间：</span>
-					<input type="text" disabled="disabled" id="czDate" value="" />
+					<input type="text" disabled="disabled" id="bespeakTime" value="" />
 		        </div>
 		        
 		        <b>
@@ -257,7 +269,7 @@
 				<input type="hidden"  id="bespeakId" value=""/>
 				<input type="hidden"  id="hisOrdNum" value=""/>
 		       	<input type="hidden"  id="serialNumber" value=""/>
-				<button id="cancel" class="ui-btn ui-btn-lg ui-btn-primary" style="display: none;">取消预约</button>
+				<button id="cancel" class="ui-btn ui-btn-lg ui-btn-primary" >取消预约</button>
 				<button id="refund" class="ui-btn ui-btn-lg ui-btn-primary" style="display: none;">退款</button>
 			</div>
 			
@@ -272,29 +284,24 @@
 						<div class="radio_con">
 							<div class="radio_item active">
 		                     	<i class="iconfont icon-zhengquewancheng"></i> 
-		                     	<span>下错单了</span>
+		                     	<span>科室预约错误</span>
 		                    </div>
 							<div class="radio_item">
 		                     	<i class="iconfont "></i> 
-		                     	<span>下错单了</span>
+		                     	<span>医生预约错误</span>
 		                    </div>
 							<div class="radio_item">
 		                     	<i class="iconfont "></i> 
-		                     	<span>下错单了</span>
+		                     	<span>预约时间错误</span>
 		                    </div>
-							<div class="radio_item">
+							<div class="radio_item" id="qtsm">
 		                     	<i class="iconfont "></i> 
-		                     	<span>下错单了</span>
-		                    </div>
-							<div class="radio_item">
-		                     	<i class="iconfont "></i> 
-		                     	<span>其他</span>
+		                     	<span>其他原因说明</span>
 		                    </div>
 						</div>
 						<!-- 编辑取消预约原因 -->
-						<div class="edit_sendMsg ">
-							<span style="line-height: 40px;">取消理由：</span>
-							<textarea class="group_textArea" id="cancelReason"></textarea>
+						<div class="edit_sendMsg" style="display: none;">
+							<textarea class="group_textArea" id="cancelReason" placeholder="字数最少5个字"></textarea>
 						</div>
 					</div>
 					<div class="ui-dialog-ft">
