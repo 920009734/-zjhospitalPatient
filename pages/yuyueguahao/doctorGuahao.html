@@ -32,7 +32,8 @@
 			.guahao{display: block;float: left; width: 49%;border: 1px solid #000000;text-align: center;border: 1px solid #4CB6AC;border-radius: 2px;}
 			.guahao.active{background-color: #4CB6AC;color: #FFFFFF;}
 			.mingyi_guahao{margin-left: -2px;}
-			
+			.nock_dateTime{display: block;float: left;width: 100%;height: 50px;line-height: 50px;border-bottom: 1px solid #E4E4E4;font-size: 15px;background-color: #D8D8D8;}
+			.nock_dateTime:last-child{border: none;}
 			.doc_content{display: block;float: left;width: 100%;background-color: #F7F7F7;}
 			.doc_item{display: block;float: left;width: 94%; margin-left:3%; height: 70px;background-color: #FFFFFF;margin-top: 10px;border-radius: 3px;}
 			.doc_item>div{display: block;float: left;height: 100%;}
@@ -71,19 +72,6 @@
 				</div>
 				
 				<div class="doc_content" id="zjList" >
-					<!--<div class="doc_item">
-						<div class="doc_item_img">
-							<img src="../../img/kes/a1.png" />
-						</div>
-						<div class="doc_item_content">
-							<div class="doc_name">
-								<span>董方明</span>
-							</div>
-							<div class="doc_time"> 
-								<span>普通号</span>
-							</div>
-						</div>
-					</div>-->
 				</div>	
 				
 				<div class="doc_content" id="myList" style="display: none;">
@@ -155,7 +143,7 @@
 						dortorInfo= data.data;
 						console.log("医生挂号："+JSON.stringify(dortorInfo));
 						for (var i = 0; i < dortorInfo.length; i++) {
-							if(dortorInfo[i].clinicType=="名医号"){//名医挂号 
+							if(dortorInfo[i].clinicType=="名医号"){//名医挂号
 								$("#myList").append(
 									"<div class='doc_item'>"+
 										"<input type='hidden' name='ghType' value='2'>"+
@@ -166,7 +154,7 @@
 											"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
 											"<input type='hidden' name='clinicType' value='"+dortorInfo[i].clinicType+"'>"+
 											"<div class='doc_name'>"+
-												"<span>"+dortorInfo[i].doctorName+"</span>"+
+												"<span class='doctorName'>"+dortorInfo[i].doctorName+"</span>"+
 											"</div>"+
 											"<div class='doc_time'>"+
 												"<span>"+dortorInfo[i].clinicType+"</span>"+
@@ -201,15 +189,17 @@
 				});
 				
 				
-				$("#zjList,#mjList").on("click",".doc_item",function(){
+				$("#zjList,#myList").on("click",".doc_item",function(){
 					var ghType = $(this).children("input[name='ghType']").val();
 					var deptCode = $("#deptCode").val();
 					var deptName = $("#deptName").text();
 					var doctorCode = $(this).children(".doc_item_content").children("input[name='doctorCode']").val();
 					var clinicType = $(this).children(".doc_item_content").children("input[name='clinicType']").val();
 					var doctorName = $(this).children(".doc_item_content").children(".doc_name").children(".doctorName").text();
+					var url = "../yuyueguahao/doctorGuahao_detail.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&doctorName="+doctorName+"&ghType="+ghType+"&clinicType="+clinicType;
 					window.location.href="../yuyueguahao/doctorGuahao_detail.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&doctorName="+doctorName+"&ghType="+ghType+"&clinicType="+clinicType;
 				});
+				
 			});	
 		</script>
 	</body>

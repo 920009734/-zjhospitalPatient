@@ -30,6 +30,10 @@
 			.box_time_item:last-child{border: none;}
 			.box_time_item>span{display: block;float: left;border-radius: 2px;}
 			.box_time_item>span:nth-child(1){padding-left:10px;width: 45%;}
+			.nobox_time_item{display:block;float:left;width:100%;height:50px;line-height:50px;font-size: 15px;border-bottom: 1px solid #E7E7E7;background-color: #D8D8D8;}
+			.nobox_time_item:last-child{border: none;}
+			.nobox_time_item>span{display: block;float: left;border-radius: 2px;}
+			.nobox_time_item>span:nth-child(1){padding-left:10px;width: 45%;}
 			.box_sj{margin-left: 4%;}
 			.box_yuhao{width: 23%; background-color: #3B92A6;border-radius: 2px; height: 30px;line-height: 30px;margin-top: 10px;margin-right: 4%;color: #FFFFFF;font-size: 13px;text-align: center;margin-left: 4%;}
 			.box_ghf{width: 23%; background-color: #E04141;height: 30px;line-height: 30px;margin-top: 10px;color: #FFFFFF;font-size: 13px;text-align: center;}
@@ -137,7 +141,6 @@
 					if (data.success) {
 						var doctorInfo = new Array();
 						doctorInfo= data.data;
-						console.log("info:"+JSON.stringify(doctorInfo))
 						var timeGroupBy;
 						for (var i = 0; i < doctorInfo.length; i++) {
 							if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
@@ -149,15 +152,28 @@
 								timeGroupBy = doctorInfo[i].timeGroupBy;
 								for (var j = 0; j < timeGroupBy.length; j++) {
 									var regFee = parseInt(timeGroupBy[j].regFee)/100;
-									$("#hsTime"+i).append(
-										"<div class='box_time_item'>"+
-											"<input type='hidden' name='timeFlag' value=''>"+
-											"<span class='box_sj'><span class='beginTime'>"+timeGroupBy[j].beginTime+"</span>"+
-											" ~ <span class='endTime'>"+timeGroupBy[j].endTime+"</span></span>"+
-											"<span class='box_yuhao' >余号：<span class='leftNum'>"+timeGroupBy[j].leftNum+"</span></span>"+
-											"<span class='box_ghf'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
-										"</div>"
-									);
+									if (timeGroupBy[j].leftNum==0) {//余号为0 ，不可挂号
+										$("#hsTime"+i).append(
+											"<div class='nobox_time_item'>"+
+												"<input type='hidden' name='timeFlag' value='"+doctorInfo[i].timeFlag+"'>"+
+												"<span class='box_sj'><span class='beginTime'>"+timeGroupBy[j].beginTime+"</span>"+
+												" ~ <span class='endTime'>"+timeGroupBy[j].endTime+"</span></span>"+
+												"<span class='box_yuhao' >余号：<span class='leftNum'>"+timeGroupBy[j].leftNum+"</span></span>"+
+												"<span class='box_ghf'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
+											"</div>"
+										);
+									}else{//余号不为0 ，可挂号
+										$("#hsTime"+i).append(
+											"<div class='box_time_item'>"+
+												"<input type='hidden' name='timeFlag' value='"+doctorInfo[i].timeFlag+"'>"+
+												"<span class='box_sj'><span class='beginTime'>"+timeGroupBy[j].beginTime+"</span>"+
+												" ~ <span class='endTime'>"+timeGroupBy[j].endTime+"</span></span>"+
+												"<span class='box_yuhao' >余号：<span class='leftNum'>"+timeGroupBy[j].leftNum+"</span></span>"+
+												"<span class='box_ghf'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
+											"</div>"
+										);
+									}
+									
 								}
 							}
 						}	
@@ -168,7 +184,6 @@
 				
 				$("#dateList").on("click",".box_time_item",function(){//按日期选择
 					if($(this).children(".box_yuhao").children(".leftNum").text()>0){
-						
 						var deptCode = $("#deptCode").val();
 						var deptName = $("#deptName").text();
 						var doctorCode = $("#doctorCode").val();
@@ -179,7 +194,7 @@
 						var beginTime = $(this).children(".box_sj").children(".beginTime").text();
 						var endTime = $(this).children(".box_sj").children(".endTime").text();
 						var timeFlag = $(this).children("input[name='timeFlag']").val();
-						window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;            
+						window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;
 					}
 				});
 				
