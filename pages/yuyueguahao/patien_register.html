@@ -43,35 +43,29 @@
 								var yyStatus;
 								switch (status){
 									case "0":
-										yyStatus="已预约";
+										yyStatus="预约";
 										break;
 									case "1":
-										yyStatus="已预约,待支付";
+										yyStatus="取消";
 										break;
 									case "2":
-										yyStatus="已预约,已支付";
+										yyStatus="取号";
 										break;
 									case "3":
-										yyStatus="已取消";
-										break;
-									case "4":
-										yyStatus="已取消,未退款";
-										break;
-									case "5":
-										yyStatus="已取消,已退款";
+										yyStatus="退约";
 										break;
 									default:
-										yyStatus="已预约";
+										yyStatus="预约";
 										break;
 								}
-								alert("patient:"+patient[i].czDate);
+								var czDate = Utils.formatDate(new Date(patient[i].czDate));
 								$("#yyList").append(
 									"<div class='msg'>"+
 							       		"<div class='msg_right'>"+
 							       			"<input type='hidden'  name='bespeakId' value='"+patient[i].bespeakId+"'  >"+
 							       			"<input type='hidden'  name='hisOrdNum' value='"+patient[i].hisOrdNum+"'  >"+
 							       			"<input type='hidden'  name='serialNumber' value='"+patient[i].serialNumber+"'  >"+
-							       			"<input type='hidden'  name='czDate' value='"+patient[i].czDate+"'  >"+
+							       			"<input type='hidden'  name='czDate' value='"+czDate+"'  >"+
 									    	"<span class='doc_name' >"+patient[i].divisionName+"</span>"+
 									    	"<span class='dep_sec' >"+patient[i].doctorName+"</span>"+
 									    	"<span class='doc_status' id='yyStatus'>"+yyStatus+"</span>"+
@@ -98,7 +92,6 @@
 					var hisOrdNum = $(this).children("input[name='hisOrdNum']").val();
 					var serialNumber = $(this).children("input[name='serialNumber']").val();
 					var czDate = $(this).children("input[name='czDate']").val();
-					alert(czDate)
 					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?bespeakId="+bespeakId+"&serialNumber="+serialNumber+"&hisOrdNum="+hisOrdNum+"&czDate="+czDate;
 				})
 				

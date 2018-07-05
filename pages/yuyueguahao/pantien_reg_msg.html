@@ -46,7 +46,6 @@
         		$("#bespeakId").val(Request["bespeakId"]);
         		$("#hisOrdNum").val(Request["hisOrdNum"]);
         		$("#serialNumber").val(Request["serialNumber"]);
-        		alert(Request["czDate"]);
 				var params={};
 				params.bespeakId=Request["bespeakId"];
         		$.post(Utils.getRoot()+"/registerApp/selPatientYYInfo",params,function(data){

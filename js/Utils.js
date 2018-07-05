@@ -45,7 +45,9 @@ Utils = {
 	/**
 	 * 把Date类型转为yyyy-MM-dd hh:mm:ss格式的字符串
 	 * 
-	 * @param l
+	 *@param 1
+	 *            fmt,格式：yyyy-MM-dd hh:mm:ss
+	 * @param 2
 	 *            Date类型
 	 * 
 	 * @return 日期字符串
@@ -109,6 +111,24 @@ Utils = {
 	   var d = dd.getDate()<10?"0"+dd.getDate():dd.getDate();//获取当前几号，不足10补0  
 	   return y+"-"+m+"-"+d;   
 	},
+	/**
+	 * 将时间戳转换成日期格式
+	 * 
+	 * @param l
+	 *            timestamp，时时间戳。
+	 * 
+	 * @return 日期字符串(yyyy-MM-dd hh:mm:ss)
+	 */
+	timestampToTime : function(timestamp) {
+        var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+        return Y+M+D+h+m+s;
+   },
 	/**
 	 * 身份证号合法性验证 
 	 * 支持15位和18位身份证号
