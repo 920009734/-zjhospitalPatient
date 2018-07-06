@@ -219,7 +219,7 @@ $(function(){
 						$("#swcount").text(s+"人");
 						$("#swinfoList").append(
 							"<div class='con_doc'>"+
-								 "<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+								 "<div class='doc_img'><img src='../../img/self/self.png'></div>"+
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
@@ -238,7 +238,7 @@ $(function(){
 						$("#xwcount").text(x+"人");
 						$("#xwinfoList").append(
 							"<div class='con_doc' >"+
-								"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+								"<div class='doc_img'><img src='../../img/self/self.png'></div>"+
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
@@ -257,7 +257,7 @@ $(function(){
 						$("#wscount").text(w+"人");
 						$("#wsinfoList").append(
 							"<div class='con_doc'>"+
-								"<div class='doc_img'><img src='../../img/docImg.png'></div>"+
+								"<div class='doc_img'><img src='../../img/self/self.png'></div>"+
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
