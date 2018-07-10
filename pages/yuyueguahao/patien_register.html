@@ -68,7 +68,7 @@
 							       			"<input type='hidden'  name='czDate' value='"+czDate+"'  >"+
 									    	"<span class='doc_name' >"+patient[i].divisionName+"</span>"+
 									    	"<span class='dep_sec' >"+patient[i].doctorName+"</span>"+
-									    	"<span class='doc_status' id='yyStatus'>"+yyStatus+"</span>"+
+									    	"<span class='doc_status' >"+yyStatus+"</span>"+
 									    	"<div class='doc_time'>预约时间： <span id='czDate'>"+patient[i].bespeakTime+"</span></div>"    +
 								   	   " </div>"+
 							        "</div>"
@@ -89,10 +89,9 @@
 				
 				$("#yyList").on("click",".msg_right",function(){
 					var bespeakId = $(this).children("input[name='bespeakId']").val();
-					var hisOrdNum = $(this).children("input[name='hisOrdNum']").val();
-					var serialNumber = $(this).children("input[name='serialNumber']").val();
 					var czDate = $(this).children("input[name='czDate']").val();
-					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?bespeakId="+bespeakId+"&serialNumber="+serialNumber+"&hisOrdNum="+hisOrdNum+"&czDate="+czDate;
+					var yyStatus = $(this).children(".doc_status").text();
+					window.location.href="../../pages/yuyueguahao/pantien_reg_msg.html?bespeakId="+bespeakId+"&czDate="+czDate+"&yyStatus="+yyStatus;
 				})
 				
         	})

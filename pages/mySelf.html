@@ -58,13 +58,13 @@
 				    </div>
 				</div>	
 				<div class="cat_container">
-					<div class="catlog" id="wdgz">
-						<div class="pic"><img src="../img/self/wodeguanzhu.png" /></div>
-						<div class="pic_w">我的关注</div>
-					</div>
 					<div class="catlog">
 						<div class="pic"><img src="../img/self/member.png" /></div>
 						<div class="pic_w">家庭成员</div>
+					</div>
+					<div class="catlog" id="wdgz">
+						<div class="pic"><img src="../img/self/wodeguanzhu.png" /></div>
+						<div class="pic_w">我的关注</div>
 					</div>
 					<div class="catlog" id="zxjl">
 						<div class="pic"><img src="../img/self/zixunjilu.png" /></div>
@@ -80,7 +80,7 @@
 					</div>
 					<div class="catlog" id="cyzyjl">
 						<div class="pic"><img src="../img/index/yuyueRecord.png" /></div>
-						<div class="pic_w">出院住院记录</div>
+						<div class="pic_w">住院记录</div>
 					</div>
 				</div>
 				<div class="cat_container_1">
@@ -169,11 +169,11 @@
     		});
     		
     		$("#jfjl").click(function(){
-    			alert("没有查询到您的缴费信息！");
+    			
     		});
     		
     		$("#cyzyjl").click(function(){
-    			alert("没有查询到您的出院住院信息！");
+    			top.location.href="hospitalization/inHospotalSearch.html"
     		});
     		
     		//退出
