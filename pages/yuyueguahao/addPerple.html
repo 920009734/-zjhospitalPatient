@@ -46,15 +46,15 @@
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name">姓名</span>
-					<span class="item_value"><input type="text" id="patientofname" placeholder="请填写"/></span>
+					<span class="item_value"><input type="text" id="patientofname" placeholder="请输入姓名"/></span>
 				</div>
 				<div class="comfirm_item ">
-					<span class="item_name" id="shenfenz"><span>二代身份证</span><i class="ui-icon ui-icon-unfold"></i></span>
-					<span class="item_value"><input type="text" id="idcord" placeholder="请填写"/></span>
+					<span class="item_name" id="shenfenz"><span>身份证</span><!--<i class="ui-icon ui-icon-unfold"></i>--></span>
+					<span class="item_value"><input type="text" id="idcord" placeholder="请输入身份证号"/></span>
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name">手机号</span>
-					<span class="item_value"><input type="text" id="phone" placeholder="请填写"/></span>
+					<span class="item_value"><input type="text" id="phone" placeholder="请输入手机号"/></span>
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name" style="width: 30%;">验证码</span>
@@ -76,14 +76,14 @@
 						<button class="actionsheetClose" style="color: #FF0000;">取消</button> 
 					</div>         
 				</div>
-				<div class="ui-actionsheet " id="IdCard">  
+				<!--<div class="ui-actionsheet " id="IdCard">  
 					<div class="ui-actionsheet-cnt"> 
 						<button class="personl_zj active" id="1">二代身份证</button>  
 						<button class="personl_zj " id="2">港澳居民身份证</button>   
 						<button class="personl_zj " id="3">台湾居民身份证</button>  
 						<button class="actionsheetClose" style="color: #FF0000;">取消</button> 
 					</div>         
-				</div>
+				</div>-->
 			</section>
 		</section>
 		<script type="text/javascript">
@@ -94,9 +94,9 @@
 				$(".actionsheetClose").click(function(){
 					$('.ui-actionsheet').removeClass('show');
 				});
-				$("#shenfenz").click(function(){
+				/*$("#shenfenz").click(function(){
 					$('#IdCard').addClass('show');
-				});
+				});*/
 				$(".personl_gx").click(function(){
 					var aa = $(this).hasClass("active");
 					if(!aa){
