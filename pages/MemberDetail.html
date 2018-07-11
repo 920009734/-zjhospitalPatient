@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../css/frozen.css">
+        <link rel="stylesheet" href="../css/style.css" />
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+		<title>家庭成员详细信息</title>
+		<style type="text/css">
+			html,body{background-color: #F8F8F8;}
+			
+			.list-item{display: block;float: left;width: 100%;min-height: 20px;max-height: 200px; padding:13px 0;background-color: #FFFFFF;border-bottom: 1px solid #F1F5FA;}
+			.demo_name{display: block;float: left;width: 33%;padding-left: 3%;font-size: 15px;text-align: ;}
+			.demo_value{display: block;float: right;width: 61%; color: #999999;font-size: 15px;margin-right: 3%;text-align: right;}
+			.hospital_record{display: block;float: left;width: 100%;}
+			
+			.cancle_btn{display: block;float: left; width: 100%;margin: 0 auto;margin-top: 25px;background-color: #FFFFFF;height: 100px;}
+			.cancle_btn>button{display: block;width: 92%;margin-left: 4%;border-radius:2px;height: 40px;line-height: 40px; background: #D60F0F;color: #FFFFFF;margin-top: 30px;}
+		</style>
+	</head>
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">家庭成员详细信息</h4>
+		</header>
+		
+		<section class="ui-container">
+			<div class="demo-block">
+				<div class="hospital_record">
+					<div class="list-item">
+						<span class="demo_name">姓名</span>
+						<span class="demo_value"><span>李媛</span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">性别</span>
+						<span class="demo_value"><span>女</span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">年龄</span>
+						<span class="demo_value"><span>10岁</span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">身份证号</span>
+						<span class="demo_value"><span>367676878766675656</span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">出生日期</span>
+						<span class="demo_value"><span>2008-07-09</span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">联系电话</span>
+						<span class="demo_value"><span>13569854785</span></span>
+					</div>
+					<div class="list-item">
+						<span class="demo_name">联系地址</span>
+						<span class="demo_value"><span>广州市天河区五山路口莲花小区13栋601号</span></span>
+					</div>
+				</div>
+				
+				<div class="cancle_btn">
+					<button class="cancle_">取消绑定</button>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>

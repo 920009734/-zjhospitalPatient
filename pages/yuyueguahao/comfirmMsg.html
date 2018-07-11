@@ -42,7 +42,9 @@
 			.add_per>span>i,.add_per>span>span{display: block;float:left ;color: #0066CC;}
 			.add_per>span>i{font-size: 30px;margin-top: 3px;color: #0066CC;}
 			.per_name{display: block;width: 90%;margin:0 auto;background-color: #FFFFFF;margin-top: 10px;height: 35px;line-height: 35px;}
-			.per_name>span{display: block;float: left;width: 44%;margin-left: 10px;}
+			.per_name>span{display: block;float: right;width: 14%;margin-right: 2%;}
+			.per_name>label{display: block;float: left;width: 70%;padding-left: 4%;color: #333333;}
+			.per_name>span>i{font-size: 25px;color: #0066CC;}
 			.per_relationship{text-align: right;}
 			.hidden{display: none;}
 			.ui-dialog-cnt{margin:50% auto;}
@@ -211,15 +213,27 @@
 		        				}else{
 		        					gxlx="本人";
 		        				}
-		        				
-			        			$("#tj").append(
-		        					"<div class='per_name' id='choosePeople_'>"+
-						            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
-						            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
-						            	"<span class='patientname_'>"+patientname+"</span>"+
-						            	"<span class='per_relationship'>"+gxlx+"</span>"+
-						            "</div>"
-						        );
+		        				debugger;
+		        				var patientname_ = $("#patientname").text();
+		        				if(patientname_ == patientname){
+		        					$("#tj").append(
+			        					"<div class='per_name active' id='choosePeople_'>"+
+							            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
+							            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
+							            	"<label class='patientname_'>"+patientname+"</label>"+
+							            	"<span class='per_relationship'><i class='iconfont icon-zhengquewancheng'></i></span>"+
+							            "</div>"
+							        );
+		        				}else{
+		        					$("#tj").append(
+			        					"<div class='per_name ' id='choosePeople_'>"+
+							            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
+							            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
+							            	"<label class='patientname_'>"+patientname+"</label>"+
+							            	"<span class='per_relationship'><i class='iconfont '></i></span>"+
+							            "</div>"
+							        );
+		        				}
 	        				}
 						            
 						    $(".addPatient").show();
@@ -229,12 +243,18 @@
 					    }
 		       		});
         		});
-        		
         		$("#add_rela").click(function(){
         			window.location.href="../yuyueguahao/addPerple.html"
         		});
         		
         		$("#tj").on("click",".per_name", function(){
+        			var has = $(this).hasClass("active");
+        			if(!has){
+        				$(this).addClass("active");
+        				$(this).siblings(".per_name").removeClass("active");
+        				$(this).children("span").children("i").addClass("icon-zhengquewancheng");
+        				$(this).siblings(".per_name").children("span").children("i").removeClass("icon-zhengquewancheng");
+        			}
         			var a = $(this).children(".patientid_").val();
         			var b = $(this).children(".patCardNo_").val();
         			var c = $(this).children(".patientname_").text();
@@ -243,7 +263,9 @@
         			$("#patCardNo").val(b);
         			$("#patientname").text(c);
         			$(".addPatient").hide();
-        		})
+        			
+        		});
+        		
         		$(".close_dialog,.ui-dialog-close").click(function(){
 					$(".ui-dialog").hide();
 				});
