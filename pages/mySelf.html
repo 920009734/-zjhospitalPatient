@@ -180,7 +180,7 @@
     		$(".login_btn").click(function() {
     			var logoutUrl = Utils.getRoot()+"/patientApp/logout";
     			$.post(logoutUrl,{
-    				token: patientInfo.token
+    				token: patientInfo.toke
     			}, function(res) {
 	    			if (res.success) {
 	    				localStorage.clear();
