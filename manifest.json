@@ -391,7 +391,8 @@
 					"img/kefu1.png",
 					"img/sjx.png",
 					"pages/hospitalization/inhospitalCostList.html",
-					"pages/yuyueguahao/patien_register.html"
+					"pages/yuyueguahao/patien_register.html",
+					"img/20180410152108.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -505,7 +506,8 @@
 				"resources": [
 					"pages/hospitalization/inhospitalRecord.html",
 					"css/frozen.css",
-					"pages/main.html"
+					"pages/main.html",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -681,7 +683,9 @@
 			},
 			"pages/payment/depositPayment.html": {
 				"resources": [
-					"pages/main.html"
+					"pages/main.html",
+					"css/frozen.css",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
