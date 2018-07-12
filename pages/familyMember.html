@@ -91,13 +91,14 @@
 				
         		$.post(Utils.getRoot()+"/patientApp/selpatients",{},function(data){
 					if (data.success) {
-						console.log(JSON.stringify(data));
 						var patient = data.data.patient;
 						var memberList = data.data.memberList;
+						
 						$("#familyList").append(
 							"<div class='family_item'>"+
 								"<div class='item_left'>"+
-									"<input type='hidden' name='phone' value='"patient.phone"'/>"+
+									"<input type='hidden' name='relationshiptype' value='1'/>"+
+									"<input type='hidden' name='phone' value='"+patient.phone+"'/>"+
 									"<span class='member_name'>"+patient.patientname+"</span>"+
 									"<span class='member_mrtype'>默认</span>"+
 									"<span class='member_id'>"+patient.idcard+"</span>"+
@@ -106,14 +107,15 @@
 							"</div>"
 						);
 						
-						for(var i=0,i<memberList.length,i++){
+						for(var i=0;i<memberList.length;i++){
 							$("#familyList").append(
 								"<div class='family_item'>"+
 									"<div class='item_left'>"+
-										"<input type='hidden' name='phone' value='"patient.phone"'/>"+
-										"<span class='member_name'>"+patient.patientname+"</span>"+
+										"<input type='hidden' name='relationshiptype' value='2'/>"+
+										"<input type='hidden' name='phone' value='"+memberList[i].phone+"'/>"+
+										"<span class='member_name'>"+memberList[i].patientofName+"</span>"+
 										"<span class='member_bdtype'>绑定</span>"+
-										"<span class='member_id'>"+patient.idcard+"</span>"+
+										"<span class='member_id'>"+memberList[i].idcard+"</span>"+
 									"</div>"+
 									"<button class='default_bdbtn'>他人</button>"+
 								"</div>"
@@ -126,10 +128,11 @@
 				});
 				
 				$("#familyList").on("click",".family_item",function(){
-					var phone = $(this).children("input[name='phone']").val();
-					var patientName = $(this).children(".member_name").text();
-					var idcard = $(this).children(".member_id").text();
-					window.location.href="memberDetail.html?phone="+phone+"&patientName="+patientName+"&idcard="+idcard;
+					var phone = $(this).children().children("input[name='phone']").val();
+					var patientName = $(this).children().children(".member_name").text();
+					var idcard = $(this).children().children(".member_id").text();
+					var relationshiptype =  $(this).children().children("input[name='relationshiptype']").val();
+					window.location.href="memberDetail.html?phone="+phone+"&patientName="+patientName+"&idcard="+idcard+"&relationshiptype="+relationshiptype;
 				});
 				
 				

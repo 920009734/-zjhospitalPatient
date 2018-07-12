@@ -33,38 +33,37 @@
 		<section class="ui-container">
 			<div class="demo-block">
 				<div class="hospital_record">
-					<div class="list-item">
+					<div class="list-item patName">
 						<span class="demo_name">姓名</span>
 						<span class="demo_value"><span id="patName"></span></span>
 					</div>
-					<div class="list-item">
+					<div class="list-item patSex">
 						<span class="demo_name">性别</span>
 						<span class="demo_value"><span id="patSex"></span></span>
 					</div>
-					<div class="list-item">
+					<div class="list-item patAge">
 						<span class="demo_name">年龄</span>
 						<span class="demo_value"><span id="patAge"></span></span>
 					</div>
-					<div class="list-item">
+					<div class="list-item idcard">
 						<span class="demo_name">身份证号</span>
 						<span class="demo_value"><span id="idcard"></span></span>
 					</div>
-					<div class="list-item">
+					<div class="list-item patBirth">
 						<span class="demo_name">出生日期</span>
 						<span class="demo_value"><span id="patBirth"></span></span>
 					</div>
-					<div class="list-item">
+					<div class="list-item patMobile">
 						<span class="demo_name">联系电话</span>
 						<span class="demo_value"><span id="patMobile"></span></span>
 					</div>
-					<div class="list-item">
+					<div class="list-item patAddress">
 						<span class="demo_name">联系地址</span>
 						<span class="demo_value"><span id="patAddress"></span></span>
 					</div>
 				</div>
-				
 				<div class="cancle_btn">
-					<button class="cancle_">取消绑定</button>
+					<button class="cancle_" id="qxbind">取消绑定</button>
 				</div>
 			</div>
 		</section>
@@ -72,29 +71,54 @@
 		<script type="text/javascript">
 			$(function(){
 				var Request = Utils.getRequest();	
-				$("#idcard").text(Request["idcard"]);
+				var relationshiptype = Request["relationshiptype"];
+				if (relationshiptype==1) {
+					$(".cancle_btn").hide();
+				}
 				var params = {};
 				params.phone = Request["phone"];
 				params.patientName = Request["patientName"];
 				params.idcard = Request["idcard"];
 				
-        		$.post(Utils.getRoot()+"/patientApp/selpatients",params,function(data){
+        		$.post(Utils.getRoot()+"/patientApp/selpatientInfo",params,function(data){
+					console.log(JSON.stringify(data))
 					if (data.success) {
-						console.log(JSON.stringify(data));
 						var patientInfo = data.data;
-						$("#patName").text(patientInfo.patName);
-						$("#patSex").text(patientInfo.patSex=="M"?"男":"女");
-						$("#patAge").text(patientInfo.patAge+"岁");
-						$("#patBirth").text(patientInfo.patBirth);
-						$("#patMobile").text(patientInfo.patMobile);
-						$("#patAddress").text(patientInfo.patAddress);
+						if(patientInfo.patCardNo==null){
+							$("#patName").text(Request["patientName"]);
+							$("#idcard").text(Request["idcard"]);
+							$("#patMobile").text(Request["phone"]);
+							
+						}else{
+							$("#patName").text(Request["patientName"]);
+							$("#patSex").text(patientInfo.patSex=="M"?"男":"女");
+							$("#idcard").text(Request["idcard"]);
+							$("#patAge").text(patientInfo.patAge+"岁");
+							$("#patBirth").text(patientInfo.patBirth);
+							$("#patMobile").text(Request["phone"]);
+							$("#patAddress").text(patientInfo.patAddress);
+						}
 						
 					}else{
 						alert(data.message);
 					}
 				});
 				
-				
+				$("#qxbind").click(function(){
+					var params = {};
+					params.patName = $("#patName").text();
+					params.idcard = $("#idcard").text();
+					params.patMobile = $("#patMobile").text();
+					
+					$.post(Utils.getRoot()+"/patientApp/qxbind",params,function(data){
+						if (data.success) {
+							alert(res.message);
+							history.back();
+						}else{
+							alert(data.message);
+						}
+					});
+				});
 				
 			});
 		</script>

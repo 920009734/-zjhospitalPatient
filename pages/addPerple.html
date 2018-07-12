@@ -46,9 +46,9 @@
 				<div class="comfirm_item ">
 					<span class="item_name">关系</span>
 					<span class="item_value" id="myself">
-						<input type="hidden" id="relationshiptype" value="1"/>
-						<span>本人</span> 
-						<i class="ui-icon ui-icon-unfold"></i>
+						<input type="hidden" id="relationshiptype" value="2"/>
+						<span>他人</span> 
+						<!--<i class="ui-icon ui-icon-unfold"></i>-->
 					</span>
 				</div>
 				<div class="comfirm_item ">
@@ -65,7 +65,7 @@
 				</div>
 				<div class="comfirm_item ">
 					<span class="item_name" style="width: 30%;">验证码</span>
-					<span class="item_value" style="width: 30%;"><input type="text" id="yzm" placeholder="请输入验证码" style="text-align: left;"/></span>
+					<span class="item_value" style="width: 30%;"><input type="text" id="code" placeholder="请输入验证码" style="text-align: left;"/></span>
 					<button class="yzm" id="yzm" >获取验证码</button>
 					<input type="hidden" id="codeStr" value=""/>
 				</div>
@@ -73,6 +73,10 @@
 					<div class="login_btn">
 						<button class="ui-btn ui-btn-lg ui-btn-primary" id="btn">立即绑定</button>
 					</div>
+				</div>
+				<div style="margin-left: 20px;font-size: 15px;">
+					<span style="color: red;">温馨提示：1.从未在珠江医院就诊过的患者，请先前往医院挂号窗口建档。</span>
+					<span>2.添加的就诊人，仅限于预约挂号功能。3.如姓名、身份证、手机号与医院的预留身份不一致，则挂号成功后需去医院挂号窗口缴费诊查费；反之则可线上缴纳。</span>
 				</div>
 				<div class="ui-actionsheet " id="guanx">  
 					<div class="ui-actionsheet-cnt">
@@ -85,9 +89,9 @@
 		</section>
 		<script type="text/javascript">
 			$(function(){
-				$("#myself").click(function(){
+				/*$("#myself").click(function(){
 					$('#guanx').addClass('show');
-				});
+				});*/
 				$(".actionsheetClose").click(function(){
 					$('.ui-actionsheet').removeClass('show');
 				});
@@ -131,7 +135,7 @@
 						},
 						success: function(result){
 							if(result.success){
-								alert(result.data);
+								console.log(result.data);
 								$("#codeStr").val(result.data);
 							}else{
 								alert(result.message);
@@ -141,6 +145,13 @@
 				});
 				
 				$("#btn").click(function() {
+					var codeStr = $("#codeStr").val();
+					var code = $("#code").val();
+					if(code!=codeStr){
+						alert("请输入正确的验证码！");
+						return false;
+					}
+					
 					var params={};
 					params.patientofName = $("#patientofName").val();
 					params.idcard = $("#idcard").val();
@@ -149,6 +160,7 @@
 					
 					$.post(Utils.getRoot()+"/patientApp/bindPatient", params, function(res) {
 						if (res.success) {
+							alert(res.message);
 							history.back();
 						} else {
 							alert(res.message);

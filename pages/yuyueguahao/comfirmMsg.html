@@ -45,6 +45,12 @@
 			.per_name>span{display: block;float: right;width: 14%;margin-right: 2%;}
 			.per_name>label{display: block;float: left;width: 70%;padding-left: 4%;color: #333333;}
 			.per_name>span>i{font-size: 25px;color: #0066CC;}
+			
+			.per_name2{display: block;width: 90%;margin:0 auto;background-color: #FFFFFF;margin-top: 10px;height: 35px;line-height: 35px;}
+			.per_name2>span{display: block;float: right;width: 14%;margin-right: 2%;}
+			.per_name2>label{display: block;float: left;width: 70%;padding-left: 4%;color: #333333;}
+			.per_name2>span>i{font-size: 25px;color: #0066CC;}
+			
 			.per_relationship{text-align: right;}
 			.hidden{display: none;}
 			.ui-dialog-cnt{margin:50% auto;}
@@ -65,6 +71,9 @@
 					<span class="ck_doctor_name">就诊人:</span>
 					<input type="hidden" id="patCardNo" value="" >
 					<input type="hidden" id="patientid" value="" >
+					<input type="hidden" id="idcard" value="" >
+					<input type="hidden" id="phone" value="" >
+					<input type="hidden" id="relationshiptype" value="" >
 					<span id="patientname" ></span>
 					<span class="ck_doctor_btn" id="jzrxz" >
 						<i class="ui-icon ui-icon-add-people" ></i>
@@ -99,25 +108,6 @@
 					<input type="hidden" name="regFee_" />
 					<span class="item_value" id="CNregFee_"></span>
 				</div>
-				<!--<div id="zffs">
-					<div class="comfirm_item menz">
-						<span class="item_name">支付方式</span>
-					</div>
-					<div>
-						<div class="ui-form-item ui-form-itemd-radio ">
-	                        <label class="ui-radio" for="radio">
-	                            <input type="radio" checked="" name="channel_radio" value="WX_WAP" />
-	                        </label>
-	                        <span>微信</span>
-	                    </div>
-	                    <div class="ui-form-item ui-form-item-radio">
-	                        <label class="ui-radio" for="radio">
-	                            <input type="radio" name="channel_radio" value="ALI_WAP" />
-	                        </label>
-	                        <span>支付宝</span>
-	                    </div>
-					</div>
-				</div>-->
 				<div style="display: block;float: left;width: 100%;height: 130px; background-color: #FFFFFF;">
 					<div class="login_btn">
 						<button class="ui-btn ui-btn-lg ui-btn-primary" id="zf">确认预约</button>
@@ -189,87 +179,7 @@
 					location.reload();
 					$(".ui-actionsheet").removeClass("show");
 				});
-        		var outChargeNo = '';//商户充值业务流水
-        		document.addEventListener('plusready', plusReady, false);
-	       		// H5 plus事件处理
-				function plusReady(){}
-	       		//选择就诊人
-        		$("#jzrxz").on("click", function(){
-        			$.post(Utils.getRoot()+"/registerApp/selPatient", function(res){
-	    				if (res.success) {
-	    					$("#tj").empty();//移除添加就诊人
-	    					
-	    					var data = new Object();
-	        				data = res.data;
-	        				for (var i = 0; i < data.length; i++) {
-	        					var patientid = data[i].patientid;
-		        				var patCardNo = data[i].patCardNo;
-		        				var patientname = data[i].patientname;
-		        				var gxlx = data[i].relationshiptype;
-		        				if(gxlx==2){
-		        					gxlx="儿童";
-		        				}else if(gxlx==3){
-		        					gxlx="其他";
-		        				}else{
-		        					gxlx="本人";
-		        				}
-		        				debugger;
-		        				var patientname_ = $("#patientname").text();
-		        				if(patientname_ == patientname){
-		        					$("#tj").append(
-			        					"<div class='per_name active' id='choosePeople_'>"+
-							            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
-							            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
-							            	"<label class='patientname_'>"+patientname+"</label>"+
-							            	"<span class='per_relationship'><i class='iconfont icon-zhengquewancheng'></i></span>"+
-							            "</div>"
-							        );
-		        				}else{
-		        					$("#tj").append(
-			        					"<div class='per_name ' id='choosePeople_'>"+
-							            	"<input type='hidden' class='patientid_' value='"+patientid+"' >"+
-							            	"<input type='hidden' class='patCardNo_' value='"+patCardNo+"' >"+
-							            	"<label class='patientname_'>"+patientname+"</label>"+
-							            	"<span class='per_relationship'><i class='iconfont '></i></span>"+
-							            "</div>"
-							        );
-		        				}
-	        				}
-						            
-						    $(".addPatient").show();
-					    } else {
-					    	$("#dialogText").html(res.message);
-							$(".ui-dialog").show();
-					    }
-		       		});
-        		});
-        		$("#add_rela").click(function(){
-        			window.location.href="../yuyueguahao/addPerple.html"
-        		});
-        		
-        		$("#tj").on("click",".per_name", function(){
-        			var has = $(this).hasClass("active");
-        			if(!has){
-        				$(this).addClass("active");
-        				$(this).siblings(".per_name").removeClass("active");
-        				$(this).children("span").children("i").addClass("icon-zhengquewancheng");
-        				$(this).siblings(".per_name").children("span").children("i").removeClass("icon-zhengquewancheng");
-        			}
-        			var a = $(this).children(".patientid_").val();
-        			var b = $(this).children(".patCardNo_").val();
-        			var c = $(this).children(".patientname_").text();
-        			//console.log(a+"，"+b+","+c);
-        			$("#patientid").val(a);
-        			$("#patCardNo").val(b);
-        			$("#patientname").text(c);
-        			$(".addPatient").hide();
-        			
-        		});
-        		
-        		$(".close_dialog,.ui-dialog-close").click(function(){
-					$(".ui-dialog").hide();
-				});
-        		var Request = Utils.getRequest();
+				var Request = Utils.getRequest();
         		
         		$("#deptName_").text(Request["deptName"]);
         		$("#doctorName_").text(Request["doctorName"]);
@@ -283,6 +193,106 @@
 				$("input[name='beginTime_']").val(Request["beginTime"]);
 				$("input[name='endTime_']").val(Request["endTime"]);
         		$("input[name='regFee_']").val(parseInt(Request["regFee"])*100);
+				
+				
+				
+        		var outChargeNo = '';//商户充值业务流水
+        		document.addEventListener('plusready', plusReady, false);
+	       		// H5 plus事件处理
+				function plusReady(){}
+	       		//选择就诊人
+        		$("#jzrxz").on("click", function(){
+        			$.post(Utils.getRoot()+"/patientApp/selpatients", function(data){
+	    				if (data.success) {
+	    					$("#tj").empty();//移除添加就诊人
+	    					var patient = data.data.patient;
+							var memberList = data.data.memberList;
+	    					
+	    					$("#tj").append(//本人信息
+	        					"<div class='per_name active' id='choosePeople_'>"+
+					            	"<input type='hidden' class='patientid_' value='"+patient.patientid+"' >"+
+					            	"<input type='hidden' class='patCardNo_' value='"+patient.patCardNo+"' >"+
+					            	"<label class='patientname_'>"+patient.patientname+"</label>"+
+					            	"<span class='per_relationship'style='color: red;'>本人</span>"+
+					            "</div>"
+					        );
+	    					
+	    					
+	        				for (var i = 0; i < memberList.length; i++) {//他人
+	        					console.log(JSON.stringify(memberList[i]));
+		        				$("#tj").append(
+		        					"<div class='per_name2 ' id='choosePeople_'>"+
+						            	"<input type='hidden' class='patientid_' value='"+memberList[i].patientofId+"' >"+
+						            	"<input type='hidden' class='idcard' value='"+memberList[i].idcard+"' >"+
+						            	"<input type='hidden' class='phone' value='"+memberList[i].phone+"' >"+
+						            	"<input type='hidden' class='relationshiptype' value='"+memberList[i].relationshiptype+"' >"+
+						            	"<label class='patientname_'>"+memberList[i].patientofName+"</label>"+
+						            	"<span class='per_relationship'>他人</span>"+
+						            "</div>"
+						        );
+	        				}
+						            
+						    $(".addPatient").show();
+					    } else {
+					    	$("#dialogText").html(data.message);
+							$(".ui-dialog").show();
+					    }
+		       		});
+		       		
+        		});
+        		$("#add_rela").click(function(){
+        			window.location.href="../yuyueguahao/addPerple.html"
+        		});
+        		
+        		$("#tj").on("click",".per_name", function(){//他人挂号
+        			$("#idcard").val("");
+        			$("#phone").val("");
+        			$("#relationshiptype").val("");
+        			
+        			$("#patientid").val($(this).children(".patientid_").val());
+        			$("#patCardNo").val($(this).children(".patCardNo_").val());
+        			$("#patientname").text($(this).children(".patientname_").text());
+        			$(".addPatient").hide();
+        		});
+        		
+        		$("#tj").on("click",".per_name2", function(){//本人挂号
+        			$("#patientid").val($(this).children(".patientid_").val());
+        			var idcard = $(this).children(".idcard").val();
+        			var phone = $(this).children(".phone").val();
+        			var patientname = $(this).children(".patientname_").text()
+        			
+        			var params = {};
+					params.phone = phone;
+					params.patientName = patientname;
+					params.idcard = idcard;
+					
+	        		$.post(Utils.getRoot()+"/patientApp/selpatientInfo",params,function(data){
+						console.log(JSON.stringify(data))
+						if (data.success) {
+							var patientInfo = data.data;
+							$("#patCardNo").val(patientInfo.patCardNo);
+							/*儿童判断逻辑
+							 */
+							
+						}else{
+							alert(data.message);
+						}
+					});
+        			
+        			
+        			$("#idcard").val(idcard);
+					$("#phone").val(phone);
+        			$("#patientname").text(patientname);
+        			$("#relationshiptype").val($(this).children(".relationshiptype").val());
+        			$(".addPatient").hide();
+        		});
+        		
+        		
+        		
+        		$(".close_dialog,.ui-dialog-close").click(function(){
+					$(".ui-dialog").hide();
+				});
+        		
         		
         		
         		$("#zf").click(function(){//支付成功后添加信息
@@ -304,7 +314,11 @@
 						params.beginTime=$("input[name='beginTime_']").val();
 						params.endTime=$("input[name='endTime_']").val();
 						params.regFee=$("input[name='regFee_']").val();
-						
+						params.relationshiptype = $("#relationshiptype").val();
+						params.idcard = $("#idcard").val();
+						params.phone = $("#phone").val();
+						params.patientName = $("#patientname").text();
+        			
 						$(".ui-loading-block").show();
 						$(".ui-loading-block").css("margin","45% 0 0 31%");
 						
