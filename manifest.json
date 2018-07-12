@@ -390,7 +390,8 @@
 					"img/self/banben.png",
 					"img/kefu1.png",
 					"img/sjx.png",
-					"pages/hospitalization/inhospitalCostList.html"
+					"pages/hospitalization/inhospitalCostList.html",
+					"pages/yuyueguahao/patien_register.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -521,7 +522,8 @@
 					"js/frozen.js",
 					"lib/zepto.min.js",
 					"js/Utils.js",
-					"js/jquery-1.8.3.min.js"
+					"js/jquery-1.8.3.min.js",
+					"pages/yuyueguahao/doctorGuahao.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -734,6 +736,51 @@
 					"css/style.css",
 					"lib/zepto.min.js",
 					"js/Utils.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/yuyueguahao/doctorGuahao.html": {
+				"resources": [
+					"img/kes/a1.png",
+					"pages/yuyueguahao/doctorGuahao_detail.html",
+					"fontIcon/iconfont.css",
+					"css/frozen.css",
+					"pages/yuyueguahao/choiceDor.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/yuyueguahao/doctorGuahao_detail.html": {
+				"resources": [
+					"pages/yuyueguahao/comfirmMsg.html",
+					"css/frozen.css",
+					"img/index/personLogo@2x.png",
+					"fontIcon/iconfont.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/yuyueguahao/patien_register.html": {
+				"resources": [
+					"js/jquery-1.8.3.min.js",
+					"pages/yuyueguahao/pantien_reg_msg.html",
+					"css/frozen.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/yuyueguahao/pantien_reg_msg.html": {
+				"resources": [
+					"fontIcon/iconfont.css",
+					"js/jquery-1.8.3.min.js",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"css/frozen.css",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"pages/yuyueguahao/patien_register.html"
 				],
 				"refer": [],
 				"priority": 0
