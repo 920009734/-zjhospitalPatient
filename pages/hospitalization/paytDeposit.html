@@ -32,14 +32,56 @@
 			<div class="demo-block">
 				<div class="payDeposit_item">
 					<label class="box_label">金额：</label>
-					<span class="box_span"><input type="number" placeholder="输入充值金额"/></span>
+					<span class="box_span"><input id="moneyAmount" type="number" placeholder="输入充值金额"/></span>
 				</div>
 				
 				 <div class="pay_btn">
-					<button id="cancel" class="pay_btn_btn" >立即充值</button>
+					<button id="pay_deposit" class="pay_btn_btn" >立即充值</button>
 				</div>
 			</div>
 		</section>
 		
+		<script>
+			function plusReady(){
+				$("#pay_deposit").click(function(){
+					var moneyAmount = $("#moneyAmount").val();
+					if(!moneyAmount){
+						alert("请输入充值金额");
+						return false;
+					}
+					plus.nativeUI.showWaiting("  请稍后...  ")
+					$.ajax({
+						type:"post",
+						url:Utils.getRoot()+"/deposit/recharge_prepay_order",
+						data: {
+							moneyAmount: parseFloat(moneyAmount)*100
+						},
+						success: function(result){
+							plus.nativeUI.closeWaiting();
+							if(result.success){
+								var chargeAmt =  moneyAmount;
+								var patientid = JSON.parse(localStorage.getItem('patientInfo')).patientid;
+								var url = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod_deposit.html?outChargeNo="+result.data+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
+								var w = plus.webview.create(url);
+								w.show();
+			        			//window.location.href = url;
+							}else{
+								alert(result.message);
+							}
+						},
+						error:function(){
+							plus.nativeUI.closeWaiting();
+							alert('网络异常，请稍候重试！');
+						}
+					});
+				});
+			}
+			
+			if(window.plus){
+				plusReady();
+			}else{
+				document.addEventListener('plusready',plusReady,false);
+			}
+		</script>
 	</body>
 </html>

@@ -390,7 +390,9 @@
 					"img/self/banben.png",
 					"img/kefu1.png",
 					"img/sjx.png",
-					"pages/hospitalization/inhospitalCostList.html"
+					"pages/hospitalization/inhospitalCostList.html",
+					"pages/hospitalization/paytDeposit.html",
+					"img/20180410152108.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -504,7 +506,8 @@
 				"resources": [
 					"pages/hospitalization/inhospitalRecord.html",
 					"css/frozen.css",
-					"pages/main.html"
+					"pages/main.html",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -679,7 +682,9 @@
 			},
 			"pages/payment/depositPayment.html": {
 				"resources": [
-					"pages/main.html"
+					"pages/main.html",
+					"css/frozen.css",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -733,6 +738,19 @@
 					"css/frozen.css",
 					"css/style.css",
 					"lib/zepto.min.js",
+					"js/Utils.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/hospitalization/paytDeposit.html": {
+				"resources": [
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"css/frozen.css",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"pages/main.html",
 					"js/Utils.js"
 				],
 				"refer": [],
