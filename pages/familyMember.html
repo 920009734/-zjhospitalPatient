@@ -6,22 +6,26 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../css/frozen.css">
         <link rel="stylesheet" href="../css/style.css" />
+        <script src="../js/jquery-1.8.3.min.js"></script>
+        <script>$.noConflict();</script>
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
+        <script src="../js/Utils.js"></script>
         <title>家庭成员</title>
         
         <style type="text/css">
         	.family{display: block;float: left;width: 92%;margin-left: 4%;margin-top: 15px;}
         	.family_item{display: block;float: left;width: 100%;height: 50px;padding: 10px 0; background-color: #FFFFFF;border-radius: 2px;font-size: 15px;margin-top: 10px;}
-        	.item_left{display: block;float: left;width: 76%;color: #008080;}
+        	.item_left{display: block;float: left;width: 76%;color: #0066cc;}
         	.item_left>span{display: block;float: left;line-height: 26px;}
         	.member_name{margin-left: 4%;}
-        	.member_age{margin-left: 5%;}
-        	.member_sex{margin-left: 5%;}
+        	.member_mrtype{margin-left: 20%; color: red;} 
+        	.member_bdtype{margin-left: 20%;} 
         	.member_id{display: block;float: none; width: 80%;margin-left: 4%;}
-        	.default_btn{display: block;float:left; height: 35px;line-height: 35px;background-color: #008080;color: #FFFFFF;font-size: 14px;width: 20%;border-radius: 2px;margin-top: 8px;}
+        	.default_mrbtn{display: block;float:left; height: 35px;line-height: 35px;background-color: red;color: #FFFFFF;font-size: 14px;width: 20%;border-radius: 2px;margin-top: 8px;}
+        	.default_bdbtn{display: block;float:left; height: 35px;line-height: 35px;background-color: #0066cc;color: #FFFFFF;font-size: 14px;width: 20%;border-radius: 2px;margin-top: 8px;}
         	.addfamily_btn{display: block;float: left; width: 100%;margin: 0 auto;margin-top: 25px;background-color: #FFFFFF;height: 100px;}
-			.addfamily_btn>button{display: block;width: 92%;margin-left: 4%;border-radius:2px;height: 40px;line-height: 40px; background: #0F9B67;color: #FFFFFF;margin-top: 30px;}
+			.addfamily_btn>button{display: block;width: 92%;margin-left: 4%;border-radius:2px;height: 40px;line-height: 40px; background: #0066cc;color: #FFFFFF;margin-top: 30px;}
         </style>
 	</head>
 	<body>
@@ -31,15 +35,22 @@
 		</header>
 		<section class="ui-container">
 			<div class="demo-block">
-				<div class="family">
-					<div class="family_item">
+				<div class="family"id="familyList">
+					<!--<div class="family_item" >
 						<div class="item_left">
 							<span class="member_name">李媛</span>
-							<span class="member_sex">女</span>
-							<span class="member_age">10岁</span>
+							<span class="member_mrtype">默认</span>
 							<span class="member_id">452224198707237896</span>
 						</div>
-						<button class="default_btn">默认</button>
+						<button class="default_mrbtn">本人</button>
+					</div>
+					<div class="family_item">
+						<div class="item_left">
+							<span class="member_name">唐佳</span>
+							<span class="member_bdtype">绑定</span>
+							<span class="member_id">452224198707237896</span>
+						</div>
+						<button class="default_bdbtn">他人</button>
 					</div>
 					<div class="family_item">
 						<div class="item_left">
@@ -56,11 +67,11 @@
 							<span class="member_age">62岁</span>
 							<span class="member_id">452224198707237896</span>
 						</div>
-					</div>
+					</div>-->
 				</div>
 				
 				<div class="addfamily_btn">
-					<button class="add_family">添加就诊人</button>
+					<button class="add_family" id="addfamily">添加就诊人</button>
 				</div>
 			</div>
 		</section>
@@ -72,7 +83,56 @@
 				});
 				$(".family_item").on("click",function(){
 					location.href = "MemberDetail.html";
-				})
+				});
+				
+				$("#addfamily").click(function(){
+					window.location.href = "addPerple.html";
+				});
+				
+        		$.post(Utils.getRoot()+"/patientApp/selpatients",{},function(data){
+					if (data.success) {
+						console.log(JSON.stringify(data));
+						var patient = data.data.patient;
+						var memberList = data.data.memberList;
+						$("#familyList").append(
+							"<div class='family_item'>"+
+								"<div class='item_left'>"+
+									"<input type='hidden' name='phone' value='"patient.phone"'/>"+
+									"<span class='member_name'>"+patient.patientname+"</span>"+
+									"<span class='member_mrtype'>默认</span>"+
+									"<span class='member_id'>"+patient.idcard+"</span>"+
+								"</div>"+
+								"<button class='default_mrbtn'>本人</button>"+
+							"</div>"
+						);
+						
+						for(var i=0,i<memberList.length,i++){
+							$("#familyList").append(
+								"<div class='family_item'>"+
+									"<div class='item_left'>"+
+										"<input type='hidden' name='phone' value='"patient.phone"'/>"+
+										"<span class='member_name'>"+patient.patientname+"</span>"+
+										"<span class='member_bdtype'>绑定</span>"+
+										"<span class='member_id'>"+patient.idcard+"</span>"+
+									"</div>"+
+									"<button class='default_bdbtn'>他人</button>"+
+								"</div>"
+							);
+						}
+						
+					}else{
+						alert(data.message);
+					}
+				});
+				
+				$("#familyList").on("click",".family_item",function(){
+					var phone = $(this).children("input[name='phone']").val();
+					var patientName = $(this).children(".member_name").text();
+					var idcard = $(this).children(".member_id").text();
+					window.location.href="memberDetail.html?phone="+phone+"&patientName="+patientName+"&idcard="+idcard;
+				});
+				
+				
 			});
 		</script>
 	</body>
