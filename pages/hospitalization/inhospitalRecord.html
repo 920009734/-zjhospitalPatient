@@ -155,12 +155,12 @@
 				$("#dscgDateTime").text(hospitaldetail.dscgDateTime);
 				$("#admsDeptName").text(hospitaldetail.admsDeptName);
 				$("#dscgDeptName").text(hospitaldetail.dscgDeptName);
-				$("#prepayAmount").text(parseInt(hospitaldetail.prepayAmount)/100+"元");
-				$("#totalCosts").text(parseInt(hospitaldetail.totalCosts)/100+"元");
-				$("#unsettleCosts").text(parseInt(hospitaldetail.unsettleCosts)/100+"元");
-				$("#settledCosts").text(parseInt(hospitaldetail.settledCosts)/100+"元");
-				$("#insurPay").text(parseInt(hospitaldetail.insurPay)/100+"元");
-				$("#selfPay").text(parseInt(hospitaldetail.selfPay)/100+"元");
+				$("#prepayAmount").text(parseFloat(hospitaldetail.prepayAmount)/100+"元");
+				$("#totalCosts").text(parseFloat(hospitaldetail.totalCosts)/100+"元");
+				$("#unsettleCosts").text(parseFloat(hospitaldetail.unsettleCosts)/100+"元");
+				$("#settledCosts").text(parseFloat(hospitaldetail.settledCosts)/100+"元");
+				$("#insurPay").text(parseFloat(hospitaldetail.insurPay)/100+"元");
+				$("#selfPay").text(parseFloat(hospitaldetail.selfPay)/100+"元");
 				$("#remark").text(hospitaldetail.remark);
 				
 				
@@ -182,10 +182,10 @@
 									"<td>"+costDetail[i].itemName+"</td>"+
 									"<td>"+costDetail[i].feeClass+"</td>"+
 									"<td>"+costDetail[i].itemSpec+"</td>"+
-									"<td>"+(parseInt(costDetail[i].Amount)/100)+"</td>"+
+									"<td>"+(parseFloat(costDetail[i].Amount)/100)+"</td>"+
 									"<td>"+costDetail[i].Units+"</td>"+
-									"<td>"+(parseInt(costDetail[i].Price)/1000)+"</td>"+
-									"<td>"+(parseInt(costDetail[i].Charges)/100)+"</td>"+
+									"<td>"+(parseFloat(costDetail[i].Price)/1000)+"</td>"+
+									"<td>"+(parseFloat(costDetail[i].Charges)/100)+"</td>"+
 									"<td>"+costDetail[i].insuClass+"</td>"+
 									"<td>"+costDetail[i].billingDateTime+"</td>"+
 								"</tr>"

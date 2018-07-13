@@ -24,12 +24,15 @@ $(function(){
 					if(doctorInfo[i].timeFlag==timeFlag){
 						if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
 							//把诊查费转为元，原本是分
-							var regFee = parseInt(doctorInfo[i].regFee)/100;
+							var regFee = parseFloat(doctorInfo[i].regFee)/100;
+							var childRegFee = parseFloat(doctorInfo[i].childRegFee)/100;//儿童诊查费
+							alert("childRegFee:"+childRegFee);
 							if (doctorInfo[i].leftNum==0) {//余号为0
 								$("#dateTimeDiv").append(
 									"<div class='nock_dateTime'>"+
 										"<div class='slot_item'>"+
 											"<input type='hidden' name='timeFlag_' value='"+doctorInfo[i].timeFlag+"' />"+
+											"<input type='hidden' name='childRegFee' value='"+childRegFee+"' />"+
 											"<span class='time_slot'>"+
 												"<span class='beginTime_'>"+doctorInfo[i].beginTime+"</span>"+
 												"~"+
@@ -45,6 +48,7 @@ $(function(){
 									"<div class='ck_dateTime'>"+
 										"<div class='slot_item'>"+
 											"<input type='hidden' name='timeFlag_' value='"+doctorInfo[i].timeFlag+"' />"+
+											"<input type='hidden' name='childRegFee' value='"+childRegFee+"' />"+
 											"<span class='time_slot'>"+
 												"<span class='beginTime_'>"+doctorInfo[i].beginTime+"</span>"+
 												"~"+
@@ -83,7 +87,8 @@ $(function(){
 			var beginTime = $(this).children().children(".time_slot").children(".beginTime_").text();
 			var endTime = $(this).children().children(".time_slot").children(".endTime_").text();
 			var timeFlag = $(this).children().find("input[name='timeFlag_']").val();
-			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;            
+			var childRegFee = $(this).children().find("input[name='childRegFee']").val();
+			window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType+"&childRegFee="+childRegFee;            
 		}
 	});
 	

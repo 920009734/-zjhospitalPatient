@@ -58,7 +58,7 @@
 							listPayorder= data.data;
 							console.log(listPayorder);
 							for (var i = 0; i < listPayorder.length; i++) {
-								var totalAmt = parseInt(listPayorder[i].totalAmt)/100;
+								var totalAmt = parseFloat(listPayorder[i].totalAmt)/100;
 								$("#wjfList").append(
 									"<div class='wjf_item' >"+
 										"<input type='hidden' name='listPayorder'  value='"+listPayorder[i]+"'/>"+

@@ -151,7 +151,7 @@
 								);
 								timeGroupBy = doctorInfo[i].timeGroupBy;
 								for (var j = 0; j < timeGroupBy.length; j++) {
-									var regFee = parseInt(timeGroupBy[j].regFee)/100;
+									var regFee = parseFloat(timeGroupBy[j].regFee)/100;
 									if (timeGroupBy[j].leftNum==0) {//余号为0 ，不可挂号
 										$("#hsTime"+i).append(
 											"<div class='nobox_time_item'>"+

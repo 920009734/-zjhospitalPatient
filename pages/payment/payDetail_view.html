@@ -47,9 +47,9 @@
 				$("#payName").text(listPayorder.payName);
 				$("#deptName").text(listPayorder.deptName);
 				$("#doctorName").text(listPayorder.doctorName);
-				$("#medInsAmt").text(parseInt(listPayorder.medInsAmt)/100+"元");
-				$("#selfAmt").text(parseInt(listPayorder.selfAmt)/100+"元");
-				$("#totalAmt").text(parseInt(listPayorder.totalAmt)/100+"元");
+				$("#medInsAmt").text(parseFloat(listPayorder.medInsAmt)/100+"元");
+				$("#selfAmt").text(parseFloat(listPayorder.selfAmt)/100+"元");
+				$("#totalAmt").text(parseFloat(listPayorder.totalAmt)/100+"元");
 				
         		/*代缴费记录明细*/
         		var params={};
