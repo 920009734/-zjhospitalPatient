@@ -32,7 +32,7 @@
 	</head>
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
-			<i class="ui-icon ui-icon-return" id="closeWindows"></i>
+			<i class="ui-icon ui-icon-return" id="closeWindows" onclick="history.back()"></i>
 			<h4 style="margin-left: 25px;"><span>南方医科大学珠江医院</span><span class="reflash_item"><i class="iconfont icon-switch"></i></span></h4>
 			
 		</header>
@@ -68,13 +68,14 @@
 		
 		<script type="text/javascript">
         	$(function(){
-        		document.addEventListener('plusready', plusReady, false);
+        		/*document.addEventListener('plusready', plusReady, false);
 	       		// H5 plus事件处理
 				function plusReady(){}
+				
 				$("#closeWindows").click(function(){
 					var ws=plus.webview.currentWebview();
 					plus.webview.close(ws);
-				});
+				});*/
         		
         		var params={};
         		$.post(Utils.getRoot()+"/registerApp/selDivision",params,function(data){
