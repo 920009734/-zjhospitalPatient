@@ -392,7 +392,10 @@
 					"img/sjx.png",
 					"pages/hospitalization/inhospitalCostList.html",
 					"pages/yuyueguahao/patien_register.html",
-					"img/20180410152108.png"
+					"img/20180410152108.png",
+					"pages/hospitalization/paytDeposit.html",
+					"pages/myAttention.html",
+					"pages/familyMember.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -423,7 +426,8 @@
 					"fontIcon/iconfont.css",
 					"js/frozen.js",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"img/index/personLogo@2x.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -507,7 +511,11 @@
 					"pages/hospitalization/inhospitalRecord.html",
 					"css/frozen.css",
 					"pages/main.html",
-					"css/style.css"
+					"css/style.css",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -610,7 +618,12 @@
 					"img/myD.png",
 					"img/online/u574.png",
 					"pages/consultation/choiceDepartment.html",
-					"fontIcon/iconfont.css"
+					"fontIcon/iconfont.css",
+					"css/style.css",
+					"pages/consultation/liuyanCons.html",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -620,7 +633,13 @@
 					"js/jquery-1.8.3.min.js",
 					"css/frozen.css",
 					"pages/consultation/onlineCons.html",
-					"img/online/u610.png"
+					"img/online/u610.png",
+					"js/frozen.js",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"pages/consultation/consultation.html",
+					"font/iconfont-full.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -785,6 +804,42 @@
 					"lib/zepto.min.js",
 					"js/Utils.js",
 					"pages/yuyueguahao/patien_register.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/consultation/liuyanCons.html": {
+				"resources": [
+					"js/jquery-1.8.3.min.js",
+					"css/frozen.css",
+					"css/style.css",
+					"img/z_add.png",
+					"pages/consultation/consultation.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/hospitalization/paytDeposit.html": {
+				"resources": [
+					"css/frozen.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/myAttention.html": {
+				"resources": [
+					"fontIcon/iconfont.css",
+					"css/frozen.css",
+					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/familyMember.html": {
+				"resources": [
+					"js/jquery-1.8.3.min.js",
+					"css/frozen.css",
+					"pages/main.html"
 				],
 				"refer": [],
 				"priority": 0
