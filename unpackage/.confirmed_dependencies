@@ -1,1 +1,66 @@
-null
+{
+  "pages/login.html": {
+    "resources": [
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "img/u364.png",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/main.html": {
+    "resources": [
+      "img/index/zjyy.png",
+      "H5Js/shortcut.js",
+      "img/u112.png",
+      "pages/index.html",
+      "img/index/zjLogo.png",
+      "img/index/logo@2x.png",
+      "img/index/dongtai.png",
+      "H5Js/immersed.js",
+      "pages/hospitalization/paytDeposit.html",
+      "img/self/shezhi.png",
+      "pages/message1.html",
+      "img/self/wodeguanzhu.png",
+      "img/self/self.png",
+      "img/self/member.png",
+      "img/self/jiuzhenjilu.png",
+      "font/iconfont-full.ttf",
+      "img/tongzhixiao@2x.png",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "img/self/bangzhu.png",
+      "pages/mySelf.html",
+      "img/sixinxxiao@2x.png",
+      "img/self/zixunjilu.png",
+      "img/index/yuyueRecord.png",
+      "img/self/jiaofeijilui.png",
+      "img/self/banben.png",
+      "img/yuyuexiao@2x.png",
+      "js/frozen.js",
+      "img/xiaofeixiao@2x.png",
+      "js/Utils.js"
+    ],
+    "refer": [
+      "pages/hospitalization/paytDeposit.html"
+    ]
+  },
+  "pages/hospitalization/paytDeposit.html": {
+    "resources": [
+      "css/frozen.css",
+      "pages/main.html",
+      "css/style.css"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  }
+}

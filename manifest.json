@@ -392,7 +392,8 @@
 					"img/sjx.png",
 					"pages/hospitalization/inhospitalCostList.html",
 					"pages/yuyueguahao/patien_register.html",
-					"img/20180410152108.png"
+					"img/20180410152108.png",
+					"pages/hospitalization/paytDeposit.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -785,6 +786,15 @@
 					"lib/zepto.min.js",
 					"js/Utils.js",
 					"pages/yuyueguahao/patien_register.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/hospitalization/paytDeposit.html": {
+				"resources": [
+					"css/frozen.css",
+					"pages/main.html",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
