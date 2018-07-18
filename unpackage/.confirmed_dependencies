@@ -1,180 +1,248 @@
 {
-	"pages/login.html": {
-		"resources": [
-			"font/iconfont-full.ttf",
-			"fontIcon/iconfont.css",
-			"img/u364.png",
-			"js/frozen.js",
-			"css/frozen.css",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/consultation/choiceDepartment.html": {
-		"resources": [
-			"fontIcon/iconfont.css",
-			"css/frozen.css",
-			"css/style.css",
-			"img/index/personLogo@2x.png",
-			"pages/consultation/consultation.html",
-			"js/frozen.js",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/consultation/consultation.html",
-			"pages/main.html"
-		]
-	},
-	"pages/main.html": {
-		"resources": [
-			"img/index/zjyy.png",
-			"H5Js/shortcut.js",
-			"img/u112.png",
-			"pages/index.html",
-			"pages/consultation/choiceDepartment.html",
-			"css/frozen.css",
-			"css/style.css",
-			"img/index/zjLogo.png",
-			"img/index/logo@2x.png",
-			"img/index/dongtai.png",
-			"H5Js/immersed.js",
-			"pages/floorDistribution.html",
-			"pages/hospitalization/inHospotalSearch.html",
-			"pages/hospitalization/paytDeposit.html",
-			"img/self/shezhi.png",
-			"img/self/wodeguanzhu.png",
-			"img/self/bangzhu.png",
-			"img/self/self.png",
-			"img/self/member.png",
-			"pages/mySelf.html",
-			"img/self/jiuzhenjilu.png",
-			"img/self/zixunjilu.png",
-			"img/index/yuyueRecord.png",
-			"img/self/jiaofeijilui.png",
-			"img/self/banben.png",
-			"pages/myAttention.html",
-			"pages/familyMember.html",
-			"pages/message1.html",
-			"img/yuyuexiao@2x.png",
-			"img/tongzhixiao@2x.png",
-			"img/xiaofeixiao@2x.png",
-			"img/sixinxxiao@2x.png"
-		],
-		"refer": [
-			"pages/consultation/choiceDepartment.html",
-			"pages/floorDistribution.html",
-			"pages/hospitalization/inHospotalSearch.html",
-			"pages/hospitalization/paytDeposit.html",
-			"pages/myAttention.html",
-			"pages/familyMember.html"
-		]
-	},
-	"pages/consultation/consultation.html": {
-		"resources": [
-			"pages/consultation/consultation.html",
-			"img/online/u522.png",
-			"img/online/u576.png",
-			"fontIcon/iconfont.css",
-			"css/frozen.css",
-			"css/style.css",
-			"img/online/u456.png",
-			"img/myD.png",
-			"img/online/u574.png",
-			"pages/consultation/liuyanCons.html",
-			"js/frozen.js",
-			"lib/zepto.min.js",
-			"pages/consultation/onlineCons.html",
-			"js/Utils.js",
-			"pages/consultation/choiceDepartment.html"
-		],
-		"refer": [
-			"pages/consultation/onlineCons.html",
-			"pages/consultation/choiceDepartment.html",
-			"pages/consultation/liuyanCons.html"
-		]
-	},
-	"pages/consultation/liuyanCons.html": {
-		"resources": [
-			"js/jquery-1.8.3.min.js",
-			"css/frozen.css",
-			"css/style.css",
-			"img/z_add.png",
-			"pages/consultation/consultation.html"
-		],
-		"refer": [
-			"pages/consultation/consultation.html"
-		]
-	},
-	"pages/consultation/onlineCons.html": {
-		"resources": [
-			"js/jquery-1.8.3.min.js",
-			"js/frozen.js",
-			"css/frozen.css",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"pages/consultation/onlineCons.html",
-			"img/online/u610.png",
-			"js/Utils.js",
-			"pages/consultation/consultation.html",
-			"font/iconfont-full.ttf"
-		],
-		"refer": [
-			"pages/consultation/consultation.html"
-		]
-	},
-	"pages/floorDistribution.html": {
-		"resources": [
-			"css/frozen.css",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/hospitalization/inHospotalSearch.html": {
-		"resources": [
-			"pages/main.html",
-			"css/frozen.css",
-			"font/iconfont-full.ttf",
-			"js/frozen.js",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/Utils.js"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/hospitalization/paytDeposit.html": {
-		"resources": [
-			"css/frozen.css"
-		]
-	},
-	"pages/myAttention.html": {
-		"resources": [
-			"fontIcon/iconfont.css",
-			"css/frozen.css",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/familyMember.html": {
-		"resources": [
-			"js/jquery-1.8.3.min.js",
-			"css/frozen.css",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	}
+  "pages/login.html": {
+    "resources": [
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "img/u364.png",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/consultation/choiceDepartment.html": {
+    "resources": [
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "css/style.css",
+      "img/index/personLogo@2x.png",
+      "pages/consultation/consultation.html",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/consultation/consultation.html",
+      "pages/main.html"
+    ]
+  },
+  "pages/main.html": {
+    "resources": [
+      "img/index/zjyy.png",
+      "H5Js/shortcut.js",
+      "img/u112.png",
+      "pages/index.html",
+      "pages/consultation/choiceDepartment.html",
+      "css/frozen.css",
+      "css/style.css",
+      "img/index/zjLogo.png",
+      "img/index/logo@2x.png",
+      "img/index/dongtai.png",
+      "H5Js/immersed.js",
+      "pages/floorDistribution.html",
+      "pages/hospitalization/inHospotalSearch.html",
+      "pages/hospitalization/paytDeposit.html",
+      "img/self/shezhi.png",
+      "img/self/wodeguanzhu.png",
+      "img/self/bangzhu.png",
+      "img/self/self.png",
+      "img/self/member.png",
+      "pages/mySelf.html",
+      "img/self/jiuzhenjilu.png",
+      "img/self/zixunjilu.png",
+      "img/index/yuyueRecord.png",
+      "img/self/jiaofeijilui.png",
+      "img/self/banben.png",
+      "pages/myAttention.html",
+      "pages/familyMember.html",
+      "pages/message1.html",
+      "img/yuyuexiao@2x.png",
+      "img/tongzhixiao@2x.png",
+      "img/xiaofeixiao@2x.png",
+      "img/sixinxxiao@2x.png",
+      "pages/payment/depositPayment.html",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/lineUpSearch/jcbg_list.html",
+      "pages/lineUpSearch/jybg_list.html",
+      "pages/login.html",
+      "pages/divisionIntroduce.html"
+    ],
+    "refer": [
+      "pages/consultation/choiceDepartment.html",
+      "pages/floorDistribution.html",
+      "pages/hospitalization/inHospotalSearch.html",
+      "pages/hospitalization/paytDeposit.html",
+      "pages/myAttention.html",
+      "pages/familyMember.html",
+      "pages/payment/depositPayment.html",
+      "pages/lineUpSearch/jcbg_list.html",
+      "pages/lineUpSearch/jybg_list.html",
+      "pages/login.html",
+      "pages/divisionIntroduce.html"
+    ]
+  },
+  "pages/consultation/consultation.html": {
+    "resources": [
+      "pages/consultation/consultation.html",
+      "img/online/u522.png",
+      "img/online/u576.png",
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "css/style.css",
+      "img/online/u456.png",
+      "img/myD.png",
+      "img/online/u574.png",
+      "pages/consultation/liuyanCons.html",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "pages/consultation/onlineCons.html",
+      "js/Utils.js",
+      "pages/consultation/choiceDepartment.html"
+    ],
+    "refer": [
+      "pages/consultation/onlineCons.html",
+      "pages/consultation/choiceDepartment.html",
+      "pages/consultation/liuyanCons.html"
+    ]
+  },
+  "pages/consultation/liuyanCons.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "css/frozen.css",
+      "css/style.css",
+      "img/z_add.png",
+      "pages/consultation/consultation.html"
+    ],
+    "refer": [
+      "pages/consultation/consultation.html"
+    ]
+  },
+  "pages/consultation/onlineCons.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "pages/consultation/onlineCons.html",
+      "img/online/u610.png",
+      "js/Utils.js",
+      "pages/consultation/consultation.html",
+      "font/iconfont-full.ttf"
+    ],
+    "refer": [
+      "pages/consultation/consultation.html"
+    ]
+  },
+  "pages/floorDistribution.html": {
+    "resources": [
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/hospitalization/inHospotalSearch.html": {
+    "resources": [
+      "pages/main.html",
+      "css/frozen.css",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/hospitalization/paytDeposit.html": {
+    "resources": [
+      "css/frozen.css",
+      "pages/main.html",
+      "css/style.css"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/myAttention.html": {
+    "resources": [
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/familyMember.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/payment/depositPayment.html": {
+    "resources": [
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/lineUpSearch/jcbg_list.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "css/frozen.css",
+      "css/style.css",
+      "date/date.css",
+      "pages/lineUpSearch/jianchabg_view.html",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/lineUpSearch/jianchabg_view.html",
+      "pages/main.html"
+    ]
+  },
+  "pages/lineUpSearch/jianchabg_view.html": {
+    "resources": [
+      "pages/lineUpSearch/jcbg_list.html",
+      "css/frozen.css",
+      "css/style.css"
+    ],
+    "refer": [
+      "pages/lineUpSearch/jcbg_list.html"
+    ]
+  },
+  "pages/lineUpSearch/jybg_list.html": {
+    "resources": [
+      "pages/main.html",
+      "css/frozen.css"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/divisionIntroduce.html": {
+    "resources": [
+      "img/kes/a1.png",
+      "img/kes/a.png",
+      "css/frozen.css"
+    ]
+  }
 }
