@@ -141,7 +141,6 @@
 					if (data.success) {
 						var dortorInfo = new Array();
 						dortorInfo= data.data;
-						console.log("医生挂号："+JSON.stringify(dortorInfo));
 						for (var i = 0; i < dortorInfo.length; i++) {
 							var doctorPhoto = dortorInfo[i].doctorPhoto;
 							if(doctorPhoto==null || doctorPhoto== "" 
