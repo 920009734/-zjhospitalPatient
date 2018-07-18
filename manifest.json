@@ -479,7 +479,8 @@
 			"pages/lineUpSearch/jianchabg_view.html": {
 				"resources": [
 					"css/frozen.css",
-					"pages/lineUpSearch/jcbg_list.html"
+					"pages/lineUpSearch/jcbg_list.html",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -826,7 +827,9 @@
 			},
 			"pages/hospitalization/paytDeposit.html": {
 				"resources": [
-					"css/frozen.css"
+					"css/frozen.css",
+					"pages/main.html",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0

@@ -217,9 +217,15 @@ $(function(){
 					if (dortorInfo[i].timeFlag==1) {//上午
 						s++;
 						$("#swcount").text(s+"人");
+						var doctorPhoto = dortorInfo[i].doctorPhoto;
+						if(doctorPhoto==null || doctorPhoto== "" 
+							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+							doctorPhoto = "../../img/self/self.png";
+						}
+							
 						$("#swinfoList").append(
 							"<div class='con_doc'>"+
-								 "<div class='doc_img'><img src='../../img/self/self.png'></div>"+
+								 "<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
@@ -236,9 +242,14 @@ $(function(){
 					} else if(dortorInfo[i].timeFlag==2) {//下午
 						x++;
 						$("#xwcount").text(x+"人");
+						var doctorPhoto = dortorInfo[i].doctorPhoto;
+						if(doctorPhoto==null || doctorPhoto== "" 
+							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+							doctorPhoto = "../../img/self/self.png";
+						}
 						$("#xwinfoList").append(
 							"<div class='con_doc' >"+
-								"<div class='doc_img'><img src='../../img/self/self.png'></div>"+
+								"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
@@ -255,9 +266,14 @@ $(function(){
 					}else if(dortorInfo[i].timeFlag==3){//晚上
 						w++;
 						$("#wscount").text(w+"人");
+						var doctorPhoto = dortorInfo[i].doctorPhoto;
+						if(doctorPhoto==null || doctorPhoto== "" 
+							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+							doctorPhoto = "../../img/self/self.png";
+						}
 						$("#wsinfoList").append(
 							"<div class='con_doc'>"+
-								"<div class='doc_img'><img src='../../img/self/self.png'></div>"+
+								"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+

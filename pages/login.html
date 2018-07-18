@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="../css/style.css" />
         <link rel="stylesheet" href="../fontIcon/iconfont.css" />
         
-        <link rel="stylesheet" href="../fontIcon/iconfont.css" />
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
         <script src="../js/Utils.js"></script>
@@ -70,19 +69,6 @@
 		</section>
 	</body>
 	<script>
-	
-		$(".eyes_icon").on("click",function(){
-			var a = $(this).hasClass("active");
-			if(!a){
-				$(this).addClass("active");
-				$(this).siblings("span").children("input").attr("type","text");
-				$(this).children("i").css("color","#3A93A5");
-			}else{
-				$(this).removeClass("active");
-				$(this).siblings("span").children("input").attr("type","password");
-				$(this).children("i").css("color","#999999");
-			}
-		})
 		function plusReady(){
 			// 隐藏滚动条
 			plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
@@ -106,6 +92,18 @@
 				$("#phone_").val(patientInfo.phone);
 				checkToken(patientInfo.token);
 			}
+			$(".eyes_icon").on("click",function(){
+				var a = $(this).hasClass("active");
+				if(!a){
+					$(this).addClass("active");
+					$(this).siblings("span").children("input").attr("type","text");
+					$(this).children("i").css("color","#3A93A5");
+				}else{
+					$(this).removeClass("active");
+					$(this).siblings("span").children("input").attr("type","password");
+					$(this).children("i").css("color","#999999");
+				}
+			});
 		}
 		
 		function checkToken(token){

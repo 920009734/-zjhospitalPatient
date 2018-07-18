@@ -166,6 +166,9 @@
 							doctorInfo= data.data;
 							for (var i = 0; i < doctorInfo.length; i++) {
 //								console.log("i="+i+"--doctorName:"+doctorInfo[i].doctorName+",doctorIntrodution:"+doctorInfo[i].doctorIntrodution)
+								var str = doctorInfo[i].doctorIntrodution;
+								var regx = /<[^>]*>|<\/[^>]*>/gm;
+								var docValue =  str.replace(regx,"");
 								$("#doctor_").append(
 									"<div class='ck_doc'>"
 										+"<div class='doc_left'>"
@@ -179,9 +182,7 @@
 												+"<span class='right_position'>"+doctorInfo[i].doctorTitle+"</span>"
 												+"<span class='right_type'>"+doctorInfo[i].deptName+"</span>"
 											+"</div>"
-											+"<div class='right_detail'>"
-												+doctorInfo[i].doctorIntrodution
-											+"</div>"
+											+"<div class='right_detail'>"+docValue+"</div>"
 										+"</div>"
 									+"</div>"
 								);
