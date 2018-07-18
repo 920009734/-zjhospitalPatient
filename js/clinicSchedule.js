@@ -327,7 +327,4 @@ $(function(){
 		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag+"&doctorName="+doctorName+"&clinicType="+clinicType;
 	});
 	
-	
-	
-		
 });

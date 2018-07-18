@@ -61,13 +61,11 @@
 				var params={};
 				params.bespeakId=Request["bespeakId"];
         		$.post(Utils.getRoot()+"/registerApp/selPatientYYInfo",params,function(data){
-					
 					if (data.success) {
 						var yyInfo = data.data;
 						var orderInfo = yyInfo[0].order;
 						var bespeakInfo = yyInfo[0].bespeakInfo;
 						console.log("bespeakInfo:"+JSON.stringify(bespeakInfo));
-						
 						var patientGender = bespeakInfo.patientGender=="1"?"男":"女";
 						$("#hisPatientId").val(bespeakInfo.hisPatientId);
 						$("#hisOrdNum").text(bespeakInfo.hisOrdNum);
@@ -93,6 +91,20 @@
 						$("#bespeakTime").text(bespeakInfo.bespeakTime);
 						$("#yyStatus").text(Request["yyStatus"]);
 						$("#status").val(bespeakInfo.yyStatus);
+						switch (bespeakInfo.yyStatus){
+							case "0":
+								$("#cancel").show();//显示按钮
+								break;
+							case "1":
+								$("#cancel").hide();//隐藏按钮
+								break;
+							case "2":
+								$("#cancel").show();//显示按钮
+								break;
+							case "3":
+								$("#cancel").hide();//显示按钮
+								break;
+						}
 					}
 				});
 				
