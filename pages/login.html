@@ -4,9 +4,9 @@
 		<meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="format-detection" content="telephone=no">
-		<script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
         <link rel="stylesheet" href="../css/frozen.css">
         <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../fontIcon/iconfont.css" />
         
         <link rel="stylesheet" href="../fontIcon/iconfont.css" />
         <script src="../lib/zepto.min.js"></script>
@@ -21,8 +21,9 @@
 			.login_user{display: block;width: 90%;height: 45px;margin:0 auto;border-bottom: 1px solid #E7E7E7;}
 			.login_user>span{display: block;float: left;}
 			.user_icon{display: block;width: 15%;}
-			.user_inp{display: block;width: 80%;}
+			.user_inp{display: block;width: 75%;}
 			.user_inp>input{width: 100%;height: 35px;line-height:35px;margin-top: 3px;border: none;}
+			.eyes_icon>i{font-size: 23px;color: #7F7F7F;}
 			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;}
 			.login_btn>button{border-radius:5px ;background: #0066CC;}
 			.login-detai{display: block;width: 89%;margin: 0 auto;margin-top:10px;font-size: 16px;color: #00A5E0;}
@@ -54,6 +55,7 @@
 					<div class="login_user">
 						<span class="user_icon"><i class="ui-icon icon-lock"></i></span>
 						<span class="user_inp"><input id="password_" type="password" placeholder="请输入密码" class=""/></span>
+						<span class="eyes_icon "><i class="ui-icon icon-browse"></i></span>
 					</div>
 				</div>
 				
@@ -76,6 +78,19 @@
 		</section>
 	</body>
 	<script>
+	
+		$(".eyes_icon").on("click",function(){
+			var a = $(this).hasClass("active");
+			if(!a){
+				$(this).addClass("active");
+				$(this).siblings("span").children("input").attr("type","text");
+				$(this).children("i").css("color","#3A93A5");
+			}else{
+				$(this).removeClass("active");
+				$(this).siblings("span").children("input").attr("type","password");
+				$(this).children("i").css("color","#999999");
+			}
+		})
 		function plusReady(){
 			// 隐藏滚动条
 			plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
