@@ -1,1 +1,81 @@
-null
+{
+	"pages/login.html": {
+		"resources": [
+			"font/iconfont-full.ttf",
+			"fontIcon/iconfont.css",
+			"img/u364.png",
+			"js/frozen.js",
+			"css/frozen.css",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html"
+		]
+	},
+	"pages/main.html": {
+		"resources": [
+			"img/index/zjyy.png",
+			"H5Js/shortcut.js",
+			"img/u112.png",
+			"pages/index.html",
+			"css/frozen.css",
+			"css/style.css",
+			"img/index/zjLogo.png",
+			"img/index/logo@2x.png",
+			"img/index/dongtai.png",
+			"H5Js/immersed.js",
+			"img/self/zixunjilu.png",
+			"pages/message1.html",
+			"img/yuyuexiao@2x.png",
+			"pages/detailMsg.html",
+			"img/sjx.png",
+			"img/tongzhixiao@2x.png",
+			"img/xiaofeixiao@2x.png",
+			"img/sixinxxiao@2x.png",
+			"fontIcon/iconfont.css",
+			"js/frozen.js",
+			"lib/zepto.min.js",
+			"js/Utils.js",
+			"img/self/shezhi.png",
+			"img/self/wodeguanzhu.png",
+			"img/self/self.png",
+			"img/self/bangzhu.png",
+			"img/self/member.png",
+			"pages/mySelf.html",
+			"img/self/jiuzhenjilu.png",
+			"img/self/jiaofeijilui.png",
+			"img/index/yuyueRecord.png",
+			"img/self/banben.png",
+			"font/iconfont-full.ttf",
+			"img/kefu1.png",
+			"pages/familyMember.html"
+		],
+		"refer": [
+			"pages/familyMember.html"
+		]
+	},
+	"pages/familyMember.html": {
+		"resources": [
+			"js/jquery-1.8.3.min.js",
+			"css/frozen.css",
+			"pages/main.html",
+			"pages/addPerple.html"
+		],
+		"refer": [
+			"pages/main.html",
+			"pages/addPerple.html"
+		]
+	},
+	"pages/addPerple.html": {
+		"resources": [
+			"css/frozen.css",
+			"pages/familyMember.html"
+		],
+		"refer": [
+			"pages/familyMember.html"
+		]
+	}
+}

@@ -843,7 +843,16 @@
 				"resources": [
 					"js/jquery-1.8.3.min.js",
 					"css/frozen.css",
-					"pages/main.html"
+					"pages/main.html",
+					"pages/addPerple.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/addPerple.html": {
+				"resources": [
+					"css/frozen.css",
+					"pages/familyMember.html"
 				],
 				"refer": [],
 				"priority": 0
