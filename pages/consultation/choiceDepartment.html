@@ -26,7 +26,7 @@
 			.ck_doc{display:block;width:92%;height: 70px; margin-left:4%;margin-bottom:5px;background-color: #FFFFFF;border-radius: 2px;padding: 7px 0px;}
 			.ck_doc>div{display: block;float: left;} 
 			.doc_left{width: 20%;height: 100%;}
-			.doc_left>img{display: block;margin: 0 auto;width: 40px;height: 40px;margin-top: 5px;}
+			.doc_left>img{display: block;margin: 0 auto;width: 70%;height: 70%;margin-top: 5px;}
 			.doc_right{width: 78%;height: 100%;}
 			.right_title>span{display: block;float: left;height: 30px;line-height: 30px;}
 			.right_name{width: 25%;}  
@@ -165,13 +165,20 @@
 							var doctorInfo = new Array();
 							doctorInfo= data.data;
 							for (var i = 0; i < doctorInfo.length; i++) {
+//								console.log("i="+i+"--doctorName:"+doctorInfo[i].doctorName+",doctorIntrodution:"+doctorInfo[i].doctorIntrodution)
 								var str = doctorInfo[i].doctorIntrodution;
 								var regx = /<[^>]*>|<\/[^>]*>/gm;
 								var docValue =  str.replace(regx,"");
+								var doctorPhoto = doctorInfo[i].doctorPhoto;
+								if(doctorPhoto==null || doctorPhoto== "" 
+									|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+									doctorPhoto = "../../img/index/personLogo@2x.png";
+								}
+							
 								$("#doctor_").append(
 									"<div class='ck_doc'>"
 										+"<div class='doc_left'>"
-											+"<img src='../../img/index/personLogo@2x.png'/>"
+											+"<img src='"+doctorPhoto+"'/>"
 										+"</div>"
 										+"<div class='doc_right'>"
 											+"<div class='right_title'>"

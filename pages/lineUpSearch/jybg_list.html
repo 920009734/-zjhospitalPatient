@@ -48,12 +48,12 @@
         		searchList($('#startTime').val(),$('#endTime').val());
         		
         		function searchList(startTime,endTime){
+        				
         			$("#jyList").html("");
         			var params={};
 	        		params.startTime = startTime;
 	        		params.endTime = endTime;
 	        		$.post(Utils.getRoot()+"/reportQuery/selLabItems",params,function(data){
-						alert("df")
 						console.log("data:"+data)
 						if (data.success) {
 							var labItemsInfo = new Array();

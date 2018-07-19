@@ -394,6 +394,7 @@
 					"pages/yuyueguahao/patien_register.html",
 					"img/20180410152108.png",
 					"pages/hospitalization/paytDeposit.html",
+					"pages/consultation/consulteLlist.html",
 					"pages/myAttention.html",
 					"pages/familyMember.html"
 				],
@@ -427,7 +428,8 @@
 					"js/frozen.js",
 					"lib/zepto.min.js",
 					"js/Utils.js",
-					"img/index/personLogo@2x.png"
+					"img/index/personLogo@2x.png",
+					"font/iconfont-full.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -535,7 +537,8 @@
 					"lib/zepto.min.js",
 					"js/Utils.js",
 					"js/jquery-1.8.3.min.js",
-					"pages/yuyueguahao/doctorGuahao.html"
+					"pages/yuyueguahao/doctorGuahao.html",
+					"img/self/self.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -790,7 +793,8 @@
 				"resources": [
 					"js/jquery-1.8.3.min.js",
 					"pages/yuyueguahao/pantien_reg_msg.html",
-					"css/frozen.css"
+					"css/frozen.css",
+					"pages/main.html"
 				],
 				"refer": [],
 				"priority": 0

@@ -17,7 +17,7 @@
 			body{background-color: #FFFFFF;}
 			.doc_intro{display: block;width:100%;height: 120px;background: url(../../img/online/u456.png) no-repeat;background-size: 100%;}
 			.intro_photo{display: block;float: left;width: 30%;height: 100%;}
-			.intro_photo>img{display: block;margin: 0 auto;margin-top:20%;}
+			.intro_photo>img{display: block;margin: 0 auto;margin-top:20%;width:70%;height: 70%;}
 			.intro_right{display: block;float: left;widows: 68%;height: 100%;color: #FFFFFF;margin-left: 2%;}
 			.intro_right>div{height: 35px;line-height: 35px;} 
 			.intro_name{font-size: 18px;}
@@ -68,7 +68,7 @@
 			<section id="list">
 				<div class="doc_intro">
 					<div class="intro_photo">
-						<img src="#" width="70" height="70"/>
+						<img src="" id="photo" />
 					</div>
 					<div class="intro_right">
 						<div style="margin-top:20px ;">
@@ -177,6 +177,12 @@
 							$("#deptName_").html(doctorInfo[i].deptName);
 							$("#doctorTitle_").html(doctorInfo[i].doctorTitle);
 							$("#introduce_").html(doctorInfo[i].doctorIntrodution);
+							var doctorPhoto = doctorInfo[i].doctorPhoto;
+							if(doctorPhoto==null || doctorPhoto== ""
+								|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+								doctorPhoto = "../../img/index/personLogo@2x.png";
+							}
+							$("#photo").attr("src",doctorPhoto);
 						}
 					}
 				});

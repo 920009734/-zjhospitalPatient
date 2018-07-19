@@ -104,7 +104,7 @@
 					<span class="item_value" id="fullTime_"></span>
 				</div>
 				<div class="comfirm_item ">
-					<span class="item_name">挂号金额</span>
+					<span class="item_name">诊查金额</span>
 					<input type="hidden" name="regFee_" />
 					<input type="hidden" id="childRegFee" />
 					<span class="item_value" id="CNregFee_"></span>
@@ -195,7 +195,6 @@
 				$("input[name='endTime_']").val(Request["endTime"]);
         		$("input[name='regFee_']").val(parseFloat(Request["regFee"])*100);
 				$("#childRegFee").val(Request["childRegFee"]);
-				
         		var outChargeNo = '';//商户充值业务流水
         		document.addEventListener('plusready', plusReady, false);
 	       		// H5 plus事件处理
@@ -219,10 +218,10 @@
 	    					
 	    					
 	        				for (var i = 0; i < memberList.length; i++) {//他人
-	        					console.log(JSON.stringify(memberList[i]));
 		        				$("#tj").append(
 		        					"<div class='per_name2 ' id='choosePeople_'>"+
 						            	"<input type='hidden' class='patientid_' value='"+memberList[i].patientofId+"' >"+
+						            	"<input type='hidden' class='sjpatientid_' value='"+patient.patientid+"' >"+
 						            	"<input type='hidden' class='idcard' value='"+memberList[i].idcard+"' >"+
 						            	"<input type='hidden' class='phone' value='"+memberList[i].phone+"' >"+
 						            	"<input type='hidden' class='relationshiptype' value='"+memberList[i].relationshiptype+"' >"+
@@ -244,7 +243,10 @@
         			window.location.href="../yuyueguahao/addPerple.html"
         		});
         		
-        		$("#tj").on("click",".per_name", function(){//他人挂号
+        		$("#tj").on("click",".per_name", function(){//本人挂号
+        			$("#CNregFee_").text("￥"+""+Request["regFee"]+"元");
+					$("input[name='regFee_']").val(parseFloat(Request["regFee"])*100);
+        			
         			$("#idcard").val("");
         			$("#phone").val("");
         			$("#relationshiptype").val("");
@@ -255,8 +257,8 @@
         			$(".addPatient").hide();
         		});
         		
-        		$("#tj").on("click",".per_name2", function(){//本人挂号
-        			$("#patientid").val($(this).children(".patientid_").val());
+        		$("#tj").on("click",".per_name2", function(){//他人挂号
+        			$("#patientid").val($(this).children(".sjpatientid_").val());//上级ID
         			var idcard = $(this).children(".idcard").val();
         			var phone = $(this).children(".phone").val();
         			var patientname = $(this).children(".patientname_").text()
@@ -270,7 +272,6 @@
 						console.log(JSON.stringify(data))
 						if (data.success) {
 							var patientInfo = data.data;
-							
 							if(patientInfo.patCardNo!=null){
 								$("#patCardNo").val(patientInfo.patCardNo);
 								var age = Utils.jsGetAge(patientInfo.patBirth);//判断儿童的年龄
@@ -331,10 +332,10 @@
 						$(".ui-loading-block").css("margin","45% 0 0 31%");
 						
 						var patCardNo = $("#patCardNo").val();
-						
 						if (patCardNo!="null" && patCardNo!=null && patCardNo!="" ) {//挂号支付
 							//医院锁号，生成商户订单号
 							$.post(Utils.getRoot()+"/registerApp/addbespeakInfo", params, function(data){
+								console.log(JSON.stringify(data) );
 								if (data.success) {
 									console.log(JSON.stringify(data.data.hisOrdNum) );
 									outChargeNo = data.data.hisOrdNum;//订单号

@@ -38,7 +38,7 @@
 			.doc_item{display: block;float: left;width: 94%; margin-left:3%; height: 70px;background-color: #FFFFFF;margin-top: 10px;border-radius: 3px;}
 			.doc_item>div{display: block;float: left;height: 100%;}
 			.doc_item_img{width: 20%;}
-			.doc_item_img>img{display: block;margin: 0 auto;width: 40px;height: 40px;margin-top: 15px;}
+			.doc_item_img>img{display: block;margin: 0 auto;width: 70%;height: 70%;margin-top: 15px;}
 			.doc_item_content{width: 65%;margin-top: 12px;}
 			.doc_item_content>div{}
 			.doc_item:last-child{margin-bottom: 10px;}
@@ -141,14 +141,19 @@
 					if (data.success) {
 						var dortorInfo = new Array();
 						dortorInfo= data.data;
-						console.log("医生挂号："+JSON.stringify(dortorInfo));
 						for (var i = 0; i < dortorInfo.length; i++) {
+							var doctorPhoto = dortorInfo[i].doctorPhoto;
+							if(doctorPhoto==null || doctorPhoto== "" 
+								|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+								doctorPhoto = "../../img/kes/a1.png";
+							}
+							alert(dortorInfo[i].clinicType)
 							if(dortorInfo[i].clinicType=="名医号"){//名医挂号
 								$("#myList").append(
 									"<div class='doc_item'>"+
 										"<input type='hidden' name='ghType' value='2'>"+
 										"<div class='doc_item_img'>"+
-											"<img src='../../img/kes/a1.png' />"+
+											"<img src='"+doctorPhoto+"' />"+
 										"</div>"+
 										"<div class='doc_item_content'>"+
 											"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
@@ -167,7 +172,7 @@
 									"<div class='doc_item'>"+
 										"<input type='hidden' name='ghType' value='1'>"+
 										"<div class='doc_item_img'>"+
-											"<img src='../../img/kes/a1.png' />"+
+											"<img src='"+doctorPhoto+"' />"+
 										"</div>"+
 										"<div class='doc_item_content'>"+
 											"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+

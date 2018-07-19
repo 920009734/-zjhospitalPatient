@@ -16,7 +16,7 @@
 		<style type="text/css">
 			.box_detail{display: block;float: left;width: 100%;min-height: 50px;max-height: 350px;background-color: #FFFFFF;padding: 10px 0;}
 			.box_detail_img{display: block;float: left;width: 22%;}
-			.box_detail_img>img{display: block;width: 45px;height: 45px;margin: 0 auto;}
+			.box_detail_img>img{display: block;width: 70%;height: 70%;margin: 0 auto;}
 			.box_detail_name{display: block;float: left;height: 45px;line-height: 45px;}
 			.box_detail_dep{display: block;float: left;margin-left: 10px;height: 45px;line-height: 45px;color: #999999;}
 			.box_shanchang{display: block;float: left;padding-bottom: 10px; width: 100%;margin-top: 15px;background-color: #FFFFFF;}
@@ -55,7 +55,7 @@
 					<div>
 						<input type="hidden" id="ghType" value="">
 						<input type="hidden" id="clinicType" value="">
-						<span class="box_detail_img"><img src="../../img/self/self.png"/></span>
+						<span class="box_detail_img"><img src="" id="photo"/></span>
 						<input type="hidden" id="doctorCode" value=""/>
 						<span class="box_detail_name" id="doctorName"></span>
 						<span class="box_detail_dep" id="doctorTitle"></span>
@@ -124,6 +124,13 @@
 						dortorInfo= data.data;
 						$("#doctorTitle").text(dortorInfo[0].doctorTitle);//医生职称
 						$("#doctorSkill").text(dortorInfo[0].doctorSkill);//医生擅长
+						var doctorPhoto = dortorInfo[0].doctorPhoto;
+						if(doctorPhoto==null || doctorPhoto== "" 
+							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+							doctorPhoto = "../../img/self/self.png";
+						}
+						$("#photo").attr("src",doctorPhoto);
+							
 					}
 				});
 				
@@ -152,10 +159,13 @@
 								timeGroupBy = doctorInfo[i].timeGroupBy;
 								for (var j = 0; j < timeGroupBy.length; j++) {
 									var regFee = parseFloat(timeGroupBy[j].regFee)/100;
+									//儿童诊查费
+									var childRegFee = parseFloat(timeGroupBy[i].childRegFee)/100; 
 									if (timeGroupBy[j].leftNum==0) {//余号为0 ，不可挂号
 										$("#hsTime"+i).append(
 											"<div class='nobox_time_item'>"+
 												"<input type='hidden' name='timeFlag' value='"+doctorInfo[i].timeFlag+"'>"+
+												"<input type='hidden' name='childRegFee' value='"+childRegFee+"' />"+
 												"<span class='box_sj'><span class='beginTime'>"+timeGroupBy[j].beginTime+"</span>"+
 												" ~ <span class='endTime'>"+timeGroupBy[j].endTime+"</span></span>"+
 												"<span class='box_yuhao' >余号：<span class='leftNum'>"+timeGroupBy[j].leftNum+"</span></span>"+
@@ -166,6 +176,7 @@
 										$("#hsTime"+i).append(
 											"<div class='box_time_item'>"+
 												"<input type='hidden' name='timeFlag' value='"+doctorInfo[i].timeFlag+"'>"+
+												"<input type='hidden' name='childRegFee' value='"+childRegFee+"' />"+
 												"<span class='box_sj'><span class='beginTime'>"+timeGroupBy[j].beginTime+"</span>"+
 												" ~ <span class='endTime'>"+timeGroupBy[j].endTime+"</span></span>"+
 												"<span class='box_yuhao' >余号：<span class='leftNum'>"+timeGroupBy[j].leftNum+"</span></span>"+
@@ -194,7 +205,8 @@
 						var beginTime = $(this).children(".box_sj").children(".beginTime").text();
 						var endTime = $(this).children(".box_sj").children(".endTime").text();
 						var timeFlag = $(this).children("input[name='timeFlag']").val();
-						window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType;
+						var childRegFee = $(this).find("input[name='childRegFee']").val();
+						window.location.href="../yuyueguahao/comfirmMsg.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName+"&dateTime="+dateTime+"&regFee="+regFee+"&beginTime="+beginTime+"&endTime="+endTime+"&timeFlag="+timeFlag+"&clinicType="+clinicType+"&childRegFee="+childRegFee;
 					}
 				});
 				

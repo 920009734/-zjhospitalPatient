@@ -14,7 +14,7 @@ $(function(){
 	//获取当前时间
 	var nowdate = new Date();
 	var nt = Utils.formatDateByLong(nowdate, "yyyy-MM-dd");
-	$("#nowTime").html(nt);
+//	$("#nowTime").html(nt);
 	//开始日期，结束日期，一共是七天
 	var dateTime = getSevenDate(nowdate);
 	//科室ID
@@ -126,13 +126,15 @@ $(function(){
 	        var showday = new Date();
 	        if(tDate == doHandleMonth(showday.getDate())){
 	        	if (tDate == data[i].dataday) {
-	        		
+	        		/*if(data[0].status == 2){
+		    			$("#nowTime").html(data[i].dataday);
+		    		}*/
 	        		if (data[i].status == 1) {//有号
 	        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
 							+'<h3 class="dep_name">'+tday+'</h3>'
 							+'<p class="dep_addr">'+tDate+'(有)</p>'
 							+'</div>');
-	        		} else {//无号
+	        		} else {//无号 2
 	        			$(".date_item").append('<div class="nodate_list noactive" id="'+tDate+'" >'
 							+'<h3 class="dep_name">'+tday+'</h3>'
 							+'<p class="dep_addr">'+tDate+'(无)</p>'
@@ -140,13 +142,18 @@ $(function(){
 	        		}
 	        	}
 	        }else{
+	        	var day = $(".date_item").children(".active").attr("id");
+				
 	        	if (tDate == data[i].dataday) {
 	        		if (data[i].status == 1) {
-	        			$(".date_item").append('<div class="date_list" id="'+tDate+'">'
-							+'<h3 class="dep_name">'+tday+'</h3>'
-							+'<p class="dep_addr">'+tDate+'(有)</p>'
-							+'</div>');
-	        		} else {
+		        		$(".date_item").append('<div class="date_list" id="'+tDate+'">'
+						+'<h3 class="dep_name">'+tday+'</h3>'
+						+'<p class="dep_addr">'+tDate+'(有)</p>'
+						+'</div>');
+						if(day==undefined){
+							$(".date_list").attr("class","date_list active");
+						}
+	        		}else {
 	        			$(".date_item").append('<div class="nodate_list noactive" id="'+tDate+'">'
 							+'<h3 class="dep_name">'+tday+'</h3>'
 							+'<p class="dep_addr">'+tDate+'(无)</p>'
@@ -167,9 +174,8 @@ $(function(){
 	}
 	
 	function exditTopDate() {
-		var day = $(".date_list.active").attr("id");
+		var day = $(".date_item").children(".active").attr("id");
 		var topTime = "";
-		
 		var nowdate = new Date();
 		var s = getSevenDate(nowdate);
 		
@@ -217,9 +223,15 @@ $(function(){
 					if (dortorInfo[i].timeFlag==1) {//上午
 						s++;
 						$("#swcount").text(s+"人");
+						var doctorPhoto = dortorInfo[i].doctorPhoto;
+						if(doctorPhoto==null || doctorPhoto== "" 
+							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+							doctorPhoto = "../../img/self/self.png";
+						}
+							
 						$("#swinfoList").append(
 							"<div class='con_doc'>"+
-								 "<div class='doc_img'><img src='../../img/self/self.png'></div>"+
+								 "<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
@@ -236,9 +248,14 @@ $(function(){
 					} else if(dortorInfo[i].timeFlag==2) {//下午
 						x++;
 						$("#xwcount").text(x+"人");
+						var doctorPhoto = dortorInfo[i].doctorPhoto;
+						if(doctorPhoto==null || doctorPhoto== "" 
+							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+							doctorPhoto = "../../img/self/self.png";
+						}
 						$("#xwinfoList").append(
 							"<div class='con_doc' >"+
-								"<div class='doc_img'><img src='../../img/self/self.png'></div>"+
+								"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
@@ -255,9 +272,14 @@ $(function(){
 					}else if(dortorInfo[i].timeFlag==3){//晚上
 						w++;
 						$("#wscount").text(w+"人");
+						var doctorPhoto = dortorInfo[i].doctorPhoto;
+						if(doctorPhoto==null || doctorPhoto== "" 
+							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+							doctorPhoto = "../../img/self/self.png";
+						}
 						$("#wsinfoList").append(
 							"<div class='con_doc'>"+
-								"<div class='doc_img'><img src='../../img/self/self.png'></div>"+
+								"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
 								 "<div class='doc_detail'>"+
 									"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
 									"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
@@ -327,7 +349,4 @@ $(function(){
 		window.location.href="../yuyueguahao/choiceTime.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&dateTime="+dateTime+"&timeFlag="+timeFlag+"&doctorName="+doctorName+"&clinicType="+clinicType;
 	});
 	
-	
-	
-		
 });
