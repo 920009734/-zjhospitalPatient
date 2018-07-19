@@ -19,7 +19,7 @@
 			.demo_name{display: block;float: left;width: 33%;padding-left: 3%;font-size: 15px;text-align: ;}
 			.demo_value{display: block;float: right;width: 61%; color: #999999;font-size: 15px;margin-right: 3%;text-align: right;}
 			.hospital_record{display: block;float: left;width: 100%;}
-			
+			.notData{color: red; text-align: center;}
 			.cancle_btn{display: block;float: left; width: 100%;margin: 0 auto;margin-top: 25px;background-color: #FFFFFF;height: 100px;}
 			.cancle_btn>button{display: block;width: 92%;margin-left: 4%;border-radius:2px;height: 40px;line-height: 40px; background: #D60F0F;color: #FFFFFF;margin-top: 30px;}
 		</style>
@@ -88,7 +88,6 @@
 							$("#patName").text(Request["patientName"]);
 							$("#idcard").text(Request["idcard"]);
 							$("#patMobile").text(Request["phone"]);
-							
 						}else{
 							$("#patName").text(Request["patientName"]);
 							$("#patSex").text(patientInfo.patSex=="M"?"男":"女");
@@ -100,7 +99,12 @@
 						}
 						
 					}else{
-						alert(data.message);
+						$(".hospital_record").append(
+							"<div class='list-item '>"+
+								"<p class='notData'>"+data.data+"</p>"+
+							"</div>"
+						);
+						
 					}
 				});
 				

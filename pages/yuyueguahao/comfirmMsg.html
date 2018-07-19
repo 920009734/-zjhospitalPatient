@@ -195,7 +195,6 @@
 				$("input[name='endTime_']").val(Request["endTime"]);
         		$("input[name='regFee_']").val(parseFloat(Request["regFee"])*100);
 				$("#childRegFee").val(Request["childRegFee"]);
-				
         		var outChargeNo = '';//商户充值业务流水
         		document.addEventListener('plusready', plusReady, false);
 	       		// H5 plus事件处理
@@ -219,7 +218,6 @@
 	    					
 	    					
 	        				for (var i = 0; i < memberList.length; i++) {//他人
-	        					console.log(JSON.stringify(memberList[i]));
 		        				$("#tj").append(
 		        					"<div class='per_name2 ' id='choosePeople_'>"+
 						            	"<input type='hidden' class='patientid_' value='"+memberList[i].patientofId+"' >"+
@@ -274,10 +272,7 @@
 						console.log(JSON.stringify(data))
 						if (data.success) {
 							var patientInfo = data.data;
-							
-							$("#patCardNo").val("");
-							
-							/*if(patientInfo.patCardNo!=null){
+							if(patientInfo.patCardNo!=null){
 								$("#patCardNo").val(patientInfo.patCardNo);
 								var age = Utils.jsGetAge(patientInfo.patBirth);//判断儿童的年龄
 								if(age<18){//儿童挂号
@@ -286,7 +281,7 @@
 								}
 							}else{
 								$("#patCardNo").val(patientInfo.patCardNo);
-							}*/
+							}
 							
 						}else{
 							alert(data.message);
