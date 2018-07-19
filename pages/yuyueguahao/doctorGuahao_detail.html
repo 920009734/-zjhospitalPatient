@@ -14,14 +14,14 @@
         <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
 		<title>医生挂号</title>
 		<style type="text/css">
-			.box_detail{display: block;float: left;width: 100%;min-height: 50px;max-height: 500px;background-color: #FFFFFF;padding: 10px 0;}
+			.box_detail{display: block;float: left;width: 100%;min-height: 50px;max-height: 350px;background-color: #FFFFFF;padding: 10px 0;}
 			.box_detail_img{display: block;float: left;width: 22%;}
 			.box_detail_img>img{display: block;width: 45px;height: 45px;margin: 0 auto;}
 			.box_detail_name{display: block;float: left;height: 45px;line-height: 45px;}
 			.box_detail_dep{display: block;float: left;margin-left: 10px;height: 45px;line-height: 45px;color: #999999;}
-			.box_shanchang{display: block;float: left;width: 100%;margin-top: 15px;}
+			.box_shanchang{display: block;float: left;padding-bottom: 10px; width: 100%;margin-top: 15px;background-color: #FFFFFF;}
 			.box_shanchang>span{display: block; padding: 5px 10px;color: #008080;}
-			.box_shanchang>p{padding: 5px 10px;text-indent: 25px;font-size: 14px;line-height: 21px;color: #999999;}
+			.box_shanchang>p{padding: 5px 10px;text-indent: 25px;font-size: 14px;line-height: 21px;color: #999999;min-height: 50px;max-height: 260px;overflow-y: auto;}
 			.box_ckTime{display: block;float: left;width: 100%;margin-top: 10px;}
 			.box_item{display: block;float: left;width: 100%;background-color: #ffffff;margin-top: 10px;}
 			.box_date{display: block;float: left;width: 100%;height: 40px;line-height: 40px;border-bottom: 1px solid #e7e7e7;}
@@ -34,7 +34,7 @@
 			.nobox_time_item:last-child{border: none;}
 			.nobox_time_item>span{display: block;float: left;border-radius: 2px;}
 			.nobox_time_item>span:nth-child(1){padding-left:10px;width: 45%;}
-			.box_sj{margin-left: 4%;}
+			.box_sj{margin-left: 3%;width: 35%;}
 			.box_yuhao{width: 23%; background-color: #3B92A6;border-radius: 2px; height: 30px;line-height: 30px;margin-top: 10px;margin-right: 4%;color: #FFFFFF;font-size: 13px;text-align: center;margin-left: 4%;}
 			.box_ghf{width: 23%; background-color: #E04141;height: 30px;line-height: 30px;margin-top: 10px;color: #FFFFFF;font-size: 13px;text-align: center;}
 		</style>
@@ -55,7 +55,7 @@
 					<div>
 						<input type="hidden" id="ghType" value="">
 						<input type="hidden" id="clinicType" value="">
-						<span class="box_detail_img"><img src="../../img/index/personLogo@2x.png"/></span>
+						<span class="box_detail_img"><img src="../../img/self/self.png"/></span>
 						<input type="hidden" id="doctorCode" value=""/>
 						<span class="box_detail_name" id="doctorName"></span>
 						<span class="box_detail_dep" id="doctorTitle"></span>
