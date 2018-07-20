@@ -53,6 +53,46 @@
 			
 		</style>
 		
+	</head>
+	<body>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">在线咨询</h4>
+		</header>
+		<section class="ui-container"> 
+			<section id="list">
+				<div class="doc_intro">
+					<div class="intro_photo">
+						<img src="#" id="photo" style="width: 70%;height: 70%;"/>
+					</div>
+					<div class="intro_right">
+						<div style="margin-top:10px ;">
+							<input type="hidden" name="id" id="id" />
+							<span class="intro_name" id="doctorName"></span>
+							<span class="intro_status" id="doctorTitle"></span>
+						</div>
+						<div>
+							<span class="intro_dep" id="doctorIntrodution"></span>
+						</div>
+					</div>
+				</div>
+				<div class="msg_item" id="msglist">
+				</div>
+				
+				<div class="cons_footer">
+					<div class="cons_footer_con">
+						<div class="up_img"><img src="../../img/online/u610.png" width="38" height="27" onclick="appendByGallery()"/></div>
+						<div class="foot_inp"><input type="text" id="crcontent"/></div>
+						<div class="foot_btn">
+							<button class="ui-btn ui-btn-primary" id="fasong">发送</button>
+						</div>
+					</div>
+					
+				</div>
+			</section>
+		</section>
+		
+		
 		<script type="text/javascript">
 			$(function(){
 				//从之前的页面接受医生id
@@ -62,18 +102,19 @@
 					strs = str.split("&"); 
 					id = unescape(strs[0].split("=")[1]);
 				}*/
-				var Request = new Object();
-				Request = Utils.getRequest();
+				var Request = Utils.getRequest();
 				
 				var id = Request["doctorCode"];
 				var doctorName = Request["doctorName"];
 				var doctorIntrodution = Request["doctorIntrodution"];
 				var doctorTitle = Request["doctorTitle"];
+				var doctorPhoto = Request["doctorPhoto"];
 				
 				$("#id").val(id);
 				$("#doctorName").text(doctorName);
 				$("#doctorIntrodution").text(doctorIntrodution);
 				$("#doctorTitle").text(doctorTitle);
+				$("#photo").attr("src",doctorPhoto);
 				//然后查询患者和此医生有关的在线咨询信息
 				var queryConsultingReplyByPatientUrl = Utils.getRoot()+"/consultingreplyApp/queryConsultingReplyByPatient";
 				$.post(queryConsultingReplyByPatientUrl, {id:id}, function(res){
@@ -162,44 +203,5 @@
 			    });
 			}
 		</script>
-		
-	</head>
-	<body>
-		<header class="ui-header ui-header-positive">
-			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;">在线咨询</h4>
-		</header>
-		<section class="ui-container"> 
-			<section id="list">
-				<div class="doc_intro">
-					<div class="intro_photo">
-						<img src="#" />
-					</div>
-					<div class="intro_right">
-						<div style="margin-top:10px ;">
-							<input type="hidden" name="id" id="id" />
-							<span class="intro_name" id="doctorName"></span>
-							<span class="intro_status" id="doctorTitle"></span>
-						</div>
-						<div>
-							<span class="intro_dep" id="doctorIntrodution"></span>
-						</div>
-					</div>
-				</div>
-				<div class="msg_item" id="msglist">
-				</div>
-				
-				<div class="cons_footer">
-					<div class="cons_footer_con">
-						<div class="up_img"><img src="../../img/online/u610.png" width="38" height="27" onclick="appendByGallery()"/></div>
-						<div class="foot_inp"><input type="text" id="crcontent"/></div>
-						<div class="foot_btn">
-							<button class="ui-btn ui-btn-primary" id="fasong">发送</button>
-						</div>
-					</div>
-					
-				</div>
-			</section>
-		</section>
 	</body>
 </html>
