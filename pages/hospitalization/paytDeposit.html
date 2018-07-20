@@ -12,15 +12,22 @@
         <title>住院押金补缴</title>
         
         <style type="text/css">
-        	html,body{background-color: #FFFFFF;}
-        	.payDeposit_item{display: block;float: left;width: 90%;margin-left: 5%;margin-top: 10%;}
+        	html,body{background-color: #F1F0F8;}
+        	.payDeposit_cz{display: block;float: left;width: 100%;background-color: #FFFFFF;}
+        	.payDeposit_item{display: block;float: left;width: 90%;margin-left: 5%;margin-top: 5%;}
         	.box_label, .box_span{display: block;float: left;height: 40px;line-height: 40px;}
         	.box_label{width: 30%;}
         	.box_span{width: 60%;}
         	.box_span>input{width: 100%;height: 35px;line-height: 35px;border: 1px solid #E6E6E6;border-radius: 2px;}
         	input{padding-left: 10px;font-size: 13px;}
-        	.pay_btn{display: block;float: left;width: 100%;height: 100px;background-color: #FFFFFF;margin-top: 10px;}
+        	.pay_btn{display: block;float: left;width: 100%;height: 100px;background-color: #FFFFFF;}
 			.pay_btn>button{display: block;width: 90%;height: 44px;line-height: 44px;text-align: center; margin: 0 auto;font-size: 16px; background: #FF3333;border-radius: 2px;color: #FFFFFF;margin-top: 30px;}
+			
+			.payDeposit_list{display: block;float: left;width: 100%;margin-top: 20px;margin-bottom: 30px;}
+			.list_item{display: block;float: left;width: 88%;margin-left: 3%;margin-top: 10px; padding: 2% 3%;background-color: #FFFFFF;border-radius: 2px;font-size: 14px;color: #333333;}
+			.list_item>div{display: block;width: 100%;float: left;height: 25px;line-height: 25px;}
+			.list_item>div>label{display: block;float: left;width: 35%;}
+			.list_item>div>span{display: block;float: left;width: 65%;}
         </style>
 	</head>
 	<body>
@@ -30,20 +37,63 @@
 		</header>
 		<section class="ui-container">
 			<div class="demo-block">
-				<div class="payDeposit_item">
-					<label class="box_label">金额 (元)：</label>
-					<span class="box_span">
-						<input id="moneyAmount" type="number" placeholder="输入充值金额"/>
-					</span>
+				<div class="payDeposit_cz" >
+					<div class="payDeposit_item">
+						<label class="box_label">金额 (元)：</label>
+						<span class="box_span">
+							<input id="moneyAmount" type="number" placeholder="输入充值金额"/>
+						</span>
+					</div>
+					
+					 <div class="pay_btn">
+						<button id="pay_deposit" class="pay_btn_btn" >立即充值</button>
+					</div>
 				</div>
-				
-				 <div class="pay_btn">
-					<button id="pay_deposit" class="pay_btn_btn" >立即充值</button>
+			</div>
+			<div class="payDeposit_list">
+				<div class="list_item">
+					<div>
+						<label>医院收据号：</label> 
+						<span> 88888888</span>
+					</div>
+					<div>
+						<label>支付时间：</label> 
+						<span>2018-07-20 15:20</span>
+					</div>
+					<div>
+						<label>金额：</label>  
+						<span>140元</span>
+					</div>
+					<div>
+						<label>支付渠道：</label> 
+						<span>微信</span>
+					</div>
+				</div>
+				<div class="list_item">
+					<div>
+						<label>医院收据号：</label> 
+						<span> 88888888</span>
+					</div>
+					<div>
+						<label>支付时间：</label> 
+						<span>2018-07-20 15:20</span>
+					</div>
+					<div>
+						<label>金额：</label>  
+						<span>140元</span>
+					</div>
+					<div>
+						<label>支付渠道：</label> 
+						<span>微信</span>
+					</div>
 				</div>
 			</div>
 		</section>
 		
 		<script>
+			$(".payDeposit_list").on("click",".list_item",function(){
+				location.href = "paytDeposit_view.html";
+			})
 			function plusReady(){
 				$("#pay_deposit").click(function(){
 					var moneyAmount = $("#moneyAmount").val();
