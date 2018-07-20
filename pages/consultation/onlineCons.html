@@ -32,7 +32,7 @@
 			.intro_name,.intro_status,.intro_posti{height: 35px;line-height: 35px;}
 			.intro_status{margin-left:20px;}
 			
-			.intro_dep{width: 96%;font-size: 13px;display: block;float: left;line-height: 20px;}
+			.intro_dep{display: block;float: left;width: 96%;font-size: 13px;min-height: 30px;max-height: 70px;line-height: 20px; overflow-y: auto;text-indent: 25px;color: #999999;}
 			.send_time{display: block;width: 30%;height: 20px;line-height:20px;font-size: 13px; background-color:#F2F2F2;border-radius:10px ;text-align: center;color: #666666;margin: 0 auto;}
 			.msg_list{display: block;width: 94%; min-height: 50px;max-height: 600px;margin: 0 auto;margin-left: 10px;margin-top: 15px; }
 			.cons_per{display: block;width: 100%;hanging-punctuation: 30px;font-size: 13px;color: #999999;text-align: right;}
@@ -106,7 +106,12 @@
 				
 				var id = Request["doctorCode"];
 				var doctorName = Request["doctorName"];
-				var doctorIntrodution = Request["doctorIntrodution"];
+				//识别内容中的标签，并用空格替换
+				var str = Request["doctorIntrodution"];
+				var regx = /<[^>]*>|<\/[^>]*>/gm;
+				var docValue =  str.replace(regx,"");
+				var doctorIntrodution = docValue;
+				
 				var doctorTitle = Request["doctorTitle"];
 				var doctorPhoto = Request["doctorPhoto"];
 				
