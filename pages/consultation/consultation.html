@@ -143,49 +143,6 @@
 		</section>
 		<script type="text/javascript">
 			$(function(){
-				var doctorCode = "";
-				var doctorName = "";
-				var doctorIntrodution = "";
-				var doctorTitle = "";
-				
-				$("#onlineCon").click(function(){
-					window.location.href="./onlineCons.html?doctorCode="+doctorCode+"&doctorName="+doctorName+"&doctorIntrodution="+doctorIntrodution+"&doctorTitle="+doctorTitle;
-				});
-				$("#liuyanCon").click(function(){
-					window.location.href="./liuyanCons.html?doctorCode="+doctorCode+"&doctorName="+doctorName;
-				});
-				
-				var Request = new Object();
-				Request = Utils.getRequest();
-				var params={};
-    			params.deptCode=Request["deptCode"];
-    			params.doctorCode=Request["doctorCode"];
-    			
-    			doctorCode = Request["doctorCode"];
-    			
-    			//alert(params.deptCode+"---"+params.doctorCode);
-				$.post(Utils.getRoot()+"/inquiry/findDoctor",params,function(data){
-					if (data.success) {
-						var doctorInfo = new Array();
-						doctorInfo= data.data; 
-						for (var i = 0; i < doctorInfo.length; i++) {
-							doctorName = doctorInfo[i].doctorName;
-							deptName = doctorInfo[i].deptName;
-							doctorTitle = doctorInfo[i].doctorTitle;
-							
-							$("#doctorName_").html(doctorInfo[i].doctorName);
-							$("#deptName_").html(doctorInfo[i].deptName);
-							$("#doctorTitle_").html(doctorInfo[i].doctorTitle);
-							$("#introduce_").html(doctorInfo[i].doctorIntrodution);
-							var doctorPhoto = doctorInfo[i].doctorPhoto;
-							if(doctorPhoto==null || doctorPhoto== ""
-								|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
-								doctorPhoto = "../../img/index/personLogo@2x.png";
-							}
-							$("#photo").attr("src",doctorPhoto);
-						}
-					}
-				});
 				//刷新页面
 				$(".reflash_item").on("click",function(){
 					$(".ui-actionsheet").addClass("show");
@@ -196,7 +153,48 @@
 				$(".reflash_btn").on("click",function(){
 					location.reload();
 					$(".ui-actionsheet").removeClass("show");
-				})
+				});
+				
+				var Request = Utils.getRequest();
+				var doctorCode = Request["doctorCode"];
+				var doctorName = "";
+				var doctorTitle = "";
+				var doctorIntrodution = "";
+				var doctorPhoto = "";
+				
+				
+				var params={};
+    			params.deptCode=Request["deptCode"];
+    			params.doctorCode=doctorCode;
+    			
+				$.post(Utils.getRoot()+"/inquiry/findDoctor",params,function(data){
+					if (data.success) {
+						var doctorInfo = data.data; 
+						doctorName = doctorInfo[0].doctorName;
+						deptName = doctorInfo[0].deptName;
+						doctorTitle = doctorInfo[0].doctorTitle;
+						doctorIntrodution = doctorInfo[0].doctorIntrodution;
+						doctorPhoto = doctorInfo[0].doctorPhoto;
+						
+						$("#doctorName_").html(doctorName);
+						$("#deptName_").html(deptName);
+						$("#doctorTitle_").html(doctorTitle);
+						$("#introduce_").html(doctorIntrodution);
+						if(doctorPhoto==null || doctorPhoto== ""
+							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+							doctorPhoto = "../../img/index/personLogo@2x.png";
+						}
+						$("#photo").attr("src",doctorPhoto);
+					}
+				});
+				
+				
+				$("#onlineCon").click(function(){
+					window.location.href="./onlineCons.html?doctorCode="+doctorCode+"&doctorName="+doctorName+"&doctorIntrodution="+doctorIntrodution+"&doctorTitle="+doctorTitle+"&doctorPhoto="+doctorPhoto;
+				});
+				$("#liuyanCon").click(function(){
+					window.location.href="./liuyanCons.html?doctorCode="+doctorCode+"&doctorName="+doctorName;
+				});
 			});
 		</script>
 	</body>
