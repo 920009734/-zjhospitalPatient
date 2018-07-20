@@ -315,7 +315,6 @@
         		
         		$("#tj").on("click",".per_name2", function(){//他人挂号
         			$("#patientid").val($(this).children(".sjpatientid_").val());//上级ID
-        			alert($("#patientid").val())
         			var idcard = $(this).children(".idcard").val();
         			var phone = $(this).children(".phone").val();
         			var patientname = $(this).children(".patientname_").text()
@@ -349,7 +348,7 @@
 				    formData.sender=$("#huanzhe_").text();
 				    formData.content = $("#describe_").val();
 				    formData.patientId = $("#patientid").val();
-				    console.log("formData:"+JSON.stringify(formData));
+				  	
 				    //D7BB131564844D498EB7C89CEA95EF4F
 				    for(var i = 0 ; i < files.length ; i ++){
 				    	formData.files = files[i];
@@ -364,7 +363,8 @@
 						$(".ui-dialog").show();
 						return false;
 					}
-				    if(!$("#describe_").val()){
+					
+				    if($("#describe_").val().length<1){
 						$("#dialogText").html("请输入你要提的问题!");
 						$(".ui-dialog").show();
 						return false;
@@ -377,6 +377,7 @@
 			             contentType: false,  
 			             processData: false,  
 			             success: function (result) {
+			             	console.log("success:"+JSON.stringify(result))
 					     	if (result.success) {
 					    		location.href = "../main.html";
 					    	} else {
@@ -385,6 +386,7 @@
 					    	}
 			             },
 			             error: function(result){
+			             	console.log("error:"+JSON.stringify(result))
 							$("#dialogText").html(result.message);
 							$(".ui-dialog").show();
 						 }
