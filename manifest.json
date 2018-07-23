@@ -829,7 +829,12 @@
 				"resources": [
 					"css/frozen.css",
 					"pages/main.html",
-					"css/style.css"
+					"css/style.css",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"pages/hospitalization/paytDeposit_view.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -857,6 +862,19 @@
 				"resources": [
 					"css/frozen.css",
 					"pages/familyMember.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/hospitalization/paytDeposit_view.html": {
+				"resources": [
+					"pages/hospitalization/paytDeposit.html",
+					"css/frozen.css",
+					"css/style.css",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js"
 				],
 				"refer": [],
 				"priority": 0

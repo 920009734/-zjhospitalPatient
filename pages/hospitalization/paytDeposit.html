@@ -51,7 +51,7 @@
 				</div>
 			</div>
 			<div class="payDeposit_list">
-				<div class="list_item">
+				<!--<div class="list_item">
 					<div>
 						<label>医院收据号：</label> 
 						<span> 88888888</span>
@@ -68,33 +68,17 @@
 						<label>支付渠道：</label> 
 						<span>微信</span>
 					</div>
-				</div>
-				<div class="list_item">
-					<div>
-						<label>医院收据号：</label> 
-						<span> 88888888</span>
-					</div>
-					<div>
-						<label>支付时间：</label> 
-						<span>2018-07-20 15:20</span>
-					</div>
-					<div>
-						<label>金额：</label>  
-						<span>140元</span>
-					</div>
-					<div>
-						<label>支付渠道：</label> 
-						<span>微信</span>
-					</div>
-				</div>
+				</div>-->
 			</div>
 		</section>
 		
 		<script>
 			$(".payDeposit_list").on("click",".list_item",function(){
-				location.href = "paytDeposit_view.html";
+				var id = $(this).attr('id');
+				location.href = "paytDeposit_view.html?id="+id;
 			})
 			function plusReady(){
+				loadRecord();
 				$("#pay_deposit").click(function(){
 					var moneyAmount = $("#moneyAmount").val();
 					if(!moneyAmount){
@@ -126,6 +110,37 @@
 							alert('网络异常，请稍候重试！');
 						}
 					});
+				});
+			}
+			
+			function loadRecord(){
+				plus.nativeUI.showWaiting("  请稍后...  ")
+				$.ajax({
+					type:"post",
+					url:Utils.getRoot()+"/deposit/getDeposits",
+					success: function(result){
+						plus.nativeUI.closeWaiting();
+						$(".payDeposit_list").empty();
+						var tempStr = '';
+						var channel = '';//WX_WAP、ALI_WAP
+						if(result.success){
+							$.each(result.data, function(ind, val) {
+								channel = val.channel == 'WX_WAP' ? '微信' : '支付宝';
+								tempStr += '<div id='+val.orderId+' class="list_item">'
+									+ '<div><label>医院收据号：</label><span>'+val.receiptNum+'</span></div>'
+									+ '<div><label>支付时间：</label><span>'+val.payTime+'</span></div>'
+									+ '<div><label>金额：</label><span>'+val.orderAmount+'元</span></div>'
+									+ '<div><label>支付渠道：</label><span>'+channel+'</span></div></div>';
+							});
+							$(".payDeposit_list").append(tempStr);
+						}else{
+							alert(result.message);
+						}
+					},
+					error:function(){
+						plus.nativeUI.closeWaiting();
+						alert('网络异常，请稍候重试！');
+					}
 				});
 			}
 			

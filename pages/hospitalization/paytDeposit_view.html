@@ -30,33 +30,70 @@
 				<div class="payDeposit_view">
 					<div class="list-item">
 						<span class="demo_name">流水号</span>
-						<span class="demo_value"><span>03938272</span></span>
+						<span class="demo_value"><span id="serialNumber_"></span></span>
 					</div>
 					<div class="list-item">
 						<span class="demo_name">医院收据号</span>
-						<span class="demo_value"><span>88888888</span></span>
+						<span class="demo_value"><span id="receiptNum_"></span></span>
 					</div>
 					<div class="list-item">
 						<span class="demo_name">支付渠道</span>
-						<span class="demo_value"><span>微信</span></span>
+						<span class="demo_value"><span id="channel_"></span></span>
 					</div>
 					<div class="list-item">
 						<span class="demo_name">订单金额</span>
-						<span class="demo_value"><span>140元</span></span>
+						<span class="demo_value"><span id="orderAmount_"></span></span>
 					</div>
 					<div class="list-item">
 						<span class="demo_name">支付时间</span>
-						<span class="demo_value"><span>2018-07-20 15:20</span></span>
+						<span class="demo_value"><span id="payTime_"></span></span>
 					</div>
-					<div class="list-item">
-						<span class="demo_name">创建时间</span>
-						<span class="demo_value"><span>2018-07-20 15:21</span></span>
-					</div>
+					<!--<div class="list-item">
+						<span class="demo_name">订单创建时间</span>
+						<span class="demo_value"><span id="createTime_"></span></span>
+					</div>-->
 				</div>
 			</div>
 		</section>
 		
 		<script>
+			function plusReady(){
+				var Request = Utils.getRequest();
+		     	var id = Request["id"];
+		     	plus.nativeUI.showWaiting("  请稍后...  ")
+				$.ajax({
+					type:"post",
+					url:Utils.getRoot()+"/deposit/getDepositBy",
+					data: {
+						id: id
+					},
+					success: function(result){
+						plus.nativeUI.closeWaiting();
+						var data = result.data;
+						if(result.success){
+							var channel = data.channel == 'WX_WAP' ? '微信' : '支付宝';//WX_WAP、ALI_WAP
+							$("#channel_").html(channel);
+							$("#orderAmount_").html(data.orderAmount+"元");
+							$("#receiptNum_").html(data.receiptNum);
+							$("#payTime_").html(data.payTime);
+							//$("#createTime_").html(Utils.formatDateByLong(data.createTime));
+							$("#serialNumber_").html(data.serialNumber);
+						}else{
+							alert(result.message);
+						}
+					},
+					error:function(){
+						plus.nativeUI.closeWaiting();
+						alert('网络异常，请稍候重试！');
+					}
+				});
+			}
+			
+			if(window.plus){
+				plusReady();
+			}else{
+				document.addEventListener('plusready',plusReady,false);
+			}
 		</script>
 	</body>
 </html>

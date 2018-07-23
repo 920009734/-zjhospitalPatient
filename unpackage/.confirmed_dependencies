@@ -51,10 +51,14 @@
 			"img/self/banben.png",
 			"font/iconfont-full.ttf",
 			"img/kefu1.png",
-			"pages/familyMember.html"
+			"pages/familyMember.html",
+			"pages/hospitalization/paytDeposit.html",
+			"pages/floorDistribution.html"
 		],
 		"refer": [
-			"pages/familyMember.html"
+			"pages/familyMember.html",
+			"pages/hospitalization/paytDeposit.html",
+			"pages/floorDistribution.html"
 		]
 	},
 	"pages/familyMember.html": {
@@ -76,6 +80,45 @@
 		],
 		"refer": [
 			"pages/familyMember.html"
+		]
+	},
+	"pages/hospitalization/paytDeposit.html": {
+		"resources": [
+			"css/frozen.css",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js",
+			"pages/main.html",
+			"pages/hospitalization/paytDeposit_view.html"
+		],
+		"refer": [
+			"pages/main.html",
+			"pages/hospitalization/paytDeposit_view.html"
+		]
+	},
+	"pages/floorDistribution.html": {
+		"resources": [
+			"css/frozen.css",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html"
+		]
+	},
+	"pages/hospitalization/paytDeposit_view.html": {
+		"resources": [
+			"pages/hospitalization/paytDeposit.html",
+			"css/frozen.css",
+			"css/style.css",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"lib/zepto.min.js",
+			"js/Utils.js"
+		],
+		"refer": [
+			"pages/hospitalization/paytDeposit.html"
 		]
 	}
 }
