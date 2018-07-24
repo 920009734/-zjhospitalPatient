@@ -111,6 +111,7 @@
 		if(!plus){
 			plus = top.plus;
 		}
+		//更新APP资源包
 		function checkVersion(){
 			if(localStorage.getItem('isNewVersion')){
 				plus.nativeUI.confirm('是否确认升级到最新版本?', function(e) {
@@ -169,8 +170,7 @@
     		
     		//退出
     		$(".login_btn").click(function() {
-    			var logoutUrl = Utils.getRoot()+"/patientApp/logout";
-    			$.post(logoutUrl,{
+    			$.post(Utils.getRoot()+"/patientApp/logout", {
     				token: patientInfo.toke
     			}, function(res) {
 	    			if (res.success) {

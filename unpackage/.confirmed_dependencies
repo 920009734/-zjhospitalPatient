@@ -9,10 +9,12 @@
 			"css/style.css",
 			"lib/zepto.min.js",
 			"js/Utils.js",
-			"pages/main.html"
+			"pages/main.html",
+			"pages/regist.html"
 		],
 		"refer": [
-			"pages/main.html"
+			"pages/main.html",
+			"pages/regist.html"
 		]
 	},
 	"pages/main.html": {
@@ -53,12 +55,14 @@
 			"img/kefu1.png",
 			"pages/familyMember.html",
 			"pages/hospitalization/paytDeposit.html",
-			"pages/floorDistribution.html"
+			"pages/floorDistribution.html",
+			"pages/login.html"
 		],
 		"refer": [
 			"pages/familyMember.html",
 			"pages/hospitalization/paytDeposit.html",
-			"pages/floorDistribution.html"
+			"pages/floorDistribution.html",
+			"pages/login.html"
 		]
 	},
 	"pages/familyMember.html": {

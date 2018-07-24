@@ -66,10 +66,12 @@
 					}
 				},false);
 				
-				//检测版本
-				plus.runtime.getProperty(plus.runtime.appid, function(info) {
-					checkUpdate(info.version);
-	            });
+				if(!localStorage.getItem('isNewVersion')){
+					//检测版本
+					plus.runtime.getProperty(plus.runtime.appid, function(info) {
+						checkUpdate(info.version);
+	            	});
+				}
 			}
         	
         	function checkUpdate(v){
@@ -131,7 +133,7 @@
 				var socket = new WebSocket('ws://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + patientInfo.patientid);
 				// 打开Socket
 				socket.onopen = function(event) {
-				  localStorage.setItem('socket_is_connect','true');
+				  localStorage.setItem('socket_is_connect',true);
 				}
 				  // 监听消息
 				socket.onmessage = function(event) {

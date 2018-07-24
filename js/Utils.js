@@ -293,6 +293,7 @@ Utils = {
 				    plus.runtime.install(task.filename, {force: true}, function(){
 				        plus.nativeUI.closeWaiting();
 				        plus.nativeUI.alert("应用资源更新完成！",function(){
+				        	//更新之后重新登录
 				        	localStorage.clear();
 				            plus.runtime.restart();
 				        });
