@@ -16,12 +16,12 @@
 			html,body{width: 100%;height: 100%;background-color: #F1F0F8;}
 			header>h4>span,header>h4>i{display: block;float: left;}
 			header>h4>i{margin-top: 1px;}
-			.search_doc{display: block;width: 92%;height: 60px;margin: 0 auto;margin-top: 15px;}
+			.search_doc{display: block;width: 100%;position: fixed;top: 50px; height: 70px;background-color: #F1F0F8;}
 			.search_doc>div{display: block;float: left;height: 35px;line-height: 35px;} 
-			.search_left{width: 87%;background-color: #FFFFFF;border-radius: 30px;}
+			.search_left{width: 92%;background-color: #FFFFFF;border-radius: 30px;margin-top: 20px;margin-left: 4%;}
 			.search_left>input,.search_left>i{display: block;float: left;}
 			.search_left>input{height: 35px;line-height: 35px;width: 80%;border: none;margin-left: 15px;}
-			.search_left>i{font-size: 40px;margin-right: -10px;margin-top: -6px;color: #199ED8;}
+			.search_left>i{font-size: 45px;margin-right: -10px;margin-top: -7px;color: #199ED8;}
 			.search_right{width: 13%;text-align: right;color: #199ED8;}
 			.ck_doc{display:block;width:92%;height: 70px; margin-left:4%;margin-bottom:5px;background-color: #FFFFFF;border-radius: 2px;padding: 7px 0px;}
 			.ck_doc>div{display: block;float: left;} 
@@ -47,7 +47,7 @@
 			.right_item>span{margin-left: 10px;}
 			.depitem_list.all{padding-bottom: 5px;}
 			
-			#doctor_{display: block;float: left;width: 100%;height: 100%;}
+			#doctor_{display: block;float: left;width: 100%;height: 100%;margin-top: 75px;}
 			.notData{color: #999999;text-align: center;line-height: 50px;}
 			input[placeholder]{font-size: 13px;}
 		</style>
@@ -67,7 +67,7 @@
 						<input type="text" placeholder="输入医生姓名搜索医生" id="docName_id"/>
 						<i class="ui-icon ui-icon-search" onclick="changeVal()"></i>
 					</div>
-					<div class="search_right" onclick="changeVal()">搜索</div>
+					<!--<div class="search_right" onclick="changeVal()">搜索</div>-->
 				</div>
 				<div id="doctor_"></div>
 			</section>
