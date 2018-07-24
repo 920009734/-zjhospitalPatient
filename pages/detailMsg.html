@@ -32,7 +32,7 @@
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
 			<h4 style="margin-left: 25px;">
 				<span>我的消息</span>
-				<span class="reflash_item"><i class="iconfont icon-switch"></i></span>
+				<!--<span class="reflash_item"><i class="iconfont icon-switch"></i></span>-->
 			</h4>
 		</header>
 		<section class="ui-container"> 
@@ -69,6 +69,10 @@
 			if(!plus){
 				plus = top.plus;
 			}
+			// Android处理返回键
+			plus.key.addEventListener('backbutton',function(){
+				history.go(-1);
+			},false);
 			
 			loadNotice();
 			

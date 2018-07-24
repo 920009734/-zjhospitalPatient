@@ -69,15 +69,22 @@
 		</section>
 	</body>
 	<script>
+		var backbuttonCount = 0;
 		function plusReady(){
 			// 隐藏滚动条
 			plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
 			// Android处理返回键
 			plus.key.addEventListener('backbutton',function(){
-				if(confirm('确认退出？')){
-					plus.runtime.quit();
-				}
-			},false);
+					backbuttonCount ++ ;
+					if(backbuttonCount > 1){
+						plus.runtime.quit();
+					}else{
+						plus.nativeUI.toast('再按一次退出应用');
+					}
+					setTimeout(function() {
+						backbuttonCount = 0;
+					}, 1000);
+				},false);
 			
 			//延迟时间为启动图展示时间
 			setTimeout(function(){

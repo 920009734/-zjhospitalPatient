@@ -322,5 +322,18 @@
 				
 			</section>
 		</section>
+		<script>
+			function plusReady(){
+				// Android处理返回键
+				plus.key.addEventListener('backbutton',function(){
+					history.go(-1);
+				},false);
+			}
+			if(window.plus){
+				plusReady();
+			}else{
+				document.addEventListener('plusready',plusReady,false);
+			}
+		</script>
 	</body>
 </html>

@@ -853,7 +853,8 @@
 					"js/jquery-1.8.3.min.js",
 					"css/frozen.css",
 					"pages/main.html",
-					"pages/addPerple.html"
+					"pages/addPerple.html",
+					"pages/memberDetail.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -875,6 +876,20 @@
 					"js/frozen.js",
 					"lib/zepto.min.js",
 					"js/Utils.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/consultation/consulteLlist.html": {
+				"resources": [
+					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/memberDetail.html": {
+				"resources": [
+					"pages/familyMember.html"
 				],
 				"refer": [],
 				"priority": 0
