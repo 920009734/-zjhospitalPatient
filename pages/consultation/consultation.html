@@ -179,7 +179,14 @@
 						$("#doctorName_").html(doctorName);
 						$("#deptName_").html(deptName);
 						$("#doctorTitle_").html(doctorTitle);
-						$("#introduce_").html(doctorIntrodution);
+						
+						//识别内容中的标签
+						var str = doctorIntrodution;
+						var regx = /<[^>]*>|<\/[^>]*>/gm;
+						var docValue =  str.replace(regx,"");
+						
+						$("#introduce_").html(docValue);
+						
 						if(doctorPhoto==null || doctorPhoto== ""
 							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
 							doctorPhoto = "../../img/self/self.png";
