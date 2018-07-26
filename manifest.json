@@ -675,7 +675,9 @@
 					"font/iconfont-full.ttf",
 					"js/frozen.js",
 					"lib/zepto.min.js",
-					"pages/main.html"
+					"pages/main.html",
+					"H5Js/common.js",
+					"js/common.js"
 				],
 				"refer": [],
 				"priority": 0

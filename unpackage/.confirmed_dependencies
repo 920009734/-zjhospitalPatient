@@ -59,7 +59,8 @@
 			"pages/login.html",
 			"pages/hospitalization/inHospotalSearch.html",
 			"pages/yuyueguahao/patien_register.html",
-			"pages/consultation/consulteLlist.html"
+			"pages/consultation/consulteLlist.html",
+			"pages/yuyueguahao/choiceDepartment.html"
 		],
 		"refer": [
 			"pages/familyMember.html",
@@ -68,7 +69,8 @@
 			"pages/login.html",
 			"pages/hospitalization/inHospotalSearch.html",
 			"pages/yuyueguahao/patien_register.html",
-			"pages/consultation/consulteLlist.html"
+			"pages/consultation/consulteLlist.html",
+			"pages/yuyueguahao/choiceDepartment.html"
 		]
 	},
 	"pages/familyMember.html": {
@@ -113,7 +115,10 @@
 	"pages/floorDistribution.html": {
 		"resources": [
 			"css/frozen.css",
-			"pages/main.html"
+			"pages/main.html",
+			"css/style.css",
+			"H5Js/common.js",
+			"js/common.js"
 		],
 		"refer": [
 			"pages/main.html"
@@ -165,6 +170,17 @@
 		],
 		"refer": [
 			"pages/familyMember.html"
+		]
+	},
+	"pages/yuyueguahao/choiceDepartment.html": {
+		"resources": [
+			"fontIcon/iconfont.css",
+			"css/frozen.css",
+			"css/style.css",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html"
 		]
 	}
 }
