@@ -31,7 +31,7 @@
 		
 		<section class="ui-container">
 			<div class="keshi" id="department">
-				<div class="keshi_item">
+				<!--<div class="keshi_item">
 					<span class="box_img"><img src="../img/kes/g1.png" /></span>
 					<span class="box_con">普通外科门诊</span>
 					<span class="box_icon"><i class="ui-icon ui-icon-arrow"></i></span>
@@ -60,12 +60,52 @@
 					<span class="box_img"><img src="../img/kes/g1.png" /></span>
 					<span class="box_con">普通外科门诊</span>
 					<span class="box_icon"><i class="ui-icon ui-icon-arrow"></i></span>
-				</div>
+				</div>-->
 			</div>
 		</section>
 	</body>
 	 
 	<script type="text/javascript">
+		if(window.plus){
+			plusReady();
+		}else{
+			document.addEventListener('plusready',plusReady,false);
+		}
+		function plusReady(){
+			loadData();
+		}
 		
+		function loadData(){
+			plus.nativeUI.showWaiting("数据加载中...");
+			$.ajax({
+				type:"post",
+				url: Utils.getRoot()+"/deptInfo/getRootDeptInfo",
+				success: function(result){
+					plus.nativeUI.closeWaiting();
+					$("#department").empty();
+					var tempStr = '';
+					if(result.success){
+						$.each(result.data, function(ind, val) {
+							tempStr += '<div class="keshi_item" onclick="child_vew('+val.id+')">'+
+									'<span class="box_img"><img src="../img/kes/g1.png" /></span>'+
+									'<span class="box_con">'+val.typeName+'</span>'+
+									'<span class="box_icon"><i class="ui-icon ui-icon-arrow"></i></span>'+
+								'</div>';
+						});
+						$("#department").append(tempStr);
+					}else{
+						alert(result.message);
+					}
+				},
+				error:function(){
+					plus.nativeUI.closeWaiting();
+					alert('网络异常，请稍候重试！');
+				}
+			});
+		}
+		function child_vew(id){
+			var ws = plus.webview.create("divisionIntroduce_child.html?id="+id,"dataView");
+			ws.show();
+		}
 	</script>
 </html>
