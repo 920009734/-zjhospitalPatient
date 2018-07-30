@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
         <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/jquery-1.8.3.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
         <title>诊间缴费</title>
@@ -27,10 +28,40 @@
         	.notData{color: #999999;text-align: center;line-height: 50px;}
         </style>
         
+	</head>
+	<body>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">诊间缴费</h4>
+		</header>
+		<section class="ui-container">
+			<div class="demo-block">
+				<div class="pay_list">
+					<div class="pay_tab">
+						<span class="box_tab active" id="wjf">待缴费</span>
+						<span class="box_tab " id="yjf">已缴费</span>
+					</div>
+					<div class="wjf_con" id="wjfList">
+					</div>
+					
+					<div class="yjf_con">
+						<a href="payDetail_yjf_view.html">
+							<div class="yjf_item">
+								<span class="box_type">接诊科室：内科门诊（已缴费）</span>
+								<span class="box_money">已缴总额：129元</span>
+								<span class="box_time">缴费时间：2018-05-21 15:22</span>
+							</div>
+						</a>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+		
+		
         <script type="text/javascript">
         	$(function(){
         		wjfList();
-        		
         		$(".box_tab").on("click",function(){
 					var a = $(this).hasClass("active");
 					if(!a){
@@ -47,9 +78,44 @@
 				});
 				
         		
-        		
+        		//待交费记录
         		function wjfList(){
-        			
+        			var params={};
+	        		$.post(Utils.getRoot()+"/outpatientPayment/selPayorder",params,function(data){
+						if (data.success) {
+							var listPayorder = new Array();
+							listPayorder= data.data;
+							console.log("listPayorder:"+JSON.stringify(listPayorder));
+							for (var i = 0; i < listPayorder.length; i++) {
+								var totalAmt = parseFloat(listPayorder[i].totalAmt)/100;
+								$("#wjfList").append(
+									"<div class='wjf_item' >"+
+										"<input type='hidden' name='listPayorder'  value='"+JSON.stringify(listPayorder[i])+"'/>"+
+										"<span class='box_type'>订单号："+listPayorder[i].hisOrdNum+"</span>"+
+										"<span class='box_type'>缴费项目："+listPayorder[i].payName+"</span>"+
+										"<span class='box_type'>科室姓名："+listPayorder[i].deptName+"</span>"+
+										"<span class='box_type'>医生姓名："+listPayorder[i].doctorName+"</span>"+
+										"<span class='box_money'>总费用："+totalAmt+" 元</span>"+
+									"</div>"
+								)
+							}
+						}else{
+							$("#wjfList").append(
+								"<div class='list-item '>"+
+									"<p class='notData'>暂无数据</p>"+
+								"</div>"
+							);
+						}
+					});
+        		}
+        		
+        		$("#wjfList").on("click",".wjf_item",function(){
+        			var listPayorder = $(this).children("input[name='listPayorder']").val();
+        			window.location.href="../payment/payDetail_view.html?listPayorder="+listPayorder;
+        		});
+        		
+        		//已交费记录
+        		/*function yjfList(){
         			var params={};
 	        		$.post(Utils.getRoot()+"/outpatientPayment/selPayorder",params,function(data){
 							console.log(JSON.stringify(data));
@@ -78,51 +144,10 @@
 							);
 						}
 					});
-        		}
-        		
-        		$("#wjfList").on("click",".wjf_item",function(){
-        			var listPayorder = $(this).children("input[name='listPayorder']").val();
-        			window.location.href="../payment/payDetail_view.html?listPayorder="+listPayorder;
-        		});
+        		}*/
         		
         		
         	})
        </script>
-	</head>
-	<body>
-		<header class="ui-header ui-header-positive">
-			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;">诊间缴费</h4>
-		</header>
-		<section class="ui-container">
-			<div class="demo-block">
-				<div class="pay_list">
-					<div class="pay_tab">
-						<span class="box_tab active" id="wjf">未缴费</span>
-						<span class="box_tab " id="yjf">已缴费</span>
-					</div>
-					<div class="wjf_con" id="wjfList">
-						<!--<div class="wjf_item" >
-							<span class="box_type">订单号：456456456</span>
-							<span class="box_type">科室姓名：内科门诊</span>
-							<span class="box_type">医生姓名：张三</span>
-							<span class="box_money">总费用：129元</span>
-						</div>-->
-					</div>
-					
-					<div class="yjf_con">
-						<a href="payDetail_yjf_view.html">
-							<div class="yjf_item">
-								<span class="box_type">接诊科室：内科门诊（已缴费）</span>
-								<span class="box_money">已缴总额：129元</span>
-								<span class="box_time">缴费时间：2018-05-21 15:22</span>
-							</div>
-						</a>
-					</div>
-					
-				</div>
-			</div>
-		</section>
-		
 	</body>
 </html>

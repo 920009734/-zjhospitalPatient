@@ -7,9 +7,10 @@
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
         <script src="../../lib/zepto.min.js"></script>
+        <script src="../../js/jquery-1.8.3.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
-		<title>缴费详情</title>
+		<title>待缴费详情</title>
 		<style type="text/css">
 			html,body{background-color: #F3F3F3;}
 			.pay_detail{display: block;float: left;width: 100%;height: 100%;}
@@ -35,74 +36,18 @@
 			.con_left>span:first-child,.con_center>span:first-child,.con_right>span:first-child{font-size: 13px;}
 			.hr_sex{display: block;float: left;width: 1px;height: 30px;margin-top: 10px;border-right: 1px solid #FFFFFF;}
 		</style>
-		
-		<script type="text/javascript">
-        	$(function(){
-        		var Request = new Object();
-        		Request = Utils.getRequest();
-        		
-        		var listPayorder = Request["listPayorder"];
-        		/*代缴费记录*/
-				$("#hisOrdNum").text(listPayorder.hisOrdNum);
-				$("#payName").text(listPayorder.payName);
-				$("#deptName").text(listPayorder.deptName);
-				$("#doctorName").text(listPayorder.doctorName);
-				$("#medInsAmt").text(parseFloat(listPayorder.medInsAmt)/100+"元");
-				$("#selfAmt").text(parseFloat(listPayorder.selfAmt)/100+"元");
-				$("#totalAmt").text(parseFloat(listPayorder.totalAmt)/100+"元");
-				
-        		/*代缴费记录明细*/
-        		var params={};
-        		params.hisOrdNum = listPayorder.hisOrdNum;
-        		$.post(Utils.getRoot()+"/outpatientPayment/selPayorderInfo",params,function(data){
-					if (data.success) {
-						var payorderInfo = new Array();
-						payorderInfo= data.data;
-						console.log(JSON.stringify(payorderInfo));
-						
-						
-						var patientInfo = payorderInfo[0].patientInfo;
-						$("#realname").text(patientInfo.realname);
-						if (patientInfo.sex == 1) {
-							$("#sex").text("男");
-						} else {
-							$("#sex").text("女");
-						}
-						$("#age").text(patientInfo.age);
-						
-						
-						/*代缴费记录明细*/
-						for (var i = 0; i < payorderInfo.length; i++) {
-							$("#wjfmxList").append(
-								"<tr>"+
-									"<td>"+payorderInfo[i].itemName+"</td>"+
-									"<td>"+payorderInfo[i].itemType+"</td>"+
-									"<td>"+payorderInfo[i].itemNumber+"</td>"+
-									"<td>"+payorderInfo[i].itemSpec+"</td>"+
-									"<td>"+payorderInfo[i].itemUnit+"</td>"+
-									"<td>"+payorderInfo[i].itemPrice+"</td>"+
-								"</tr>"
-							);
-						}
-					}else{
-						alert(data.message);
-					}
-				});
-        		
-        	});
-       </script>
        
 	</head>
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;">代缴费明细</h4>
+			<h4 style="margin-left: 25px;">待缴费明细</h4>
 		</header>
 		
 		<section class="ui-container">
 			<div class="demo-block">
 				<div class="person_msg">
-					<div class="jcbg_title">代缴费明细</div>
+					<div class="jcbg_title">待缴费明细</div>
 					<div class="jcbg_con">
 						<div class="con_left">
 							<span>患者</span>
@@ -146,21 +91,22 @@
 							<span class="demo_name" >自费金额</span>
 							<span class="demo_value"><span id="selfAmt"></span></span>
 						</div>
-						<div class="list-item">
-							<span class="demo_name">应缴总额</span>
-							<span class="demo_value"><span id="totalAmt"></span></span>
+						<div class="list-item" >
+							<span class="demo_name"style="color:red">应缴总额</span>
+							<span class="demo_value"style="color:red"><span id="totalAmt"></span></span>
 						</div>
 					</div>
 					<div class="pay_detail_table">
 						<table class="baogao_table">
 							<thead>
 								<tr>
-									<th style="width: 25%;">项目名称</th>
-									<th style="width: 20%;">类别/费别</th>
+									<th style="width: 20%;">项目名称</th>
+									<th style="width: 15%;">类别/费别</th>
 									<th style="width: 10%;">数量</th>
 									<th style="width: 10%;">规格</th>
 									<th style="width: 10%;">单位</th>
-									<th style="width: 15%;">单价(元)</th>
+									<th style="width: 10%;">单价(分)</th>
+									<th style="width: 15%;">合计(元)</th>
 								</tr>
 							</thead>
 							<tbody id="wjfmxList">
@@ -172,10 +118,87 @@
 						</table>
 					</div>
 					<div class="pay_btn">
-						<button >立即缴费</button>
+						<button id="pay">立即缴费</button>
 					</div>
 				</div>
 			</div>
 		</section>
+		
+		<script type="text/javascript">
+        	$(function(){
+        		
+        		var Request = new Object();
+        		Request = Utils.getRequest();
+        		
+        		var listPayorder = JSON.parse(Request["listPayorder"]);
+        		/*代缴费记录*/
+				$("#hisOrdNum").text(listPayorder.hisOrdNum);
+				$("#payName").text(listPayorder.payName);
+				$("#deptName").text(listPayorder.deptName);
+				$("#doctorName").text(listPayorder.doctorName);
+				$("#medInsAmt").text(parseFloat(listPayorder.medInsAmt)/100+"元");
+				$("#selfAmt").text(parseFloat(listPayorder.selfAmt)/100+"元");
+				$("#totalAmt").text(parseFloat(listPayorder.totalAmt)/100+"元");
+				
+        		/*代缴费记录明细*/
+        		var params={};
+        		params.hisOrdNum = listPayorder.hisOrdNum;
+        		$.post(Utils.getRoot()+"/outpatientPayment/selPayorderInfo",params,function(data){
+					console.log(JSON.stringify(data));
+					if (data.success) {
+						var payorderInfo = new Array();
+						payorderInfo= data.data;
+						var patientInfo = payorderInfo[0].patientInfo;
+						$("#realname").text(patientInfo.realname);
+						if (patientInfo.sex == 1) {
+							$("#sex").text("男");
+						} else {
+							$("#sex").text("女");
+						}
+						$("#age").text(patientInfo.age);
+						
+						/*代缴费记录明细*/
+						for (var i = 0; i < payorderInfo.length; i++) {
+							$("#wjfmxList").append(
+								"<tr>"+
+									"<td>"+payorderInfo[i].itemName+"</td>"+
+									"<td>"+payorderInfo[i].itemType+"</td>"+
+									"<td>"+payorderInfo[i].itemNumber+"</td>"+
+									"<td>"+payorderInfo[i].itemSpec+"</td>"+
+									"<td>"+payorderInfo[i].itemUnit+"</td>"+
+									"<td>"+payorderInfo[i].itemPrice+"</td>"+
+									"<td>"+(parseFloat(payorderInfo[i].itemTotalFee)/100)+"</td>"+
+								"</tr>"
+							);
+						}
+					}else{
+						alert(data.message);
+					}
+				});
+				
+				if(window.plus){
+					plusReady();
+				}else{
+					document.addEventListener('plusready',plusReady,false);
+				}
+				
+				function plusReady(){
+					$("#pay").click(function(){
+						var chargeAmt =  $("#totalAmt").text();
+						var patientid = JSON.parse(localStorage.getItem('patientInfo')).patientid;
+						var outChargeNo = $("#hisOrdNum").text();
+						var url = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod_outpatient.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
+						var w = plus.webview.create(url);
+						w.show();
+					});
+					
+					// Android处理返回键
+					plus.key.addEventListener('backbutton',function(){
+						history.go(-1);
+					},false);
+				}
+        		
+        	});
+       </script>
 	</body>
 </html>
