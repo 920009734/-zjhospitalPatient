@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="../css/frozen.css">
         <link rel="stylesheet" href="../css/style.css"/>
         
+        <script src="../H5Js/common.js" ></script>
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
         <script src="../js/Utils.js" ></script>
@@ -25,7 +26,7 @@
 	</head>
 	<body>
 		<header class="ui-header ui-header-positive">
-			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<i class="ui-icon ui-icon-return" onclick=""></i>
 			<h4 style="margin-left: 25px;" id="dep_type" ><span>科室介绍</span> </h4>
 		</header>
 		
@@ -86,7 +87,7 @@
 					var tempStr = '';
 					if(result.success){
 						$.each(result.data, function(ind, val) {
-							tempStr += '<div class="keshi_item" onclick="child_vew('+val.id+')">'+
+							tempStr += '<div class="keshi_item" onclick=\'child_vew("'+val.id+'","'+val.typeName+'")\'>'+
 									'<span class="box_img"><img src="../img/kes/g1.png" /></span>'+
 									'<span class="box_con">'+val.typeName+'</span>'+
 									'<span class="box_icon"><i class="ui-icon ui-icon-arrow"></i></span>'+
@@ -103,8 +104,8 @@
 				}
 			});
 		}
-		function child_vew(id){
-			var ws = plus.webview.create("divisionIntroduce_child.html?id="+id,"dataView");
+		function child_vew(id,typeName){
+			var ws = plus.webview.create("divisionIntroduce_child.html?id="+id+"&typeName="+typeName);
 			ws.show();
 		}
 	</script>

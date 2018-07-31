@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="../css/frozen.css">
         <link rel="stylesheet" href="../css/style.css"/>
         
+        <script src="../H5Js/common.js" ></script>
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
         <script src="../js/Utils.js" ></script>
@@ -17,7 +18,6 @@
 			.keshi_item{display: block;float: left;width: 94%;margin-left: 3%;height: 50px;line-height: 50px;background-color: #FFFFFF;margin-top: 5px;border-radius: 4px;}
 			
 			.box_img{display: block;float: left;padding-left: 10px;}
-			.box_img>img{display: block;width: 30px;height: 30px;margin-top: 10px;}
 			.box_con{display: block;float: left;padding-left: 10px;color: #127674;}
 			.box_icon{display: block;float: right;}
 			.box_icon>i{line-height: 50px;color: #88BFC9;}
@@ -25,37 +25,12 @@
 	</head>
 	<body>
 		<header class="ui-header ui-header-positive">
-			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;" id="dep_type" ><span>科室介绍</span> </h4>
+			<i class="ui-icon ui-icon-return" onclick="closeme()"></i>
+			<h4 style="margin-left: 25px;" id="dep_type" ><span></span> </h4>
 		</header>
 		
 		<section class="ui-container">
-			<div class="keshi" id="department_child">
-				<!--<div class="keshi_item">
-					<span class="box_con">普通外科门诊</span>
-					<span class="box_icon"><i class="ui-icon ui-icon-arrow"></i></span>
-				</div>
-				<div class="keshi_item">
-					<span class="box_con">普通内科门诊</span>
-					<span class="box_icon"><i class="ui-icon ui-icon-arrow"></i></span>
-				</div>
-				<div class="keshi_item">
-					<span class="box_con">普通外科门诊</span>
-					<span class="box_icon"><i class="ui-icon ui-icon-arrow"></i></span>
-				</div>
-				<div class="keshi_item">
-					<span class="box_con">普通外科门诊</span>
-					<span class="box_icon"><i class="ui-icon ui-icon-arrow"></i></span>
-				</div>
-				<div class="keshi_item">
-					<span class="box_con">普通外科门诊</span>
-					<span class="box_icon"><i class="ui-icon ui-icon-arrow"></i></span>
-				</div>
-				<div class="keshi_item">
-					<span class="box_con">普通外科门诊</span>
-					<span class="box_icon"><i class="ui-icon ui-icon-arrow"></i></span>
-				</div>-->
-			</div>
+			<div class="keshi" id="department_child"> </div>
 		</section>
 	</body>
 	 
@@ -72,16 +47,16 @@
 			plus.nativeUI.showWaiting("数据加载中...");
 			var Request = Utils.getRequest();
 		    var id = Request["id"];
-		    
-			console.log(id);
+		    var typeName = Request["typeName"];
 			$.ajax({
 				type:"post",
 				url: Utils.getRoot()+"/deptInfo/getChildrenBy",
-				data:{id: id},
+				data:{id: id,typeName:typeName},
 				success: function(result){
 					plus.nativeUI.closeWaiting();
 					$("#department_child").empty();
 					var tempStr = '';
+					
 					if(result.success){
 						$.each(result.data, function(ind, val) {
 							tempStr += '<div class="keshi_item" onclick="child_vew('+val.id+')">'+
@@ -90,6 +65,7 @@
 								'</div>';
 						});
 						$("#department_child").append(tempStr);
+						$("#dep_type").children("span").html(typeName);
 					}else{
 						alert(result.message);
 					}
@@ -101,8 +77,13 @@
 			});
 		}
 		function child_vew(id){
-			var ws = plus.webview.create("divisionIntroduce_view.html?id="+id,"dataView");
+			var ws = plus.webview.create("divisionIntroduce_view.html?id="+id);
 			ws.show();
+		}
+		
+		function closeme(){
+			var ws=plus.webview.currentWebview();
+			plus.webview.close(ws);
 		}
 	</script>
 </html>
