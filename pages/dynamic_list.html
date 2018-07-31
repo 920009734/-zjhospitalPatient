@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <link rel="stylesheet" href="../css/frozen.css">
+        <link rel="stylesheet" href="../css/style.css" />
+        
+        <script src="../H5Js/common.js" ></script>
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+        <script src="../js/Utils.js" ></script>
+		<title>动态</title>
+		<style type="text/css">
+			html,body{font-family: "微软雅黑";background-color: #FFFFFF;}
+			.notice_item{display: block;float: left;width: 100%;height:30% ;margin-bottom:80px;background-color: #FFFFFF;}
+			.notice_title{display: block;float: left;width: 100%;height: 40px;line-height: 40px;}
+			.notice_title>img{display: block;float: left; margin-top: 8px;margin-left: 10px;margin-right: 10px; width: 24px;height: 22px;}
+			.notice_con{display: block;float: left;height: 30px;line-height: 30px;width: 20%;text-align: center;}
+			.notice_con.active{border-bottom: 2px solid #008080;}
+			.more_notice{display: block;float: right;height: 30px;line-height: 30px;width: 18%;}
+			.more_notice>i, .more_notice>span{display: block;float: left;height: 30px;line-height: 30px;}
+			.more_notice>i{font-size: 25px;height: 30px;line-height: 30px;}
+			.a_con{display: block;float: left;}
+			.a_con{width: 90%;line-height: 25px;margin-left: 5%;} 
+			.p_title{font-size: 15px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;text-overflow:ellipsis;overflow:hidden;}
+			.p_con{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;text-overflow:ellipsis;overflow:hidden;font-size: 12px;}
+			.a_con_time{color: #999999;font-size: 12px;}
+			.new_ul{display: block;width: 100%;margin: 0 auto;}
+			.new_li{display: block;float: left;width: 100%;padding-top: 8px;padding-bottom: 5px;border-bottom: 1px solid #E0E0E0;}
+			.new_li:last-child{border: none;}
+		</style>
+	</head>
+	<body ontouchstart>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="back(true)"></i><h4 style="margin-left: 25px;">动态</h4>
+		</header>
+		
+		<section class="ui-container">
+			<div class="demo-block">
+				<div class="notice_item">
+					<ul class="new_ul" id="notice_dynamic_list">
+					</ul>
+				</div>
+			</div>
+		</section>
+		
+		<script type="text/javascript">
+			if(window.plus){
+				plusReady();
+			}else{
+				document.addEventListener('plusready',plusReady,false);
+			}
+			function plusReady(){
+				loadData();
+			}
+			function loadData(){
+    			plus.nativeUI.showWaiting("数据加载中...");
+				var Request = Utils.getRequest();
+			    var classFlag = Request["typeNum"];
+    			$.ajax({
+					type:"post",
+					url: Utils.getRoot()+"/news/findListNewsByClassFlag",
+					data:{classFlag: classFlag},
+					success: function(result){
+						$("#notice_dynamic_list").empty();
+						var tempStr = '';
+						var str = '';
+						var regx = /<[^>]*>|<\/[^>]*>/gm;
+						var contentValue =  '';
+						if(result.success){
+							plus.nativeUI.closeWaiting();
+							$.each(result.data, function(ind, val) {
+								str = val.content;
+								contentValue = str.replace(regx,"");
+								contentValue = contentValue.replace(/(\s|&nbsp;)+/g,"");
+								
+								var s = Utils.htmlEncode(val.content);
+								//alert(s);
+								tempStr += '<li class="new_li" onclick=\'dynamicView("'+val.title+'","'+s+'","'+val.infoTime+'")\'>'+
+											'<span class="a_con">'+
+												'<p class="p_title">'+val.title+'</p>'+
+												'<p class="p_con">'+contentValue+'</p>'+
+												'<p class="a_con_time">'+val.infoTime+'</p>'+
+											'</span>'+
+										'</li>';
+							});
+							$("#notice_dynamic_list").append(tempStr);
+						}else{
+							alert(result.message);
+						}
+					},
+					error:function(){
+						plus.nativeUI.closeWaiting();
+						alert('网络异常，请稍候重试！');
+					}
+				});
+			}
+			
+			function dynamicView(title,content,infoTime){
+				alert(title);
+				var ws = plus.webview.create("dynamic.html?title="+title+"&content="+content+"&infoTime="+infoTime);
+				ws.show();
+			}
+				
+		</script>
+	</body>
+</html>

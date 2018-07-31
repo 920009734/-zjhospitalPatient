@@ -7,6 +7,8 @@
         <title>首页</title>
         <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
         <link rel="stylesheet" href="../css/frozen.css">
+        <link rel="stylesheet" href="../css/style.css">
+         
         <script src="../js/Utils.js"></script>
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
@@ -14,7 +16,7 @@
        	 	html,body{height: 100%;width: 100%;font-family: "微软雅黑";background-color: #F1F0F8;}
 			
 			.tab_img{display: block;float: left;width: 100%;margin-bottom: 10px;}
-			.tab_img>img{width: 100%;height: auto;}
+			.tab_img>img{width: 100%;height: auto;margin-top: -5px;}
 			
 			.fun_item{display: block;float: left;width: 100%; min-height: 100px; max-height: 300px;background-color: #FFFFFF;margin-top: 5px;}
 			.fun_item:nth-child(3){margin-top: 25px;margin-bottom: 20px;}
@@ -35,18 +37,17 @@
 			.notice_title>img{display: block;float: left; margin-top: 8px;margin-left: 10px;margin-right: 10px; width: 24px;height: 22px;}
 			.notice_con{display: block;float: left;height: 30px;line-height: 30px;width: 20%;text-align: center;}
 			.notice_con.active{border-bottom: 2px solid #008080;}
+			.more_notice{display: block;float: right;height: 30px;line-height: 30px;width: 18%;}
+			.more_notice>i, .more_notice>span{display: block;float: left;height: 30px;line-height: 30px;}
+			.more_notice>i{font-size: 25px;height: 30px;line-height: 30px;}
 			
 			#new_item{margin-bottom: 80px;} 
-			.a_img ,.a_con{display: block;float: left;}
-			.a_img{width: 30%;}
-			.a_img>img{margin-top: 4px;margin-left: 5px;}
-			.a_con{width: 70%;line-height: 25px;} 
-			.a_con>h4{font-size: 15px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;text-overflow:ellipsis;overflow:hidden;width: 100%;}
-			.a_con>p{font-size: 12px;}
-			.a_con .p_con{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;text-overflow:ellipsis;overflow:hidden;width: 100%;}
-			.a_con_time{color: #999999;}
+			.a_con{display: block;float: left;}
+			.a_con{width: 96%;line-height: 25px;margin-left: 2.5%;} 
+			.p_title{font-size: 15px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;text-overflow:ellipsis;overflow:hidden;}
+			.p_con{display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;text-overflow:ellipsis;overflow:hidden;font-size: 12px;}
+			.a_con_time{color: #999999;font-size: 12px;}
 			.new_ul{display: block;width: 94%;margin: 0 auto;}
-			.new_li>a{color: #000000;}
 			.new_li{display: block;float: left;width: 100%;padding-top: 8px;padding-bottom: 5px;border-bottom: 1px solid #E0E0E0;}
 			.new_li:last-child{border: none;}
 			.tab_yiyuan{display: block;width: 100%;height: 40px;line-height: 40px;background-color: #FFFFFF;margin-top: -6px;}
@@ -74,6 +75,7 @@
     		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
     		
     		loadMenus();
+    		noticeData(1);
     		
     		$("#list").on('click', '.pageJump' , function(){
     			state = $(this).data('state');
@@ -142,6 +144,49 @@
 	    			}
 	    		});
     		}
+    		//?classFlag=1
+    		function noticeData(classFlag){
+    			//plus.nativeUI.showWaiting("数据加载中...");
+    			$.ajax({
+					type:"post",
+					url: Utils.getRoot()+"/news/findListNewsByClassFlag",
+					data:{classFlag: classFlag},
+					success: function(result){
+						$("#notice_dynamic").empty();
+						var tempStr = '';
+						var str = '';
+						var regx = /<[^>]*>|<\/[^>]*>/gm;
+						var contentValue =  '';
+						if(result.success){
+							//plus.nativeUI.closeWaiting();
+							$.each(result.data, function(ind, val) {
+								if(ind == 4){
+									return false;
+								}
+								str = val.content;
+								contentValue = str.replace(regx,"");
+								
+								contentValue = contentValue.replace(/(\s|&nbsp;)+/g,"");
+								tempStr += '<li class="new_li" onclick="">'+
+											'<span class="a_con">'+
+												'<p class="p_title">'+val.title+'</p>'+
+												'<p class="p_con">'+contentValue+'</p>'+
+												'<p class="a_con_time">'+val.infoTime+'</p>'+
+											'</span>'+
+										'</li>';
+							});
+							$("#notice_dynamic").append(tempStr);
+						}else{
+							alert(result.message);
+						}
+					},
+					error:function(){
+						//plus.nativeUI.closeWaiting();
+						alert('网络异常，请稍候重试！');
+					}
+				});
+    		}
+    		
     		
     		$(".notice_con").on("click",function(){
     			var a = $(this).hasClass("acticve");
@@ -149,14 +194,19 @@
     			if(!a){
     				$(this).addClass("active").siblings("span").removeClass("active");
     				if(id_ == "notice_id"){
-    				
+    					noticeData(2);
     				}else{
-    					
+    					noticeData(1);
     				}
     			}
     			
     		});
     	});
+    	
+		function moreNotice(item){
+			var typeNum = $(".notice_con.active").attr("numType");
+			top.location.href = "dynamic_list.html?typeNum="+typeNum;
+		}
     </script>
     <body ontouchstart>
         <section class="ui-container">
@@ -172,154 +222,21 @@
 						</span>
 					</div>
 				</div>
-				
-				<!-- 功能块 -->
-				
-				<!--<div class="fun_item">
-					<div class="fun_title "> 
-						<span class="item_img"><img src="../img/index/menzhenIcon.png" width="23" height="23"></span>	
-						<span class="item_title">门诊服务</span>
-					</div>
-					<div class="fun_item_list" >
-						<div class="item_list" id="ksxz">
-							<span class="list_icon"><img src="../img/index/yygh.png"/></span>
-							<span class="list_title">预约挂号</span>
-						</div>
-						<a href="lineUpSearch/paiduijiaohaoMenu.html" target="_parent" >	
-							<div class="item_list">
-								<span class="list_icon"><img src="../img/index/paiduijiaohao.png"/></span>
-								<span class="list_title">排队候诊</span>
-							</div>
-						</a>	
-						<div class="item_list" id="zx">
-							<span class="list_icon"><img src="../img/index/zhuanjiazixun.png"/></span>
-							<span class="list_title">专家咨询</span>
-						</div>
-						<div class="item_list" id="zjjf">
-							<span class="list_icon"><img src="../img/index/zwjf.png"/></span>
-							<span class="list_title">诊间缴费</span>
-						</div>
-						<a href="floorDistribution.html" target="_parent" >
-							 <div class="item_list" id="zx">
-								<span class="list_icon"><img src="../img/index/floorDistribution.png"/></span>
-								<span class="list_title">楼层分布</span>
-							</div>
-						</a>
-					</div>
-				</div>-->
-				<!-- 医院 -->
-				<!--<div class="fun_item">
-					<div class="fun_title ">
-						<span class="item_img"><img src="../img/index/zhuyuanIcon.png" width="22" height="23"></span>	
-						<span class="item_title">住院服务</span>
-					</div>
-					<div class="fun_item_list">
-						<div class="item_list" id="zyjlcx">
-							<span class="list_icon"><img src="../img/index/zyjlcx.png"/></span>
-							<span class="list_title">住院记录查询</span>
-						</div>
-						<div class="item_list" id="zyyjbj">
-							<span class="list_icon"><img src="../img/index/yjbj.png"/></span>
-							<span class="list_title">住院押金补缴</span>
-						</div>
-						<div class="item_list">
-							<span class="list_icon"><img src="../img/index/cydy.png"/></span>
-							<span class="list_title">出院带药</span>
-						</div>
-						<div class="item_list">
-							<span class="list_icon"><img src="../img/index/chuyuanxiaojie.png"/></span>
-							<span class="list_title">出院小结</span>
-						</div>
-					</div> 
-				</div> -->
-				<!-- 体检 -->
-				<!--<div class="fun_item">
-					<div class="fun_title " >
-						<span class="item_img"><img src="../img/index/baogcxun.png" width="22" height="23"></span>	
-						<span class="item_title">报告查询</span>
-					</div>
-					<div class="fun_item_list">
-						<div class="item_list" id="jcbg">
-							<span class="list_icon"><img src="../img/index/bgcx1.png"/></span>
-							<span class="list_title">检查报告查询</span>
-						</div>
-						<div class="item_list" id="jybg">
-							<span class="list_icon"><img src="../img/index/bgcx2.png"/></span>
-							<span class="list_title">检验报告查询</span>
-						</div>
-						<div class="item_list" > 
-							id="tjbg"
-							<span class="list_icon"><img src="../img/index/bgcx3.png"/></span>
-							<span class="list_title">体检报告查询</span>
-						</div>
-					</div>
-				</div>-->
-				<!-- 综合 -->
-				<!--<div class="fun_item">
-					<div class="fun_title ui-border-b">
-						<span class="item_img"><img src="../img/index/zongheIcon.png" width="22" height="23"></span>	
-						<span class="item_title">综合</span>
-					</div>
-					<div class="fun_item_list">
-						<div class="zonghe_item ui-border-r" id="divisionIntroduce">
-							<div class="zonghe_img"><img src="../img/index/kesjs.png"></div>
-							<div class="zonghe_con">
-								<h5>科室介绍</h5>
-								<p>根据功能，对症下药</p>
-							</div>
-						</div>
-						<div class="zonghe_item" id="zjjs">
-							<div class="zonghe_img"><img src="../img/index/zhuanjiajs.png"></div>
-							<div class="zonghe_con">
-								<h5>专家介绍</h5>
-								<p>专家信息，轻松查找</p>
-							</div>
-						</div>
-					</div>
-				</div>-->
 				 
 				<!-- 动态 -->
 				<div class="notice_item" id="new_item">
 					<div class="notice_title">
 						<img src="../img/index/dongtai.png"/>
 						<div class="box_tab">
-							<span class="notice_con active" id="notice_id">公告</span>
-							<span class="notice_con " id="dynamic_id">动态</span>
+							<span class="notice_con active" id="dynamic_id" numType="1">动态</span>
+							<span class="notice_con " id="notice_id" numType="2">公告</span>
 						</div>
-						
-						<!--<span class="more_notice">更多<i class="ui-icon ui-icon-arrow"></i></span>-->
-					</div>
-					<ul class="new_ul">
-						<li class="new_li">
-							<a href="dynamic.html">
-								<span class="a_con">
-									<h4>我院获评“中国房颤中心第一第一第一</h4>
-									<p class="p_con">我院全票通过省级胸痛中心认证我院全我院全我院全</p>
-									<p class="a_con_time">2018年3月21号  13:23:00</p>
-								</span>
-								<span class="a_img"><img src="../img/u112.png" width="90" height="55"/></span>
-							</a>
-						</li>
-						<li class="new_li">
-							<a href="dynamic.html">
-								<span class="a_con">
-									<h4>我院获评“中国房颤中心第第一第一第一第一第一</h4>
-									<p class="p_con">我院全票通过省级胸痛中心认证第一第一第一第一第一</p>
-									<p class="a_con_time">2018年3月21号  13:23:00</p>
-								</span>
-								<span class="a_img"><img src="../img/u112.png" width="90" height="55"/></span>
-							</a>
-						</li>
-						<li class="new_li">
-							<a href="dynamic.html">
-								<span class="a_con">
-									<h4>我院获评“中国房颤中心第第一第一第一第一第一</h4>
-									<p class="p_con">我院全票通过省级胸痛中心认证第一第一第一第一第一</p>
-									<p class="a_con_time">2018年3月21号  13:23:00</p>
-								</span>
-								<span class="a_img"><img src="../img/u112.png" width="90" height="55"/></span>
-							</a>
-						</li>
+						<span class="more_notice" onclick="moreNotice();">
+							<span>更多</span>
+							<i class="ui-icon ui-icon-arrow"></i>
+						</span>
+					</div> 
+					<ul class="new_ul" id="notice_dynamic">
 					</ul>
 				</div>
 			</section>
