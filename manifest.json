@@ -711,7 +711,10 @@
 				"resources": [
 					"pages/main.html",
 					"css/frozen.css",
-					"css/style.css"
+					"css/style.css",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"js/Utils.js"
 				],
 				"refer": [],
 				"priority": 0

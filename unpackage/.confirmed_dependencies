@@ -60,7 +60,8 @@
 			"pages/hospitalization/inHospotalSearch.html",
 			"pages/yuyueguahao/patien_register.html",
 			"pages/consultation/consulteLlist.html",
-			"pages/yuyueguahao/choiceDepartment.html"
+			"pages/yuyueguahao/choiceDepartment.html",
+			"pages/payment/depositPayment.html"
 		],
 		"refer": [
 			"pages/familyMember.html",
@@ -70,7 +71,8 @@
 			"pages/hospitalization/inHospotalSearch.html",
 			"pages/yuyueguahao/patien_register.html",
 			"pages/consultation/consulteLlist.html",
-			"pages/yuyueguahao/choiceDepartment.html"
+			"pages/yuyueguahao/choiceDepartment.html",
+			"pages/payment/depositPayment.html"
 		]
 	},
 	"pages/familyMember.html": {
@@ -181,6 +183,15 @@
 		],
 		"refer": [
 			"pages/main.html"
+		]
+	},
+	"pages/payment/depositPayment.html": {
+		"resources": [
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/frozen.css",
+			"css/style.css",
+			"js/Utils.js"
 		]
 	}
 }

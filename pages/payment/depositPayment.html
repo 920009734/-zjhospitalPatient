@@ -26,6 +26,10 @@
         	.yjf_item>span{display: block;line-height: 25px;font-size: 14px;color: #008080;width: 100%;}
         	.list-item{display: block;float: left;width: 100%;min-height: 50px;max-height: 150px;background-color: #FFFFFF;border-bottom: 1px solid #F7F7F7;}
         	.notData{color: #999999;text-align: center;line-height: 50px;}
+       		.search_time{display: block;float: left; width:100%;height: 120px; background-color: #FFFFFF;margin-bottom: 10px; }
+			.riqi_item{display: block;float: left;width: 90%;height: 60px;margin-left: 5%;color:#0066CC;}
+			.riqi_item>input{width:38%;height: 30px;line-height: 30px;border: 1px solid #0066CC;border-radius: 2px;margin-top: 15px;color: #0066CC; background-color: #FFFFFF;}
+			.riqiBtn{display: block;width: 90%;margin: 0 auto; border-radius: 2px;height: 40px;line-height: 40px;background-color: #0066CC;color: #FFFFFF;}
         </style>
         
 	</head>
@@ -45,13 +49,24 @@
 					</div>
 					
 					<div class="yjf_con">
-						<a href="payDetail_yjf_view.html">
+						<div class="search_time">
+							<div class="riqi_item">
+								<span> 日期：</span>
+								<input type="button" id="startTime" onclick="pickDate(this)" /> 
+								 - 
+								<input type="button" id="endTime" onclick="pickDate(this)" /> 
+							</div>
+							<button type="button" class="riqiBtn" id="searchp">查询</button>
+						</div>
+						<div class="yjf_item" id="yjfList">
+						</div>
+						<!--<a href="payDetail_yjf_view.html">
 							<div class="yjf_item">
 								<span class="box_type">接诊科室：内科门诊（已缴费）</span>
 								<span class="box_money">已缴总额：129元</span>
 								<span class="box_time">缴费时间：2018-05-21 15:22</span>
 							</div>
-						</a>
+						</a>-->
 					</div>
 					
 				</div>
@@ -61,6 +76,17 @@
 		
         <script type="text/javascript">
         	$(function(){
+        		var day = new Date();
+				$('#startTime').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
+				$('#endTime').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
+				
+				$("#searchp").click(function(){
+					var yjfparams = {};
+					yjfparams.startTime = $('#startTime').val();//缴费开始日期
+					yjfparams.endTime = $('#endTime').val();//缴费结束日期
+					yjfList(yjfparams);
+				});
+					
         		wjfList();
         		$(".box_tab").on("click",function(){
 					var a = $(this).hasClass("active");
@@ -73,18 +99,20 @@
 						} else{
 							$(".yjf_con").show();
 							$(".wjf_con").html("");
+							var yjfparams = {};
+							yjfparams.startTime = $('#startTime').val();//缴费开始日期
+							yjfparams.endTime = $('#endTime').val();//缴费结束日期
+							yjfList(yjfparams);
 						}
 					}
 				});
-				
         		
         		//待交费记录
         		function wjfList(){
         			var params={};
 	        		$.post(Utils.getRoot()+"/outpatientPayment/selPayorder",params,function(data){
 						if (data.success) {
-							var listPayorder = new Array();
-							listPayorder= data.data;
+							var listPayorder = data.data;
 							console.log("listPayorder:"+JSON.stringify(listPayorder));
 							for (var i = 0; i < listPayorder.length; i++) {
 								var totalAmt = parseFloat(listPayorder[i].totalAmt)/100;
@@ -115,39 +143,43 @@
         		});
         		
         		//已交费记录
-        		/*function yjfList(){
-        			var params={};
-	        		$.post(Utils.getRoot()+"/outpatientPayment/selPayorder",params,function(data){
-							console.log(JSON.stringify(data));
+        		function yjfList(params){
+
+	        		$.post(Utils.getRoot()+"/outpatientPayment/getPayQueryMaster",params,function(data){
+							console.log("data:"+JSON.stringify(data));
 						if (data.success) {
-							var listPayorder = new Array();
-							listPayorder= data.data;
-							console.log(listPayorder);
-							for (var i = 0; i < listPayorder.length; i++) {
-								var totalAmt = parseFloat(listPayorder[i].totalAmt)/100;
-								$("#wjfList").append(
+							var listMap = data.data;
+							console.log(listMap);
+							for (var i = 0; i < listMap.length; i++) {
+								var totalAmt = parseFloat(listMap[i].totalAmt)/100;
+								$("#yjfList").append(
 									"<div class='wjf_item' >"+
-										"<input type='hidden' name='listPayorder'  value='"+listPayorder[i]+"'/>"+
-										"<span class='box_type'>订单号："+listPayorder[i].hisOrdNum+"</span>"+
-										"<span class='box_type'>缴费项目："+listPayorder[i].payName+"</span>"+
-										"<span class='box_type'>科室姓名："+listPayorder[i].deptName+"</span>"+
-										"<span class='box_type'>医生姓名："+listPayorder[i].doctorName+"</span>"+
-										"<span class='box_money'>总费用："+totalAmt+" 元</span>"+
+										"<input type='hidden' name='listMap'  value='"+listMap[i]+"'/>"+
+										"<span class='box_type'>收据号："+listMap[i].rcptNo+"</span>"+
+										"<span class='box_type'>收费日期："+listMap[i].chargeDate+"</span>"+
+										"<span class='box_money'>总金额："+totalAmt+" 元</span>"+
+										"<span class='box_type'>支付方式1："+listMap[i].PAYWAY1+"</span>"+
+										"<span class='box_type'>支付金额："+listMap[i].AMOUNT1+"</span>"+
+										"<span class='box_type'>支付方式2："+listMap[i].PAYWAY2+"</span>"+
+										"<span class='box_type'>支付金额："+listMap[i].AMOUNT2+"</span>"+
+										"<span class='box_type'>支付方式3："+listMap[i].PAYWAY3+"</span>"+
+										"<span class='box_type'>支付金额："+listMap[i].AMOUNT3+"</span>"+
+										"<span class='box_type'>支付方式4："+listMap[i].PAYWAY4+"</span>"+
+										"<span class='box_type'>支付金额："+listMap[i].AMOUNT4+"</span>"+
 									"</div>"
 								)
 							}
 						}else{
-							$("#wjfList").append(
+							$("#yjfList").append(
 								"<div class='list-item '>"+
 									"<p class='notData'>暂无数据</p>"+
 								"</div>"
 							);
 						}
 					});
-        		}*/
+        		}
         		
-        		
-        	})
+        	});
        </script>
 	</body>
 </html>
