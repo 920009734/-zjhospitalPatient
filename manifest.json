@@ -663,9 +663,18 @@
 					"css/frozen.css",
 					"img/kes/a1.png",
 					"img/kes/a.png",
-					"pages/main.html"
+					"pages/main.html",
+					"img/kes/g1.png",
+					"css/style.css",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"H5Js/common.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/divisionIntroduce_child.html"
+				],
 				"priority": 0
 			},
 			"pages/floorDistribution.html": {
@@ -892,6 +901,35 @@
 			"pages/memberDetail.html": {
 				"resources": [
 					"pages/familyMember.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/divisionIntroduce_child.html": {
+				"resources": [
+					"css/frozen.css",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"H5Js/common.js"
+				],
+				"refer": [
+					"pages/divisionIntroduce_view.html"
+				],
+				"priority": 0
+			},
+			"pages/divisionIntroduce_view.html": {
+				"resources": [
+					"css/frozen.css",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"H5Js/common.js",
+					"js/jquery-1.8.3.min.js"
 				],
 				"refer": [],
 				"priority": 0
