@@ -216,5 +216,36 @@
 		"refer": [
 			"pages/payment/depositPayment.html"
 		]
+	},
+	"pages/dynamic.html": {
+		"resources": [
+			"H5Js/common.js",
+			"css/frozen.css",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js"
+		]
+	},
+	"pages/index.html": {
+		"refer": [
+			"pages/dynamic.html",
+			"pages/dynamic_list.html"
+		]
+	},
+	"pages/dynamic_list.html": {
+		"resources": [
+			"H5Js/common.js",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/frozen.css",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js"
+		],
+		"refer": [
+			"pages/dynamic.html"
+		]
 	}
 }
