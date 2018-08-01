@@ -34,7 +34,8 @@
 	</head>
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
-			<i class="ui-icon ui-icon-return" onclick="back(true)"></i><h4 style="margin-left: 25px;">动态</h4>
+			<i class="ui-icon ui-icon-return" onclick="closeme()"></i>
+			<h4 style="margin-left: 25px;" id="dynamic_name"></h4>
 		</header>
 		
 		<section class="ui-container">
@@ -58,11 +59,11 @@
 			function loadData(){
     			plus.nativeUI.showWaiting("数据加载中...");
 				var Request = Utils.getRequest();
-			    var classFlag = Request["typeNum"];
+			    var classFlag_ = Request["typeNum"];
     			$.ajax({
 					type:"post",
 					url: Utils.getRoot()+"/news/findListNewsByClassFlag",
-					data:{classFlag: classFlag},
+					data:{classFlag: classFlag_},
 					success: function(result){
 						$("#notice_dynamic_list").empty();
 						var tempStr = '';
@@ -78,7 +79,7 @@
 								
 								var s = Utils.htmlEncode(val.content);
 								//alert(s);
-								tempStr += '<li class="new_li" onclick=\'dynamicView("'+val.title+'","'+s+'","'+val.infoTime+'")\'>'+
+								tempStr += '<li class="new_li" onclick=\'dynamicView("'+classFlag_+'","'+val.id+'")\'>'+
 											'<span class="a_con">'+
 												'<p class="p_title">'+val.title+'</p>'+
 												'<p class="p_con">'+contentValue+'</p>'+
@@ -86,6 +87,11 @@
 											'</span>'+
 										'</li>';
 							});
+							if(classFlag_ == 1){
+								$("#dynamic_name").text("动态");
+							}else{
+								$("#dynamic_name").text("公告");
+							}
 							$("#notice_dynamic_list").append(tempStr);
 						}else{
 							alert(result.message);
@@ -98,10 +104,12 @@
 				});
 			}
 			
-			function dynamicView(title,content,infoTime){
-				alert(title);
-				var ws = plus.webview.create("dynamic.html?title="+title+"&content="+content+"&infoTime="+infoTime);
+			function dynamicView(classFlag,id){
+				var ws = plus.webview.create("dynamic.html?classFlag="+classFlag+"&id="+id);
 				ws.show();
+			}
+			function closeme(){
+				plus.webview.currentWebview().close();
 			}
 				
 		</script>

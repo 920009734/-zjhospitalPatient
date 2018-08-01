@@ -33,13 +33,13 @@
 			.item_list>span>img{display: block;margin: 0 auto;width: 100%;height: 100%;}
 			
 			.notice_item{display: block;float: left;width: 100%;height:30% ;margin-top: 15px;background-color: #FFFFFF;}
-			.notice_title{display: block;float: left;width: 100%;height: 40px;line-height: 40px;}
+			.notice_title{display: block;float: left;width: 100%;height: 50px;line-height: 40px;}
 			.notice_title>img{display: block;float: left; margin-top: 8px;margin-left: 10px;margin-right: 10px; width: 24px;height: 22px;}
-			.notice_con{display: block;float: left;height: 30px;line-height: 30px;width: 20%;text-align: center;}
+			.notice_con{display: block;float: left;height: 40px;line-height: 40px;width: 20%;text-align: center;}
 			.notice_con.active{border-bottom: 2px solid #008080;}
-			.more_notice{display: block;float: right;height: 30px;line-height: 30px;width: 18%;}
-			.more_notice>i, .more_notice>span{display: block;float: left;height: 30px;line-height: 30px;}
-			.more_notice>i{font-size: 25px;height: 30px;line-height: 30px;}
+			.more_notice{display: block;float: right;height: 40px;line-height: 40px;width: 18%;}
+			.more_notice>i, .more_notice>span{display: block;float: left;height: 40px;line-height: 40px;}
+			.more_notice>i{font-size: 25px;height: 40px;line-height: 40px;}
 			
 			#new_item{margin-bottom: 80px;} 
 			.a_con{display: block;float: left;}
@@ -167,7 +167,7 @@
 								contentValue = str.replace(regx,"");
 								
 								contentValue = contentValue.replace(/(\s|&nbsp;)+/g,"");
-								tempStr += '<li class="new_li" onclick="">'+
+								tempStr += '<li class="new_li" onclick=\'dynamicView("'+classFlag+'","'+val.id+'")\'>'+
 											'<span class="a_con">'+
 												'<p class="p_title">'+val.title+'</p>'+
 												'<p class="p_con">'+contentValue+'</p>'+
@@ -203,9 +203,16 @@
     		});
     	});
     	
+		var plus = top.plus;
 		function moreNotice(item){
 			var typeNum = $(".notice_con.active").attr("numType");
-			top.location.href = "dynamic_list.html?typeNum="+typeNum;
+			var ws = plus.webview.create("dynamic_list.html?typeNum="+typeNum);
+			ws.show();
+		}
+		
+		function dynamicView(classFlag,id){
+			var ws = plus.webview.create("dynamic.html?classFlag="+classFlag+"&id="+id);
+			ws.show();
 		}
     </script>
     <body ontouchstart>
