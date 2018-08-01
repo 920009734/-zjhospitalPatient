@@ -64,7 +64,9 @@
 			"pages/divisionIntroduce.html",
 			"pages/payment/depositPayment.html",
 			"pages/dynamic.html",
-			"img/20180410152108.png"
+			"img/20180410152108.png",
+			"pages/dynamic_list.html",
+			"H5Js/common.js"
 		],
 		"refer": [
 			"pages/familyMember.html",
@@ -76,7 +78,9 @@
 			"pages/consultation/consulteLlist.html",
 			"pages/yuyueguahao/choiceDepartment.html",
 			"pages/divisionIntroduce.html",
-			"pages/payment/depositPayment.html"
+			"pages/payment/depositPayment.html",
+			"pages/dynamic_list.html",
+			"pages/dynamic.html"
 		]
 	},
 	"pages/familyMember.html": {
@@ -239,6 +243,43 @@
 			"js/Utils.js",
 			"H5Js/common.js",
 			"js/jquery-1.8.3.min.js"
+		]
+	},
+	"pages/dynamic_list.html": {
+		"resources": [
+			"H5Js/common.js",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/frozen.css",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html",
+			"pages/dynamic.html"
+		]
+	},
+	"pages/dynamic.html": {
+		"resources": [
+			"css/frozen.css",
+			"H5Js/common.js",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html"
+		]
+	},
+	"pages/index.html": {
+		"refer": [
+			"pages/dynamic.html",
+			"pages/dynamic_list.html"
 		]
 	}
 }
