@@ -61,10 +61,7 @@
 			"pages/yuyueguahao/patien_register.html",
 			"pages/consultation/consulteLlist.html",
 			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/divisionIntroduce.html",
-			"pages/payment/depositPayment.html",
-			"pages/dynamic.html",
-			"img/20180410152108.png"
+			"pages/payment/depositPayment.html"
 		],
 		"refer": [
 			"pages/familyMember.html",
@@ -75,7 +72,6 @@
 			"pages/yuyueguahao/patien_register.html",
 			"pages/consultation/consulteLlist.html",
 			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/divisionIntroduce.html",
 			"pages/payment/depositPayment.html"
 		]
 	},
@@ -189,56 +185,13 @@
 			"pages/main.html"
 		]
 	},
-	"pages/divisionIntroduce.html": {
-		"resources": [
-			"img/kes/g1.png",
-			"css/frozen.css",
-			"css/style.css",
-			"font/iconfont-full.ttf",
-			"js/frozen.js",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"pages/main.html",
-			"H5Js/common.js"
-		],
-		"refer": [
-			"pages/main.html",
-			"pages/divisionIntroduce_child.html"
-		]
-	},
-	"pages/divisionIntroduce_child.html": {
-		"resources": [
-			"css/frozen.css",
-			"font/iconfont-full.ttf",
-			"js/frozen.js",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"H5Js/common.js"
-		],
-		"refer": [
-			"pages/divisionIntroduce_view.html"
-		]
-	},
 	"pages/payment/depositPayment.html": {
 		"resources": [
-			"css/frozen.css",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/divisionIntroduce_view.html": {
-		"resources": [
-			"css/frozen.css",
 			"font/iconfont-full.ttf",
 			"js/frozen.js",
+			"css/frozen.css",
 			"css/style.css",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"H5Js/common.js",
-			"js/jquery-1.8.3.min.js"
+			"js/Utils.js"
 		]
 	}
 }
