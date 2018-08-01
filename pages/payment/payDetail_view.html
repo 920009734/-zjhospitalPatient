@@ -184,12 +184,13 @@
 				
 				function plusReady(){
 					$("#pay").click(function(){
-						var chargeAmt =  $("#totalAmt").text();
+						/*var chargeAmt =  $("#totalAmt").text();*/
+						var chargeAmt =  "0.1";
 						var patientid = JSON.parse(localStorage.getItem('patientInfo')).patientid;
 						var outChargeNo = $("#hisOrdNum").text();
-						var url = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod_outpatient.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
-						var w = plus.webview.create(url);
-						w.show();
+						window.location.href  = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod_outpatient.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
+						/*var w = plus.webview.create(url);
+						w.show();*/
 					});
 					
 					// Android处理返回键

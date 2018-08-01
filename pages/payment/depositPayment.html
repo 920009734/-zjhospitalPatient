@@ -138,8 +138,9 @@
         		}
         		
         		$("#wjfList").on("click",".wjf_item",function(){
-        			var listPayorder = $(this).children("input[name='listPayorder']").val();
-        			window.location.href="../payment/payDetail_view.html?listPayorder="+listPayorder;
+        			/*var listPayorder = $(this).children("input[name='listPayorder']").val();
+        			window.location.href="../payment/payDetail_view.html?listPayorder="+listPayorder;*/
+        			window.location.href = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod_outpatient.html?outChargeNo=180731000001&chargeAmt=0.1&patientid=D7BB131564844D498EB7C89CEA95EF4F";
         		});
         		
         		//已交费记录
