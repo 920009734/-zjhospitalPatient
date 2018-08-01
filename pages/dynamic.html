@@ -25,7 +25,8 @@
 	</head>
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
-			<i class="ui-icon ui-icon-return" onclick="closeme()"></i><h4 style="margin-left: 25px;">动态详情</h4>
+			<i class="ui-icon ui-icon-return" onclick="closeme()"></i>
+			<h4 style="margin-left: 25px;">动态详情</h4>
 		</header>
 		
 		<section class="ui-container">
@@ -39,11 +40,6 @@
 						<span class="dy_ti_name"></span>
 					</div>
 					<div class="dynamic_content" >
-						<!--<img src="../img/20180410152108.png" />
-						<p>4月8日，广州市卫计委组织开展了2018年北江大堤抗洪抢险医疗卫生应急救援演练，我院医疗队参加并圆满完成了各项演练任务。</p>
-						<p>早上7点20分，医务处应急联络员突然接到广州市急救医疗指挥中心指令，要求我院医疗队在9点30分前赶到北江大堤广州指挥部进行集结演练。医务处立即启动应急预案，调集车辆、物资，抽调急诊科医生、护士、担架工、驾驶员等5人组成应急医疗队。在冯常森副院长的带领下，提前抵达演练指定集结位置。</p>
-						<p>现场演练环节，在车载物品检查中我院获得满分，急救转运救治操作医疗队员们动作娴熟、演示精彩，得到了领导和考核专家的认可和肯定。此次任务的圆满完成，充分体现了我院医疗队应急准备工作扎实，关键时刻能够做到“拉得出,用得上,打得响”。</p>
-						<p>北江大堤是全国七大防洪堤坝之一，地理位置重要，北江大堤的稳固直接关系着珠三角地区人民群众的生命财产安全。北江大堤抗洪抢险医疗卫生应急救援演练由广州市急救医疗指挥中心组织，演练的主要内容为检查各医疗机构应急集结情况、车载物品、医务人员理论知识和临床技能熟练程度，熟悉各医疗机构应急医疗保障救治点展开位置。</p>-->
 					</div>
 				</div>
 				
@@ -73,15 +69,10 @@
 						//$("#dynamic_detail").empty();
 						var dept = result.data;
 						if(result.success){
-							console.log(dept.title+"----"+dept.infoTime+"====="+dept.content);
 							$(".dynamic_title>h2").text(dept.title);
 							$(".info_time").text(dept.infoTime);
-							$(".dy_ti_name").html("南方医科大学珠江医院");
+							$(".dy_ti_name").html(dept.publish);
 							$(".dynamic_content").html(dept.content);
-							/*var tempStr = '<div class="view_title">'+dept.typeName+' </div>';
-							tempStr += '<div class="view_con">'+dept.content+' </div>';
-							$("#department_view").append(tempStr);
-							$("#dep_type").children("span").html(dept.typeName);*/
 						}else{
 							alert(result.message);
 						}
