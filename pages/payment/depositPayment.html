@@ -138,23 +138,21 @@
         		}
         		
         		$("#wjfList").on("click",".wjf_item",function(){
-        			/*var listPayorder = $(this).children("input[name='listPayorder']").val();
-        			window.location.href="../payment/payDetail_view.html?listPayorder="+listPayorder;*/
-        			window.location.href = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod_outpatient.html?outChargeNo=180731000001&chargeAmt=0.1&patientid=D7BB131564844D498EB7C89CEA95EF4F";
+        			var listPayorder = $(this).children("input[name='listPayorder']").val();
+        			window.location.href="../payment/payDetail_view.html?listPayorder="+listPayorder;
         		});
         		
         		//已交费记录
         		function yjfList(params){
 
 	        		$.post(Utils.getRoot()+"/outpatientPayment/getPayQueryMaster",params,function(data){
-							console.log("data:"+JSON.stringify(data));
 						if (data.success) {
 							var listMap = data.data;
-							console.log(listMap);
+							console.log("listMap:"+JSON.stringify(listMap));
 							for (var i = 0; i < listMap.length; i++) {
 								var totalAmt = parseFloat(listMap[i].totalAmt)/100;
 								$("#yjfList").append(
-									"<div class='wjf_item' >"+
+									"<div class='yjf_item' >"+
 										"<input type='hidden' name='listMap'  value='"+listMap[i]+"'/>"+
 										"<span class='box_type'>收据号："+listMap[i].rcptNo+"</span>"+
 										"<span class='box_type'>收费日期："+listMap[i].chargeDate+"</span>"+
@@ -179,6 +177,11 @@
 						}
 					});
         		}
+        		
+        		$("#yjfList").on("click",".yjf_item",function(){
+        			var listPayorder = $(this).children("input[name='listPayorder']").val();
+        			window.location.href="../payment/payDetail_view.html?listPayorder="+listPayorder;
+        		});
         		
         	});
        </script>

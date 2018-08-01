@@ -191,7 +191,30 @@
 			"js/frozen.js",
 			"css/frozen.css",
 			"css/style.css",
+			"js/Utils.js",
+			"js/jquery-1.8.3.min.js",
+			"pages/payment/payDetail_view.html",
+			"lib/zepto.min.js",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/payment/payDetail_view.html",
+			"pages/main.html"
+		]
+	},
+	"pages/payment/payDetail_view.html": {
+		"resources": [
+			"css/frozen.css",
+			"pages/payment/depositPayment.html",
+			"js/jquery-1.8.3.min.js",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/style.css",
+			"lib/zepto.min.js",
 			"js/Utils.js"
+		],
+		"refer": [
+			"pages/payment/depositPayment.html"
 		]
 	}
 }
