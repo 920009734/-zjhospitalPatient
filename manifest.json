@@ -429,7 +429,8 @@
 					"lib/zepto.min.js",
 					"js/Utils.js",
 					"img/index/personLogo@2x.png",
-					"font/iconfont-full.ttf"
+					"font/iconfont-full.ttf",
+					"img/self/self.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -669,9 +670,18 @@
 					"css/frozen.css",
 					"img/kes/a1.png",
 					"img/kes/a.png",
-					"pages/main.html"
+					"pages/main.html",
+					"img/kes/g1.png",
+					"H5Js/common.js",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js"
 				],
-				"refer": [],
+				"refer": [
+					"pages/divisionIntroduce_child.html"
+				],
 				"priority": 0
 			},
 			"pages/floorDistribution.html": {
@@ -943,6 +953,19 @@
 				"refer": [
 					"pages/dynamic.html"
 				],
+				"priority": 0
+			},
+			"pages/divisionIntroduce_child.html": {
+				"resources": [
+					"H5Js/common.js",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"css/frozen.css",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
