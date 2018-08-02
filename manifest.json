@@ -396,7 +396,9 @@
 					"pages/hospitalization/paytDeposit.html",
 					"pages/consultation/consulteLlist.html",
 					"pages/myAttention.html",
-					"pages/familyMember.html"
+					"pages/familyMember.html",
+					"pages/dynamic_list.html",
+					"H5Js/common.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -956,7 +958,7 @@
 				],
 				"priority": 0
 			},
-			"pages/divisionIntroduce_child.html": {
+			"pages/dynamic_list.html": {
 				"resources": [
 					"H5Js/common.js",
 					"font/iconfont-full.ttf",
@@ -964,9 +966,20 @@
 					"css/frozen.css",
 					"css/style.css",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"pages/main.html"
 				],
-				"refer": [],
+				"refer": [
+					"pages/dynamic.html"
+				],
+				"priority": 0
+			},
+			"pages/index.html": {
+				"resources": [],
+				"refer": [
+					"pages/dynamic.html",
+					"pages/dynamic_list.html"
+				],
 				"priority": 0
 			}
 		},
