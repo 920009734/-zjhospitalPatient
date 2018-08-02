@@ -61,7 +61,8 @@
 			"pages/yuyueguahao/patien_register.html",
 			"pages/consultation/consulteLlist.html",
 			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/payment/depositPayment.html"
+			"pages/payment/depositPayment.html",
+			"pages/divisionIntroduce.html"
 		],
 		"refer": [
 			"pages/familyMember.html",
@@ -72,7 +73,8 @@
 			"pages/yuyueguahao/patien_register.html",
 			"pages/consultation/consulteLlist.html",
 			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/payment/depositPayment.html"
+			"pages/payment/depositPayment.html",
+			"pages/divisionIntroduce.html"
 		]
 	},
 	"pages/familyMember.html": {
@@ -179,10 +181,16 @@
 			"fontIcon/iconfont.css",
 			"css/frozen.css",
 			"css/style.css",
-			"pages/main.html"
+			"pages/main.html",
+			"pages/yuyueguahao/choiceDor.html",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"lib/zepto.min.js",
+			"js/Utils.js"
 		],
 		"refer": [
-			"pages/main.html"
+			"pages/main.html",
+			"pages/yuyueguahao/choiceDor.html"
 		]
 	},
 	"pages/payment/depositPayment.html": {
@@ -195,7 +203,8 @@
 			"js/jquery-1.8.3.min.js",
 			"pages/payment/payDetail_view.html",
 			"lib/zepto.min.js",
-			"pages/main.html"
+			"pages/main.html",
+			"H5Js/immersed.js"
 		],
 		"refer": [
 			"pages/payment/payDetail_view.html",
@@ -246,6 +255,50 @@
 		],
 		"refer": [
 			"pages/dynamic.html"
+		]
+	},
+	"pages/yuyueguahao/choiceDor.html": {
+		"resources": [
+			"js/jquery-1.8.3.min.js",
+			"font/iconfont-full.ttf",
+			"fontIcon/iconfont.css",
+			"js/frozen.js",
+			"js/clinicSchedule.js",
+			"css/frozen.css",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"img/self/self.png",
+			"pages/yuyueguahao/choiceDepartment.html",
+			"js/Utils.js"
+		],
+		"refer": [
+			"pages/yuyueguahao/choiceDepartment.html"
+		]
+	},
+	"pages/divisionIntroduce.html": {
+		"resources": [
+			"img/kes/g1.png",
+			"H5Js/common.js",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/frozen.css",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js"
+		],
+		"refer": [
+			"pages/divisionIntroduce_child.html"
+		]
+	},
+	"pages/divisionIntroduce_child.html": {
+		"resources": [
+			"H5Js/common.js",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/frozen.css",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js"
 		]
 	}
 }

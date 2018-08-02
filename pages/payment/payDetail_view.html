@@ -6,8 +6,9 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
-        <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/jquery-1.8.3.min.js"></script>
+        <script>$.noConflict();</script>
+        <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
 		<title>待缴费详情</title>
@@ -126,11 +127,9 @@
 		
 		<script type="text/javascript">
         	$(function(){
+        		var Request = Utils.getRequest();
+        		var listPayorder = eval('(' + Request["listPayorder"] + ')');
         		
-        		var Request = new Object();
-        		Request = Utils.getRequest();
-        		
-        		var listPayorder = JSON.parse(Request["listPayorder"]);
         		/*代缴费记录*/
 				$("#hisOrdNum").text(listPayorder.hisOrdNum);
 				$("#payName").text(listPayorder.payName);

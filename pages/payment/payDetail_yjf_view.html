@@ -34,6 +34,81 @@
 			.con_left>span:first-child,.con_center>span:first-child,.con_right>span:first-child{font-size: 13px;}
 			.hr_sex{display: block;float: left;width: 1px;height: 30px;margin-top: 10px;border-right: 1px solid #FFFFFF;}
 		</style>
+		<script type="text/javascript">
+        	$(function(){
+        		var Request = Utils.getRequest();
+        		var listMap = eval('(' + Request["listMap"] + ')');
+        		
+        		/*缴费记录*/
+				$("#rcptNo").text(listMap.rcptNo);
+				$("#chargeDate").text(listMap.chargeDate);
+				$("#totalAmt").text(parseFloat(listMap.totalAmt)/100+"元");
+				$("#PAYWAY1").text(listMap.PAYWAY1);
+				$("#AMOUNT1").text(listMap.AMOUNT1);
+				$("#PAYWAY2").text(listMap.PAYWAY2);
+				$("#AMOUNT2").text(listMap.AMOUNT2);
+				$("#PAYWAY3").text(listMap.PAYWAY3);
+				$("#AMOUNT3").text(listMap.AMOUNT3);
+				$("#PAYWAY4").text(listMap.PAYWAY4);
+				$("#AMOUNT4").text(listMap.AMOUNT4);
+				
+        		
+        		var params={};
+        		params.hisOrdNum = listPayorder.hisOrdNum;
+        		$.post(Utils.getRoot()+"/outpatientPayment/selPayorderInfo",params,function(data){
+					console.log(JSON.stringify(data));
+					if (data.success) {
+						var listMap = data.data;
+						var patientInfo = listMap[0].patient;
+						$("#realname").text(patientInfo.realname);
+						if (patientInfo.sex == 1) {
+							$("#sex").text("男");
+						} else {
+							$("#sex").text("女");
+						}
+						$("#age").text(patientInfo.age);
+						
+						/*缴费记录明细*/
+						for (var i = 0; i < listMap.length; i++) {
+							$("#jfmxList").append(
+								"<tr>"+
+									"<td>"+listMap[i].itemNO+"</td>"+
+									"<td>"+listMap[i].classOnMr+"</td>"+
+									"<td>"+listMap[i].itemCode+"</td>"+
+									"<td>"+listMap[i].itemName+"</td>"+
+									"<td>"+listMap[i].itemSpec+"</td>"+
+									"<td>"+listMap[i].Amount+"</td>"+
+									"<td>"+listMap[i].itemUnit+"</td>"+
+									"<td>"+listMap[i].itemPrice+"</td>"+
+									"<td>"+listMap[i].Cost+"</td>"+
+									"<td>"+listMap[i].orderDeptName+"</td>"+
+									"<td>"+listMap[i].orderDoctorName+"</td>"+
+									"<td>"+listMap[i].performDeptName+"</td>"+
+									/*"<td>"+(parseFloat(payorderInfo[i].itemTotalFee)/100)+"</td>"+*/
+								"</tr>"
+							);
+						}
+					}else{
+						alert(data.message);
+					}
+				});
+				
+				if(window.plus){
+					plusReady();
+				}else{
+					document.addEventListener('plusready',plusReady,false);
+				}
+				
+				function plusReady(){
+					
+					// Android处理返回键
+					plus.key.addEventListener('backbutton',function(){
+						history.go(-1);
+					},false);
+				}
+        		
+        	});
+       </script>
 	</head>
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
@@ -65,79 +140,86 @@
 				<div class="pay_detail">
 					<div class="pay_detail_top">
 						<div class="list-item">
-							<span class="demo_name">接诊科室</span>
-							<span class="demo_value"><span>内科</span></span>
+							<span class="demo_name">收据号</span>
+							<span class="demo_value"><span id="rcptNo"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">接诊医生</span>
-							<span class="demo_value"><span>李医生</span></span>
+							<span class="demo_name">收费日期</span>
+							<span class="demo_value"><span id="chargeDate"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">订单号</span>
-							<span class="demo_value"><span>0029101</span></span>
+							<span class="demo_name">支付方式1</span>
+							<span class="demo_value"><span id="PAYWAY1"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">缴费项</span>
-							<span class="demo_value"><span>体检</span></span>
+							<span class="demo_name">支付金额1</span>
+							<span class="demo_value"><span id="AMOUNT1"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">医保部分金额</span>
-							<span class="demo_value"><span>100元</span></span>
+							<span class="demo_name">支付方式2</span>
+							<span class="demo_value"><span id="PAYWAY2"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">自费部分金额</span>
-							<span class="demo_value"><span>29元</span></span>
+							<span class="demo_name">支付金额2</span>
+							<span class="demo_value"><span id="AMOUNT2"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">已缴总额</span>
-							<span class="demo_value"><span>129元</span></span>
+							<span class="demo_name">支付方式3</span>
+							<span class="demo_value"><span id="PAYWAY3"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">缴费时间</span>
-							<span class="demo_value"><span>2018-05-23 15:12</span></span>
+							<span class="demo_name">支付金额3</span>
+							<span class="demo_value"><span id="AMOUNT3"></span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">支付方式4</span>
+							<span class="demo_value"><span id="PAYWAY4"></span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">支付金额4</span>
+							<span class="demo_value"><span id="AMOUNT4"></span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">总金额</span>
+							<span class="demo_value"><span id="totalAmt"></span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">就诊日期</span>
+							<span class="demo_value"><span id="visitDate"></span></span>
+						</div>
+						<div class="list-item">
+							<span class="demo_name">单号</span>
+							<span class="demo_value"><span id="visitNO"></span></span>
 						</div>
 					</div>
 					<div class="pay_detail_table">
 						<table class="baogao_table">
 							<thead>
 								<tr>
-									<th style="width: 25%;">项目名称</th>
-									<th style="width: 15%;">类别</th>
+									<th style="width: 5%;">序号</th>
+									<th style="width: 10%;">项目分类</th>
+									<th style="width: 15%;">项目代码</th>
+									<th style="width: 20%;">项目名称</th>
 									<th style="width: 15%;">规格</th>
-									<th style="width: 15%;">数量</th>
-									<th style="width: 15%;">单位</th>
-									<th style="width: 15%;">单价</th>
+									<th style="width: 10%;">数量</th>
+									<th style="width: 10%;">单位</th>
+									<th style="width: 10%;">价格</th>
+									<th style="width: 10%;">金额</th>
+									<th style="width: 15%;">开单科室</th>
+									<th style="width: 15%;">开单医生</th>
+									<th style="width: 15%;">执行科室 </th>
+									
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
+							<tbody id="jfmxList">
+								<!--<tr>
 									<td>处方药</td>
 									<td>内服</td>
 									<td>包</td>
 									<td>4</td>
 									<td>g</td>
 									<td>10元</td>
-								</tr>
-								<tr>
-									<td>处方药</td>
-									<td>内服</td>
-									<td>包</td>
-									<td>4</td>
-									<td>g</td>
-									<td>10元</td>
-								</tr>
-								<tr>
-									<td>处方药</td>
-									<td>内服</td>
-									<td>包</td>
-									<td>4</td>
-									<td>g</td>
-									<td>10元</td>
-								</tr>
-								<tr>
-									<td>总价</td>
-									<td colspan="5" style="color: #E51717;text-align: center;">129元</td>
-								</tr>
+								</tr>-->
 							</tbody>
 						</table>
 					</div>
