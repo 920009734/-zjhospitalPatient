@@ -37,7 +37,7 @@ $(function(){
 											"~"+
 											"<span class='endTime_'>"+doctorInfo[i].endTime+"</span>"+
 										"</span>"+
-										"<span class='yuhao'>余号：<span class='yuhao_'>"+doctorInfo[i].leftNum+"</span></span>"+
+										"<span class='yuhao'>余号：<span class='yuhao_'>约满</span></span>"+
 										"<span class='ghmoney'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
 									"</div>"+
 								"</div>"

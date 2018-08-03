@@ -10,6 +10,7 @@
          <script src="../../lib/zepto.min.js">  </script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
+        <script src="../../js/androidFh.js"></script>
 		<title>检查报告详情</title>
 		
 		<style type="text/css">
@@ -36,6 +37,7 @@
         		var params={};
         		params.checkId = Request["checkId"];
         		$.post(Utils.getRoot()+"/reportQuery/selExamItemsDetail",params,function(data){
+					alert(JSON.stringify(data));
 					if (data.success) {
 						var examItemsInfo = new Array();
 						examItemsInfo= data.data;

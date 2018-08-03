@@ -6,12 +6,13 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="../../css/frozen.css">
         <link rel="stylesheet" href="../../css/style.css" />
+         <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
-        <!--<script src="../../js/doctorGuahao.js"></script>-->
+        <script src="../../js/androidFh.js"></script>
         
-        <link rel="stylesheet" href="../../fontIcon/iconfont.css" />
+       
 		<title>医生挂号</title>
 		<style type="text/css">
 			.box_detail{display: block;float: left;width: 100%;min-height: 50px;max-height: 350px;background-color: #FFFFFF;padding: 10px 0;}
@@ -168,7 +169,7 @@
 												"<input type='hidden' name='childRegFee' value='"+childRegFee+"' />"+
 												"<span class='box_sj'><span class='beginTime'>"+timeGroupBy[j].beginTime+"</span>"+
 												" ~ <span class='endTime'>"+timeGroupBy[j].endTime+"</span></span>"+
-												"<span class='box_yuhao' >余号：<span class='leftNum'>"+timeGroupBy[j].leftNum+"</span></span>"+
+												"<span class='box_yuhao' >余号：<span class='leftNum'>"+约满+"</span></span>"+
 												"<span class='box_ghf'><span>￥</span><span class='regFee'>"+regFee+"</span></span>"+
 											"</div>"
 										);

@@ -413,7 +413,8 @@
 					"js/frozen.js",
 					"lib/zepto.min.js",
 					"js/Utils.js",
-					"font/iconfont-full.ttf"
+					"font/iconfont-full.ttf",
+					"js/androidFh.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -474,7 +475,8 @@
 					"js/Utils.js",
 					"lib/zepto.min.js",
 					"pages/lineUpSearch/jianchabg_view.html",
-					"pages/main.html"
+					"pages/main.html",
+					"js/androidFh.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -522,7 +524,8 @@
 					"font/iconfont-full.ttf",
 					"js/frozen.js",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"js/androidFh.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -574,7 +577,8 @@
 					"js/frozen.js",
 					"lib/zepto.min.js",
 					"js/Utils.js",
-					"pages/main.html"
+					"pages/main.html",
+					"pages/yuyueguahao/doctorGuahao_detail.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -814,7 +818,8 @@
 					"pages/yuyueguahao/comfirmMsg.html",
 					"css/frozen.css",
 					"img/index/personLogo@2x.png",
-					"fontIcon/iconfont.css"
+					"fontIcon/iconfont.css",
+					"pages/yuyueguahao/doctorGuahao.html"
 				],
 				"refer": [],
 				"priority": 0
