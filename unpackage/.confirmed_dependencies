@@ -1,1 +1,114 @@
-null
+{
+	"pages/login.html": {
+		"resources": [
+			"font/iconfont-full.ttf",
+			"fontIcon/iconfont.css",
+			"img/u364.png",
+			"js/frozen.js",
+			"css/frozen.css",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/main.html"
+		]
+	},
+	"pages/main.html": {
+		"resources": [
+			"img/index/zjyy.png",
+			"H5Js/shortcut.js",
+			"pages/index.html",
+			"img/index/zjLogo.png",
+			"img/index/logo@2x.png",
+			"img/index/dongtai.png",
+			"H5Js/immersed.js",
+			"pages/payment/depositPayment.html",
+			"css/frozen.css",
+			"css/style.css",
+			"pages/yuyueguahao/choiceDepartment.html"
+		],
+		"refer": [
+			"pages/payment/depositPayment.html",
+			"pages/yuyueguahao/choiceDepartment.html"
+		]
+	},
+	"pages/payment/depositPayment.html": {
+		"resources": [
+			"js/jquery-1.8.3.min.js",
+			"css/frozen.css",
+			"pages/payment/payDetail_yjf_view.html",
+			"H5Js/immersed.js",
+			"css/style.css",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"lib/zepto.min.js",
+			"js/Utils.js",
+			"pages/main.html",
+			"js/androidFh.js",
+			"pages/payment/payDetail_view.html"
+		],
+		"refer": [
+			"pages/payment/payDetail_yjf_view.html",
+			"pages/main.html",
+			"pages/payment/payDetail_view.html"
+		]
+	},
+	"pages/payment/payDetail_yjf_view.html": {
+		"resources": [
+			"css/frozen.css",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"pages/payment/depositPayment.html",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js",
+			"js/androidFh.js"
+		],
+		"refer": [
+			"pages/payment/depositPayment.html"
+		]
+	},
+	"pages/dynamic_list.html": {
+		"resources": [
+			"H5Js/common.js",
+			"css/frozen.css"
+		],
+		"refer": [
+			"pages/dynamic.html"
+		]
+	},
+	"pages/dynamic.html": {
+		"resources": [
+			"css/frozen.css",
+			"H5Js/common.js",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js"
+		]
+	},
+	"pages/index.html": {
+		"refer": [
+			"pages/dynamic_list.html",
+			"pages/dynamic.html"
+		]
+	},
+	"pages/yuyueguahao/choiceDepartment.html": {
+		"resources": [
+			"fontIcon/iconfont.css",
+			"css/frozen.css"
+		]
+	},
+	"pages/payment/payDetail_view.html": {
+		"resources": [
+			"pages/payment/depositPayment.html",
+			"css/frozen.css"
+		],
+		"refer": [
+			"pages/payment/depositPayment.html"
+		]
+	}
+}

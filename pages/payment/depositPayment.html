@@ -11,6 +11,7 @@
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
 		<script src="../../H5Js/immersed.js" ></script>
+		<script src="../../js/androidFh.js"></script>
         <title>诊间缴费</title>
         
         <style type="text/css">
@@ -62,11 +63,13 @@
 					if(!a){
 						$(this).addClass("active").siblings(".box_tab").removeClass("active");
 						if ($(this).attr("id")=="wjf") {
-							$(".yjf_con").html("");
+							$("#yjfList").html("");
+							$(".yjf_con").hide();
 							$(".wjf_con").show();
 							wjfList();
 						} else{
 							$(".yjf_con").show();
+							$("#yjfList").show();
 							$(".wjf_con").html("");
 							var yjfparams = {};
 							yjfparams.startTime = $('#startTime').val();//缴费开始日期
@@ -121,7 +124,7 @@
 								var totalAmt = parseFloat(listMap[i].totalAmt)/100;
 								$("#yjfList").append(
 									"<div class='yjf_item' >"+
-										"<input type='hidden' name='listMap'  value='"+listMap[i]+"'/>"+
+										"<input type='hidden' name='listMap'  value='"+JSON.stringify(listMap[i])+"'/>"+
 										"<span class='box_type'>收据号："+listMap[i].rcptNo+"</span>"+
 										"<span class='box_type'>收费日期："+listMap[i].chargeDate+"</span>"+
 										"<span class='box_money'>总金额："+totalAmt+" 元</span>"+

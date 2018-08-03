@@ -9,6 +9,8 @@
         <script src="../../lib/zepto.min.js"></script>
         <script src="../../js/frozen.js"></script>
         <script src="../../js/Utils.js"></script>
+        <script src="../../js/androidFh.js"></script>
+        
 		<title>缴费详情</title>
 		<style type="text/css">
 			html,body{background-color: #F3F3F3;}
@@ -19,7 +21,7 @@
 			.demo_name{display: block;float: left;width: 33%;padding-left: 3%;}
 			.demo_value{display: block;float: right;width: 61%; color: #999999;margin-right: 3%;}
 			.demo_value>span{display: block;float: right;}
-			.pay_detail_table{display: block;float: left; width: 100%;overflow-x: auto; margin-top: 20px;border-top: 2px solid #2CA99D;}
+			.pay_detail_table{display: block;float: left; width: 100%;overflow-x: auto; margin-top: 20px;border-top: 2px solid #2CA99D;margin-bottom: 20px;}
 			.baogao_table{background-color: #FFFFFF;width: 900px;overflow: auto;}
 			table thead tr th{height: 40px;font-weight: 400;text-align: center;border: 1px solid #F6F6F6;color: #989898;font-size: 13px; }
 			table tbody tr td{padding: 10px 5px ;border: 1px solid #F6F6F6;font-size: 12px;text-align: center;}
@@ -38,52 +40,50 @@
         	$(function(){
         		var Request = Utils.getRequest();
         		var listMap = eval('(' + Request["listMap"] + ')');
-        		
         		/*缴费记录*/
 				$("#rcptNo").text(listMap.rcptNo);
 				$("#chargeDate").text(listMap.chargeDate);
 				$("#totalAmt").text(parseFloat(listMap.totalAmt)/100+"元");
 				$("#PAYWAY1").text(listMap.PAYWAY1);
-				$("#AMOUNT1").text(listMap.AMOUNT1);
+				$("#AMOUNT1").text(listMap.AMOUNT1 == ""?"":(parseFloat(listMap.AMOUNT1)/100)+"元");
 				$("#PAYWAY2").text(listMap.PAYWAY2);
-				$("#AMOUNT2").text(listMap.AMOUNT2);
+				$("#AMOUNT2").text(listMap.AMOUNT2 == ""?"":(parseFloat(listMap.AMOUNT2)/100)+"元");
 				$("#PAYWAY3").text(listMap.PAYWAY3);
-				$("#AMOUNT3").text(listMap.AMOUNT3);
+				$("#AMOUNT3").text(listMap.AMOUNT3 == ""?"":(parseFloat(listMap.AMOUNT3)/100)+"元");
 				$("#PAYWAY4").text(listMap.PAYWAY4);
-				$("#AMOUNT4").text(listMap.AMOUNT4);
-				
+				$("#AMOUNT4").text(listMap.AMOUNT4 == ""?"":(parseFloat(listMap.AMOUNT4)/100)+"元");
         		
         		var params={};
-        		params.hisOrdNum = listPayorder.hisOrdNum;
-        		$.post(Utils.getRoot()+"/outpatientPayment/selPayorderInfo",params,function(data){
-					console.log(JSON.stringify(data));
+        		params.rcptNo = listMap.rcptNo;
+        		$.post(Utils.getRoot()+"/outpatientPayment/getPayQuerydetail",params,function(data){
 					if (data.success) {
-						var listMap = data.data;
-						var patientInfo = listMap[0].patient;
-						$("#realname").text(patientInfo.realname);
-						if (patientInfo.sex == 1) {
-							$("#sex").text("男");
-						} else {
-							$("#sex").text("女");
-						}
+						var list = data.data;
+						var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
+						
+						$("#realname").text(patientInfo.patientname);
+						$("#sex").text(patientInfo.sex == '1' ? '男' : '女');
 						$("#age").text(patientInfo.age);
 						
+						$("#visitDate").text(list[0].visitDate);
+						$("#visitNO").text(list[0].visitNO);
+						
 						/*缴费记录明细*/
-						for (var i = 0; i < listMap.length; i++) {
+						for (var i = 0; i < list.length; i++) {
+							console.log("list:"+i+","+JSON.stringify(list[i]));
 							$("#jfmxList").append(
 								"<tr>"+
-									"<td>"+listMap[i].itemNO+"</td>"+
-									"<td>"+listMap[i].classOnMr+"</td>"+
-									"<td>"+listMap[i].itemCode+"</td>"+
-									"<td>"+listMap[i].itemName+"</td>"+
-									"<td>"+listMap[i].itemSpec+"</td>"+
-									"<td>"+listMap[i].Amount+"</td>"+
-									"<td>"+listMap[i].itemUnit+"</td>"+
-									"<td>"+listMap[i].itemPrice+"</td>"+
-									"<td>"+listMap[i].Cost+"</td>"+
-									"<td>"+listMap[i].orderDeptName+"</td>"+
-									"<td>"+listMap[i].orderDoctorName+"</td>"+
-									"<td>"+listMap[i].performDeptName+"</td>"+
+									"<td>"+list[i].itemNO+"</td>"+
+									"<td>"+list[i].classOnMr+"</td>"+
+									"<td>"+list[i].itemCode+"</td>"+
+									"<td>"+list[i].itemName+"</td>"+
+									"<td>"+list[i].itemSpec+"</td>"+
+									"<td>"+(parseInt(list[i].Amount)/100)+"</td>"+
+									"<td>"+list[i].itemUnit+"</td>"+
+									"<td>"+(parseFloat(list[i].itemPrice)/1000)+"</td>"+
+									"<td>"+(parseFloat(list[i].Cost)/100)+"</td>"+
+									"<td>"+list[i].orderDeptName+"</td>"+
+									"<td>"+list[i].orderDoctorName+"</td>"+
+									"<td>"+list[i].performDeptName+"</td>"+
 									/*"<td>"+(parseFloat(payorderInfo[i].itemTotalFee)/100)+"</td>"+*/
 								"</tr>"
 							);
@@ -93,19 +93,6 @@
 					}
 				});
 				
-				if(window.plus){
-					plusReady();
-				}else{
-					document.addEventListener('plusready',plusReady,false);
-				}
-				
-				function plusReady(){
-					
-					// Android处理返回键
-					plus.key.addEventListener('backbutton',function(){
-						history.go(-1);
-					},false);
-				}
         		
         	});
        </script>
@@ -203,8 +190,8 @@
 									<th>规格</th>
 									<th>数量</th>
 									<th>单位</th>
-									<th>价格</th>
-									<th>金额</th>
+									<th>价格(元)</th>
+									<th>金额(元)</th>
 									<th>开单科室</th>
 									<th>开单医生</th>
 									<th>执行科室 </th>
@@ -214,9 +201,9 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="pay_btn">
+					<!--<div class="pay_btn">
 						<button >去退款</button>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</section>

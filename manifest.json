@@ -737,7 +737,9 @@
 					"js/jquery-1.8.3.min.js",
 					"pages/payment/payDetail_view.html",
 					"lib/zepto.min.js",
-					"H5Js/immersed.js"
+					"H5Js/immersed.js",
+					"pages/payment/payDetail_yjf_view.html",
+					"js/androidFh.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -952,21 +954,6 @@
 					"css/frozen.css",
 					"css/style.css",
 					"lib/zepto.min.js",
-					"js/Utils.js"
-				],
-				"refer": [
-					"pages/dynamic.html"
-				],
-				"priority": 0
-			},
-			"pages/dynamic_list.html": {
-				"resources": [
-					"H5Js/common.js",
-					"font/iconfont-full.ttf",
-					"js/frozen.js",
-					"css/frozen.css",
-					"css/style.css",
-					"lib/zepto.min.js",
 					"js/Utils.js",
 					"pages/main.html"
 				],
@@ -975,12 +962,18 @@
 				],
 				"priority": 0
 			},
-			"pages/index.html": {
-				"resources": [],
-				"refer": [
-					"pages/dynamic.html",
-					"pages/dynamic_list.html"
+			"pages/payment/payDetail_yjf_view.html": {
+				"resources": [
+					"css/frozen.css",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"pages/payment/depositPayment.html",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"js/androidFh.js"
 				],
+				"refer": [],
 				"priority": 0
 			}
 		},

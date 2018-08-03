@@ -54,7 +54,7 @@
 	        		params.startTime = startTime;
 	        		params.endTime = endTime;
 	        		$.post(Utils.getRoot()+"/reportQuery/selLabItems",params,function(data){
-						console.log("data:"+data)
+						console.log("data:"+JSON.stringify(data))
 						if (data.success) {
 							var labItemsInfo = new Array();
 							labItemsInfo= data.data;
