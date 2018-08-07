@@ -48,7 +48,14 @@
 			"pages/hospitalization/inHospotalSearch.html",
 			"pages/lineUpSearch/jcbg_list.html",
 			"pages/lineUpSearch/jybg_list.html",
+<<<<<<< HEAD
 			"pages/yuyueguahao/patien_register.html"
+=======
+			"font/iconfont-full.ttf",
+			"lib/zepto.min.js",
+			"js/frozen.js",
+			"js/Utils.js"
+>>>>>>> branch 'master' of https://gitee.com/yy17756/zjhospitalPatient.git
 		],
 		"refer": [
 			"pages/payment/depositPayment.html",
