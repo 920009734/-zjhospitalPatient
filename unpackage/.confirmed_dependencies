@@ -47,7 +47,11 @@
 			"pages/hospitalization/paytDeposit.html",
 			"pages/hospitalization/inHospotalSearch.html",
 			"pages/lineUpSearch/jcbg_list.html",
-			"pages/lineUpSearch/jybg_list.html"
+			"pages/lineUpSearch/jybg_list.html",
+			"font/iconfont-full.ttf",
+			"lib/zepto.min.js",
+			"js/frozen.js",
+			"js/Utils.js"
 		],
 		"refer": [
 			"pages/payment/depositPayment.html",
