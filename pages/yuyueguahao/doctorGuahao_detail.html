@@ -162,7 +162,7 @@
 									var regFee = parseFloat(timeGroupBy[j].regFee)/100;
 									//儿童诊查费
 									var childRegFee = parseFloat(timeGroupBy[i].childRegFee)/100; 
-									if (timeGroupBy[j].leftNum==0) {//余号为0 ，不可挂号
+									if (timeGroupBy[j].leftNum<=0) {//余号小于等于0 ，不可挂号
 										$("#hsTime"+i).append(
 											"<div class='nobox_time_item'>"+
 												"<input type='hidden' name='timeFlag' value='"+doctorInfo[i].timeFlag+"'>"+

@@ -229,7 +229,7 @@ $(function(){
 							doctorPhoto = "../../img/self/self.png";
 						}
 						
-						if(dortorInfo[i].leftNum==0){//余号为0，约满状态
+						if(dortorInfo[i].leftNum<=0){//余号为0，约满状态
 							$("#swinfoList").append(
 								"<div class='nocon_doc'>"+
 									 "<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+

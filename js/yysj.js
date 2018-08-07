@@ -26,7 +26,7 @@ $(function(){
 						//把诊查费转为元，原本是分
 						var regFee = parseFloat(doctorInfo[i].regFee)/100;
 						var childRegFee = parseFloat(doctorInfo[i].childRegFee)/100;//儿童诊查费
-						if (doctorInfo[i].leftNum==0) {//余号为0
+						if (doctorInfo[i].leftNum<=0) {//余号为0
 							$("#dateTimeDiv").append(
 								"<div class='nock_dateTime'>"+
 									"<div class='slot_item'>"+
