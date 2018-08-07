@@ -37,10 +37,10 @@
         		var params={};
         		params.checkId = Request["checkId"];
         		$.post(Utils.getRoot()+"/reportQuery/selExamItemsDetail",params,function(data){
-					alert(JSON.stringify(data));
+					
 					if (data.success) {
-						var examItemsInfo = new Array();
-						examItemsInfo= data.data;
+						var examItemsInfo = data.data;
+						console.log(JSON.stringify(examItemsInfo));
 						$("#checkId").text(examItemsInfo[0].checkId);
 						$("#deptName").text(examItemsInfo[0].deptName);
 						$("#doctorName").text(examItemsInfo[0].doctorName);

@@ -57,7 +57,7 @@
 	        		$.post(Utils.getRoot()+"/reportQuery/selExamItems",params,function(data){
 						if (data.success) {
 							var examItemsInfo = data.data;
-							alert(JSON.stringify(examItemsInfo));
+							console.log(JSON.stringify(examItemsInfo));
 							for (var i = 0; i < examItemsInfo.length; i++) {
 								$("#jcList").append(
 									"<div class='list-item '>"+
