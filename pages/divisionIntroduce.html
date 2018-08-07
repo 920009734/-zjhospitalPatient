@@ -86,6 +86,7 @@
 					$("#department").empty();
 					var tempStr = '';
 					if(result.success){
+						alert(result);
 						$.each(result.data, function(ind, val) {
 							tempStr += '<div class="keshi_item" onclick=\'child_vew("'+val.id+'","'+val.typeName+'")\'>'+
 									'<span class="box_img"><img src="../img/kes/g1.png" /></span>'+

@@ -86,15 +86,15 @@
 							<span class="demo_value"><span id="doctorName"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name">医保金额</span>
+							<span class="demo_name">医保金额(元)</span>
 							<span class="demo_value"><span id="medInsAmt"></span></span>
 						</div>
 						<div class="list-item">
-							<span class="demo_name" >自费金额</span>
+							<span class="demo_name" >自费金额(元)</span>
 							<span class="demo_value"><span id="selfAmt"></span></span>
 						</div>
 						<div class="list-item" >
-							<span class="demo_name"style="color:red">应缴总额</span>
+							<span class="demo_name"style="color:red">应缴总额(元)</span>
 							<span class="demo_value"style="color:red"><span id="totalAmt"></span></span>
 						</div>
 					</div>
@@ -136,9 +136,9 @@
 				$("#payName").text(listPayorder.payName);
 				$("#deptName").text(listPayorder.deptName);
 				$("#doctorName").text(listPayorder.doctorName);
-				$("#medInsAmt").text(parseFloat(listPayorder.medInsAmt)/100+"元");
-				$("#selfAmt").text(parseFloat(listPayorder.selfAmt)/100+"元");
-				$("#totalAmt").text(parseFloat(listPayorder.totalAmt)/100+"元");
+				$("#medInsAmt").text(parseFloat(listPayorder.medInsAmt)/100);
+				$("#selfAmt").text(parseFloat(listPayorder.selfAmt)/100);
+				$("#totalAmt").text(parseFloat(listPayorder.totalAmt)/100);
 				
         		/*代缴费记录明细*/
         		var params={};
@@ -163,7 +163,7 @@
 								"<tr>"+
 									"<td>"+payorderInfo[i].itemName+"</td>"+
 									"<td>"+payorderInfo[i].itemType+"</td>"+
-									"<td>"+(parseInt(payorderInfo[i].itemNumber)/100)+"</td>"+
+									"<td>"+(payorderInfo[i].itemNumber)+"</td>"+
 									"<td>"+payorderInfo[i].itemSpec+"</td>"+
 									"<td>"+payorderInfo[i].itemUnit+"</td>"+
 									"<td>"+payorderInfo[i].itemPrice+"</td>"+
@@ -184,10 +184,10 @@
 				
 				function plusReady(){
 					$("#pay").click(function(){
-						/*var chargeAmt =  $("#totalAmt").text();*/
-						var chargeAmt =  "0.1";
+						var chargeAmt =  $("#totalAmt").text();
 						var patientid = JSON.parse(localStorage.getItem('patientInfo')).patientid;
 						var outChargeNo = $("#hisOrdNum").text();
+						console.log(outChargeNo);
 						window.location.href  = "http://onepay.zjyy.com.cn:8082/zjhospital-app/paySuccess/paymentMethod_outpatient.html?outChargeNo="+outChargeNo+"&chargeAmt="+chargeAmt+"&patientid="+patientid;
 						/*var w = plus.webview.create(url);
 						w.show();*/

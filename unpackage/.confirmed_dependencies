@@ -47,7 +47,8 @@
 			"pages/hospitalization/paytDeposit.html",
 			"pages/hospitalization/inHospotalSearch.html",
 			"pages/lineUpSearch/jcbg_list.html",
-			"pages/lineUpSearch/jybg_list.html"
+			"pages/lineUpSearch/jybg_list.html",
+			"pages/yuyueguahao/patien_register.html"
 		],
 		"refer": [
 			"pages/payment/depositPayment.html",
@@ -55,7 +56,8 @@
 			"pages/hospitalization/paytDeposit.html",
 			"pages/hospitalization/inHospotalSearch.html",
 			"pages/lineUpSearch/jcbg_list.html",
-			"pages/lineUpSearch/jybg_list.html"
+			"pages/lineUpSearch/jybg_list.html",
+			"pages/yuyueguahao/patien_register.html"
 		]
 	},
 	"pages/payment/depositPayment.html": {
@@ -126,7 +128,8 @@
 			"css/frozen.css",
 			"pages/yuyueguahao/choiceDor.html",
 			"js/androidFh.js",
-			"pages/main.html"
+			"pages/main.html",
+			"css/style.css"
 		],
 		"refer": [
 			"pages/yuyueguahao/choiceDor.html",
@@ -136,7 +139,13 @@
 	"pages/payment/payDetail_view.html": {
 		"resources": [
 			"pages/payment/depositPayment.html",
-			"css/frozen.css"
+			"css/frozen.css",
+			"js/jquery-1.8.3.min.js",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"css/style.css",
+			"lib/zepto.min.js",
+			"js/Utils.js"
 		],
 		"refer": [
 			"pages/payment/depositPayment.html"
@@ -256,6 +265,28 @@
 	"pages/lineUpSearch/jybg_list.html": {
 		"resources": [
 			"css/frozen.css"
+		]
+	},
+	"pages/yuyueguahao/pantien_reg_msg.html": {
+		"resources": [
+			"fontIcon/iconfont.css",
+			"pages/yuyueguahao/patien_register.html",
+			"css/frozen.css"
+		],
+		"refer": [
+			"pages/yuyueguahao/patien_register.html"
+		]
+	},
+	"pages/yuyueguahao/patien_register.html": {
+		"resources": [
+			"pages/yuyueguahao/pantien_reg_msg.html",
+			"js/jquery-1.8.3.min.js",
+			"css/frozen.css",
+			"pages/main.html"
+		],
+		"refer": [
+			"pages/yuyueguahao/pantien_reg_msg.html",
+			"pages/main.html"
 		]
 	}
 }
