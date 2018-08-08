@@ -14,7 +14,7 @@
 		<title>选择科室</title>
 		<style type="text/css">
 			html,body{background-color: #FFFFFF;}
-			.keshi_view{display: block;float: left;width: 96%;height: 100%;margin-top: 15px;margin-left: 2%;}
+			.keshi_view{display: block;float: left;width: 94%;height: 100%;margin-top: 15px;margin-left: 3%;}
 			.view_title{display: block;float: left;width: 100%;height: 40px;line-height: 40px;font-size: 18px;color: #127674;}
 			.view_con{display: block;float: left;width: 100%;font-size: 15px;text-indent: 30px;line-height: 26px;margin-bottom: 50px;}
 			img{display: block;width: 300px;margin: 0 auto;} 
@@ -56,12 +56,10 @@
 				data:{id: id},
 				success: function(result){
 					plus.nativeUI.closeWaiting();
-					$("#department_view").empty();
 					var dept = result.data;
 					if(result.success){
 						$("#view_con").html(dept.content);
 						$("#view_con1").html(dept.content1);
-						//$("#department_view").append(tempStr);
 						$("#dep_type").children("span").html(dept.typeName);
 					}else{
 						alert(result.message);

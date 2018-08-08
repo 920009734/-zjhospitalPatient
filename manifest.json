@@ -561,7 +561,8 @@
 					"fontIcon/iconfont.css",
 					"js/frozen.js",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"js/androidFh.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -862,7 +863,11 @@
 					"css/frozen.css",
 					"css/style.css",
 					"img/z_add.png",
-					"pages/consultation/consultation.html"
+					"pages/consultation/consultation.html",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"lib/zepto.min.js",
+					"js/Utils.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -986,6 +991,32 @@
 					"js/androidFh.js"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"pages/divisionIntroduce_view.html": {
+				"resources": [
+					"css/frozen.css",
+					"H5Js/common.js",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/divisionIntroduce_child.html": {
+				"resources": [
+					"H5Js/common.js",
+					"js/frozen.js",
+					"css/frozen.css",
+					"lib/zepto.min.js",
+					"js/Utils.js"
+				],
+				"refer": [
+					"pages/divisionIntroduce_view.html"
+				],
 				"priority": 0
 			}
 		},
