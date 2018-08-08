@@ -28,6 +28,10 @@
 		
 		<section class="ui-container">
 			<div class="keshi_view" id="department_view">
+				<div class="view_title">科室简介</div>
+				<div class="view_con" id="view_con"></div>
+				<div class="view_title">医疗特色</div>
+				<div class="view_con" id="view_con1"></div>
 			</div>
 		</section>
 	</body>
@@ -55,9 +59,9 @@
 					$("#department_view").empty();
 					var dept = result.data;
 					if(result.success){
-						var tempStr = '<div class="view_title">'+dept.typeName+' </div>';
-						tempStr += '<div class="view_con">'+dept.content+' </div>';
-						$("#department_view").append(tempStr);
+						$("#view_con").html(dept.content);
+						$("#view_con1").html(dept.content1);
+						//$("#department_view").append(tempStr);
 						$("#dep_type").children("span").html(dept.typeName);
 					}else{
 						alert(result.message);

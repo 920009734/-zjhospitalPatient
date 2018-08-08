@@ -808,7 +808,8 @@
 					"pages/yuyueguahao/doctorGuahao_detail.html",
 					"fontIcon/iconfont.css",
 					"css/frozen.css",
-					"pages/yuyueguahao/choiceDor.html"
+					"pages/yuyueguahao/choiceDor.html",
+					"css/style.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -819,7 +820,13 @@
 					"css/frozen.css",
 					"img/index/personLogo@2x.png",
 					"fontIcon/iconfont.css",
-					"pages/yuyueguahao/doctorGuahao.html"
+					"pages/yuyueguahao/doctorGuahao.html",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/androidFh.js",
+					"js/Utils.js"
 				],
 				"refer": [],
 				"priority": 0
