@@ -1,4 +1,5 @@
 $(function(){
+	
 	//储存数据
 	var sdata = new Object();//号源数据
 	var rdata = new Object();//日期数据
@@ -22,9 +23,8 @@ $(function(){
 	//动态生成当前日期
 	createTime(dateTime, deptCode);
 	
-	$(".date_item").on("click",".date_list",function(){
+	$(".box_list").on("click",".date_list",function(){
 		cleanDiv();
-		
 		var a = $(this).attr("class");
 		if(a=="date_list"){
 			$(this).addClass("active").siblings(".date_list.active").removeClass("active");
@@ -81,6 +81,9 @@ $(function(){
 			if (res.success) {
 				rdata = JSON.stringify(res.data);
 				getDay(res.data);
+				
+				var height_ = $(".date_list>span").width();
+				$(".date_list>span").height(height_);
 			}
 		});
 	}
@@ -129,34 +132,35 @@ $(function(){
 	        		/*if(data[0].status == 2){
 		    			$("#nowTime").html(data[i].dataday);
 		    		}*/
+		    		$(".data_zh").append('<div class="zh_irem">'+tday+'</div>');
 	        		if (data[i].status == 1) {//有号
-	        			$(".date_item").append('<div class="date_list active" id="'+tDate+'">'
-							+'<h3 class="dep_name">'+tday+'</h3>'
-							+'<p class="dep_addr">'+tDate+'(有)</p>'
+	        			$(".box_list").append('<div class="date_list active" id="'+tDate+'">'
+							+'<span class="riqi_date"><span class="dep_name">'+tDate+'</span>'
+							+'<span class="dep_addr">有号</span></span>'
 							+'</div>');
 	        		} else {//无号 2
-	        			$(".date_item").append('<div class="nodate_list noactive" id="'+tDate+'" >'
-							+'<h3 class="dep_name">'+tday+'</h3>'
-							+'<p class="dep_addr">'+tDate+'(无)</p>'
+	        			$(".box_list").append('<div class="nodate_list noactive" id="'+tDate+'" >'
+							+'<span class="riqi_date"><span class="dep_name">'+tDate+'</span>'
+							+'<span class="dep_addr">(无)</span></span>'
 							+'</div>');
 	        		}
 	        	}
 	        }else{
-	        	var day = $(".date_item").children(".active").attr("id");
-				
+	        	var day = $(".box_list").children(".active").attr("id");
+				$(".data_zh").append('<div class="zh_irem">'+tday+'</div>');
 	        	if (tDate == data[i].dataday) {
 	        		if (data[i].status == 1) {
-		        		$(".date_item").append('<div class="date_list" id="'+tDate+'">'
-						+'<h3 class="dep_name">'+tday+'</h3>'
-						+'<p class="dep_addr">'+tDate+'(有)</p>'
+		        		$(".box_list").append('<div class="date_list" id="'+tDate+'">'
+						+'<span class="riqi_date"><span class="dep_name">'+tDate+'</span>'
+						+'<sapn class="dep_addr">有号</sapn></span>'
 						+'</div>');
 						if(day==undefined){
 							$(".date_list").attr("class","date_list active");
 						}
 	        		}else {
-	        			$(".date_item").append('<div class="nodate_list noactive" id="'+tDate+'">'
-							+'<h3 class="dep_name">'+tday+'</h3>'
-							+'<p class="dep_addr">'+tDate+'(无)</p>'
+	        			$(".box_list").append('<div class="nodate_list noactive" id="'+tDate+'">'
+							+'<span class="riqi_date"><span class="dep_name">'+tDate+'</span>'
+							+'<span class="dep_addr">无</span></span>'
 							+'</div>');
 	        		}
 	        	}
@@ -174,7 +178,7 @@ $(function(){
 	}
 	
 	function exditTopDate() {
-		var day = $(".date_item").children(".active").attr("id");
+		var day = $(".box_list").children(".active").attr("id");
 		var topTime = "";
 		var nowdate = new Date();
 		var s = getSevenDate(nowdate);
