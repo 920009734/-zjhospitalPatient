@@ -76,11 +76,16 @@
 					</div>
 				</div>
 				
-				<div class="doc_content" id="zjList" >
+				<div class="doc_content" id="myList" >
 				</div>	
 				
-				<div class="doc_content" id="myList" style="display: none;">
+				<div class="doc_content" id="zjList" style="display: none;">
+					<div id="zgh"></div>
+					<div id="fgh"></div>
 				</div>	
+				
+				<div class="doc_content" id="ptList" style="display: none;">
+				</div>
 				
 			</section>
 		</section>
@@ -118,11 +123,17 @@
 					if(!a){
 						$(this).addClass("active").siblings("span").removeClass("active");
 						var ghtype = $(".guahao.active").attr("id");
-						if(ghtype=="mygh"){
+						if(ghtype=="mygh"){//名医挂号
 							$("#myList").show();
 							$("#zjList").hide();
-						}else{
+							$("#ptList").hide();
+						}else if(ghtype=="zjgh"){//专家挂号
 							$("#zjList").show();
+							$("#myList").hide();
+							$("#ptList").hide();
+						}else{//普通挂号
+							$("#ptList").show();
+							$("#zjList").hide();
 							$("#myList").hide();
 						}
 					}
@@ -140,12 +151,10 @@
 				params.beginDate = beginDate;
 				params.endDate = endDate;
 				params.deptCode = $("#deptCode").val();
-				
 				//挂号
 				$.post(Utils.getRoot()+"/registerApp/selDoctorListDetail",params,function(data){
 					if (data.success) {
-						var dortorInfo = new Array();
-						dortorInfo= data.data;
+						var dortorInfo = data.data;
 						for (var i = 0; i < dortorInfo.length; i++) {
 							var doctorPhoto = dortorInfo[i].doctorPhoto;
 							if(doctorPhoto==null || doctorPhoto== "" 
@@ -171,10 +180,10 @@
 										"</div>"+
 									"</div>"
 								);
-							}else{//专家挂号
-								$("#zjList").append(
+							}else if(dortorInfo[i].clinicType=="普通号"){//普通挂号
+								$("#ptList").append(
 									"<div class='doc_item'>"+
-										"<input type='hidden' name='ghType' value='1'>"+
+										"<input type='hidden' name='ghType' value='2'>"+
 										"<div class='doc_item_img'>"+
 											"<img src='"+doctorPhoto+"' />"+
 										"</div>"+
@@ -190,6 +199,66 @@
 										"</div>"+
 									"</div>"
 								);
+							}else{//专家挂号
+								if(dortorInfo[i].clinicType=="正高号"){//正高号排前面
+									$("#zgh").append(
+										"<div class='doc_item'>"+
+											"<input type='hidden' name='ghType' value='1'>"+
+											"<div class='doc_item_img'>"+
+												"<img src='"+doctorPhoto+"' />"+
+											"</div>"+
+											"<div class='doc_item_content'>"+
+												"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
+												"<input type='hidden' name='clinicType' value='"+dortorInfo[i].clinicType+"'>"+
+												"<div class='doc_name'>"+
+													"<span class='doctorName'>"+dortorInfo[i].doctorName+"</span>"+
+												"</div>"+
+												"<div class='doc_time'>"+
+													"<span>"+dortorInfo[i].clinicType+"</span>"+
+												"</div>"+
+											"</div>"+
+										"</div>"
+									);
+								}else if(dortorInfo[i].clinicType=="副高号"){//副高号排第二
+									$("#fgh").append(
+										"<div class='doc_item'>"+
+											"<input type='hidden' name='ghType' value='1'>"+
+											"<div class='doc_item_img'>"+
+												"<img src='"+doctorPhoto+"' />"+
+											"</div>"+
+											"<div class='doc_item_content'>"+
+												"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
+												"<input type='hidden' name='clinicType' value='"+dortorInfo[i].clinicType+"'>"+
+												"<div class='doc_name'>"+
+													"<span class='doctorName'>"+dortorInfo[i].doctorName+"</span>"+
+												"</div>"+
+												"<div class='doc_time'>"+
+													"<span>"+dortorInfo[i].clinicType+"</span>"+
+												"</div>"+
+											"</div>"+
+										"</div>"
+									);
+								}else{//其余的放副高号后面
+									$("#zjList").append(
+										"<div class='doc_item'>"+
+											"<input type='hidden' name='ghType' value='1'>"+
+											"<div class='doc_item_img'>"+
+												"<img src='"+doctorPhoto+"' />"+
+											"</div>"+
+											"<div class='doc_item_content'>"+
+												"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
+												"<input type='hidden' name='clinicType' value='"+dortorInfo[i].clinicType+"'>"+
+												"<div class='doc_name'>"+
+													"<span class='doctorName'>"+dortorInfo[i].doctorName+"</span>"+
+												"</div>"+
+												"<div class='doc_time'>"+
+													"<span>"+dortorInfo[i].clinicType+"</span>"+
+												"</div>"+
+											"</div>"+
+										"</div>"
+									);
+								}
+								
 							}
 						}
 					}else{
