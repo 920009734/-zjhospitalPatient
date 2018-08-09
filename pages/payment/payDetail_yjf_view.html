@@ -44,14 +44,37 @@
 				$("#rcptNo").text(listMap.rcptNo);
 				$("#chargeDate").text(listMap.chargeDate);
 				$("#totalAmt").text(parseFloat(listMap.totalAmt)/100+"元");
-				$("#PAYWAY1").text(listMap.PAYWAY1);
-				$("#AMOUNT1").text(listMap.AMOUNT1 == ""?"":(parseFloat(listMap.AMOUNT1)/100)+"元");
-				$("#PAYWAY2").text(listMap.PAYWAY2);
-				$("#AMOUNT2").text(listMap.AMOUNT2 == ""?"":(parseFloat(listMap.AMOUNT2)/100)+"元");
-				$("#PAYWAY3").text(listMap.PAYWAY3);
-				$("#AMOUNT3").text(listMap.AMOUNT3 == ""?"":(parseFloat(listMap.AMOUNT3)/100)+"元");
-				$("#PAYWAY4").text(listMap.PAYWAY4);
-				$("#AMOUNT4").text(listMap.AMOUNT4 == ""?"":(parseFloat(listMap.AMOUNT4)/100)+"元");
+				if(listMap.AMOUNT1==""){
+					$("#pay1").hide();
+					$("#amo1").hide();
+				}else{
+					$("#PAYWAY1").text(listMap.PAYWAY1);
+					$("#AMOUNT1").text(listMap.AMOUNT1 == ""?"":(parseFloat(listMap.AMOUNT1)/100)+"元");
+				}
+				
+				if(listMap.AMOUNT2==""){
+					$("#pay2").hide();
+					$("#amo2").hide();
+				}else{
+					$("#PAYWAY2").text(listMap.PAYWAY2);
+					$("#AMOUNT2").text(listMap.AMOUNT2 == ""?"":(parseFloat(listMap.AMOUNT2)/100)+"元");
+				}
+				
+				if(listMap.AMOUNT3==""){
+					$("#pay3").hide();
+					$("#amo3").hide();
+				}else{
+					$("#PAYWAY3").text(listMap.PAYWAY3);
+					$("#AMOUNT3").text(listMap.AMOUNT3 == ""?"":(parseFloat(listMap.AMOUNT3)/100)+"元");
+				}
+				
+				if(listMap.AMOUNT4==""){
+					$("#pay4").hide();
+					$("#amo4").hide();
+				}else{
+					$("#PAYWAY4").text(listMap.PAYWAY4);
+					$("#AMOUNT4").text(listMap.AMOUNT4 == ""?"":(parseFloat(listMap.AMOUNT4)/100)+"元");
+				}
         		
         		var params={};
         		params.rcptNo = listMap.rcptNo;
@@ -134,36 +157,36 @@
 							<span class="demo_name">收费日期</span>
 							<span class="demo_value"><span id="chargeDate"></span></span>
 						</div>
-						<div class="list-item">
-							<span class="demo_name">支付方式1</span>
+						<div class="list-item" id="pay1">
+							<span class="demo_name">支付方式(类型)</span>
 							<span class="demo_value"><span id="PAYWAY1"></span></span>
 						</div>
-						<div class="list-item">
-							<span class="demo_name">支付金额1</span>
+						<div class="list-item" id="amo1">
+							<span class="demo_name">支付金额</span>
 							<span class="demo_value"><span id="AMOUNT1"></span></span>
 						</div>
-						<div class="list-item">
-							<span class="demo_name">支付方式2</span>
+						<div class="list-item" id="pay2">
+							<span class="demo_name">支付方式(类型)</span>
 							<span class="demo_value"><span id="PAYWAY2"></span></span>
 						</div>
-						<div class="list-item">
-							<span class="demo_name">支付金额2</span>
+						<div class="list-item" id="amo2">
+							<span class="demo_name">支付金额</span>
 							<span class="demo_value"><span id="AMOUNT2"></span></span>
 						</div>
-						<div class="list-item">
-							<span class="demo_name">支付方式3</span>
+						<div class="list-item" id="pay3">
+							<span class="demo_name">支付方式(类型)</span>
 							<span class="demo_value"><span id="PAYWAY3"></span></span>
 						</div>
-						<div class="list-item">
-							<span class="demo_name">支付金额3</span>
+						<div class="list-item" id="amo3">
+							<span class="demo_name">支付金额</span>
 							<span class="demo_value"><span id="AMOUNT3"></span></span>
 						</div>
-						<div class="list-item">
-							<span class="demo_name">支付方式4</span>
+						<div class="list-item" id="pay4">
+							<span class="demo_name">支付方式(类型)</span>
 							<span class="demo_value"><span id="PAYWAY4"></span></span>
 						</div>
-						<div class="list-item">
-							<span class="demo_name">支付金额4</span>
+						<div class="list-item" id="amo4">
+							<span class="demo_name">支付金额</span>
 							<span class="demo_value"><span id="AMOUNT4"></span></span>
 						</div>
 						<div class="list-item">
