@@ -48,6 +48,9 @@
 				<div class="dep_item">
 					<div class="dep_con" id="deptInfoList">
 					</div>
+					
+					<div id="doctorInfoList">
+					</div>
 				</div>
 				
 			</section>
@@ -81,16 +84,29 @@
         		var params={};
         		$.post(Utils.getRoot()+"/registerApp/selDivision",params,function(data){
 					if (data.success) {
-						var deptInfo = new Array();
-						deptInfo= data.data;
+						var deptInfo = data.data;
+						
 						for (var i = 0; i < deptInfo.length; i++) {
-							$("#deptInfoList").append(
+							$("#deptInfoList").append(//科室信息
 								"<div class='dep_list' >"+
 								  "<input type='hidden' value='"+deptInfo[i].deptCode+"' name='deptCode'>"+
 								  "<span class='dep_name' name='deptName'>"+deptInfo[i].deptName+"</span>"+
 								  "<i class='ui-icon ui-icon-arrow'></i>"+
 								"</div>"
 							);
+							
+							var doctorDetail = deptInfo[i].doctorDetail;
+							for (var j = 0; j < doctorDetail.length; j++) {//医生信息
+								$("#doctorInfoList").append(
+									"<div class='dep_list' >"+
+									  "<input type='hidden' value='"+doctorDetail[j].doctorCode+"' name='doctorCode'>"+
+									  "<span class='dep_name' name='doctorName'>"+doctorDetail[j].doctorName+"</span>"+
+									  "<i class='ui-icon ui-icon-arrow'></i>"+
+									"</div>"
+								);
+							}
+							
+							
 						}
 					}else{
 						alert(data.message);

@@ -30,8 +30,8 @@ $(function(){
 			$(this).addClass("active").siblings(".date_list.active").removeClass("active");
 			exditTopDate();
 		}else{
-			
-			$("#swinfoList").append(
+			exditTopDate();
+			/*$("#swinfoList").append(
 				"<div class='list-item '>"+
 					"<p class='notData'>暂无数据</p>"+
 				"</div>"
@@ -45,7 +45,7 @@ $(function(){
 				"<div class='list-item '>"+
 					"<p class='notData'>暂无数据</p>"+
 				"</div>"
-			);
+			);*/
 		}
 	});
 	
