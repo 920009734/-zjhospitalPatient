@@ -17,7 +17,7 @@
 		<style type="text/css">
 			html,body{font-family: "微软雅黑";}
 			.dep_item{display: block; width: 100%;margin-top: 90px;}
-			.dep_con{display: block;width: 100%; min-height: 50px;max-height: 2000px;}
+			.dep_con{display: block;width: 100%;}
 			
 			.dep_list{display: block;width: 100%;height: 50px;line-height: 50px; margin-bottom: 5px;background-color: #FFFFFF;}
 			.dep_list>span{display: block;float: left;width: 84%;padding-left: 15px;}
@@ -28,6 +28,7 @@
 			.huanzhe_search>input{display: block;float: left; width: 87%;border: none;height: 30px;margin-top: 5px;background-color: #FAFAFA;}
 			.huanzhe_search>i{display: block;float: left;width: 7%;font-size: 26px;line-height: 40px;color: #2A8681;}
 			input[placeholder]{font-size: 14px;padding-left:10px;}
+			.title_{display: block;width: 100%; padding-left: 15px;height: 30px;padding-bottom: 3px;color: #999999;}
 		</style>
 		 
 	</head>
@@ -46,6 +47,7 @@
 					</div>
 				</div>
 				<div class="dep_item">
+					<span class="title_">科室</span>
 					<div class="dep_con" id="deptInfoList">
 					</div>
 					
@@ -80,7 +82,8 @@
 					var ws=plus.webview.currentWebview();
 					plus.webview.close(ws);
 				});*/
-        		
+        		$("#doctorInfoList").hide();
+        		$(".title_").hide();
         		var params={};
         		$.post(Utils.getRoot()+"/registerApp/selDivision",params,function(data){
 					if (data.success) {
@@ -136,17 +139,28 @@
         		var showVal = $("#chazhao").val();
         		var class_value = new Array();
         		var class_name = new Array();
+        		debugger;
         		$(".dep_name").each(function(ind,val){ 
         			class_value.push($(this).text());
         			class_name.push($(this));
         			
         			if(showVal != null && showVal != ""){
         				if(class_value[ind].match(".*"+showVal+".*")){
+	        				$("#doctorInfoList").show();
 	        				class_name[ind].parent().show();
-	        			}else{ 
+	        				var a = $(this).parent().parent().is("#doctorInfoList");
+	        				$(".title_").show();
+	        				if(a){
+	        					$(".title_").text("医生");
+	        				}else{
+	        					$(".title_").text("科室");
+	        				}
+	        			}else{
 	        				class_name[ind].parent().hide();
 	        			}
         			}else{
+        				$("#doctorInfoList").hide();
+        				$(".title_").hide();
         				class_name[ind].parent().show();
         			}
         		}); 
