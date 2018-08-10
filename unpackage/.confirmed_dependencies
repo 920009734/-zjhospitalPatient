@@ -87,7 +87,12 @@
 			"img/self/self.png",
 			"pages/yuyueguahao/doctorGuahao.html",
 			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/yuyueguahao/choiceTime.html"
+			"pages/yuyueguahao/choiceTime.html",
+			"font/iconfont-full.ttf",
+			"js/frozen.js",
+			"lib/zepto.min.js",
+			"js/androidFh.js",
+			"js/Utils.js"
 		],
 		"refer": [
 			"pages/yuyueguahao/doctorGuahao.html",
