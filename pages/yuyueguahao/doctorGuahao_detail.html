@@ -120,10 +120,10 @@
 				var dparams={};
 				dparams.deptCode = $("#deptCode").val();
 				dparams.doctorCode = $("#doctorCode").val();
+				
 				$.post(Utils.getRoot()+"/registerApp/selDoctor",dparams,function(data){
 					if (data.success) {
-						var dortorInfo = new Array();
-						dortorInfo= data.data;
+						var dortorInfo = data.data;
 						$("#doctorTitle").text(dortorInfo[0].doctorTitle);//医生职称
 						$("#doctorSkill").text(dortorInfo[0].doctorSkill);//医生擅长
 						var doctorPhoto = dortorInfo[0].doctorPhoto;
@@ -146,10 +146,10 @@
 				params.deptCode = $("#deptCode").val();
 				params.doctorCode = $("#doctorCode").val();
 				params.ghType = $("#ghType").val();
+				
 				$.post(Utils.getRoot()+"/registerApp/selDoctorListDetail",params,function(data){
 					if (data.success) {
-						var doctorInfo = new Array();
-						doctorInfo= data.data;
+						var doctorInfo = data.data;
 						var timeGroupBy;
 						for (var i = 0; i < doctorInfo.length; i++) {
 							if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时

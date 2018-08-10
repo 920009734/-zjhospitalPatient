@@ -164,7 +164,7 @@
 							if(dortorInfo[i].clinicType=="名医号"){//名医挂号
 								$("#myList").append(
 									"<div class='doc_item'>"+
-										"<input type='hidden' name='ghType' value='2'>"+
+										"<input type='hidden' name='ghType' value='1'>"+
 										"<div class='doc_item_img'>"+
 											"<img src='"+doctorPhoto+"' />"+
 										"</div>"+
@@ -183,7 +183,7 @@
 							}else if(dortorInfo[i].clinicType=="普通号"){//普通挂号
 								$("#ptList").append(
 									"<div class='doc_item'>"+
-										"<input type='hidden' name='ghType' value='2'>"+
+										"<input type='hidden' name='ghType' value='3'>"+
 										"<div class='doc_item_img'>"+
 											"<img src='"+doctorPhoto+"' />"+
 										"</div>"+
@@ -203,7 +203,7 @@
 								if(dortorInfo[i].clinicType=="正高号"){//正高号排前面
 									$("#zgh").append(
 										"<div class='doc_item'>"+
-											"<input type='hidden' name='ghType' value='1'>"+
+											"<input type='hidden' name='ghType' value='2'>"+
 											"<div class='doc_item_img'>"+
 												"<img src='"+doctorPhoto+"' />"+
 											"</div>"+
@@ -267,14 +267,13 @@
 				});
 				
 				
-				$("#zjList,#myList").on("click",".doc_item",function(){
+				$("#zjList,#myList,#ptList").on("click",".doc_item",function(){
 					var ghType = $(this).children("input[name='ghType']").val();
 					var deptCode = $("#deptCode").val();
 					var deptName = $("#deptName").text();
 					var doctorCode = $(this).children(".doc_item_content").children("input[name='doctorCode']").val();
 					var clinicType = $(this).children(".doc_item_content").children("input[name='clinicType']").val();
 					var doctorName = $(this).children(".doc_item_content").children(".doc_name").children(".doctorName").text();
-					var url = "../yuyueguahao/doctorGuahao_detail.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&doctorName="+doctorName+"&ghType="+ghType+"&clinicType="+clinicType;
 					window.location.href="../yuyueguahao/doctorGuahao_detail.html?deptCode="+deptCode+"&doctorCode="+doctorCode+"&deptName="+deptName+"&doctorName="+doctorName+"&ghType="+ghType+"&clinicType="+clinicType;
 				});
 				
