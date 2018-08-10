@@ -34,8 +34,11 @@
 			.suc_item>label{display: block;float: left;margin-left: 3%;font-size: 15px;color: #595959;}
 			.suc_item>span{display: block;float: right;margin-right: 3%;color: #999999;font-size: 13px;}
        
-       		.login_btn{display: block;float: left; width: 94%;margin-left: 3%;margin-top: 25px;}
-			.login_btn>button{border-radius:2px ;background: #2A8681;font-size: 16px;border: none;}
+			.login_btn{display: block;float: left; width: 94%;margin-left: 3%;margin-top: 25px;}
+			.login_btn>button{display: block;width: 100%;height: 44px;line-height: 44px;color: #FFFFFF; border-radius:2px;}
+       		#cancel{background-color: #E51717;}
+       		#refund{background-color: #2A8681;}
+       		
        		.dialog_groupMsg{display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;z-index: 9999;background: rgba(0,0,0,0.4);}
 			.dialog_sendMsg_cnt{display: block;width: 80%;min-height: 100px;max-height: 800px;background-color: #FFFFFF;position: relative;margin-left: 10%;margin-top: 20%;border-radius: 5px;}
 			.ui-dialog-ft .close_groupMsg{color: red;}
@@ -313,8 +316,8 @@
 	        
 			<div class="login_btn">
 				<input type="hidden"  id="bespeakId" value=""/>
-				<button id="cancel" class="ui-btn ui-btn-lg ui-btn-primary" >取消预约</button>
-				<button id="refund" class="ui-btn ui-btn-lg ui-btn-primary" style="display: none;">退款</button>
+				<button id="cancel">取消预约</button>
+				<button id="refund" style="display: none;">退款</button>
 			</div>
 			
 			<!-- 取消预约窗口-->
