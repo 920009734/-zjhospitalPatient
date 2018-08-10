@@ -42,8 +42,8 @@
 			<section id="list">
 				<div class="search_dep">
 					<div class="huanzhe_search">
-						<input type="text" id="chazhao" placeholder="查找科室" />
-						<i class="ui-icon icon-search" id="searchp" onclick="changeVal()" ></i>
+						<input type="text" id="chazhao" placeholder="查找科室/医生" />
+						<!--<i class="ui-icon icon-search" id="searchp" oninput="changeVal()" ></i>-->
 					</div>
 				</div>
 				<div class="dep_item">
@@ -135,6 +135,8 @@
 				});
         		
         	});
+        	
+        	$("#chazhao").on('input propertychange',changeVal);
         	function changeVal(){
         		var showVal = $("#chazhao").val();
         		var class_value = new Array();
