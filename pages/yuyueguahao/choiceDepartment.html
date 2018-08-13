@@ -31,6 +31,12 @@
 			.title_{display: block;width: 100%; padding-left: 15px;height: 30px;padding-bottom: 3px;color: #999999;}
 			.not_data{display: block;float: left;width: 100%;height: 100px;text-align: center;line-height: 100px;color: #383737;}
 			
+			.doc_list{display: block;float: left;width: 100%;height: 60px; margin-bottom: 5px;background-color: #FFFFFF;}
+			.doc_list>span{display: block;float: right; width: 81%;line-height: 24px;}
+			.dep_name.doc_name{margin-top: 8px;}
+			.dep_type.doc_name{font-size: 12px;color: #999999;}
+			.doc_list>div{display: block;float: left;width: 15%;height: 100%;margin-left: 3%;}
+			.doc_list>div>img{display: block;margin: 0 auto; width: 40px;height: 40px;margin-top: 10px;}
 		</style>
 		 
 	</head>
@@ -49,11 +55,13 @@
 					</div>
 				</div>
 				<div class="dep_item">
-					<span class="title_">科室</span>
-					<div class="dep_con" id="deptInfoList">
+					<div>
+						<span class="title_" id="keshi_title">科室</span>
+						<div class="dep_con" id="deptInfoList"></div>
 					</div>
-					
-					<div id="doctorInfoList">
+					<div>
+						<span class="title_" id="doc_title">医生</span>
+						<div id="doctorInfoList"></div>
 					</div>
 					
 					<div class="not_data">
@@ -90,6 +98,7 @@
 				});*/
         		$("#doctorInfoList").hide();
         		$(".title_").hide();
+        		$(".title_1").hide();
         		$(".not_data").hide();
         		var params={};
         		$.post(Utils.getRoot()+"/registerApp/selDivision",params,function(data){
@@ -108,10 +117,11 @@
 							var doctorDetail = deptInfo[i].doctorDetail;
 							for (var j = 0; j < doctorDetail.length; j++) {//医生信息
 								$("#doctorInfoList").append(
-									"<div class='dep_list' >"+
+									"<div class='doc_list' >"+
 									  "<input type='hidden' value='"+doctorDetail[j].doctorCode+"' name='doctorCode'>"+
-									  "<span class='dep_name' name='doctorName'>"+doctorDetail[j].doctorName+"</span>"+
-									  "<i class='ui-icon ui-icon-arrow'></i>"+
+									  "<div><img src='../../img/self/self.png' /></div>"+
+									  "<span class='dep_name doc_name' name='doctorName'>"+doctorDetail[j].doctorName+"</span>"+
+									  "<span class='dep_type doc_name' name='deptName'>"+deptInfo[i].deptName+"</span>"+
 									"</div>"
 								);
 							}
@@ -149,6 +159,8 @@
         		var class_value = new Array();
         		var class_name = new Array();
         		var count = 0;
+        		var flag_doc = 0;
+        		var flag_keshi = 0;
         		$(".dep_name").each(function(ind,val){ 
         			class_value.push($(this).text());
         			class_name.push($(this));
@@ -160,10 +172,27 @@
 	        				var a = $(this).parent().parent().is("#doctorInfoList");
 	        				$(".title_").show();
 	        				if(a){
-	        					$(".title_").text("医生");
+	        					flag_doc = flag_doc+1;
+	        					$(this).parent().parent().siblings("title_").text("医生");
+	        					
 	        				}else{
-	        					$(".title_").text("科室");
+	        					flag_keshi = flag_keshi+1;
+	        					$(this).parent().parent().siblings("title_").text("科室");
 	        				}
+	        				
+	        				//判断是科室还是医生
+	        				if(flag_doc >= 1){
+    							$("#keshi_title").hide();
+        						$("#doc_title").show();
+        					}
+	        				if(flag_keshi >= 1){
+    							$("#doc_title").hide();
+        						$("#keshi_title").show();
+        					}
+	        				if(flag_doc >= 1 && flag_keshi >= 1){
+    							$("#keshi_title").show();
+    							$("#doc_title").show();
+        					}
 	        				$(".not_data").hide();
 	        			}else{
 	        				count = count+1;

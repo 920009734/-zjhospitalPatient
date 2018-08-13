@@ -50,6 +50,7 @@
 			#doctor_{display: block;float: left;width: 100%;height: 100%;margin-top: 75px;}
 			.notData{color: #999999;text-align: center;line-height: 50px;}
 			input[placeholder]{font-size: 13px;}
+			.not_data{display: block;float: left;width: 100%;height: 100px;text-align: center;line-height: 100px;color: #383737;}
 		</style>
 	</head>
 	<body ontouchstart>
@@ -65,11 +66,14 @@
 				<div class="search_doc">
 					<div class="search_left">
 						<input type="text" placeholder="输入医生姓名搜索医生" id="docName_id"/>
-						<i class="ui-icon ui-icon-search" onclick="changeVal()"></i>
+						<!--<i class="ui-icon ui-icon-search" onclick="changeVal()"></i>-->
 					</div>
 					<!--<div class="search_right" onclick="changeVal()">搜索</div>-->
 				</div>
 				<div id="doctor_"></div>
+				<div class="not_data">
+					<span>暂未获取到相关结果</span>
+				</div>
 			</section>
 		</section>
 		
@@ -113,6 +117,7 @@
 		</section>
 		<script type="text/javascript">
 			$(function(){
+				$("not_data").hide();
 				$("#dep_type").click(function(){
 				    $(".ui-dialog").dialog("show");
 				})
@@ -215,12 +220,17 @@
 					location.reload();
 					$(".ui-actionsheet").removeClass("show");
 				});
+				
+				
 			});
 			
+			$("#docName_id").on('input propertychange',changeVal);
 			function changeVal(){
         		var showVal = $("#docName_id").val();
         		var class_value = new Array();
         		var class_name = new Array();
+        		var count = 0;
+        		
         		$(".right_name").each(function(ind,val){ 
         			class_value.push($(this).text());
         			class_name.push($(this));
@@ -228,11 +238,17 @@
         			if(showVal != null && showVal != ""){
         				if(class_value[ind].match(".*"+showVal+".*")){
 	        				class_name[ind].parent().parent().parent().show();
+	        				$(".not_data").hide();
 	        			}else{ 
+	        				count = count+1;
+	        				if(count>=ind){
+	        					$(".not_data").show();
+	        				}
 	        				class_name[ind].parent().parent().parent().hide();
 	        			}
         			}else{
         				class_name[ind].parent().parent().parent().show();
+        				$(".not_data").hide();
         			}
         		}); 
         	}
