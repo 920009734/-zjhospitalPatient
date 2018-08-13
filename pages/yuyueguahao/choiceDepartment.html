@@ -29,6 +29,8 @@
 			.huanzhe_search>i{display: block;float: left;width: 7%;font-size: 26px;line-height: 40px;color: #2A8681;}
 			input[placeholder]{font-size: 14px;padding-left:10px;}
 			.title_{display: block;width: 100%; padding-left: 15px;height: 30px;padding-bottom: 3px;color: #999999;}
+			.not_data{display: block;float: left;width: 100%;height: 100px;text-align: center;line-height: 100px;color: #383737;}
+			
 		</style>
 		 
 	</head>
@@ -52,6 +54,10 @@
 					</div>
 					
 					<div id="doctorInfoList">
+					</div>
+					
+					<div class="not_data">
+						<span>暂未获取到相关结果</span>
 					</div>
 				</div>
 				
@@ -84,6 +90,7 @@
 				});*/
         		$("#doctorInfoList").hide();
         		$(".title_").hide();
+        		$(".not_data").hide();
         		var params={};
         		$.post(Utils.getRoot()+"/registerApp/selDivision",params,function(data){
 					if (data.success) {
@@ -141,7 +148,7 @@
         		var showVal = $("#chazhao").val();
         		var class_value = new Array();
         		var class_name = new Array();
-        		debugger;
+        		var count = 0;
         		$(".dep_name").each(function(ind,val){ 
         			class_value.push($(this).text());
         			class_name.push($(this));
@@ -157,13 +164,19 @@
 	        				}else{
 	        					$(".title_").text("科室");
 	        				}
+	        				$(".not_data").hide();
 	        			}else{
+	        				count = count+1;
+	        				if(count>=ind){
+	        					$(".not_data").show();
+	        				}
 	        				class_name[ind].parent().hide();
 	        			}
         			}else{
         				$("#doctorInfoList").hide();
         				$(".title_").hide();
         				class_name[ind].parent().show();
+        				$(".not_data").hide();
         			}
         		}); 
         	}
