@@ -115,11 +115,18 @@
 							);
 							
 							var doctorDetail = deptInfo[i].doctorDetail;
+							
 							for (var j = 0; j < doctorDetail.length; j++) {//医生信息
+								var doctorPhoto = doctorDetail[j].doctorPhoto;
+								if(doctorPhoto==null || doctorPhoto== "" 
+									|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
+									doctorPhoto = "../../img/self/self.png";
+								}
 								$("#doctorInfoList").append(
 									"<div class='doc_list' >"+
+									  "<input type='hidden' value='"+deptInfo[i].deptCode+"' name='deptCode'>"+
 									  "<input type='hidden' value='"+doctorDetail[j].doctorCode+"' name='doctorCode'>"+
-									  "<div><img src='../../img/self/self.png' /></div>"+
+									  "<div><img src='"+doctorPhoto+"' /></div>"+
 									  "<span class='dep_name doc_name' name='doctorName'>"+doctorDetail[j].doctorName+"</span>"+
 									  "<span class='dep_type doc_name' name='deptName'>"+deptInfo[i].deptName+"</span>"+
 									"</div>"
@@ -137,6 +144,14 @@
         			var deptCode = $(this).children("input").val();
         			var deptName = $(this).children(".dep_name").text();
         			window.location.href="../yuyueguahao/choiceDor.html?deptCode="+deptCode+"&deptName="+deptName;
+        		});
+        		
+        		$("#doctorInfoList").on("click",".doc_list",function(){
+        			var deptCode = $(this).children("input[name='deptCode']").val();
+        			var deptName = $(this).children(".dep_type").text();
+        			var doctorCode = $(this).children("input[name='doctorCode']").val();
+        			var doctorName = $(this).children(".dep_name").text();
+        			window.location.href="../yuyueguahao/doctorGuahaoInfo.html?deptCode="+deptCode+"&deptName="+deptName+"&doctorCode="+doctorCode+"&doctorName="+doctorName;
         		});
         		
         		//刷新页面

@@ -55,7 +55,6 @@
 			<div class="demo-block">
 				<div class="box_detail">
 					<div>
-						<input type="hidden" id="ghType" value="">
 						<input type="hidden" id="clinicType" value="">
 						<span class="box_detail_img"><img src="" id="photo"/></span>
 						<input type="hidden" id="doctorCode" value=""/>
@@ -108,9 +107,7 @@
 				$("#deptName").text(Request["deptName"]);
 				$("#doctorCode").val(Request["doctorCode"]);
 				$("#doctorName").text(Request["doctorName"]);
-				$("#clinicType").val(Request["clinicType"]);
 				
-				$("#ghType").val(Request["ghType"]);
 				var beginDate = Utils.formatDate(new Date());
 				var endDate = Utils.getDateStr(7);
 				
@@ -136,18 +133,11 @@
 					}
 				});
 				
-				
-				/**
-				 * 获取7天之内的所有时间节点
-				 */
 				var params={};
-				params.beginDate = beginDate;
-				params.endDate = endDate;
 				params.deptCode = $("#deptCode").val();
 				params.doctorCode = $("#doctorCode").val();
-				params.ghType = $("#ghType").val();
 				
-				$.post(Utils.getRoot()+"/registerApp/selDoctorListDetail",params,function(data){
+				$.post(Utils.getRoot()+"/registerApp/selDoctorInfo",params,function(data){
 					if (data.success) {
 						var doctorInfo = data.data;
 						var timeGroupBy;
@@ -155,7 +145,12 @@
 							if (doctorInfo[i].hasDetailTime==1) {//判断是否有分时
 								$("#dateList").append(
 									"<div class='box_item' id='hsTime"+i+"'>"+
-										"<div class='box_date'><span class='sj'>"+doctorInfo[i].scheduleDate+"</span></div>"+
+										"<div class='box_date'>"+
+											"<span class='sj'>"+doctorInfo[i].scheduleDate+"</span>"+
+											"<span>   (</span>"+
+											"<span class='clinicType'>"+doctorInfo[i].clinicType+"</span>"+
+											"<span>)</span>"+
+										"</div>"+
 									"</div>"
 								);
 								timeGroupBy = doctorInfo[i].timeGroupBy;
@@ -200,7 +195,7 @@
 						var deptCode = $("#deptCode").val();
 						var deptName = $("#deptName").text();
 						var doctorCode = $("#doctorCode").val();
-						var clinicType = $("#clinicType").val();
+						var clinicType = $(this).siblings(".box_date").children(".clinicType").text();
 						var doctorName = $("#doctorName").text();
 						var dateTime = $(this).siblings(".box_date").children(".sj").text();
 						var regFee = $(this).children(".box_ghf").children(".regFee").text();
