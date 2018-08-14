@@ -189,6 +189,23 @@ Utils = {
 	    
 	},
 	/**
+	 * 根据日期字符串获取星期几
+	 * @param dateString 日期字符串（如：2016-12-29），为空时为用户当前日期
+	 * @returns String
+	 */
+	getWeek : function (dateString){
+	    var date;
+	    if(dateString==null || dateString==undefined || dateString==""){
+	        date = new Date();
+	    }else{
+	        var dateArray = dateString.split("-");
+	        date = new Date(dateArray[0], parseInt(dateArray[1] - 1), dateArray[2]);
+	    }
+	    var weeks = new Array("日", "一", "二", "三", "四", "五", "六");
+	    return "星期" + weeks[date.getDay()];
+	},
+	
+	/**
 	 * 身份证号合法性验证 
 	 * 支持15位和18位身份证号
 	 * 支持地址编码、出生日期、校验位验证

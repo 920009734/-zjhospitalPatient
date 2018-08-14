@@ -4,10 +4,15 @@
 		<meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="format-detection" content="telephone=no">
-        <title>专家排班</title>
+        <title>专家出诊</title>
         <link rel="stylesheet" href="../css/frozen.css">
         <link rel="stylesheet" href="../css/style.css"/>
-        
+        <link rel="stylesheet" href="../fontIcon/iconfont.css" />
+        <script src="../js/jquery-1.8.3.min.js"></script>
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+        <script src="../js/Utils.js"></script>
+        <script src="../js/androidFh.js"></script>
         <style type="text/css">
         	html,body{background-color: #FFFFFF;}
         	.expert_con{display: block;width: 100%;}
@@ -25,20 +30,17 @@
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;">专家排班</h4>
+			<h4 style="margin-left: 25px;">专家出诊</h4>
 		</header>
 		
 		<section class="ui-container">
-			<section id="list">
+			<section >
 				<div class="expert_con">
 					<div class="expert_search">
-						<select class="search_select">
-							<option>科室介绍</option>
-							<option>科室介绍1</option>
-							<option>科室介绍2</option>
-							<option>科室介绍3</option>
+						<select class="search_select" id="deptList">
+							<option value="-1">请选择科室</option>
 						</select>
-						<button class="search_btn">查询</button>
+						<button class="search_btn" >查询</button>
 					</div>
 					
 					<div class="expert_table">
@@ -51,49 +53,80 @@
 									<th>班次</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
+							<tbody id="doctorList">
+								<!--<tr>
 									<td>陈安</td>
 									<td>2018-08-14</td>
 									<td>星期二</td>
 									<td>下午</td>
-								</tr>
-								<tr>
-									<td>陈安</td>
-									<td>2018-08-14</td>
-									<td>星期二</td>
-									<td>下午</td>
-								</tr>
-								<tr>
-									<td>陈安</td>
-									<td>2018-08-14</td>
-									<td>星期二</td>
-									<td>下午</td>
-								</tr>
-								<tr>
-									<td>陈安</td>
-									<td>2018-08-14</td>
-									<td>星期二</td>
-									<td>下午</td>
-								</tr>
+								</tr>-->
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</section>
 		</section>
+		
 		<script>
-			function plusReady(){
-				// Android处理返回键
-				plus.key.addEventListener('backbutton',function(){
-					history.go(-1);
-				},false);
-			}
-			if(window.plus){
-				plusReady();
-			}else{
-				document.addEventListener('plusready',plusReady,false);
-			}
+			$(function(){
+	    		$.post(Utils.getRoot()+"/registerApp/selVisitingDept",{},function(data){
+					if (data.success) {
+						var deptInfoList = data.data;
+						for (var i = 0; i < deptInfoList.length; i++) {
+							$("#deptList").append(//科室信息
+								"<option value='"+deptInfoList[i].deptCode+"'>"+deptInfoList[i].deptName+"</option>"
+							);
+						}
+					}else{
+						alert(data.message);
+					}
+				});
+				
+				
+				$(".search_btn").click(function(){
+					if(jQuery("#deptList").val()=="-1"){
+						alert("请选择科室");
+						return false;
+					}else{
+						var params = {};
+						params.deptCode = jQuery("#deptList").val();
+//						params.deptName = jQuery("#deptList").find("option:selected").text();
+						$.post(Utils.getRoot()+"/registerApp/selVisitingDoctor",params,function(data){
+							if (data.success) {
+								var doctorInfoList = data.data;
+								console.log(JSON.stringify(doctorInfoList));
+								for (var i = 0; i < doctorInfoList.length; i++) {
+									var week = Utils.getWeek(doctorInfoList[i].scheduleDate);
+									var timeFlag = doctorInfoList[i].timeFlag;
+									switch (timeFlag){
+										case "1":
+											timeFlag="上午";
+											break;
+										case "2":
+											timeFlag="下午";
+											break;
+										case "3":
+											timeFlag="晚上";
+											break;
+									}
+									$("#doctorList").append(//医生出诊信息
+										"<tr>"+
+											"<td>"+doctorInfoList[i].doctorName+"</td>"+
+											"<td>"+doctorInfoList[i].scheduleDate+"</td>"+
+											"<td>"+week+"</td>"+
+											"<td>"+timeFlag+"</td>"+
+										"</tr>"
+									);
+								}
+							}else{
+								alert(data.message);
+							}
+						});
+					}
+					
+				});
+	      });
+			
 		</script>
 	</body>
 </html>
