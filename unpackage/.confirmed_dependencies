@@ -1,372 +1,372 @@
 {
-	"pages/login.html": {
-		"resources": [
-			"font/iconfont-full.ttf",
-			"fontIcon/iconfont.css",
-			"img/u364.png",
-			"js/frozen.js",
-			"css/frozen.css",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/main.html": {
-		"resources": [
-			"img/index/zjyy.png",
-			"H5Js/shortcut.js",
-			"pages/index.html",
-			"img/index/zjLogo.png",
-			"img/index/logo@2x.png",
-			"img/index/dongtai.png",
-			"H5Js/immersed.js",
-			"pages/message1.html",
-			"img/yuyuexiao@2x.png",
-			"img/tongzhixiao@2x.png",
-			"img/xiaofeixiao@2x.png",
-			"css/frozen.css",
-			"img/sixinxxiao@2x.png",
-			"font/iconfont-full.ttf",
-			"js/frozen.js",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/lineUpSearch/paiduijiaohaoMenu.html",
-			"pages/consultation/choiceDepartment.html",
-			"pages/floorDistribution.html",
-			"pages/payment/depositPayment.html",
-			"pages/hospitalization/paytDeposit.html",
-			"pages/hospitalization/inHospotalSearch.html",
-			"pages/lineUpSearch/jcbg_list.html",
-			"pages/lineUpSearch/jybg_list.html",
-			"pages/divisionIntroduce.html"
-		],
-		"refer": [
-			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/lineUpSearch/paiduijiaohaoMenu.html",
-			"pages/consultation/choiceDepartment.html",
-			"pages/floorDistribution.html",
-			"pages/payment/depositPayment.html",
-			"pages/hospitalization/paytDeposit.html",
-			"pages/hospitalization/inHospotalSearch.html",
-			"pages/lineUpSearch/jcbg_list.html",
-			"pages/lineUpSearch/jybg_list.html",
-			"pages/divisionIntroduce.html"
-		]
-	},
-	"pages/yuyueguahao/choiceDepartment.html": {
-		"resources": [
-			"fontIcon/iconfont.css",
-			"css/frozen.css",
-			"js/androidFh.js",
-			"font/iconfont-full.ttf",
-			"js/frozen.js",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"pages/yuyueguahao/choiceDor.html",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/yuyueguahao/choiceDor.html",
-			"pages/main.html"
-		]
-	},
-	"pages/yuyueguahao/choiceDor.html": {
-		"resources": [
-			"js/jquery-1.8.3.min.js",
-			"fontIcon/iconfont.css",
-			"js/clinicSchedule.js",
-			"css/frozen.css",
-			"css/style.css",
-			"img/self/self.png",
-			"pages/yuyueguahao/doctorGuahao.html",
-			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/yuyueguahao/choiceTime.html",
-			"font/iconfont-full.ttf",
-			"js/frozen.js",
-			"lib/zepto.min.js",
-			"js/androidFh.js",
-			"js/Utils.js"
-		],
-		"refer": [
-			"pages/yuyueguahao/doctorGuahao.html",
-			"pages/yuyueguahao/choiceDepartment.html",
-			"pages/yuyueguahao/choiceTime.html"
-		]
-	},
-	"pages/yuyueguahao/doctorGuahao.html": {
-		"resources": [
-			"img/kes/a1.png",
-			"fontIcon/iconfont.css",
-			"css/frozen.css",
-			"css/style.css",
-			"pages/yuyueguahao/doctorGuahao_detail.html",
-			"pages/yuyueguahao/choiceDor.html"
-		],
-		"refer": [
-			"pages/yuyueguahao/doctorGuahao_detail.html",
-			"pages/yuyueguahao/choiceDor.html"
-		]
-	},
-	"pages/yuyueguahao/doctorGuahao_detail.html": {
-		"resources": [
-			"font/iconfont-full.ttf",
-			"fontIcon/iconfont.css",
-			"js/frozen.js",
-			"css/frozen.css",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/androidFh.js",
-			"js/Utils.js",
-			"pages/yuyueguahao/doctorGuahao.html",
-			"pages/yuyueguahao/comfirmMsg.html"
-		],
-		"refer": [
-			"pages/yuyueguahao/doctorGuahao.html",
-			"pages/yuyueguahao/comfirmMsg.html"
-		]
-	},
-	"pages/yuyueguahao/comfirmMsg.html": {
-		"resources": [
-			"js/jquery-1.8.3.min.js",
-			"css/frozen.css",
-			"pages/yuyueguahao/doctorGuahao_detail.html",
-			"pages/yuyueguahao/choiceTime.html",
-			"font/iconfont-full.ttf"
-		],
-		"refer": [
-			"pages/yuyueguahao/doctorGuahao_detail.html",
-			"pages/yuyueguahao/choiceTime.html"
-		]
-	},
-	"pages/yuyueguahao/choiceTime.html": {
-		"resources": [
-			"js/yysj.js",
-			"pages/yuyueguahao/comfirmMsg.html",
-			"fontIcon/iconfont.css",
-			"css/frozen.css",
-			"js/frozen.js",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/androidFh.js",
-			"js/Utils.js",
-			"pages/yuyueguahao/choiceDor.html"
-		],
-		"refer": [
-			"pages/yuyueguahao/comfirmMsg.html",
-			"pages/yuyueguahao/choiceDor.html"
-		]
-	},
-	"pages/lineUpSearch/paiduijiaohaoMenu.html": {
-		"resources": [
-			"pages/lineUpSearch/menzhenSearch.html",
-			"pages/lineUpSearch/paiduiSearch.html",
-			"css/frozen.css",
-			"img/index/jilu.png",
-			"img/index/tijain2.png",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/lineUpSearch/menzhenSearch.html",
-			"pages/lineUpSearch/paiduiSearch.html",
-			"pages/main.html"
-		]
-	},
-	"pages/lineUpSearch/menzhenSearch.html": {
-		"resources": [
-			"pages/lineUpSearch/paiduijiaohaoMenu.html",
-			"js/jquery-1.8.3.min.js",
-			"css/frozen.css"
-		],
-		"refer": [
-			"pages/lineUpSearch/paiduijiaohaoMenu.html"
-		]
-	},
-	"pages/consultation/consultation.html": {
-		"resources": [
-			"img/online/u522.png",
-			"pages/consultation/choiceDepartment.html",
-			"img/online/u576.png",
-			"js/frozen.js",
-			"css/frozen.css",
-			"img/online/u456.png",
-			"lib/zepto.min.js",
-			"img/myD.png",
-			"img/online/u574.png",
-			"js/Utils.js",
-			"pages/consultation/onlineCons.html",
-			"pages/consultation/liuyanCons.html",
-			"fontIcon/iconfont.css",
-			"css/style.css"
-		],
-		"refer": [
-			"pages/consultation/choiceDepartment.html",
-			"pages/consultation/onlineCons.html",
-			"pages/consultation/liuyanCons.html"
-		]
-	},
-	"pages/consultation/choiceDepartment.html": {
-		"resources": [
-			"pages/consultation/consultation.html",
-			"js/frozen.js",
-			"css/frozen.css",
-			"lib/zepto.min.js",
-			"img/self/self.png",
-			"js/Utils.js",
-			"pages/main.html",
-			"fontIcon/iconfont.css"
-		],
-		"refer": [
-			"pages/consultation/consultation.html",
-			"pages/main.html"
-		]
-	},
-	"pages/lineUpSearch/paiduiSearch.html": {
-		"resources": [
-			"pages/lineUpSearch/paiduijiaohaoMenu.html"
-		],
-		"refer": [
-			"pages/lineUpSearch/paiduijiaohaoMenu.html"
-		]
-	},
-	"pages/consultation/onlineCons.html": {
-		"resources": [
-			"js/jquery-1.8.3.min.js",
-			"js/frozen.js",
-			"css/frozen.css",
-			"lib/zepto.min.js",
-			"pages/consultation/onlineCons.html",
-			"img/online/u610.png",
-			"js/Utils.js",
-			"font/iconfont-full.ttf",
-			"css/style.css",
-			"pages/consultation/consultation.html"
-		],
-		"refer": [
-			"pages/consultation/consultation.html"
-		]
-	},
-	"pages/consultation/liuyanCons.html": {
-		"resources": [
-			"img/z_add.png",
-			"pages/consultation/consultation.html",
-			"js/jquery-1.8.3.min.js",
-			"font/iconfont-full.ttf",
-			"js/frozen.js",
-			"css/frozen.css",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/Utils.js"
-		],
-		"refer": [
-			"pages/consultation/consultation.html"
-		]
-	},
-	"pages/payment/depositPayment.html": {
-		"resources": [
-			"css/frozen.css",
-			"js/androidFh.js",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/floorDistribution.html": {
-		"resources": [
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/hospitalization/inHospotalSearch.html": {
-		"resources": [
-			"css/frozen.css",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/lineUpSearch/jcbg_list.html": {
-		"resources": [
-			"js/jquery-1.8.3.min.js",
-			"pages/main.html",
-			"date/date.css"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/hospitalization/paytDeposit.html": {
-		"resources": [
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/lineUpSearch/jybg_list.html": {
-		"resources": [
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/divisionIntroduce_view.html": {
-		"resources": [
-			"css/frozen.css",
-			"H5Js/common.js",
-			"font/iconfont-full.ttf",
-			"js/frozen.js",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/Utils.js"
-		]
-	},
-	"pages/divisionIntroduce.html": {
-		"resources": [
-			"img/kes/g1.png",
-			"H5Js/common.js",
-			"js/frozen.js",
-			"css/frozen.css",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/divisionIntroduce_child.html",
-			"pages/main.html"
-		]
-	},
-	"pages/divisionIntroduce_child.html": {
-		"resources": [
-			"H5Js/common.js",
-			"js/frozen.js",
-			"css/frozen.css",
-			"lib/zepto.min.js",
-			"js/Utils.js"
-		],
-		"refer": [
-			"pages/divisionIntroduce_view.html"
-		]
-	},
-	"pages/dynamic.html": {
-		"resources": [
-			"css/frozen.css"
-		]
-	},
-	"pages/index.html": {
-		"refer": [
-			"pages/dynamic.html"
-		]
-	}
+  "pages/login.html": {
+    "resources": [
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "img/u364.png",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/main.html": {
+    "resources": [
+      "img/index/zjyy.png",
+      "H5Js/shortcut.js",
+      "pages/index.html",
+      "img/index/zjLogo.png",
+      "img/index/logo@2x.png",
+      "img/index/dongtai.png",
+      "H5Js/immersed.js",
+      "pages/message1.html",
+      "img/yuyuexiao@2x.png",
+      "img/tongzhixiao@2x.png",
+      "img/xiaofeixiao@2x.png",
+      "css/frozen.css",
+      "img/sixinxxiao@2x.png",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/yuyueguahao/choiceDepartment.html",
+      "pages/lineUpSearch/paiduijiaohaoMenu.html",
+      "pages/consultation/choiceDepartment.html",
+      "pages/floorDistribution.html",
+      "pages/payment/depositPayment.html",
+      "pages/hospitalization/paytDeposit.html",
+      "pages/hospitalization/inHospotalSearch.html",
+      "pages/lineUpSearch/jcbg_list.html",
+      "pages/lineUpSearch/jybg_list.html",
+      "pages/divisionIntroduce.html"
+    ],
+    "refer": [
+      "pages/yuyueguahao/choiceDepartment.html",
+      "pages/lineUpSearch/paiduijiaohaoMenu.html",
+      "pages/consultation/choiceDepartment.html",
+      "pages/floorDistribution.html",
+      "pages/payment/depositPayment.html",
+      "pages/hospitalization/paytDeposit.html",
+      "pages/hospitalization/inHospotalSearch.html",
+      "pages/lineUpSearch/jcbg_list.html",
+      "pages/lineUpSearch/jybg_list.html",
+      "pages/divisionIntroduce.html"
+    ]
+  },
+  "pages/yuyueguahao/choiceDepartment.html": {
+    "resources": [
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "js/androidFh.js",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/yuyueguahao/choiceDor.html",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/yuyueguahao/choiceDor.html",
+      "pages/main.html"
+    ]
+  },
+  "pages/yuyueguahao/choiceDor.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "fontIcon/iconfont.css",
+      "js/clinicSchedule.js",
+      "css/frozen.css",
+      "css/style.css",
+      "img/self/self.png",
+      "pages/yuyueguahao/doctorGuahao.html",
+      "pages/yuyueguahao/choiceDepartment.html",
+      "pages/yuyueguahao/choiceTime.html",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "lib/zepto.min.js",
+      "js/androidFh.js",
+      "js/Utils.js"
+    ],
+    "refer": [
+      "pages/yuyueguahao/doctorGuahao.html",
+      "pages/yuyueguahao/choiceDepartment.html",
+      "pages/yuyueguahao/choiceTime.html"
+    ]
+  },
+  "pages/yuyueguahao/doctorGuahao.html": {
+    "resources": [
+      "img/kes/a1.png",
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "css/style.css",
+      "pages/yuyueguahao/doctorGuahao_detail.html",
+      "pages/yuyueguahao/choiceDor.html"
+    ],
+    "refer": [
+      "pages/yuyueguahao/doctorGuahao_detail.html",
+      "pages/yuyueguahao/choiceDor.html"
+    ]
+  },
+  "pages/yuyueguahao/doctorGuahao_detail.html": {
+    "resources": [
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/androidFh.js",
+      "js/Utils.js",
+      "pages/yuyueguahao/doctorGuahao.html",
+      "pages/yuyueguahao/comfirmMsg.html"
+    ],
+    "refer": [
+      "pages/yuyueguahao/doctorGuahao.html",
+      "pages/yuyueguahao/comfirmMsg.html"
+    ]
+  },
+  "pages/yuyueguahao/comfirmMsg.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "css/frozen.css",
+      "pages/yuyueguahao/doctorGuahao_detail.html",
+      "pages/yuyueguahao/choiceTime.html",
+      "font/iconfont-full.ttf"
+    ],
+    "refer": [
+      "pages/yuyueguahao/doctorGuahao_detail.html",
+      "pages/yuyueguahao/choiceTime.html"
+    ]
+  },
+  "pages/yuyueguahao/choiceTime.html": {
+    "resources": [
+      "js/yysj.js",
+      "pages/yuyueguahao/comfirmMsg.html",
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/androidFh.js",
+      "js/Utils.js",
+      "pages/yuyueguahao/choiceDor.html"
+    ],
+    "refer": [
+      "pages/yuyueguahao/comfirmMsg.html",
+      "pages/yuyueguahao/choiceDor.html"
+    ]
+  },
+  "pages/lineUpSearch/paiduijiaohaoMenu.html": {
+    "resources": [
+      "pages/lineUpSearch/menzhenSearch.html",
+      "pages/lineUpSearch/paiduiSearch.html",
+      "css/frozen.css",
+      "img/index/jilu.png",
+      "img/index/tijain2.png",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/lineUpSearch/menzhenSearch.html",
+      "pages/lineUpSearch/paiduiSearch.html",
+      "pages/main.html"
+    ]
+  },
+  "pages/lineUpSearch/menzhenSearch.html": {
+    "resources": [
+      "pages/lineUpSearch/paiduijiaohaoMenu.html",
+      "js/jquery-1.8.3.min.js",
+      "css/frozen.css"
+    ],
+    "refer": [
+      "pages/lineUpSearch/paiduijiaohaoMenu.html"
+    ]
+  },
+  "pages/consultation/consultation.html": {
+    "resources": [
+      "img/online/u522.png",
+      "pages/consultation/choiceDepartment.html",
+      "img/online/u576.png",
+      "js/frozen.js",
+      "css/frozen.css",
+      "img/online/u456.png",
+      "lib/zepto.min.js",
+      "img/myD.png",
+      "img/online/u574.png",
+      "js/Utils.js",
+      "pages/consultation/onlineCons.html",
+      "pages/consultation/liuyanCons.html",
+      "fontIcon/iconfont.css",
+      "css/style.css"
+    ],
+    "refer": [
+      "pages/consultation/choiceDepartment.html",
+      "pages/consultation/onlineCons.html",
+      "pages/consultation/liuyanCons.html"
+    ]
+  },
+  "pages/consultation/choiceDepartment.html": {
+    "resources": [
+      "pages/consultation/consultation.html",
+      "js/frozen.js",
+      "css/frozen.css",
+      "lib/zepto.min.js",
+      "img/self/self.png",
+      "js/Utils.js",
+      "pages/main.html",
+      "fontIcon/iconfont.css"
+    ],
+    "refer": [
+      "pages/consultation/consultation.html",
+      "pages/main.html"
+    ]
+  },
+  "pages/lineUpSearch/paiduiSearch.html": {
+    "resources": [
+      "pages/lineUpSearch/paiduijiaohaoMenu.html"
+    ],
+    "refer": [
+      "pages/lineUpSearch/paiduijiaohaoMenu.html"
+    ]
+  },
+  "pages/consultation/onlineCons.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "js/frozen.js",
+      "css/frozen.css",
+      "lib/zepto.min.js",
+      "pages/consultation/onlineCons.html",
+      "img/online/u610.png",
+      "js/Utils.js",
+      "font/iconfont-full.ttf",
+      "css/style.css",
+      "pages/consultation/consultation.html"
+    ],
+    "refer": [
+      "pages/consultation/consultation.html"
+    ]
+  },
+  "pages/consultation/liuyanCons.html": {
+    "resources": [
+      "img/z_add.png",
+      "pages/consultation/consultation.html",
+      "js/jquery-1.8.3.min.js",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js"
+    ],
+    "refer": [
+      "pages/consultation/consultation.html"
+    ]
+  },
+  "pages/payment/depositPayment.html": {
+    "resources": [
+      "css/frozen.css",
+      "js/androidFh.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/floorDistribution.html": {
+    "resources": [
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/hospitalization/inHospotalSearch.html": {
+    "resources": [
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/lineUpSearch/jcbg_list.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "pages/main.html",
+      "date/date.css"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/hospitalization/paytDeposit.html": {
+    "resources": [
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/lineUpSearch/jybg_list.html": {
+    "resources": [
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/divisionIntroduce_view.html": {
+    "resources": [
+      "css/frozen.css",
+      "H5Js/common.js",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js"
+    ]
+  },
+  "pages/divisionIntroduce.html": {
+    "resources": [
+      "img/kes/g1.png",
+      "H5Js/common.js",
+      "js/frozen.js",
+      "css/frozen.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/divisionIntroduce_child.html",
+      "pages/main.html"
+    ]
+  },
+  "pages/divisionIntroduce_child.html": {
+    "resources": [
+      "H5Js/common.js",
+      "js/frozen.js",
+      "css/frozen.css",
+      "lib/zepto.min.js",
+      "js/Utils.js"
+    ],
+    "refer": [
+      "pages/divisionIntroduce_view.html"
+    ]
+  },
+  "pages/dynamic.html": {
+    "resources": [
+      "css/frozen.css"
+    ]
+  },
+  "pages/index.html": {
+    "refer": [
+      "pages/dynamic.html"
+    ]
+  }
 }
