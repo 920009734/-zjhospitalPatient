@@ -196,8 +196,10 @@
 	        				$(".not_data").hide();
 	        			}else{
 	        				count = count+1;
-	        				if(count>=ind){
+	        				if(count > ind){
 	        					$(".not_data").show();
+	        					$("#keshi_title").hide();
+    							$("#doc_title").hide();
 	        				}
 	        				class_name[ind].parent().hide();
 	        			}
