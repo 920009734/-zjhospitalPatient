@@ -55,6 +55,10 @@
 			}
 			function plusReady(){
 				loadData();
+				// Android处理返回键
+				plus.key.addEventListener('backbutton',function(){
+					history.go(-1);
+				},false);
 			}
 			function loadData(){
     			plus.nativeUI.showWaiting("数据加载中...");
