@@ -59,14 +59,14 @@
 		
 		<script type="text/javascript">
 			$(function(){
-				hsopotalSearch({});
+				var params = {};
+				hsopotalSearch(params);
 				
 				var day = new Date();
-				$('#startTime').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
+				$('#startTime').val(day.getFullYear()-1+"-"+(day.getMonth()-2)+"-"+day.getDate());
 				$('#endTime').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
 				
 				$("#searchp").click(function(){
-					var params = {};
 					params.admsStart = $('#startTime').val();//入院时间
 					params.admsEnd = $('#endTime').val();//出院时间
 					hsopotalSearch(params);
@@ -85,30 +85,30 @@
 				});
 			}
 			function hsopotalSearch(params){
-					$.post(Utils.getRoot()+"/hospitalService/selhospitaldetail",params,function(data){
-						if (data.success) {
-							var hospitaldetail = new Array();
-							hospitaldetail= data.data;
-							for (var i = 0; i < hospitaldetail.length; i++) {
-								$("#hospitalList").append(
-									"<div class='search_item'>"+
-										"<span class='hospitaldetail' style='display: none;'>"+JSON.stringify(hospitaldetail[i])+"</span>"+
-										"<span class='con_name'>第<span class='visitId'>"+hospitaldetail[i].visitId+"</span>次住院</span>"+
-										"<span class='con_type'>"+hospitaldetail[i].admsDeptName+"</span>"+
-										"<span class='con_time'>"+hospitaldetail[i].admsDateTime+"</span>"+
-									"</div>"
-								);
-							}
-						}else{
-							$("#hospitalList").empty();
+				$.post(Utils.getRoot()+"/hospitalService/selhospitaldetail",params,function(data){
+					alert(JSON.stringify(data))
+					if (data.success) {
+						var hospitaldetail = data.data;
+						for (var i = 0; i < hospitaldetail.length; i++) {
 							$("#hospitalList").append(
-								"<div class='nosearch_item'>"+
-									"<p class='notData'>暂无住院记录</p>"+
+								"<div class='search_item'>"+
+									"<span class='hospitaldetail' style='display: none;'>"+JSON.stringify(hospitaldetail[i])+"</span>"+
+									"<span class='con_name'>第<span class='visitId'>"+hospitaldetail[i].visitId+"</span>次住院</span>"+
+									"<span class='con_type'>"+hospitaldetail[i].admsDeptName+"</span>"+
+									"<span class='con_time'>"+hospitaldetail[i].admsDateTime+"</span>"+
 								"</div>"
 							);
 						}
-					});
-				}
+					}else{
+						$("#hospitalList").empty();
+						$("#hospitalList").append(
+							"<div class='nosearch_item'>"+
+								"<p class='notData'>暂无住院记录</p>"+
+							"</div>"
+						);
+					}
+				});
+			}
 			
 		</script>
 	</body>
