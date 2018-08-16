@@ -153,10 +153,10 @@
 				socket.onmessage = function(event) {
 				    var obj = JSON.parse(event.data);
 				    if(obj.zs != 0){
-				    	$("#messag e_number").html(obj.zs);
+				    	$("#message_number").html(obj.zs);
 				    	$("#message_number").addClass("msg_num");
 				    }else{
-				    	$("#message_n13901136964mber").removeClass("msg_num");
+				    	$("#message_number").removeClass("msg_num");
 				    }
 				    localStorage.setItem('message_type_1', obj.sx);
 				    localStorage.setItem('message_type_2', obj.tz);
