@@ -416,7 +416,8 @@
 					"lib/zepto.min.js",
 					"js/Utils.js",
 					"font/iconfont-full.ttf",
-					"js/androidFh.js"
+					"js/androidFh.js",
+					"img/self/self.png"
 				],
 				"refer": [],
 				"priority": 0

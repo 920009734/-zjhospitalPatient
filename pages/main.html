@@ -113,10 +113,7 @@
 				    console.log("应用从后台切换到前台");
 				}, false);*/
 				
-        		var isConnect = localStorage.getItem('socket_is_connect')
-        		if(!isConnect || isConnect != 'true'){
-        			initSocket();
-        		}
+        		initSocket();
         		
         		$(".footer_item").click(function(){
         			var a = $(this).hasClass(("active"));
@@ -147,7 +144,7 @@
 				var socket = new WebSocket('ws://219.137.32.146:8082/zjhospital-app/websocket/socketServer?userId=' + patientInfo.patientid);
 				// 打开Socket
 				socket.onopen = function(event) {
-				  localStorage.setItem('socket_is_connect', true);
+					
 				}
 				  // 监听消息
 				socket.onmessage = function(event) {
@@ -156,6 +153,7 @@
 				    	$("#message_number").html(obj.zs);
 				    	$("#message_number").addClass("msg_num");
 				    }else{
+				    	$("#message_number").html("");
 				    	$("#message_number").removeClass("msg_num");
 				    }
 				    localStorage.setItem('message_type_1', obj.sx);
@@ -165,7 +163,7 @@
 				}
 				  // 监听Socket的关闭
 				socket.onclose = function(event) {
-				  localStorage.removeItem('socket_is_connect');
+					
 				};
         	}
         	
