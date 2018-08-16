@@ -398,7 +398,9 @@
 					"pages/myAttention.html",
 					"pages/familyMember.html",
 					"pages/dynamic_list.html",
-					"H5Js/common.js"
+					"H5Js/common.js",
+					"js/androidFh.js",
+					"pages/expertScheduling.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -1021,6 +1023,20 @@
 				"refer": [
 					"pages/divisionIntroduce_view.html"
 				],
+				"priority": 0
+			},
+			"pages/expertScheduling.html": {
+				"resources": [
+					"js/jquery-1.8.3.min.js",
+					"fontIcon/iconfont.css",
+					"js/frozen.js",
+					"css/frozen.css",
+					"lib/zepto.min.js",
+					"js/androidFh.js",
+					"js/Utils.js",
+					"pages/main.html"
+				],
+				"refer": [],
 				"priority": 0
 			}
 		},
