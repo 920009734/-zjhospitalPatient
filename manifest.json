@@ -433,7 +433,8 @@
 					"js/Utils.js",
 					"img/index/personLogo@2x.png",
 					"font/iconfont-full.ttf",
-					"img/self/self.png"
+					"img/self/self.png",
+					"js/androidFh.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -638,7 +639,8 @@
 					"pages/consultation/liuyanCons.html",
 					"js/frozen.js",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"js/androidFh.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -868,7 +870,8 @@
 					"font/iconfont-full.ttf",
 					"js/frozen.js",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"js/androidFh.js"
 				],
 				"refer": [],
 				"priority": 0

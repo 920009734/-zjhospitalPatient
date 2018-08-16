@@ -190,214 +190,215 @@
 		
 	<script type="text/javascript" src="../../js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript">
-			$(function(){
-				var Request = new Object();
-				Request = Utils.getRequest();
-				var doctorCode = Request["doctorCode"];
-				var doctorName = Request["doctorName"];
-				$("#doctorName_").html(doctorName);
-				
-				var files = new Array();
-		        //px转换为rem
-		        (function(doc, win) {
-		            var docEl = doc.documentElement,
-		                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-		                recalc = function() {
-		                    var clientWidth = docEl.clientWidth;
-		                    if (!clientWidth) return;
-		                    if (clientWidth >= 640) {
-		                        docEl.style.fontSize = '100px';
-		                    } else {
-		                        docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
-		                    }
-		                };
-		
-		            if (!doc.addEventListener) return;
-		            win.addEventListener(resizeEvt, recalc, false);
-		            doc.addEventListener('DOMContentLoaded', recalc, false);
-		        })(document, window);
-		
-		        function imgChange(obj1, obj2) {
-		            //获取点击的文本框
-		            var file = document.getElementById("file");
-		            //存放图片的父级元素
-		            var imgContainer = document.getElementsByClassName(obj1)[0];
-		            //获取的图片文件
-		            var fileList = file.files;
-		            //文本框的父级元素
-		            var input = document.getElementsByClassName(obj2)[0];
-		            var imgArr = [];
-		            //遍历获取到得图片文件
-		            for (var i = 0; i < 5; i++) {
-						//给传值的files赋值
-		            	files.push(file.files[i]);
-		                var imgUrl = window.URL.createObjectURL(file.files[i]);
-		                imgArr.push(imgUrl);
-		                var img = document.createElement("img");
-		                img.setAttribute("src", imgArr[i]);
-		                var imgAdd = document.createElement("div");
-		                imgAdd.setAttribute("class", "z_addImg");
-		                imgAdd.appendChild(img);
-		                imgContainer.appendChild(imgAdd);
-		            };
-		            imgRemove();
-		        };
-		
-		        function imgRemove() {
-		            var imgList = document.getElementsByClassName("z_addImg");
-		            var mask = document.getElementsByClassName("z_mask")[0];
-		            var cancel = document.getElementsByClassName("z_cancel")[0];
-		            var sure = document.getElementsByClassName("z_sure")[0];
-		            for (var j = 0; j < imgList.length; j++) {
-		                imgList[j].index = j;
-		                imgList[j].onclick = function() {
-		                    var t = this;
-		                    mask.style.display = "block";
-		                    cancel.onclick = function() {
-		                        mask.style.display = "none";
-		                    };
-		                    sure.onclick = function() {
-		                        mask.style.display = "none";
-		                        t.style.display = "none";
-		                    };
-		
-		                }
-		            };
-		        };
-        
-				//选择就诊人
-        		$("#huanzhe").on("click", function(){
-        			$.post(Utils.getRoot()+"/patientApp/selpatients", function(data){
-	    				if (data.success) {
-	    					$("#tj").empty();//移除添加就诊人
-	    					
-	    					var patient = data.data.patient;
-							var memberList = data.data.memberList;
-	    					console.log("patient:"+JSON.stringify(patient));
-	    					console.log("memberList:"+JSON.stringify(memberList));
-	    					
-	    					$("#tj").append(
-	        					"<div class='per_name'>"+
-					            	"<input type='hidden' class='patientid_' value='"+patient.patientid+"' >"+
-					            	"<input type='hidden' class='patCardNo_' value='"+patient.patCardNo+"' >"+
-					            	"<span class='patientname_'>"+patient.patientname+"</span>"+
-					            	"<span class='per_relationship'style='color: red;'>本人</span>"+
+		var files = new Array();
+		$(function(){
+			var Request = new Object();
+			Request = Utils.getRequest();
+			var doctorCode = Request["doctorCode"];
+			var doctorName = Request["doctorName"];
+			$("#doctorName_").html(doctorName);
+			
+	        //px转换为rem
+	        (function(doc, win) {
+	            var docEl = doc.documentElement,
+	                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	                recalc = function() {
+	                    var clientWidth = docEl.clientWidth;
+	                    if (!clientWidth) return;
+	                    if (clientWidth >= 640) {
+	                        docEl.style.fontSize = '100px';
+	                    } else {
+	                        docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+	                    }
+	                };
+	
+	            if (!doc.addEventListener) return;
+	            win.addEventListener(resizeEvt, recalc, false);
+	            doc.addEventListener('DOMContentLoaded', recalc, false);
+	        })(document, window);
+
+
+			//选择就诊人
+    		$("#huanzhe").on("click", function(){
+    			$.post(Utils.getRoot()+"/patientApp/selpatients", function(data){
+    				if (data.success) {
+    					$("#tj").empty();//移除添加就诊人
+    					
+    					var patient = data.data.patient;
+						var memberList = data.data.memberList;
+    					console.log("patient:"+JSON.stringify(patient));
+    					console.log("memberList:"+JSON.stringify(memberList));
+    					
+    					$("#tj").append(
+        					"<div class='per_name'>"+
+				            	"<input type='hidden' class='patientid_' value='"+patient.patientid+"' >"+
+				            	"<input type='hidden' class='patCardNo_' value='"+patient.patCardNo+"' >"+
+				            	"<span class='patientname_'>"+patient.patientname+"</span>"+
+				            	"<span class='per_relationship'style='color: red;'>本人</span>"+
+				            "</div>"
+				        );
+    					
+        				for (var i = 0; i < memberList.length; i++) {
+					        $("#tj").append(
+	        					"<div class='per_name2' >"+
+					            	"<input type='hidden' class='patientid_' value='"+memberList[i].patientofId+"' >"+
+					            	"<input type='hidden' class='patCardNo_' value='"+memberList[i].patCardNo+"' >"+
+					            	"<input type='hidden' class='sjpatientid_' value='"+patient.patientid+"' >"+
+					            	"<input type='hidden' class='idcard' value='"+memberList[i].idcard+"' >"+
+					            	"<input type='hidden' class='phone' value='"+memberList[i].phone+"' >"+
+					            	"<span class='patientname_'>"+memberList[i].patientofName+"</span>"+
+					            	"<span class='per_relationship'>他人</span>"+
 					            "</div>"
 					        );
-	    					
-	        				for (var i = 0; i < memberList.length; i++) {
-						        $("#tj").append(
-		        					"<div class='per_name2' >"+
-						            	"<input type='hidden' class='patientid_' value='"+memberList[i].patientofId+"' >"+
-						            	"<input type='hidden' class='patCardNo_' value='"+memberList[i].patCardNo+"' >"+
-						            	"<input type='hidden' class='sjpatientid_' value='"+patient.patientid+"' >"+
-						            	"<input type='hidden' class='idcard' value='"+memberList[i].idcard+"' >"+
-						            	"<input type='hidden' class='phone' value='"+memberList[i].phone+"' >"+
-						            	"<span class='patientname_'>"+memberList[i].patientofName+"</span>"+
-						            	"<span class='per_relationship'>他人</span>"+
-						            "</div>"
-						        );
-	        				}
-						            
-						    $(".addPatient").show();
-					    } else {
-					    	$("#dialogText").html(data.message);
-							$(".ui-dialog").show();
-					    }
-		       		});
-        		});
-        		
-        		$("#tj").on("click",".per_name", function(){//本人挂号
-        			$("#patientid").val($(this).children(".patientid_").val());
-        			$("#patCardNo").val($(this).children(".patCardNo_").val());
-        			$("#huanzhe_").text($(this).children(".patientname_").text());
-        			$(".addPatient").hide();
-        		});
-        		
-        		$("#tj").on("click",".per_name2", function(){//他人挂号
-        			$("#patientid").val($(this).children(".sjpatientid_").val());//上级ID
-        			var idcard = $(this).children(".idcard").val();
-        			var phone = $(this).children(".phone").val();
-        			var patientname = $(this).children(".patientname_").text()
-        			var params = {};
-					params.phone = phone;
-					params.patientName = patientname;
-					params.idcard = idcard;
-					
-	        		$.post(Utils.getRoot()+"/patientApp/selpatientInfo",params,function(data){
-						if (data.success) {
-							var patientInfo = data.data;
-							$("#patCardNo").val(patientInfo.patCardNo);
-						}else{
-							alert(data.message);
-						}
-					});
-        			
-        			$("#huanzhe_").text(patientname);
-        			$(".addPatient").hide();
-        		});
-        		
-				$(".close_dialog,.ui-dialog-close").click(function(){
-					$(".ui-dialog").hide();
-				});
-				
-				
-				
-				$("#submitbt").click(function(){
-					var formData = {};
-				    formData.receiver=doctorCode;
-				    formData.sender=$("#huanzhe_").text();
-				    formData.content = $("#describe_").val();
-				    formData.patientId = $("#patientid").val();
-				  	
-				    //D7BB131564844D498EB7C89CEA95EF4F
-				    for(var i = 0 ; i < files.length ; i ++){
-				    	formData.files = files[i];
+        				}
+					            
+					    $(".addPatient").show();
+				    } else {
+				    	$("#dialogText").html(data.message);
+						$(".ui-dialog").show();
 				    }
-				    
-				    if($("#doctorName_").text()==""){
-						$("#dialogText").html("请重新选择医生!");
-						$(".ui-dialog").show();
-						return false;
-					}
-				    
-					if($("#huanzhe_").text()=="请选择患者" || $("#huanzhe_").text()=="" ){
-						$("#dialogText").html("请选择患者!");
-						$(".ui-dialog").show();
-						return false;
-					}
-					
-				    if($("#describe_").val().length<1){
-						$("#dialogText").html("请输入你要提的问题!");
-						$(".ui-dialog").show();
-						return false;
-					}
-				    
-					$.ajax({
-			             url: Utils.getRoot()+"/inquiry/addInquiry" ,  
-			             type: 'POST',  
-			             data: formData,  
-			             contentType: false,  
-			             processData: false,  
-			             success: function (result) {
-			             	console.log("success:"+JSON.stringify(result))
-					     	if (result.success) {
-					    		location.href = "../main.html";
-					    	} else {
-					    		$("#dialogText").html(res.message);
-								$(".ui-dialog").show();
-					    	}
-			             },
-			             error: function(result){
-			             	console.log("error:"+JSON.stringify(result))
-							$("#dialogText").html(result.message);
-							$(".ui-dialog").show();
-						 }
-			        });
-					
-				});
+	       		});
+    		});
+    		
+    		$("#tj").on("click",".per_name", function(){//本人挂号
+    			$("#patientid").val($(this).children(".patientid_").val());
+    			$("#patCardNo").val($(this).children(".patCardNo_").val());
+    			$("#huanzhe_").text($(this).children(".patientname_").text());
+    			$(".addPatient").hide();
+    		});
+    		
+    		$("#tj").on("click",".per_name2", function(){//他人挂号
+    			$("#patientid").val($(this).children(".sjpatientid_").val());//上级ID
+    			var idcard = $(this).children(".idcard").val();
+    			var phone = $(this).children(".phone").val();
+    			var patientname = $(this).children(".patientname_").text()
+    			var params = {};
+				params.phone = phone;
+				params.patientName = patientname;
+				params.idcard = idcard;
 				
-			})
+        		$.post(Utils.getRoot()+"/patientApp/selpatientInfo",params,function(data){
+					if (data.success) {
+						var patientInfo = data.data;
+						$("#patCardNo").val(patientInfo.patCardNo);
+					}else{
+						alert(data.message);
+					}
+				});
+    			
+    			$("#huanzhe_").text(patientname);
+    			$(".addPatient").hide();
+    		});
+    		
+			$(".close_dialog,.ui-dialog-close").click(function(){
+				$(".ui-dialog").hide();
+			});
+			
+			
+			
+			$("#submitbt").click(function(){
+				var formData = {};
+			    formData.receiver=doctorCode;
+			    formData.sender=$("#huanzhe_").text();
+			    formData.content = $("#describe_").val();
+			    formData.patientId = $("#patientid").val();
+			  	
+			    //D7BB131564844D498EB7C89CEA95EF4F
+			    for(var i = 0 ; i < files.length ; i ++){
+			    	formData.files = files[i];
+			    }
+			    
+			    if($("#doctorName_").text()==""){
+					$("#dialogText").html("请重新选择医生!");
+					$(".ui-dialog").show();
+					return false;
+				}
+			    
+				if($("#huanzhe_").text()=="请选择患者" || $("#huanzhe_").text()=="" ){
+					$("#dialogText").html("请选择患者!");
+					$(".ui-dialog").show();
+					return false;
+				}
+				
+			    if($("#describe_").val().length<1){
+					$("#dialogText").html("请输入你要提的问题!");
+					$(".ui-dialog").show();
+					return false;
+				}
+			    
+				$.ajax({
+		             url: Utils.getRoot()+"/inquiry/addInquiry" ,  
+		             type: 'POST',  
+		             data: formData,  
+		             contentType: false,  
+		             processData: false,  
+		             success: function (result) {
+		             	console.log("success:"+JSON.stringify(result))
+				     	if (result.success) {
+				    		location.href = "../main.html";
+				    	} else {
+				    		$("#dialogText").html(res.message);
+							$(".ui-dialog").show();
+				    	}
+		             },
+		             error: function(result){
+		             	console.log("error:"+JSON.stringify(result))
+						$("#dialogText").html(result.message);
+						$(".ui-dialog").show();
+					 }
+		        });
+				
+			});
+			
+		})
+			
+		function imgChange(obj1, obj2) {
+            //获取点击的文本框
+            var file = document.getElementById("file");
+            //存放图片的父级元素
+            var imgContainer = document.getElementsByClassName(obj1)[0];
+            //获取的图片文件
+            var fileList = file.files;
+            //文本框的父级元素
+            var input = document.getElementsByClassName(obj2)[0];
+            var imgArr = [];
+            //遍历获取到得图片文件
+            for (var i = 0; i < 5; i++) {
+				//给传值的files赋值
+            	files.push(file.files[i]);
+                var imgUrl = window.URL.createObjectURL(file.files[i]);
+                imgArr.push(imgUrl);
+                var img = document.createElement("img");
+                img.setAttribute("src", imgArr[i]);
+                var imgAdd = document.createElement("div");
+                imgAdd.setAttribute("class", "z_addImg");
+                imgAdd.appendChild(img);
+                imgContainer.appendChild(imgAdd);
+            };
+            imgRemove();
+        };
+
+        function imgRemove() {
+            var imgList = document.getElementsByClassName("z_addImg");
+            var mask = document.getElementsByClassName("z_mask")[0];
+            var cancel = document.getElementsByClassName("z_cancel")[0];
+            var sure = document.getElementsByClassName("z_sure")[0];
+            for (var j = 0; j < imgList.length; j++) {
+                imgList[j].index = j;
+                imgList[j].onclick = function() {
+                    var t = this;
+                    mask.style.display = "block";
+                    cancel.onclick = function() {
+                        mask.style.display = "none";
+                    };
+                    sure.onclick = function() {
+                        mask.style.display = "none";
+                        t.style.display = "none";
+                    };
+
+                }
+            };
+        }
 	</script>
 		
 	</body>
