@@ -60,6 +60,8 @@
 		<script type="text/javascript">
 			$(function(){
 				var params = {};
+				params.admsStart = "";
+				params.admsEnd = "";
 				hsopotalSearch(params);
 				
 				var day = new Date();
@@ -85,8 +87,8 @@
 				});
 			}
 			function hsopotalSearch(params){
+				
 				$.post(Utils.getRoot()+"/hospitalService/selhospitaldetail",params,function(data){
-					alert(JSON.stringify(data))
 					if (data.success) {
 						var hospitaldetail = data.data;
 						for (var i = 0; i < hospitaldetail.length; i++) {
