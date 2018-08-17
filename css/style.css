@@ -17,3 +17,5 @@ html,body{font-family: "微软雅黑";}
 .reflash_item>i{display: block;float: right; font-size: 25px;}
 .ui-actionsheet-cnt>button{font-size: 16px;}
 .ui-actionsheet-cnt .actionsheetClose{color: #FF0000;}
+
+.amount_money{color: #FF0000;} 

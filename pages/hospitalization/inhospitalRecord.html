@@ -82,27 +82,27 @@
 						</div>
 						<div class="list-item">
 							<span class="demo_name">剩余预交金</span>
-							<span class="demo_value"><span id="prepayAmount"></span></span>
+							<span class="demo_value"><span id="prepayAmount" class="amount_money"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">住院总费用</span>
-							<span class="demo_value"><span id="totalCosts"></span></span>
+							<span class="demo_value"><span id="totalCosts" class="amount_money"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">未结算费用</span>
-							<span class="demo_value"><span id="unsettleCosts"></span></span>
+							<span class="demo_value"><span id="unsettleCosts" class="amount_money"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">已结算费用</span>
-							<span class="demo_value"><span id="settledCosts"></span></span>
+							<span class="demo_value"><span id="settledCosts" class="amount_money"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">医保/公医记账金额</span>
-							<span class="demo_value"><span id="insurPay"></span></span>
+							<span class="demo_value"><span id="insurPay" class="amount_money"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">自付金额</span>
-							<span class="demo_value"><span id="selfPay"></span></span>
+							<span class="demo_value"><span id="selfPay" class="amount_money"></span></span>
 						</div>
 						<div class="list-item">
 							<span class="demo_name">备注</span>
@@ -186,7 +186,7 @@
 									"<td>"+(parseFloat(costDetail[i].Amount)/100)+"</td>"+
 									"<td>"+costDetail[i].Units+"</td>"+
 									"<td>"+(parseFloat(costDetail[i].Price)/1000)+"</td>"+
-									"<td>"+(parseFloat(costDetail[i].Charges)/100)+"</td>"+
+									"<td class='amount_money'>"+(parseFloat(costDetail[i].Charges)/100)+"</td>"+
 									"<td>"+costDetail[i].insuClass+"</td>"+
 									"<td>"+costDetail[i].billingDateTime+"</td>"+
 								"</tr>"
