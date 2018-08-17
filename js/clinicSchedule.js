@@ -222,7 +222,6 @@ $(function(){
 											"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
 										"</div>"+
 										"<div class='doc_yynum'>"+
-											"<span class='yhao'>余号</span>"+
 											"<span class='noyhao_num'>约满</span>"+
 										"</div>"+
 									"</div>"
@@ -254,7 +253,6 @@ $(function(){
 										"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
 									"</div>"+
 									"<div class='doc_yynum'>"+
-										"<span class='yhao'>余号</span>"+
 										"<span class='noyhao_num'>停诊</span>"+
 									"</div>"+
 								"</div>"
@@ -312,7 +310,7 @@ $(function(){
 										"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
 									"</div>"+
 									"<div class='doc_yynum'>"+
-										"<span class='yhao'>余号</span>"+
+										/*"<span class='yhao'>余号</span>"+*/
 										"<span class='noyhao_num'>停诊</span>"+
 									"</div>"+
 								"</div>"
@@ -338,7 +336,6 @@ $(function(){
 											"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
 										"</div>"+
 										"<div class='doc_yynum'>"+
-											"<span class='yhao'>余号</span>"+
 											"<span class='noyhao_num'>约满</span>"+
 										"</div>"+
 									"</div>"
@@ -370,7 +367,6 @@ $(function(){
 										"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
 									"</div>"+
 									"<div class='doc_yynum'>"+
-										"<span class='yhao'>余号</span>"+
 										"<span class='noyhao_num'>停诊</span>"+
 									"</div>"+
 								"</div>"
