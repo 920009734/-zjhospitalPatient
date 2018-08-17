@@ -398,7 +398,8 @@
 					"pages/myAttention.html",
 					"pages/familyMember.html",
 					"pages/dynamic_list.html",
-					"H5Js/common.js"
+					"H5Js/common.js",
+					"js/androidFh.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -414,7 +415,8 @@
 					"lib/zepto.min.js",
 					"js/Utils.js",
 					"font/iconfont-full.ttf",
-					"js/androidFh.js"
+					"js/androidFh.js",
+					"img/self/self.png"
 				],
 				"refer": [],
 				"priority": 0
