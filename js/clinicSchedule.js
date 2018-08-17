@@ -16,7 +16,7 @@ $(function(){
 	var nowdate = new Date();
 	var nt = Utils.formatDateByLong(nowdate, "yyyy-MM-dd");
 //	$("#nowTime").html(nt);
-	//开始日期，结束日期，一共是七天
+	//开始日期，结束日期，一共是14天
 	var dateTime = getSevenDate(nowdate);
 	//科室ID
 	var deptCode = $("#deptCode").val();
@@ -31,21 +31,6 @@ $(function(){
 			exditTopDate();
 		}else{
 			exditTopDate();
-			/*$("#swinfoList").append(
-				"<div class='list-item '>"+
-					"<p class='notData'>暂无数据</p>"+
-				"</div>"
-			);
-			$("#xwinfoList").append(
-				"<div class='list-item '>"+
-					"<p class='notData'>暂无数据</p>"+
-				"</div>"
-			);
-			$("#wsinfoList").append(
-				"<div class='list-item '>"+
-					"<p class='notData'>暂无数据</p>"+
-				"</div>"
-			);*/
 		}
 	});
 	
@@ -81,7 +66,6 @@ $(function(){
 			if (res.success) {
 				rdata = JSON.stringify(res.data);
 				getDay(res.data);
-				
 				var height_ = $(".date_list>span").width();
 				$(".date_list>span").height(height_);
 			}
@@ -91,7 +75,7 @@ $(function(){
 	//返回七天的字符串
 	function getSevenDate(nt) {
 		var s = Utils.formatDateByLong(nt, "yyyy-MM-dd") + ",";
-		for (var i = 1; i < 7; i++) {
+		for (var i = 1; i < 14; i++) {
 			 nt.setDate(nt.getDate() + 1);
 			 s += nt.getFullYear()+"-"+(doHandleMonth(nt.getMonth()+1))+"-"+(doHandleMonth(nt.getDate())) + ",";
 		}
@@ -129,10 +113,6 @@ $(function(){
 	        var showday = new Date();
 	        if(tDate == doHandleMonth(showday.getDate())){
 	        	if (tDate == data[i].dataday) {
-	        		/*if(data[0].status == 2){
-		    			$("#nowTime").html(data[i].dataday);
-		    		}*/
-		    		$(".data_zh").append('<div class="zh_irem">'+tday+'</div>');
 	        		if (data[i].status == 1) {//有号
 	        			$(".box_list").append('<div class="date_list active" id="'+tDate+'">'
 							+'<span class="riqi_date"><span class="dep_name">'+tDate+'</span>'
@@ -147,7 +127,6 @@ $(function(){
 	        	}
 	        }else{
 	        	var day = $(".box_list").children(".active").attr("id");
-				$(".data_zh").append('<div class="zh_irem">'+tday+'</div>');
 	        	if (tDate == data[i].dataday) {
 	        		if (data[i].status == 1) {
 		        		$(".box_list").append('<div class="date_list" id="'+tDate+'">'
@@ -220,7 +199,7 @@ $(function(){
 				var dortorInfo = new Array();
 				dortorInfo= data.data;
 				sdata = JSON.stringify(dortorInfo);
-				console.log("dortorInfo:"+JSON.stringify(dortorInfo));
+//				console.log("dortorInfo:"+JSON.stringify(dortorInfo));
 				var s=0,x=0,w=0;
 				for (var i = 0; i < dortorInfo.length; i++) {
 					//按照日期
@@ -232,8 +211,41 @@ $(function(){
 							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
 							doctorPhoto = "../../img/self/self.png";
 						}
-						
-						if(dortorInfo[i].leftNum<=0){//余号为0，约满状态
+							
+						if (dortorInfo[i].workStatus==1) {//出诊状态
+							if(dortorInfo[i].leftNum<=0){//余号为0，约满状态
+								$("#swinfoList").append(
+									"<div class='nocon_doc'>"+
+										 "<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
+										 "<div class='doc_detail'>"+
+											"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+											"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
+										"</div>"+
+										"<div class='doc_yynum'>"+
+											"<span class='yhao'>余号</span>"+
+											"<span class='noyhao_num'>约满</span>"+
+										"</div>"+
+									"</div>"
+								);
+							}else{//余号不为0，可预约
+								$("#swinfoList").append(
+									"<div class='con_doc'>"+
+										 "<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
+										 "<div class='doc_detail'>"+
+											"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
+											"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+											"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
+											"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+											"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
+										"</div>"+
+										"<div class='doc_yynum'>"+
+											"<span class='yhao'>余号</span>"+
+											"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+										"</div>"+
+									"</div>"
+								);
+							}
+						}else{//停诊状态
 							$("#swinfoList").append(
 								"<div class='nocon_doc'>"+
 									 "<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
@@ -243,29 +255,11 @@ $(function(){
 									"</div>"+
 									"<div class='doc_yynum'>"+
 										"<span class='yhao'>余号</span>"+
-										"<span class='noyhao_num'>约满</span>"+
-									"</div>"+
-								"</div>"
-							);
-						}else{//余号不为0，可预约
-							$("#swinfoList").append(
-								"<div class='con_doc'>"+
-									 "<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
-									 "<div class='doc_detail'>"+
-										"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
-										"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
-										"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
-										"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
-										"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
-									"</div>"+
-									"<div class='doc_yynum'>"+
-										"<span class='yhao'>余号</span>"+
-										"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+										"<span class='noyhao_num'>停诊</span>"+
 									"</div>"+
 								"</div>"
 							);
 						}
-							
 						
 					} else if(dortorInfo[i].timeFlag==2) {//下午
 						x++;
@@ -276,7 +270,40 @@ $(function(){
 							doctorPhoto = "../../img/self/self.png";
 						}
 						
-						if(dortorInfo[i].leftNum==0){//余号为0，约满状态
+						if (dortorInfo[i].workStatus==1) {//出诊状态
+							if(dortorInfo[i].leftNum==0){//余号为0，约满状态
+								$("#xwinfoList").append(
+									"<div class='nocon_doc' >"+
+										"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
+										 "<div class='doc_detail'>"+
+											"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+											"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
+										"</div>"+
+										"<div class='doc_yynum'>"+
+											"<span class='yhao'>余号</span>"+
+											"<span class='noyhao_num'>约满</span>"+
+										"</div>"+
+									"</div>"
+								);
+							}else{//余号不为0，可预约
+								$("#xwinfoList").append(
+									"<div class='con_doc' >"+
+										"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
+										 "<div class='doc_detail'>"+
+											"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
+											"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+											"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
+											"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+											"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
+										"</div>"+
+										"<div class='doc_yynum'>"+
+											"<span class='yhao'>余号</span>"+
+											"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+										"</div>"+
+									"</div>"
+								);
+							}
+						}else{//停诊状态
 							$("#xwinfoList").append(
 								"<div class='nocon_doc' >"+
 									"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
@@ -286,24 +313,7 @@ $(function(){
 									"</div>"+
 									"<div class='doc_yynum'>"+
 										"<span class='yhao'>余号</span>"+
-										"<span class='noyhao_num'>约满</span>"+
-									"</div>"+
-								"</div>"
-							);
-						}else{//余号不为0，可预约
-							$("#xwinfoList").append(
-								"<div class='con_doc' >"+
-									"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
-									 "<div class='doc_detail'>"+
-										"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
-										"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
-										"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
-										"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
-										"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
-									"</div>"+
-									"<div class='doc_yynum'>"+
-										"<span class='yhao'>余号</span>"+
-										"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+										"<span class='noyhao_num'>停诊</span>"+
 									"</div>"+
 								"</div>"
 							);
@@ -317,8 +327,41 @@ $(function(){
 							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
 							doctorPhoto = "../../img/self/self.png";
 						}
-							
-						if(dortorInfo[i].leftNum==0){//余号为0，约满状态
+						
+						if (dortorInfo[i].workStatus==1) {//出诊状态
+							if(dortorInfo[i].leftNum==0){//余号为0，约满状态
+								$("#wsinfoList").append(
+									"<div class='nocon_doc'>"+
+										"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
+										 "<div class='doc_detail'>"+
+											"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+											"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
+										"</div>"+
+										"<div class='doc_yynum'>"+
+											"<span class='yhao'>余号</span>"+
+											"<span class='noyhao_num'>约满</span>"+
+										"</div>"+
+									"</div>"
+								);
+							}else{//余号不为0，可预约
+								$("#wsinfoList").append(
+									"<div class='con_doc'>"+
+										"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
+										 "<div class='doc_detail'>"+
+											"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
+											"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
+											"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
+											"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+											"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
+										"</div>"+
+										"<div class='doc_yynum'>"+
+											"<span class='yhao'>余号</span>"+
+											"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
+										"</div>"+
+									"</div>"
+								);
+							}	
+						}else{//停诊状态
 							$("#wsinfoList").append(
 								"<div class='nocon_doc'>"+
 									"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
@@ -328,29 +371,11 @@ $(function(){
 									"</div>"+
 									"<div class='doc_yynum'>"+
 										"<span class='yhao'>余号</span>"+
-										"<span class='noyhao_num'>约满</span>"+
+										"<span class='noyhao_num'>停诊</span>"+
 									"</div>"+
 								"</div>"
 							);
-						}else{//余号不为0，可预约
-							$("#wsinfoList").append(
-								"<div class='con_doc'>"+
-									"<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
-									 "<div class='doc_detail'>"+
-										"<input type='hidden' value='"+dortorInfo[i].doctorCode+"' name='doctorCode'>"+
-										"<input type='hidden' value='"+dortorInfo[i].timeFlag+"' name='timeFlag'>"+
-										"<input type='hidden' value='"+dortorInfo[i].clinicType+"' name='clinicType'>"+
-										"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
-										"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
-									"</div>"+
-									"<div class='doc_yynum'>"+
-										"<span class='yhao'>余号</span>"+
-										"<span class='yhao_num'>"+dortorInfo[i].leftNum+"</span>"+
-									"</div>"+
-								"</div>"
-							);
-						}	
-						
+						}
 					}
 					
 				}

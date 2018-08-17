@@ -161,45 +161,46 @@
 								|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
 								doctorPhoto = "../../img/kes/a1.png";
 							}
-							if(dortorInfo[i].clinicType=="名医号"){//名医挂号
-								$("#myList").append(
-									"<div class='doc_item'>"+
-										"<input type='hidden' name='ghType' value='1'>"+
-										"<div class='doc_item_img'>"+
-											"<img src='"+doctorPhoto+"' />"+
-										"</div>"+
-										"<div class='doc_item_content'>"+
-											"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
-											"<input type='hidden' name='clinicType' value='"+dortorInfo[i].clinicType+"'>"+
-											"<div class='doc_name'>"+
-												"<span class='doctorName'>"+dortorInfo[i].doctorName+"</span>"+
+							if (dortorInfo[i].workStatus==1) {
+								if(dortorInfo[i].clinicType=="名医号"){//名医挂号
+									$("#myList").append(
+										"<div class='doc_item'>"+
+											"<input type='hidden' name='ghType' value='1'>"+
+											"<div class='doc_item_img'>"+
+												"<img src='"+doctorPhoto+"' />"+
 											"</div>"+
-											"<div class='doc_time'>"+
-												"<span>"+dortorInfo[i].clinicType+"</span>"+
+											"<div class='doc_item_content'>"+
+												"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
+												"<input type='hidden' name='clinicType' value='"+dortorInfo[i].clinicType+"'>"+
+												"<div class='doc_name'>"+
+													"<span class='doctorName'>"+dortorInfo[i].doctorName+"</span>"+
+												"</div>"+
+												"<div class='doc_time'>"+
+													"<span>"+dortorInfo[i].clinicType+"</span>"+
+												"</div>"+
 											"</div>"+
-										"</div>"+
-									"</div>"
-								);
-							}else if(dortorInfo[i].clinicType=="普通号"){//普通挂号
-								$("#ptList").append(
-									"<div class='doc_item'>"+
-										"<input type='hidden' name='ghType' value='3'>"+
-										"<div class='doc_item_img'>"+
-											"<img src='"+doctorPhoto+"' />"+
-										"</div>"+
-										"<div class='doc_item_content'>"+
-											"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
-											"<input type='hidden' name='clinicType' value='"+dortorInfo[i].clinicType+"'>"+
-											"<div class='doc_name'>"+
-												"<span class='doctorName'>"+dortorInfo[i].doctorName+"</span>"+
+										"</div>"
+									);
+								}else if(dortorInfo[i].clinicType=="普通号"){//普通挂号
+									$("#ptList").append(
+										"<div class='doc_item'>"+
+											"<input type='hidden' name='ghType' value='3'>"+
+											"<div class='doc_item_img'>"+
+												"<img src='"+doctorPhoto+"' />"+
 											"</div>"+
-											"<div class='doc_time'>"+
-												"<span>"+dortorInfo[i].clinicType+"</span>"+
+											"<div class='doc_item_content'>"+
+												"<input type='hidden' name='doctorCode' value='"+dortorInfo[i].doctorCode+"'>"+
+												"<input type='hidden' name='clinicType' value='"+dortorInfo[i].clinicType+"'>"+
+												"<div class='doc_name'>"+
+													"<span class='doctorName'>"+dortorInfo[i].doctorName+"</span>"+
+												"</div>"+
+												"<div class='doc_time'>"+
+													"<span>"+dortorInfo[i].clinicType+"</span>"+
+												"</div>"+
 											"</div>"+
-										"</div>"+
-									"</div>"
-								);
-							}else{//专家挂号
+										"</div>"
+									);
+								}else{//专家挂号
 								if(dortorInfo[i].clinicType=="正高号"){//正高号排前面
 									$("#zgh").append(
 										"<div class='doc_item'>"+
@@ -260,6 +261,8 @@
 								}
 								
 							}
+							}
+							  
 						}
 					}else{
 						alert(data.message);
