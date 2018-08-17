@@ -67,7 +67,7 @@
 	    		$.post(Utils.getRoot()+"/registerApp/selVisitingDept",{},function(data){
 					if (data.success) {
 						var deptInfoList = data.data;
-						console.log(JSON.stringify(deptInfoList))
+						//console.log(JSON.stringify(deptInfoList))
 						for (var i = 0; i < deptInfoList.length; i++) {
 							$("#deptList").append(//科室信息
 								"<option value='"+deptInfoList[i].deptCode+"'>"+deptInfoList[i].deptName+"</option>"
