@@ -400,7 +400,11 @@
 					"pages/dynamic_list.html",
 					"H5Js/common.js",
 					"js/androidFh.js",
-					"pages/expertScheduling.html"
+					"pages/expertScheduling.html",
+					"img/xiaofei1.png",
+					"img/yuyue1.png",
+					"img/tongzhi1.png",
+					"img/sixin1.png"
 				],
 				"refer": [],
 				"priority": 0

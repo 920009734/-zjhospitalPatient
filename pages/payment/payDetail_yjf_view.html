@@ -45,32 +45,28 @@
 				$("#chargeDate").text(listMap.chargeDate);
 				$("#totalAmt").text(parseFloat(listMap.totalAmt)/100+"元");
 				if(listMap.AMOUNT1==""){
-					$("#pay1").hide();
-					$("#amo1").hide();
+					$("#div1").hide();
 				}else{
 					$("#PAYWAY1").text(listMap.PAYWAY1);
 					$("#AMOUNT1").text(listMap.AMOUNT1 == ""?"":(parseFloat(listMap.AMOUNT1)/100)+"元");
 				}
 				
 				if(listMap.AMOUNT2==""){
-					$("#pay2").hide();
-					$("#amo2").hide();
+					$("#div2").hide();
 				}else{
 					$("#PAYWAY2").text(listMap.PAYWAY2);
 					$("#AMOUNT2").text(listMap.AMOUNT2 == ""?"":(parseFloat(listMap.AMOUNT2)/100)+"元");
 				}
 				
 				if(listMap.AMOUNT3==""){
-					$("#pay3").hide();
-					$("#amo3").hide();
+					$("#div3").hide();
 				}else{
 					$("#PAYWAY3").text(listMap.PAYWAY3);
 					$("#AMOUNT3").text(listMap.AMOUNT3 == ""?"":(parseFloat(listMap.AMOUNT3)/100)+"元");
 				}
 				
 				if(listMap.AMOUNT4==""){
-					$("#pay4").hide();
-					$("#amo4").hide();
+					$("#div4").hide();
 				}else{
 					$("#PAYWAY4").text(listMap.PAYWAY4);
 					$("#AMOUNT4").text(listMap.AMOUNT4 == ""?"":(parseFloat(listMap.AMOUNT4)/100)+"元");
@@ -96,18 +92,10 @@
 							$("#jfmxList").append(
 								"<tr>"+
 									"<td>"+list[i].itemNO+"</td>"+
-									"<td>"+list[i].classOnMr+"</td>"+
-									"<td>"+list[i].itemCode+"</td>"+
 									"<td>"+list[i].itemName+"</td>"+
-									"<td>"+list[i].itemSpec+"</td>"+
 									"<td>"+(parseInt(list[i].Amount)/100)+"</td>"+
 									"<td>"+list[i].itemUnit+"</td>"+
-									"<td>"+(parseFloat(list[i].itemPrice)/1000)+"</td>"+
 									"<td>"+(parseFloat(list[i].Cost)/100)+"</td>"+
-									"<td>"+list[i].orderDeptName+"</td>"+
-									"<td>"+list[i].orderDoctorName+"</td>"+
-									"<td>"+list[i].performDeptName+"</td>"+
-									/*"<td>"+(parseFloat(payorderInfo[i].itemTotalFee)/100)+"</td>"+*/
 								"</tr>"
 							);
 						}
@@ -157,36 +145,20 @@
 							<span class="demo_name">收费日期</span>
 							<span class="demo_value"><span id="chargeDate"></span></span>
 						</div>
-						<div class="list-item" id="pay1">
-							<span class="demo_name">支付方式(类型)</span>
-							<span class="demo_value"><span id="PAYWAY1"></span></span>
-						</div>
-						<div class="list-item" id="amo1">
-							<span class="demo_name">支付金额</span>
+						<div class="list-item" id="div1">
+							<span class="demo_name"><span id="PAYWAY1"></span></span>
 							<span class="demo_value"><span id="AMOUNT1" class="amount_money"></span></span>
 						</div>
-						<div class="list-item" id="pay2">
-							<span class="demo_name">支付方式(类型)</span>
-							<span class="demo_value"><span id="PAYWAY2"></span></span>
-						</div>
-						<div class="list-item" id="amo2">
-							<span class="demo_name">支付金额</span>
+						<div class="list-item" id="div2">
+							<span class="demo_name"><span id="PAYWAY2"></span></span>
 							<span class="demo_value"><span id="AMOUNT2" class="amount_money"></span></span>
 						</div>
-						<div class="list-item" id="pay3">
-							<span class="demo_name">支付方式(类型)</span>
-							<span class="demo_value"><span id="PAYWAY3"></span></span>
-						</div>
-						<div class="list-item" id="amo3">
-							<span class="demo_name">支付金额</span>
+						<div class="list-item" id="div3">
+							<span class="demo_name"><span id="PAYWAY3"></span></span>
 							<span class="demo_value"><span id="AMOUNT3" class="amount_money"></span></span>
 						</div>
-						<div class="list-item" id="pay4">
-							<span class="demo_name">支付方式(类型)</span>
-							<span class="demo_value"><span id="PAYWAY4"></span></span>
-						</div>
-						<div class="list-item" id="amo4">
-							<span class="demo_name">支付金额</span>
+						<div class="list-item" id="div4">
+							<span class="demo_name"><span id="PAYWAY4"></span></span>
 							<span class="demo_value"><span id="AMOUNT4" class="amount_money"></span></span>
 						</div>
 						<div class="list-item">
@@ -197,27 +169,16 @@
 							<span class="demo_name">就诊日期</span>
 							<span class="demo_value"><span id="visitDate"></span></span>
 						</div>
-						<div class="list-item">
-							<span class="demo_name">单号</span>
-							<span class="demo_value"><span id="visitNO"></span></span>
-						</div>
 					</div>
 					<div class="pay_detail_table">
 						<table class="baogao_table">
 							<thead>
 								<tr>
 									<th>序号</th>
-									<th>项目分类</th>
-									<th>项目代码</th>
 									<th>项目名称</th>
-									<th>规格</th>
 									<th>数量</th>
 									<th>单位</th>
-									<th>价格(元)</th>
 									<th>金额(元)</th>
-									<th>开单科室</th>
-									<th>开单医生</th>
-									<th>执行科室 </th>
 								</tr>
 							</thead>
 							<tbody id="jfmxList">
