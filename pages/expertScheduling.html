@@ -30,11 +30,12 @@
 	<body ontouchstart>
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;">专家出诊</h4>
+			<h4 style="margin-left: 25px;">专家出诊信息</h4>
 		</header>
 		
 		<section class="ui-container">
 			<section >
+				<div style="text-align: center;color: red;">温馨提示：该功能仅提供专家出诊信息查看，不做其他操作。如需挂号请到首页中选择“预约挂号”。</div>
 				<div class="expert_con">
 					<div class="expert_search">
 						<select class="search_select" id="deptList">
@@ -54,12 +55,6 @@
 								</tr>
 							</thead>
 							<tbody id="doctorList">
-								<!--<tr>
-									<td>陈安</td>
-									<td>2018-08-14</td>
-									<td>星期二</td>
-									<td>下午</td>
-								</tr>-->
 							</tbody>
 						</table>
 					</div>
@@ -72,6 +67,7 @@
 	    		$.post(Utils.getRoot()+"/registerApp/selVisitingDept",{},function(data){
 					if (data.success) {
 						var deptInfoList = data.data;
+						console.log(JSON.stringify(deptInfoList))
 						for (var i = 0; i < deptInfoList.length; i++) {
 							$("#deptList").append(//科室信息
 								"<option value='"+deptInfoList[i].deptCode+"'>"+deptInfoList[i].deptName+"</option>"
@@ -84,6 +80,8 @@
 				
 				
 				$(".search_btn").click(function(){
+					alert("dd");
+					$("#doctorList").html("");
 					if(jQuery("#deptList").val()=="-1"){
 						alert("请选择科室");
 						return false;
