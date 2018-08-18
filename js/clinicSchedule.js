@@ -1,7 +1,6 @@
 $(function(){
 	
 	//储存数据
-	var sdata = new Object();//号源数据
 	var rdata = new Object();//日期数据
 	
 	//获取当前时间
@@ -196,12 +195,11 @@ $(function(){
 		params.doctorCode = "";
 		$.post(Utils.getRoot()+"/registerApp/selclinicSchedule",params,function(data){
 			if (data.success) {
-				var dortorInfo = new Array();
-				dortorInfo= data.data;
-				sdata = JSON.stringify(dortorInfo);
+				var dortorInfo = data.data;
 //				console.log("dortorInfo:"+JSON.stringify(dortorInfo));
 				var s=0,x=0,w=0;
 				for (var i = 0; i < dortorInfo.length; i++) {
+//					console.log("dortorInfo:"+JSON.stringify(dortorInfo[i]));
 					//按照日期
 					if (dortorInfo[i].timeFlag==1) {//上午
 						s++;
@@ -211,7 +209,6 @@ $(function(){
 							|| doctorPhoto=="http://www.zjyy.com.cn/expertPhoto/"){
 							doctorPhoto = "../../img/self/self.png";
 						}
-							
 						if (dortorInfo[i].workStatus==1) {//出诊状态
 							if(dortorInfo[i].leftNum<=0){//余号为0，约满状态
 								$("#swinfoList").append(
@@ -245,18 +242,21 @@ $(function(){
 								);
 							}
 						}else{//停诊状态
-							$("#swinfoList").append(
-								"<div class='nocon_doc'>"+
-									 "<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
-									 "<div class='doc_detail'>"+
-										"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
-										"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
-									"</div>"+
-									"<div class='doc_yynum'>"+
-										"<span class='noyhao_num'>停诊</span>"+
-									"</div>"+
-								"</div>"
-							);
+							if (dortorInfo[i].doctorName!=null && dortorInfo[i].doctorName!="" && dortorInfo[i].doctorName!=undefined) {
+								$("#swinfoList").append(
+									"<div class='nocon_doc'>"+
+										 "<div class='doc_img'><img src='"+doctorPhoto+"'></div>"+
+										 "<div class='doc_detail'>"+
+											"<span class='doc_name'><span class='doctorName'>"+dortorInfo[i].doctorName+"</span><span class='main_doc'>"+dortorInfo[i].doctorTitle+"</span></span>"+
+											"<span class='doc_time'>"+dortorInfo[i].scheduleDate+"<span class='dep_type'>"+dortorInfo[i].clinicType+"</span></span>"+
+										"</div>"+
+										"<div class='doc_yynum'>"+
+											"<span class='noyhao_num'>停诊</span>"+
+										"</div>"+
+									"</div>"
+								);
+							}
+							
 						}
 						
 					} else if(dortorInfo[i].timeFlag==2) {//下午
