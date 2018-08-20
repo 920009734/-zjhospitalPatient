@@ -111,6 +111,7 @@ $(function(){
 	        }
 	        var showday = new Date();
 	        if(tDate == doHandleMonth(showday.getDate())){
+        		$(".data_zh").append('<div class="zh_irem">'+tday+'</div>');
 	        	if (tDate == data[i].dataday) {
 	        		if (data[i].status == 1) {//有号
 	        			$(".box_list").append('<div class="date_list active" id="'+tDate+'">'
@@ -123,9 +124,10 @@ $(function(){
 							+'<span class="dep_addr">(无)</span></span>'
 							+'</div>');
 	        		}
-	        	}
-	        }else{
+	        	}  
+	        }else{ 
 	        	var day = $(".box_list").children(".active").attr("id");
+        		$(".data_zh").append('<div class="zh_irem">'+tday+'</div>');
 	        	if (tDate == data[i].dataday) {
 	        		if (data[i].status == 1) {
 		        		$(".box_list").append('<div class="date_list" id="'+tDate+'">'
