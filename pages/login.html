@@ -150,7 +150,7 @@
 				alert('账号密码不能为空');
 				return false;13901136964
 			}
-			//plus.nativeUI.showWaiting('APP登录中...');
+			plus.nativeUI.showWaiting('APP登录中...');
 			$.ajax({
 				type: "post",
 				url: Utils.getRoot()+"/patientApp/login",
@@ -160,7 +160,7 @@
 					password: password
 				},
 				success: function(result){
-					//plus.nativeUI.closeWaiting();
+					plus.nativeUI.closeWaiting();
 					if(result.success){
 						localStorage.setItem('patientInfo', JSON.stringify(result.data));
 						location.href="main.html";

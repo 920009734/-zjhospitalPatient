@@ -1,102 +1,102 @@
 {
-	"pages/login.html": {
-		"resources": [
-			"font/iconfont-full.ttf",
-			"fontIcon/iconfont.css",
-			"img/u364.png",
-			"js/frozen.js",
-			"css/frozen.css",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/Utils.js",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/main.html": {
-		"resources": [
-			"img/xiaofei1.png",
-			"img/index/zjyy.png",
-			"pages/message1.html",
-			"pages/index.html",
-			"pages/detailMsg.html",
-			"img/yuyue1.png",
-			"img/index/zjLogo.png",
-			"js/androidFh.js",
-			"img/index/dongtai.png",
-			"H5Js/immersed.js",
-			"img/tongzhi1.png",
-			"img/self/zixunjilu.png",
-			"H5Js/shortcut.js",
-			"fontIcon/iconfont.css",
-			"img/sjx.png",
-			"css/frozen.css",
-			"img/index/logo@2x.png",
-			"img/sixin1.png",
-			"pages/expertScheduling.html",
-			"pages/lineUpSearch/jybg_list.html",
-			"pages/floorDistribution.html",
-			"pages/payment/depositPayment.html"
-		],
-		"refer": [
-			"pages/expertScheduling.html",
-			"pages/lineUpSearch/jybg_list.html",
-			"pages/floorDistribution.html",
-			"pages/payment/depositPayment.html"
-		]
-	},
-	"pages/expertScheduling.html": {
-		"resources": [
-			"js/jquery-1.8.3.min.js",
-			"fontIcon/iconfont.css",
-			"css/frozen.css",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/lineUpSearch/jybg_list.html": {
-		"resources": [
-			"js/jquery-1.8.3.min.js",
-			"css/frozen.css",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/floorDistribution.html": {
-		"resources": [
-			"css/frozen.css",
-			"pages/main.html"
-		],
-		"refer": [
-			"pages/main.html"
-		]
-	},
-	"pages/payment/depositPayment.html": {
-		"resources": [
-			"js/jquery-1.8.3.min.js",
-			"css/frozen.css",
-			"js/androidFh.js",
-			"pages/payment/payDetail_yjf_view.html"
-		],
-		"refer": [
-			"pages/payment/payDetail_yjf_view.html"
-		]
-	},
-	"pages/payment/payDetail_yjf_view.html": {
-		"resources": [
-			"css/frozen.css",
-			"font/iconfont-full.ttf",
-			"js/frozen.js",
-			"css/style.css",
-			"lib/zepto.min.js",
-			"js/androidFh.js",
-			"js/Utils.js"
-		]
-	}
+  "pages/login.html": {
+    "resources": [
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "img/u364.png",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/main.html": {
+    "resources": [
+      "img/xiaofei1.png",
+      "img/index/zjyy.png",
+      "pages/message1.html",
+      "pages/index.html",
+      "pages/detailMsg.html",
+      "img/yuyue1.png",
+      "img/index/zjLogo.png",
+      "js/androidFh.js",
+      "img/index/dongtai.png",
+      "H5Js/immersed.js",
+      "img/tongzhi1.png",
+      "img/self/zixunjilu.png",
+      "H5Js/shortcut.js",
+      "fontIcon/iconfont.css",
+      "img/sjx.png",
+      "css/frozen.css",
+      "img/index/logo@2x.png",
+      "img/sixin1.png",
+      "pages/expertScheduling.html",
+      "pages/lineUpSearch/jybg_list.html",
+      "pages/floorDistribution.html",
+      "pages/payment/depositPayment.html"
+    ],
+    "refer": [
+      "pages/expertScheduling.html",
+      "pages/lineUpSearch/jybg_list.html",
+      "pages/floorDistribution.html",
+      "pages/payment/depositPayment.html"
+    ]
+  },
+  "pages/expertScheduling.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/lineUpSearch/jybg_list.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/floorDistribution.html": {
+    "resources": [
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/payment/depositPayment.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "css/frozen.css",
+      "js/androidFh.js",
+      "pages/payment/payDetail_yjf_view.html"
+    ],
+    "refer": [
+      "pages/payment/payDetail_yjf_view.html"
+    ]
+  },
+  "pages/payment/payDetail_yjf_view.html": {
+    "resources": [
+      "css/frozen.css",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/androidFh.js",
+      "js/Utils.js"
+    ]
+  }
 }
