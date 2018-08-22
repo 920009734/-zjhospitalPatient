@@ -71,12 +71,14 @@
 						$("#department_child").append(tempStr);
 						$("#dep_type").children("span").html(typeName);
 					}else{
-						alert(result.message);
+						Utils.showConfirm("确认",result.message,"珠江医院");
+						//alert(result.message);
 					}
 				},
 				error:function(){
 					plus.nativeUI.closeWaiting();
-					alert('网络异常，请稍候重试！');
+					Utils.showConfirm("确认","网络异常，请稍候重试！","珠江医院");
+					//alert('网络异常，请稍候重试！');
 				}
 			});
 		}

@@ -109,7 +109,8 @@
 				$("#yzm").click(function(){
 					var phone = $("#phone").val();
 					if(!phone){
-						alert('请输入手机号码');
+						//alert('请输入手机号码');
+						Utils.showConfirm("确认","请输入手机号码","珠江医院");
 						return false;
 					}
 	                $(".yzm").attr("disabled","disabled");
@@ -139,7 +140,8 @@
 								console.log(result.data);
 								$("#codeStr").val(result.data);
 							}else{
-								alert(result.message);
+								//alert(result.message);
+								Utils.showConfirm("确认",result.message,"珠江医院");
 							}
 						}
 					});
@@ -149,7 +151,8 @@
 					var codeStr = $("#codeStr").val();
 					var code = $("#code").val();
 					if(code!=codeStr){
-						alert("请输入正确的验证码！");
+						Utils.showConfirm("确认","请输入正确的验证码","珠江医院");
+						//alert("请输入正确的验证码！");
 						return false;
 					}
 					
@@ -161,10 +164,12 @@
 					
 					$.post(Utils.getRoot()+"/patientApp/bindPatient", params, function(res) {
 						if (res.success) {
-							alert(res.message);
+							Utils.showConfirm("确认",res.message,"珠江医院");
+							//alert(res.message);
 							history.back();
 						} else {
-							alert(res.message);
+							Utils.showConfirm("确认",res.message,"珠江医院");
+							//alert(res.message);
 						}
 					});
 				});

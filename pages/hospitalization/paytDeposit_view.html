@@ -79,12 +79,14 @@
 							//$("#createTime_").html(Utils.formatDateByLong(data.createTime));
 							$("#serialNumber_").html(data.serialNumber);
 						}else{
-							alert(result.message);
+							//alert(result.message);
+							Utils.showConfirm("确认",result.message,"珠江医院");
 						}
 					},
 					error:function(){
 						plus.nativeUI.closeWaiting();
-						alert('网络异常，请稍候重试！');
+						Utils.showConfirm("确认","网络异常，请稍候重试！","珠江医院");
+						//alert('网络异常，请稍候重试！');
 					}
 				});
 				

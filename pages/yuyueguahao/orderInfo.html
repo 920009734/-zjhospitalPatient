@@ -161,7 +161,8 @@
 								$("#H5Pay").submit();
 							}
 						}else{
-							alert(res.message);
+							//alert(res.message);
+							Utils.showConfirm("确认",res.message,"珠江医院");
 						}
 					});
 				});

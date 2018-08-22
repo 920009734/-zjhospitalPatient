@@ -98,11 +98,13 @@
 							}
 							$("#notice_dynamic_list").append(tempStr);
 						}else{
-							alert(result.message);
+							//alert(result.message);
+							Utils.showConfirm("确认",result.message,"珠江医院");
 						}
 					},
 					error:function(){
 						plus.nativeUI.closeWaiting();
+						Utils.showConfirm("确认","网络异常，请稍候重试！","珠江医院");
 						alert('网络异常，请稍候重试！');
 					}
 				});

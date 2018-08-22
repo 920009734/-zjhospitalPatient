@@ -98,8 +98,10 @@
 			var idcard = $("#idcard").val();
 			var sex = $("#sex").val();
 			var age = $("#age").val();
-			if(!realname || !idcard || !sex || !age){
-				alert('信息填写不完整');
+			
+			if(!realname || !idcard){
+				Utils.showConfirm("确认","信息填写不完整","珠江医院");
+				//alert('信息填写不完整');
 				return false;
 			}
 			$.ajax({
@@ -114,10 +116,10 @@
 					},
 					success: function(result){
 						if(result.success){
-							alert(result.message);
+							Utils.showConfirm("确认",result.message,"珠江医院");
 							location.href="main.html";
 						}else{
-							alert("认证失败,请稍后手动绑定患者ID！");
+							Utils.showConfirm("确认","认证失败,"+result.message,"珠江医院");
 							location.href="main.html";
 						}
 					}
