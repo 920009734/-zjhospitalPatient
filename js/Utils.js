@@ -22,7 +22,6 @@ Utils = {
 	   }
 	   return theRequest;
 	},
-	
 	/**
 	 * 转换long值为日期字符串
 	 * 
