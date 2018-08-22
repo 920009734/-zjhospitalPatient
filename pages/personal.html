@@ -13,6 +13,7 @@
 		<script src="../lib/zepto.min.js"></script>
 		<script src="../js/frozen.js"></script>
 		<script src="../js/Utils.js"></script>
+		<script src="../js/androidFh.js"></script>
 		<title></title>
 		<style type="text/css"> 
 		body{background-color: #FFFFFF;}
@@ -95,7 +96,9 @@
 		function authentication(){
 			var realname = $("#realname").val();
 			var idcard = $("#idcard").val();
-			if(!realname || !idcard){
+			var sex = $("#sex").val();
+			var age = $("#age").val();
+			if(!realname || !idcard || !sex || !age){
 				alert('信息填写不完整');
 				return false;
 			}
@@ -105,12 +108,17 @@
 					async: false,
 					data: {
 						realname: realname, 
-						idcard: idcard
+						idcard: idcard,
+						sex: sex,
+						age: age,
 					},
 					success: function(result){
-						alert(result.message);
 						if(result.success){
-							location.href="main.html"
+							alert(result.message);
+							location.href="main.html";
+						}else{
+							alert("认证失败,请稍后手动绑定患者ID！");
+							location.href="main.html";
 						}
 					}
 				});
@@ -121,7 +129,7 @@
 	<body>
 		<header class="ui-header ui-header-positive">
 			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
-			<h4 style="margin-left: 25px;">个人信息认证<span class="nav_right" ><a href="main.html">跳过</a></span></h4>
+			<h4 style="margin-left: 25px;">个人信息认证<span class="nav_right" ></span></h4>
 		</header>
 		
 		<section class="ui-container">
@@ -138,7 +146,19 @@
 					<div class="login-inp">
 						<div class="login_user">
 							<span class="user_name">姓名</span>
-							<span class="user_inp"><input type="text" id="realname" placeholder="请输入真实姓名" class=""/></span>
+							<span class="user_inp"><input type="text" id="realname" placeholder="请输入姓名" class=""/></span>
+						</div>
+						<div class="login_user">
+							<span class="user_name">性别</span>
+							<span class="user_inp">
+								<select id="sex">
+									<option value="M">男</option>
+									<option value="F">女</option>
+								</select>
+						</div>
+						<div class="login_user">
+							<span class="user_name">年龄</span>
+							<span class="user_inp"><input type="text" id="age" placeholder="请输入年龄" class=""/></span>
 						</div>
 						<div class="login_user">
 							<span class="user_name">身份证号</span>
@@ -148,6 +168,12 @@
 				</form>
 				<div class="login_btn">
 					<button class="" onclick="authentication()">认证信息</button>
+				</div>
+				
+				<div style="margin-top: 10px;color: red;">
+						<div style="margin-left: 5%;">温馨提示：</div>
+					   <div style="margin-left: 15%;">1、认证成功后可使用所有功能。</div>
+					   <div style="margin-left: 15%;">2、认证失败后仅能使用“预约挂号”功能。</div>
 				</div>
 			</section>
 		</section>

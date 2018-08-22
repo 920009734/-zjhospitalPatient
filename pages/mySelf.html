@@ -134,7 +134,15 @@
     		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
     		if(patientInfo){
 	    		$("#user_name_").html(patientInfo.patientname);
-	    		$("#user_sex_").html(patientInfo.sex == '1' ? '男' : '女');
+	    		var sex;
+	    		if (patientInfo.sex=="1") {
+	    			sex = "男";
+	    		}else if(patientInfo.sex=="2"){
+	    			sex = "女";
+	    		}else{
+	    			sex = "";
+	    		}
+	    		$("#user_sex_").html(sex);
 	    		$("#user_age_").html(patientInfo.age);
     		}
     		
