@@ -102,9 +102,7 @@
 					success: function(result){
 						alert(result.message);
 						if(result.success){
-							localStorage.setItem("user_phone", result.data.phone);
-							localStorage.setItem("token",result.data.token)
-							localStorage.setItem("patientId",result.data.patientid)
+							localStorage.setItem('patientInfo', JSON.stringify(result.data));
 							location.href="personal.html"
 						}
 					}
