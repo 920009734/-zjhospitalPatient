@@ -136,7 +136,9 @@
 							
 						}
 					}else{
-						alert(data.message);
+						//showConfirm(btn,msg,titleMsg);
+						Utils.showConfirm("确认",data.message,"珠江医院");
+						//alert(data.message);
 					}
 				});
         		
@@ -145,7 +147,7 @@
         			var deptName = $(this).children(".dep_name").text();
         			window.location.href="../yuyueguahao/choiceDor.html?deptCode="+deptCode+"&deptName="+deptName;
         		});
-        		
+        		 
         		$("#doctorInfoList").on("click",".doc_list",function(){
         			var deptCode = $(this).children("input[name='deptCode']").val();
         			var deptName = $(this).children(".dep_type").text();

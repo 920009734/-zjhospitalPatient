@@ -117,10 +117,12 @@
 					
 					$.post(Utils.getRoot()+"/patientApp/qxbind",params,function(data){
 						if (data.success) {
-							alert(res.message);
+							//alert(res.message);
+							Utils.showConfirm("确认",res.message,"珠江医院");
 							history.back();
 						}else{
-							alert(data.message);
+							//alert(data.message);
+							Utils.showConfirm("确认",data.message,"珠江医院");
 						}
 					});
 				});

@@ -96,7 +96,8 @@
 			var realname = $("#realname").val();
 			var idcard = $("#idcard").val();
 			if(!realname || !idcard){
-				alert('信息填写不完整');
+				Utils.showConfirm("确认","信息填写不完整","珠江医院");
+				//alert('信息填写不完整');
 				return false;
 			}
 			$.ajax({
@@ -108,7 +109,8 @@
 						idcard: idcard
 					},
 					success: function(result){
-						alert(result.message);
+						Utils.showConfirm("确认",result.message,"珠江医院");
+						//alert(result.message);
 						if(result.success){
 							location.href="main.html"
 						}

@@ -127,7 +127,8 @@
 					if (res.success) {
 						createMessage(res.data);
 					} else {
-						alert(res.message);
+						Utils.showConfirm("确认",res.message,"珠江医院");
+						//alert(res.message);
 					}
 				});
 				//创建咨询回复信息
@@ -190,11 +191,13 @@
 									$("#crcontent").val("");
 									createMessage(res.data);
 								} else {
-									alert(res.message);
+									Utils.showConfirm("确认",res.message,"珠江医院");
+									//alert(res.message);
 								}
 							});
 						} else {
-							alert(res.message);
+							Utils.showConfirm("确认",res.message,"珠江医院");
+							//alert(res.message);
 						}
 					});
 				});

@@ -45,7 +45,8 @@
 			function getIdfyCode(){
 				var phone = $("#phone_").val();
 				if(!phone){
-					alert('请输入手机号码');
+					//alert('请输入手机号码');
+					Utils.showConfirm("确认","请输入手机号码","珠江医院");
 					return false;
 				}
                 $(".yzm").attr("disabled","disabled");
@@ -74,7 +75,8 @@
 						if(result.success){
 							idfycode = result.data;
 						}else{
-							alert(result.message);
+							//alert(result.message);
+							Utils.showConfirm("确认",result.message,"珠江医院");
 						}
 					}
 				});
@@ -84,11 +86,13 @@
 				var password = $("#password_").val();
 				var identifyingCode = $("#ic_").val();
 				if(!phone || !password || !identifyingCode){
-					alert('信息填写不完整');
+					//alert('信息填写不完整');
+					Utils.showConfirm("确认","信息填写不完整","珠江医院");
 					return false;
 				}
 				if(identifyingCode != idfycode){
-					alert('验证码错误');
+					//alert('验证码错误');
+					Utils.showConfirm("确认","验证码错误","珠江医院");
 					return false;
 				}
 				$.ajax({
@@ -100,7 +104,8 @@
 						password: password
 					},
 					success: function(result){
-						alert(result.message);
+						//alert(result.message);
+						Utils.showConfirm("确认",result.message,"珠江医院");
 						if(result.success){
 							localStorage.setItem("user_phone", result.data.phone);
 							localStorage.setItem("token",result.data.token)

@@ -120,7 +120,8 @@
                     }
                 }, "", ["升级", "取消"]);
 			}else{
-				alert("当前已是最新版本！");
+				//alert("当前已是最新版本！");
+				Utils.showConfirm("确认","当前已是最新版本！","珠江医院");
 			}
 		}
     	$(function(){
@@ -177,7 +178,8 @@
 	    				localStorage.clear();
 	    				top.location.href='login.html'
 	    			} else {
-	    				alert(res.message);
+	    				//alert(res.message);
+						Utils.showConfirm("确认",res.message,"珠江医院");
 	    			}
 	    		});
     		});

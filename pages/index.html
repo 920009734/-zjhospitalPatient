@@ -78,7 +78,8 @@
     		$("#list").on('click', '.pageJump' , function(){
     			state = $(this).data('state');
     			if( state == '2'){
-    				alert('该功能正在开发中...');
+					Utils.showConfirm("确认","该功能正在开发中...","珠江医院");
+    				//alert('该功能正在开发中...');
     				return;
     			}
     			url = $(this).data('url');
@@ -89,7 +90,8 @@
     					top.location.href = url;
     				}
     			}else{
-    				alert('该功能正在开发中...');
+					Utils.showConfirm("确认","该功能正在开发中...","珠江医院");
+    				//alert('该功能正在开发中...');
     			}
     		});
     		
@@ -104,7 +106,8 @@
 	    				if(data){
     						top.location.href = url;
     					}else{
-    						alert('请先认证医院信息后再使用该功能')
+							Utils.showConfirm("确认","请先认证医院信息后再使用该功能","珠江医院");
+    						//alert('请先认证医院信息后再使用该功能')
     					}
 	    			}
 	    		});
@@ -175,7 +178,8 @@
 							});
 							$("#notice_dynamic").append(tempStr);
 						}else{
-							alert(result.message);
+							Utils.showConfirm("确认",result.message,"珠江医院");
+							//alert(result.message);
 						}
 					},
 					error:function(){

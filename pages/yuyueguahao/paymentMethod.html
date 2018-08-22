@@ -64,7 +64,8 @@
 				    plus.payment.getChannels(function(channels){
 				    	pay_channels = channels;
 				    },function(e){
-				        alert(JSON.stringify(e));
+				        //alert(JSON.stringify(e));
+						Utils.showConfirm("确认",JSON.stringify(e),"珠江医院");
 				    });
 				}
 				

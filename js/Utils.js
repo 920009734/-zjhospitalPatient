@@ -316,7 +316,8 @@ Utils = {
 				        });
 				    },function(e){
 				        plus.nativeUI.closeWaiting();
-				        alert("安装更新文件失败");
+				        plus.nativeUI.alert("安装更新文件失败！");
+				        //alert("安装更新文件失败");
 				    });
 	    			break;
 	    	}
@@ -348,7 +349,15 @@ Utils = {
         s = s.replace(/&apos;/g,"\'");
         s = s.replace(/&quot;/g,"\"");
         return s;
-    }
+    },
+    showConfirm: function (btn,msg,titleMsg){
+		//outSet( "弹出系统确认对话框：" );
+		var bts=[btn];
+		plus.nativeUI.confirm(msg,function(e){
+			var i=e.index;
+			//outLine( "按\""+((i>=0)?bts[e.index]:"返回")+"\"关闭！" );
+		},titleMsg,bts);
+	}
 	
 	
 }

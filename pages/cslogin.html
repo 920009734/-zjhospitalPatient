@@ -119,10 +119,12 @@
 						}else{
 							localStorage.removeItem('token');
 							localStorage.removeItem('patientId');
-							alert(result.message)
+							Utils.showConfirm("确认",result.message,"珠江医院");
+							//alert(result.message)
 						}
 					}else{
-						alert(result.message);
+						//alert(result.message);
+						Utils.showConfirm("确认",result.message,"珠江医院");
 					}
 				}
 			});
@@ -132,7 +134,8 @@
 			var phone = $("#phone_").val();
 			var password = $("#password_").val();
 			if(!phone || !password){
-				alert('账号密码不能为空');
+				//alert('账号密码不能为空');
+				Utils.showConfirm("确认","账号密码不能为空","珠江医院");
 				return false;
 			}
 //			plus.nativeUI.showWaiting('APP登录中...');
@@ -150,7 +153,8 @@
 						localStorage.setItem('patientInfo', JSON.stringify(result.data));
 						location.href="yuyueguahao/paymentMethod2.html";
 					}else{
-						alert(result.message);
+						Utils.showConfirm("确认",result.message,"珠江医院");
+						//alert(result.message);
 					}
 				}
 			});
