@@ -17,7 +17,7 @@
 		<style type="text/css">
 			body{background-color: #F7F7F7;}
             .msg{display: block;width: 96%;height: 80px;margin: 0 auto;background-color: #FFFFFF;margin-top: 10px;border-radius: 2px;}
-            .notData{color: #999999; text-align: center;}
+            .notData{display: block; width: 100%;color: #999999; text-align: center;height: 70px;line-height: 70px;}
  			.msg_right{display: block;width:95%;float: left;line-height: 30px;margin-top: 10px;margin-left: 4%;}
  			.nomsg_right{display: block;width:70%;float: left;margin-top: 30px;}
             .doc_name{display: block;float:left;font-size: 15px;width:40%;}
@@ -29,7 +29,6 @@
 		</style>
 		<script type="text/javascript">
         	$(function(){
-				
 				var params={};
         		$.post(Utils.getRoot()+"/registerApp/selyyjl",params,function(data){
 					if (data.success) {
@@ -74,13 +73,7 @@
 								);
 							}
 						}else{
-							$("#yyList").append(
-								"<div class='msg'>"+
-						       		"<div class='nomsg_right'>"+
-						       			"<p class='notData'>暂无挂号记录</p>"+
-							   	   	" </div>"+
-						        "</div>"
-					        )
+							$(".ui-container").append("<p class='notData'>暂无挂号记录</p>")
 						}
 						
 					}
