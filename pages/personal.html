@@ -110,16 +110,18 @@
 					async: false,
 					data: {
 						realname: realname, 
+						patientname: realname,
 						idcard: idcard,
 						sex: sex,
 						age: age,
 					},
 					success: function(result){
 						if(result.success){
+							localStorage.setItem('patientInfo', JSON.stringify(result.data));
 							Utils.showConfirm("确认",result.message,"珠江医院");
 							location.href="main.html";
 						}else{
-							Utils.showConfirm("确认","认证失败,"+result.message,"珠江医院");
+							Utils.showConfirm("确认",result.message,"珠江医院");
 							location.href="main.html";
 						}
 					}

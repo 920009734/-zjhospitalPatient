@@ -143,7 +143,8 @@
     		//设置用户信息
     		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
     		if(patientInfo){
-	    		$("#user_name_").html(patientInfo.patientname);
+	    		$("#user_name_").html(patientInfo.realname);
+	    		console.log(JSON.stringify(patientInfo));
 	    		var sex;
 	    		if (patientInfo.sex=="M") {
 	    			sex = "男";
@@ -163,7 +164,7 @@
     		}
     		
     		$(".rz_btn").click(function(){
-    			location.href="personal2.html";
+    			top.location.href="personal2.html";
     		});
     		/*$("#wdgz").click(function(){
     			location.href="myAttention.html";
