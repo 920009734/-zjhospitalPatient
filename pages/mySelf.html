@@ -13,16 +13,14 @@
 		<style type="text/css">
 		     body{background-color:#EDF3F3 ;font-family: "微软雅黑";}
 			.top{display: block;width: 100%;height: 100px;margin: 0 auto;background-color: #FFFFFF ;background-size:100% 100%;}
-			.top_left{display: block;width: 25%;float:left;height: 100%;}
+			.top_left{display: block;width: 22%;float:left;height: 100%;}
 			.top_left>img{display: block;margin-left: 10px;margin-top: 25px;}
-			.top_center{display: block;width:65%;float: left;margin-top: 8%;}
-			.top-right{display: block;width:8%;float: right;margin-top: 8%;margin-right: 2%;}
-			.top_right_t{display: block;width:25%;float: left;height: 20%;margin-top:10px;}
+			.top_center{display: block;width:50%;float: left;margin-top: 8%;}
+			.top_right_t{display: block;width:50%;float: left;height: 20%;margin-top:10px;}
 			.top_right_z{display: block;width:25%;float: left;height: 20%;margin-top:10px;}
 			.top_right_i{display: block;width:10%;float: left;height: 20%;margin-top:10px;}
-			.top_right_j{display: block;width:5%;float: left;height: 20%;margin-top:10px;color: #999999;}
-			.top_right_k{display: block;width:10%;float: left;height: 20%;margin-top:10px;}
-			.top-right>img{display: block;float:right;margin-top: 40px;}
+			.top_right_j{display: block;width:10%;float: left;height: 20%;margin-top:10px;color: #999999;text-align: center;}
+			.top_right_k{display: block;width:20%;float: left;height: 20%;margin-top:10px;}
 			.cat_container{display: block;width: 100%;height: 312px;margin-top: 13px;}
 			.catlog{display: block;float: left;width: 100%;height: 50px;background-color: #FFFFFF;margin-top: 2px;}
 			.pic{display: block;float: left;height: 100%;width: 22%;}
@@ -31,8 +29,8 @@
 			.cat_container_1{display: block;width: 100%;height: 120px;margin-top: 13px;}
 			.login_btn{display: block;float: left; width: 90%;margin-left: 5%;margin-top: 20px;margin-bottom: 80px;}
 			.login_btn>button{display: block;width: 100%;height: 44px;line-height: 44px;color: #FFFFFF; border-radius:2px;background-color: #FC4C25;}
-			.rz_btn{display: block;float: left;width: 25%;margin-top: 10px;}
-			.rz_btn>button{display: block;width: 100%;height: 44px;line-height: 44px;color: #FFFFFF; border-radius:2px;background-color: #FC4C25;}
+			.rz_btn{display: block;float: left;width:18%;margin-top: 35px;margin-left: 3%;}
+			.rz_btn>button{display: block;width: 100%;height: 30px;line-height: 30px;color: #FFFFFF; border-radius:2px;background-color: #FC4C25;font-size: 13px;}
 			.ui-btn-primary:before{border: none;}
 			.pic>img{width: 40px;height: 40px;}
 			.banben_new{display: block;float: right;width: 10px;height: 10px;background-color: #FF0000;margin-top: 20px;border-radius: 15px;margin-right: 15px;}
@@ -56,16 +54,13 @@
 				    	<span id="user_sex_" class="top_right_i"></span>
 				    	<span class="top_right_j">|</span>
 				    	<span id="user_age_" class="top_right_k"></span>
-				    	<span id="zhuangtai" class="top_right_z"></span>
-				    	<div class="rz_btn" style="display: none;">
-							<button class="">认证</button>
-						</div>
+				    	<!--<span  class="top_right_z"></span>-->
 				    </div>
-				    
-				    <!--<div class="top-right">
-				    	<i class="ui-icon-arrow"></i>
-				    </div>-->
-				</div>	
+					<div class="rz_btn" style="">
+						<button class="" id="zhuangtai">未认证</button>
+					</div>
+				</div>
+				
 				<div class="cat_container" >
 					<div class="catlog" id="jtcy">
 						<div class="pic"><img src="../img/self/member.png" /></div>
@@ -155,11 +150,10 @@
 	    		$("#user_age_").html(patientInfo.age);
 	    		$("#patCardNo").val(patientInfo.patCardNo);
 	    		if (!patientInfo.patCardNo) {
-	    			$("#zhuangtai").html("(未认证)");
-	    			$("#zhuangtai").css({"color":"red"});
+	    			$("#zhuangtai").html("未认证");
 	    			$(".rz_btn").show();
 	    		} else{
-	    			$("#zhuangtai").html("(已认证)");
+	    			$("#zhuangtai").html("已认证");
 	    		}
     		}
     		
