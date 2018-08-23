@@ -9,10 +9,12 @@
       "css/style.css",
       "lib/zepto.min.js",
       "js/Utils.js",
-      "pages/main.html"
+      "pages/main.html",
+      "pages/regist.html"
     ],
     "refer": [
-      "pages/main.html"
+      "pages/main.html",
+      "pages/regist.html"
     ]
   },
   "pages/main.html": {
@@ -236,6 +238,24 @@
   "pages/divisionIntroduce_child.html": {
     "refer": [
       "pages/divisionIntroduce_view.html"
+    ]
+  },
+  "pages/regist.html": {
+    "resources": [
+      "js/androidFh.js",
+      "pages/personal.html"
+    ],
+    "refer": [
+      "pages/personal.html"
+    ]
+  },
+  "pages/personal.html": {
+    "resources": [
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
     ]
   }
 }
