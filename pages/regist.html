@@ -107,9 +107,7 @@
 						//alert(result.message);
 						Utils.showConfirm("确认",result.message,"珠江医院");
 						if(result.success){
-							localStorage.setItem("user_phone", result.data.phone);
-							localStorage.setItem("token",result.data.token)
-							localStorage.setItem("patientId",result.data.patientid)
+							localStorage.setItem('patientInfo', JSON.stringify(result.data));
 							location.href="personal.html"
 						}
 					}
