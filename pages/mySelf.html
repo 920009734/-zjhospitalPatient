@@ -122,7 +122,7 @@
 		}
 		//更新APP资源包
 		function checkVersion(){
-			if(localStorage.getItem('isNewVersion')){
+			if(localStorage.getItem('isNewVersion') == 'true'){
 				plus.nativeUI.confirm('是否确认升级到最新版本?', function(e) {
                     if(e.index == 0){
                         Utils.installNewVersion();
@@ -134,7 +134,7 @@
 			}
 		}
     	$(function(){
-			if(localStorage.getItem('isNewVersion')){
+			if(localStorage.getItem('isNewVersion') == 'true'){
 				$("#banben_new_").addClass('banben_new');
 			}else{
 				$("#banben_new_").removeClass('banben_new');
