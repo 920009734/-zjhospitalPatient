@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+		<script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+        <link rel="stylesheet" href="../css/frozen.css">
+        <link rel="stylesheet" href="../css/style.css"/>
+		<script src="../lib/zepto.min.js"></script>
+		<script src="../js/frozen.js"></script>
+		<script src="../js/Utils.js"></script>
+		<script src="../js/androidFh.js"></script>
+		<title></title>
+		<style type="text/css"> 
+		body{background-color: #FFFFFF;}
+			.login_img{display: block;width: 100%;}
+			.login_img>img{display: block;margin: 0 auto;margin-top: 50px;}
+			.login-inp{display: block;width: 100%;margin-top: 20px;}
+			.login_user{display: block;width: 90%;height: 45px;line-height: 45px; margin:0 auto;border-bottom: 1px solid #E7E7E7;}
+			.login_user>span{display: block;float: left;}
+			.user_name{display: block;float: left; width:25%;text-align: right;}
+			.user_inp{display: block;float: left; width: 70%;margin-left: 4%;}
+			.user_inp>input{display: block;float: left; width: 100%;height: 45px;line-height:45px;border: none;}
+			.login_btn{display: block;width: 90%;margin: 0 auto;margin-top: 25px;}
+			.login_btn>button{display: block;width: 100%;height: 44px;line-height: 44px;color: #FFFFFF; border-radius:2px;background-color: #2A8681;}
+			.ui-checkbox input:checked:before, .ui-checkbox-s input:checked:before{color: #3A93A5;}
+			.upload_img{display: block;width: 100%;margin-top: 25px;}
+			.showImg>img{display: block;margin: 0 auto;}
+			.upload_detail{display:block;width: 100%; text-align: center;font-size: 14px;margin-top: 5px;color: #666666;}
+			.nav_right{display: block;float: right;margin-right: 15px;}
+		</style>
+		
+	
+	<script>
+	$(function(){
+		//设置用户信息
+		var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
+		$("#realname").val(patientInfo.patientname);
+		$("#sex").val(patientInfo.sex);
+		$("#age").val(patientInfo.age);
+		$("#idcard").val(patientInfo.idcard);
+		
+		
+		$(".personal").click(function(){
+			var realname = $("#realname").val();
+			var idcard = $("#idcard").val();
+			var sex = $("#sex").val();
+			var age = $("#age").val();
+			
+			if(!realname || !idcard){
+				Utils.showConfirm("确认","信息填写不完整","珠江医院");
+				return false;
+			}
+			$.ajax({
+					type: "post",
+					url: Utils.getRoot()+"/patientApp/authentication",
+					async: false,
+					data: {
+						realname: realname, 
+						idcard: idcard,
+						sex: sex,
+						age: age,
+					},
+					success: function(result){
+						if(result.success){
+							Utils.showConfirm("确认",result.message,"珠江医院");
+							window.history.back();
+						}else{
+							Utils.showConfirm("确认","认证失败,"+result.message,"珠江医院");
+							window.history.back();
+						}
+					}
+				});
+		});
+		
+			
+	})
+		
+	</script>
+		
+	</head>
+	<body>
+		<header class="ui-header ui-header-positive">
+			<i class="ui-icon ui-icon-return" onclick="history.back()"></i>
+			<h4 style="margin-left: 25px;">个人信息认证<span class="nav_right" ></span></h4>
+		</header>
+		
+		<section class="ui-container">
+			<section id="list">
+				<form action="" id="newForm" name="newFrom" method="post">
+					<!--<div class="upload_img">
+						<div class="showImg" id="photodiv">
+							<img src="../img/uploadPersonal.png" id="photoimg" />
+						</div>	
+						<input id="f" type="file" name="f" onchange="upload();" style="display: none;"/>
+						<input type="hidden" name="headimage" id="headimage" />
+						<span class="upload_detail">上传头像</span>
+					</div>-->
+					<div class="login-inp">
+						<div class="login_user">
+							<span class="user_name">姓名</span>
+							<span class="user_inp"><input type="text" id="realname" placeholder="请输入姓名" class=""/></span>
+						</div>
+						<div class="login_user">
+							<span class="user_name">性别</span>
+							<span class="user_inp">
+								<select id="sex">
+									<option value="M">男</option>
+									<option value="F">女</option>
+								</select>
+						</div>
+						<div class="login_user">
+							<span class="user_name">年龄</span>
+							<span class="user_inp"><input type="text" id="age" placeholder="请输入年龄" class=""/></span>
+						</div>
+						<div class="login_user">
+							<span class="user_name">身份证号</span>
+							<span class="user_inp"><input type="text" id="idcard" placeholder="请输入身份证号" class=""/></span>
+						</div>
+					</div>
+				</form>
+				<div class="login_btn">
+					<button class="personal" >认证信息</button>
+				</div>
+				
+				<div style="margin-top: 10px;color: red;">
+					   <div style="margin-left: 5%;">温馨提示：</div>
+					   <div style="margin-left: 15%;">1、认证信息请需与医院预约信息一致，若未在医院建过档请填写真实信息。</div>
+					   <div style="margin-left: 15%;">2、认证成功,可使用所有功能。</div>
+					   <div style="margin-left: 15%;">3、认证失败,仅能使用“预约挂号”功能。</div>
+				</div>
+			</section>
+		</section>
+		<div id="blueimp-gallery" class="blueimp-gallery">
+			<div class="slides"></div>
+		</div>
+	</body>
+</html>
