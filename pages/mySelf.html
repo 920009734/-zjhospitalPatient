@@ -51,12 +51,13 @@
 				        <img src="../img/self/self.png" width="55" height="55"/>	
 				    </div>
 				    <div class="top_center">
+				    	<input type="hidden" id="patCardNo" value="">
 				    	<span id="user_name_" class="top_right_t"></span>
 				    	<span id="user_sex_" class="top_right_i"></span>
 				    	<span class="top_right_j">|</span>
 				    	<span id="user_age_" class="top_right_k"></span>
 				    	<span id="zhuangtai" class="top_right_z"></span>
-				    	<div class="rz_btn">
+				    	<div class="rz_btn" style="display: none;">
 							<button class="">认证</button>
 						</div>
 				    </div>
@@ -151,19 +152,22 @@
 	    		}
 	    		$("#user_sex_").html(sex);
 	    		$("#user_age_").html(patientInfo.age);
+	    		$("#patCardNo").val(patientInfo.patCardNo);
 	    		if (!patientInfo.patCardNo) {
 	    			$("#zhuangtai").html("(未认证)");
 	    			$("#zhuangtai").css({"color":"red"});
+	    			$(".rz_btn").show();
 	    		} else{
 	    			$("#zhuangtai").html("(已认证)");
 	    		}
     		}
     		
-    		
-    		
-    		$("#wdgz").click(function(){
-    			location.href="myAttention.html";
+    		$(".rz_btn").click(function(){
+    			location.href="personal2.html";
     		});
+    		/*$("#wdgz").click(function(){
+    			location.href="myAttention.html";
+    		});*/
     		
     		$("#jtcy").click(function(){
     			location.href="familyMember.html";
@@ -173,21 +177,25 @@
     			location.href="familyMember.html";
     		});*/
     		
-    		$("#zxjl").click(function(){
+    		/*$("#zxjl").click(function(){
 				location.href="consultation/consulteLlist.html";
-    		});
+    		});*/
     		
     		
     		$("#ghjl").click(function(){
     			location.href="yuyueguahao/patien_register.html";
     		});
     		
-    		$("#jfjl").click(function(){
+    		/*$("#jfjl").click(function(){
     			
-    		});
+    		});*/
     		
     		$("#cyzyjl").click(function(){
-    			location.href="hospitalization/inHospotalSearch.html"
+    			if ($("#patCardNo").val()=="" || $("#patCardNo").val()==null) {
+    				Utils.showConfirm("确认","请先认证","珠江医院");
+    			} else{
+    				location.href="hospitalization/inHospotalSearch.html";
+    			}
     		});
     		
     		//退出
