@@ -108,7 +108,6 @@
 						Utils.showConfirm("确认",result.message,"珠江医院");
 						if(result.success){
 							localStorage.setItem('patientInfo', JSON.stringify(result.data));
-							Utils.showConfirm("确认",JSON.stringify(result.data),"珠江医院");
 							location.href="personal.html"
 						}
 					}

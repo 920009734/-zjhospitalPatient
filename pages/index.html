@@ -103,6 +103,8 @@
 	    			url:Utils.getRoot() + "/appmenu/checkAction",
 	    			success: function(data){
 	    				if(data){
+	    					/*var ws = plus.webview.create(url);
+							ws.show();*/
     						top.location.href = url;
     					}else{
 							Utils.showConfirm("确认","请先认证医院信息后再使用该功能","珠江医院");
@@ -252,21 +254,18 @@
         
         <script type="text/javascript">
         	$(function(){
-        		/*document.addEventListener('plusready', plusReady, false);
+        		document.addEventListener('plusready', plusReady, false);
 	       		// H5 plus事件处理
-				function plusReady(){}*/
+				function plusReady(){}
 				
         		$("#zx").click(function(){
    					top.location.href="consultation/choiceDepartment.html";
 	    		});
 	    		$("#divisionIntroduce").click(function(){
-   					top.location.href="divisionIntroduce.html";
+   					location.href="divisionIntroduce.html";
 	    		});
 	    		
 	        	$("#ksxz").click(function(){
-	        		/*var url = "yuyueguahao/choiceDepartment.html";
-					var w = plus.webview.open(url);
-					w.show(); // 显示窗口*/
 					top.location.href="yuyueguahao/choiceDepartment.html";
 	    		});
 	    		
