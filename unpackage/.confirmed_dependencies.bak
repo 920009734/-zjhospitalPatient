@@ -1,4 +1,4 @@
-
+<<<<<<< HEAD
 {
   "pages/login.html": {
     "resources": [
@@ -242,3 +242,6 @@
     ]
   }
 }
+=======
+null
+>>>>>>> branch 'master' of https://gitee.com/yy17756/zjhospitalPatient.git
