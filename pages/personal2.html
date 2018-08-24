@@ -36,7 +36,6 @@
 	
 	<script>
 	$(function(){
-		
 		//设置日期
 		var day = new Date();
 		
@@ -74,7 +73,7 @@
 						idcard: idcard,
 						sex: sex,
 						age: age,
-						patBirth:birthday
+						patBirth:patientInfo.patBirth
 					},
 					success: function(result){
 						if(result.success){
