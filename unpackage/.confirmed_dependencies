@@ -1,4 +1,3 @@
-
 {
   "pages/login.html": {
     "resources": [
@@ -124,7 +123,8 @@
       "lib/zepto.min.js",
       "js/androidFh.js",
       "js/Utils.js"
-    ]
+    ],
+    "refer": []
   },
   "pages/yuyueguahao/choiceDepartment.html": {
     "resources": [
@@ -211,13 +211,15 @@
       "css/style.css",
       "lib/zepto.min.js",
       "js/Utils.js"
-    ]
+    ],
+    "refer": []
   },
   "pages/index.html": {
     "refer": [
       "pages/dynamic_list.html",
       "pages/dynamic.html"
-    ]
+    ],
+    "resources": []
   },
   "pages/divisionIntroduce.html": {
     "resources": [
@@ -239,7 +241,18 @@
   "pages/divisionIntroduce_child.html": {
     "refer": [
       "pages/divisionIntroduce_view.html"
+    ],
+    "resources": []
+  },
+  "pages/personal.html": {
+    "resources": [
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/androidFh.js",
+      "js/Utils.js"
     ]
   }
 }
-
