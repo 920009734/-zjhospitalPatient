@@ -52,6 +52,7 @@
 				Utils.showConfirm("确认","信息填写不完整","珠江医院");
 				return false;
 			}
+			
 			$.ajax({
 					type: "post",
 					url: Utils.getRoot()+"/patientApp/authentication",
@@ -66,10 +67,10 @@
 					success: function(result){
 						if(result.success){
 							Utils.showConfirm("确认",result.message,"珠江医院");
-							window.history.back();
+							window.history.back(-1);
 						}else{
-							Utils.showConfirm("确认","认证失败,"+result.message,"珠江医院");
-							window.history.back();
+							Utils.showConfirm("确认",result.message,"珠江医院");
+							window.history.back(1);
 						}
 					}
 				});
