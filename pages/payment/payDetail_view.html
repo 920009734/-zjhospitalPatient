@@ -150,7 +150,7 @@
 						payorderInfo= data.data;
 						var patientInfo = payorderInfo[0].patientInfo;
 						$("#realname").text(patientInfo.realname);
-						if (patientInfo.sex == 1) {
+						if (patientInfo.sex == "M") {
 							$("#sex").text("男");
 						} else {
 							$("#sex").text("女");

@@ -78,9 +78,14 @@
 					if (data.success) {
 						var list = data.data;
 						var patientInfo = JSON.parse(localStorage.getItem('patientInfo'));
-						
+						var sex;
+			    		if (patientInfo.sex=="M") {
+			    			sex = "男";
+			    		}else{
+			    			sex = "女";
+			    		}
 						$("#realname").text(patientInfo.patientname);
-						$("#sex").text(patientInfo.sex == '1' ? '男' : '女');
+						$("#sex").text(sex);
 						$("#age").text(patientInfo.age);
 						
 						$("#visitDate").text(list[0].visitDate);

@@ -30,6 +30,8 @@
 			.login_btn>button{display: block;width: 100%;height: 44px;line-height: 44px;color: #FFFFFF; border-radius:2px;background-color: #FC4C25;}
 			.rz_btn{display: block;float: left;width:18%;margin-top: 35px;margin-left: 3%;}
 			.rz_btn>button{display: block;width: 100%;height: 30px;line-height: 30px;color: #FFFFFF; border-radius:2px;background-color: #FC4C25;font-size: 13px;}
+			.yrz_btn{display: block;float: left;width:18%;margin-top: 35px;margin-left: 3%;}
+			.yrz_btn>button{display: block;width: 100%;height: 30px;line-height: 30px;color: #FFFFFF; border-radius:2px;background-color: #FC4C25;font-size: 13px;}
 			.ui-btn-primary:before{border: none;}
 			.pic>img{width: 40px;height: 40px;}
 			.banben_new{display: block;float: right;width: 10px;height: 10px;background-color: #FF0000;margin-top: 20px;border-radius: 15px;margin-right: 15px;}
@@ -55,8 +57,11 @@
 				    	<span id="user_age_" class="top_right_k"></span>
 				    	<!--<span  class="top_right_z"></span>-->
 				    </div>
-					<div class="rz_btn" style="">
-						<button class="" id="zhuangtai">未认证</button>
+					<div class="rz_btn" style="display: none;">
+						<button class="" id="wrz">未认证</button>
+					</div>
+					<div class="yrz_btn" style="display: none;">
+						<button class="" id="yrz">已认证</button>
 					</div>
 				</div>
 				
@@ -149,10 +154,11 @@
 	    		$("#user_age_").html(patientInfo.age);
 	    		$("#patCardNo").val(patientInfo.patCardNo);
 	    		if (!patientInfo.patCardNo) {
-	    			$("#zhuangtai").html("未认证");
 	    			$(".rz_btn").show();
+//	    			$("#wrz").html("未认证");
 	    		} else{
-	    			$("#zhuangtai").html("已认证");
+	    			$(".yrz_btn").show();
+//	    			$("#yrz").html("已认证");
 	    		}
     		}
     		
