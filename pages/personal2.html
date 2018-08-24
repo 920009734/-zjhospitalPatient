@@ -39,7 +39,7 @@
 		
 		//设置日期
 		var day = new Date();
-		$('#birthday').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
+		
 		$("#birthday").click(function(){
 			plus.nativeUI.pickDate( function(e) {
 				var d = e.date;
@@ -53,7 +53,7 @@
 		$("#sex").val(patientInfo.sex);
 		$("#age").val(patientInfo.age);
 		$("#idcard").val(patientInfo.idcard);
-		
+		$('#birthday').val(patientInfo.patBirth);
 		$(".personal").click(function(){
 			var realname = $("#realname").val();
 			var idcard = $("#idcard").val();
@@ -74,6 +74,7 @@
 						idcard: idcard,
 						sex: sex,
 						age: age,
+						patBirth:birthday
 					},
 					success: function(result){
 						if(result.success){

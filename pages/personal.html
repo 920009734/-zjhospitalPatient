@@ -100,6 +100,8 @@
 			var idcard = $("#idcard").val();
 			var sex = $("#sex").val();
 			var age = $("#age").val();
+			var patBirth = $("#birthday").val();
+			
 			
 			if(!realname || !idcard){
 				Utils.showConfirm("确认","信息填写不完整","珠江医院");
@@ -115,7 +117,8 @@
 						patientname: realname,
 						idcard: idcard,
 						sex: sex,
-						age: age
+						age: age,
+						patBirth: patBirth
 					},
 					success: function(result){
 						if(result.success){
@@ -132,7 +135,7 @@
 		}
 		$(function(){
 			var day = new Date();
-			$('#birthday').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
+//			$('#birthday').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
 			$("#birthday").click(function(){
 				plus.nativeUI.pickDate( function(e) {
 					var d = e.date;
