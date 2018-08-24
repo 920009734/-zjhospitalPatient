@@ -60,7 +60,8 @@
       "pages/myAttention.html",
       "pages/lineUpSearch/paiduijiaohaoMenu.html",
       "pages/divisionIntroduce.html",
-      "pages/login.html"
+      "pages/login.html",
+      "pages/yuyueguahao/pantien_reg_msg.html"
     ],
     "refer": [
       "pages/expertScheduling.html",
@@ -157,10 +158,12 @@
       "img/self/self.png",
       "js/androidFh.js",
       "js/Utils.js",
-      "pages/yuyueguahao/choiceDepartment.html"
+      "pages/yuyueguahao/choiceDepartment.html",
+      "pages/yuyueguahao/doctorGuahao.html"
     ],
     "refer": [
-      "pages/yuyueguahao/choiceDepartment.html"
+      "pages/yuyueguahao/choiceDepartment.html",
+      "pages/yuyueguahao/doctorGuahao.html"
     ]
   },
   "pages/lineUpSearch/paiduijiaohaoMenu.html": {
@@ -170,7 +173,8 @@
       "img/index/jilu.png",
       "css/frozen.css",
       "img/index/tijain2.png",
-      "pages/main.html"
+      "pages/main.html",
+      "js/androidFh.js"
     ],
     "refer": [
       "pages/lineUpSearch/paiduiSearch.html",
@@ -238,6 +242,43 @@
   "pages/divisionIntroduce_child.html": {
     "refer": [
       "pages/divisionIntroduce_view.html"
+    ]
+  },
+  "pages/yuyueguahao/doctorGuahao_detail.html": {
+    "resources": [
+      "pages/yuyueguahao/comfirmMsg.html",
+      "img/self/self.png",
+      "css/frozen.css"
+    ],
+    "refer": [
+      "pages/yuyueguahao/comfirmMsg.html"
+    ]
+  },
+  "pages/yuyueguahao/doctorGuahao.html": {
+    "resources": [
+      "img/kes/a1.png",
+      "css/frozen.css",
+      "pages/yuyueguahao/doctorGuahao_detail.html"
+    ],
+    "refer": [
+      "pages/yuyueguahao/doctorGuahao_detail.html"
+    ]
+  },
+  "pages/paymentSuccess.html": {
+    "resources": [
+      "css/frozen.css",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/yuyueguahao/comfirmMsg.html": {
+    "resources": [
+      "pages/paymentSuccess.html"
+    ],
+    "refer": [
+      "pages/paymentSuccess.html"
     ]
   }
 }

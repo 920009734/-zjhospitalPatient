@@ -7,7 +7,7 @@
 	"id": "H51826D79",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "珠江医院",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.5",/*应用版本名称*/
+		"name": "1.0.9",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -404,7 +404,8 @@
 					"img/xiaofei1.png",
 					"img/yuyue1.png",
 					"img/tongzhi1.png",
-					"img/sixin1.png"
+					"img/sixin1.png",
+					"pages/yuyueguahao/pantien_reg_msg.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -594,7 +595,8 @@
 					"lib/zepto.min.js",
 					"js/Utils.js",
 					"pages/main.html",
-					"pages/yuyueguahao/doctorGuahao_detail.html"
+					"pages/yuyueguahao/doctorGuahao_detail.html",
+					"pages/paymentSuccess.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -609,7 +611,8 @@
 					"pages/lineUpSearch/paiduiSearch.html",
 					"css/style.css",
 					"pages/main.html",
-					"font/iconfont-full.ttf"
+					"font/iconfont-full.ttf",
+					"js/androidFh.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -845,7 +848,8 @@
 					"css/style.css",
 					"lib/zepto.min.js",
 					"js/androidFh.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"img/self/self.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -1047,6 +1051,14 @@
 					"lib/zepto.min.js",
 					"js/androidFh.js",
 					"js/Utils.js",
+					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/paymentSuccess.html": {
+				"resources": [
+					"css/frozen.css",
 					"pages/main.html"
 				],
 				"refer": [],
