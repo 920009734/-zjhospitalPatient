@@ -32,7 +32,9 @@
 			.showImg>img{display: block;margin: 0 auto;}
 			.upload_detail{display:block;width: 100%; text-align: center;font-size: 14px;margin-top: 5px;color: #666666;}
 			.nav_right{display: block;float: right;margin-right: 15px;}
-		</style>
+			.select_sex{height: 30px;line-height: 30px;border: 1px solid #008080;padding: 0 10px;border-radius: 2px;background-color: #FFFFFF;color: #008080;}
+			.birthday{background-color: #FFFFFF;text-align: left;color: #008080;} 
+		</style> 
 		
 		<script type="text/javascript">
 		/*$(function(){
@@ -98,6 +100,8 @@
 			var idcard = $("#idcard").val();
 			var sex = $("#sex").val();
 			var age = $("#age").val();
+			var patBirth = $("#birthday").val();
+			
 			
 			if(!realname || !idcard){
 				Utils.showConfirm("确认","信息填写不完整","珠江医院");
@@ -114,6 +118,7 @@
 						idcard: idcard,
 						sex: sex,
 						age: age,
+						patBirth: patBirth
 					},
 					success: function(result){
 						if(result.success){
@@ -124,9 +129,21 @@
 							Utils.showConfirm("确认",result.message,"珠江医院");
 							location.href="main.html";
 						}
-					}
-				});
+				}
+			});
+				
 		}
+		$(function(){
+			var day = new Date();
+//			$('#birthday').val(day.getFullYear()+"-"+(day.getMonth()+1)+"-"+day.getDate());
+			$("#birthday").click(function(){
+				plus.nativeUI.pickDate( function(e) {
+					var d = e.date;
+					$("#birthday").val(d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
+				});
+			});
+		});
+		
 	</script>
 		
 	</head>
@@ -153,16 +170,20 @@
 							<span class="user_inp"><input type="text" id="realname" placeholder="请输入姓名" class=""/></span>
 						</div>
 						<div class="login_user">
+							<span class="user_name">年龄</span>
+							<span class="user_inp"><input type="text" id="age" placeholder="请输入年龄" class=""/></span>
+						</div>
+						<div class="login_user">
 							<span class="user_name">性别</span>
 							<span class="user_inp">
-								<select id="sex">
+								<select id="sex" class="select_sex">
 									<option value="M">男</option>
 									<option value="F">女</option>
 								</select>
 						</div>
 						<div class="login_user">
-							<span class="user_name">年龄</span>
-							<span class="user_inp"><input type="text" id="age" placeholder="请输入年龄" class=""/></span>
+							<span class="user_name">出生日期</span>
+							<span class="user_inp"><input type="button" id="birthday" placeholder="请输入年龄" class="birthday"  /></span>
 						</div>
 						<div class="login_user">
 							<span class="user_name">身份证号</span>
