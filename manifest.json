@@ -7,11 +7,7 @@
 	"id": "H51826D79",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "珠江医院",/*应用名称，程序桌面图标名称*/
 	"version": {
-<<<<<<< HEAD
 		"name": "1.1.1",/*应用版本名称*/
-=======
-		"name": "1.1.0",/*应用版本名称*/
->>>>>>> branch 'master' of https://gitee.com/yy17756/zjhospitalPatient.git
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -1061,7 +1057,6 @@
 				"refer": [],
 				"priority": 0
 			},
-<<<<<<< HEAD
 			"pages/reset_password.html": {
 				"resources": [
 					"js/androidFh.js",
@@ -1073,12 +1068,6 @@
 					"lib/zepto.min.js",
 					"js/Utils.js",
 					"pages/login.html"
-=======
-			"pages/paymentSuccess.html": {
-				"resources": [
-					"css/frozen.css",
-					"pages/main.html"
->>>>>>> branch 'master' of https://gitee.com/yy17756/zjhospitalPatient.git
 				],
 				"refer": [],
 				"priority": 0
