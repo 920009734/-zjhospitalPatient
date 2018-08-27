@@ -9,10 +9,12 @@
       "css/style.css",
       "lib/zepto.min.js",
       "js/Utils.js",
-      "pages/main.html"
+      "pages/main.html",
+      "pages/reset_password.html"
     ],
     "refer": [
-      "pages/main.html"
+      "pages/main.html",
+      "pages/reset_password.html"
     ]
   },
   "pages/main.html": {
@@ -60,7 +62,9 @@
       "pages/myAttention.html",
       "pages/lineUpSearch/paiduijiaohaoMenu.html",
       "pages/divisionIntroduce.html",
-      "pages/login.html"
+      "pages/login.html",
+      "pages/familyMember.html",
+      "pages/yuyueguahao/pantien_reg_msg.html"
     ],
     "refer": [
       "pages/expertScheduling.html",
@@ -238,6 +242,22 @@
   "pages/divisionIntroduce_child.html": {
     "refer": [
       "pages/divisionIntroduce_view.html"
+    ]
+  },
+  "pages/reset_password.html": {
+    "resources": [
+      "js/androidFh.js",
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "js/frozen.js",
+      "css/frozen.css",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/login.html"
+    ],
+    "refer": [
+      "pages/login.html"
     ]
   }
 }

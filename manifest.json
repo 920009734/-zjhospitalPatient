@@ -7,7 +7,7 @@
 	"id": "H51826D79",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "珠江医院",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.5",/*应用版本名称*/
+		"name": "1.1.1",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -285,7 +285,8 @@
 					"pages/regist.html",
 					"pages/main.html",
 					"/pages/yuyueguahao/paymentMethod2.html",
-					"pages/yuyueguahao/paymentMethod2.html"
+					"pages/yuyueguahao/paymentMethod2.html",
+					"pages/reset_password.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -404,7 +405,8 @@
 					"img/xiaofei1.png",
 					"img/yuyue1.png",
 					"img/tongzhi1.png",
-					"img/sixin1.png"
+					"img/sixin1.png",
+					"pages/yuyueguahao/pantien_reg_msg.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -1048,6 +1050,21 @@
 					"js/androidFh.js",
 					"js/Utils.js",
 					"pages/main.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/reset_password.html": {
+				"resources": [
+					"js/androidFh.js",
+					"font/iconfont-full.ttf",
+					"fontIcon/iconfont.css",
+					"js/frozen.js",
+					"css/frozen.css",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"pages/login.html"
 				],
 				"refer": [],
 				"priority": 0
