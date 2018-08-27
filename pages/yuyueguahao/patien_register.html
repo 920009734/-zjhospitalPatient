@@ -36,7 +36,7 @@
 						patient= data.data;
 						if(patient.length>=1){
 							for (var i = 0; i < patient.length; i++) {
-								var patientGender = patient[i].patientGender=="1"?"男":"女";
+								var patientGender = patient[i].patientGender=="M"?"男":"女";
 								var status = patient[i].yyStatus;
 								var yyStatus;
 								switch (status){

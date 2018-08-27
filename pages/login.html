@@ -152,16 +152,16 @@
 		}
 		
 		function checkToken(token){
-//			plus.nativeUI.showWaiting('自动登录中...');
+			plus.nativeUI.showWaiting('自动登录中...');
 			$.ajax({
 				type: "post",
 				url: Utils.getRoot()+"/common/checkToken",
 				async: false,
-				data: {
+				data: { 
 					token: token
 				},
 				success: function(result){
-//					plus.nativeUI.closeWaiting();
+					plus.nativeUI.closeWaiting();
 					if(result.success){
 						if(result.data){
 							location.href="main.html";
@@ -183,7 +183,7 @@
 				Utils.showConfirm("确认","账号密码不能为空","珠江医院");
 				return false;
 			}
-//			plus.nativeUI.showWaiting('APP登录中...');
+			plus.nativeUI.showWaiting('APP登录中...');
 			$.ajax({
 				type: "post",
 				url: Utils.getRoot()+"/patientApp/login",
@@ -193,7 +193,7 @@
 					password: password
 				},
 				success: function(result){
-//					plus.nativeUI.closeWaiting();
+					plus.nativeUI.closeWaiting();
 					if(result.success){
 						localStorage.setItem('patientInfo', JSON.stringify(result.data));
 						location.href="main.html";

@@ -75,7 +75,6 @@
 						}
 					}else{
 						Utils.showConfirm("确认",data.message,"珠江医院");
-						//alert(data.message);
 					}
 				});
 				
@@ -84,7 +83,6 @@
 					$("#doctorList").html("");
 					if(jQuery("#deptList").val()=="-1"){
 						Utils.showConfirm("确认","请选择科室","珠江医院");
-						alert("请选择科室");
 						return false;
 					}else{
 						var params = {};
@@ -119,7 +117,6 @@
 								}
 							}else{
 								Utils.showConfirm("确认",data.message,"珠江医院");
-								//alert(data.message);
 							}
 						});
 					}

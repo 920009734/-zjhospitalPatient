@@ -70,7 +70,7 @@
 						var orderInfo = yyInfo[0].order;
 						var bespeakInfo = yyInfo[0].bespeakInfo;
 						console.log("bespeakInfo:"+JSON.stringify(bespeakInfo));
-						var patientGender = bespeakInfo.patientGender=="1"?"男":"女";
+						var patientGender = bespeakInfo.patientGender=="M"?"男":"女";
 						$("#hisPatientId").val(bespeakInfo.hisPatientId);
 						$("#hisOrdNum").text(bespeakInfo.hisOrdNum);
 						$("#serialNumber").text(bespeakInfo.serialNumber);
@@ -130,7 +130,6 @@
 							cancel($("#cancelReason").val());
 						}else{
 							Utils.showConfirm("确认","其他原因说明至少5个字以上","珠江医院");
-							//alert("其他原因说明至少5个字以上");
 						}
 					}else{
 						$(".dialog_groupMsg").hide();
@@ -152,13 +151,10 @@
 					if($("#status").val()==0){
 						$.post(Utils.getRoot()+"/registerApp/cancelBespeakInfoNo",params,function(data){
 							if (data.success) {
-							//$(".login_btn").hide();
 								Utils.showConfirm("确认",data.message,"珠江医院");
-								//alert(data.message);
 								$("#yyStatus").text("已取消");//改变状态
 								$("#cancel").hide();//隐藏按钮
 							}else{
-								//alert(data.message);
 								Utils.showConfirm("确认",data.message,"珠江医院");
 							}
 						});
@@ -177,13 +173,10 @@
 									czDate:Request["czDate"]//预约日期
 								}, function(res) {
 									if (res.success) {//退款成功
-//										$(".login_btn").hide();
-										//alert(res.message);
 										Utils.showConfirm("确认",res.message,"珠江医院");
 										$("#yyStatus").text("退约");//改变状态
 										$("#cancel").hide();//隐藏按钮
 									}else{//退款失败
-										//alert(res.message);
 										Utils.showConfirm("确认",res.message,"珠江医院");
 										$("#yyStatus").text("退约");//改变状态
 										$("#cancel").hide();//隐藏按钮
@@ -206,13 +199,10 @@
 						refundAmt: $("#money").text()
 					}, function(res) {
 						if (res.success) {
-//							$(".login_btn").hide();
-							//alert(res.message);
 							Utils.showConfirm("确认",res.message,"珠江医院");
 							$("#yyStatus").text("退约");//改变状态
 							$("#cancel").hide();//隐藏按钮
 						}else{
-							//alert(res.message);
 							Utils.showConfirm("确认",res.message,"珠江医院");
 							$("#yyStatus").text("退约");//改变状态
 							$("#cancel").hide();//隐藏按钮

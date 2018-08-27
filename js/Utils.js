@@ -351,6 +351,10 @@ Utils = {
         return s;
     },
     showConfirm: function (btn,msg,titleMsg){
+    	var plus = plus;
+		if(!plus){
+			plus = top.plus;
+		}
 		//outSet( "弹出系统确认对话框：" );
 		var bts=[btn];
 		plus.nativeUI.confirm(msg,function(e){
