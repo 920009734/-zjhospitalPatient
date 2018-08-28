@@ -64,7 +64,8 @@
       "pages/divisionIntroduce.html",
       "pages/login.html",
       "pages/familyMember.html",
-      "pages/yuyueguahao/pantien_reg_msg.html"
+      "pages/yuyueguahao/pantien_reg_msg.html",
+      "pages/consultation/choiceDepartment.html"
     ],
     "refer": [
       "pages/expertScheduling.html",
@@ -74,7 +75,8 @@
       "pages/yuyueguahao/choiceDepartment.html",
       "pages/lineUpSearch/paiduijiaohaoMenu.html",
       "pages/divisionIntroduce.html",
-      "pages/login.html"
+      "pages/login.html",
+      "pages/consultation/choiceDepartment.html"
     ]
   },
   "pages/expertScheduling.html": {
@@ -127,7 +129,8 @@
       "lib/zepto.min.js",
       "js/androidFh.js",
       "js/Utils.js"
-    ]
+    ],
+    "refer": []
   },
   "pages/yuyueguahao/choiceDepartment.html": {
     "resources": [
@@ -141,7 +144,8 @@
       "js/frozen.js",
       "lib/zepto.min.js",
       "js/Utils.js",
-      "pages/main.html"
+      "pages/main.html",
+      "pages/index.html"
     ],
     "refer": [
       "pages/yuyueguahao/choiceDor.html",
@@ -174,7 +178,8 @@
       "img/index/jilu.png",
       "css/frozen.css",
       "img/index/tijain2.png",
-      "pages/main.html"
+      "pages/main.html",
+      "js/androidFh.js"
     ],
     "refer": [
       "pages/lineUpSearch/paiduiSearch.html",
@@ -214,12 +219,27 @@
       "css/style.css",
       "lib/zepto.min.js",
       "js/Utils.js"
-    ]
+    ],
+    "refer": []
   },
   "pages/index.html": {
     "refer": [
       "pages/dynamic_list.html",
       "pages/dynamic.html"
+    ],
+    "resources": [
+      "img/index/zjyy.png",
+      "css/frozen.css",
+      "img/index/zjLogo.png",
+      "img/index/logo@2x.png",
+      "img/index/dongtai.png",
+      "pages/divisionIntroduce.html",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/yuyueguahao/choiceDepartment.html"
     ]
   },
   "pages/divisionIntroduce.html": {
@@ -232,7 +252,8 @@
       "css/style.css",
       "lib/zepto.min.js",
       "js/Utils.js",
-      "pages/main.html"
+      "pages/main.html",
+      "js/androidFh.js"
     ],
     "refer": [
       "pages/divisionIntroduce_child.html",
@@ -242,6 +263,15 @@
   "pages/divisionIntroduce_child.html": {
     "refer": [
       "pages/divisionIntroduce_view.html"
+    ],
+    "resources": [
+      "css/frozen.css",
+      "H5Js/common.js",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js"
     ]
   },
   "pages/reset_password.html": {
@@ -258,6 +288,84 @@
     ],
     "refer": [
       "pages/login.html"
+    ]
+  },
+  "pages/consultation/choiceDepartment.html": {
+    "resources": [
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "js/androidFh.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/divisionIntroduce_view.html": {
+    "resources": [
+      "css/frozen.css"
+    ],
+    "refer": []
+  },
+  "pages/message1.html": {
+    "resources": [
+      "img/xiaofei1.png",
+      "img/yuyue1.png",
+      "css/frozen.css",
+      "js/androidFh.js",
+      "img/sixin1.png",
+      "img/tongzhi1.png",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "pages/detailMsg.html"
+    ],
+    "refer": []
+  },
+  "pages/mySelf.html": {
+    "resources": [
+      "img/self/zixunjilu.png",
+      "img/index/yuyueRecord.png",
+      "img/self/jiaofeijilui.png",
+      "img/self/banben.png",
+      "img/self/wodeguanzhu.png",
+      "css/frozen.css",
+      "img/self/bangzhu.png",
+      "img/self/self.png",
+      "img/self/member.png",
+      "img/self/jiuzhenjilu.png",
+      "pages/familyMember.html",
+      "js/Utils.js",
+      "pages/yuyueguahao/patien_register.html"
+    ],
+    "refer": []
+  },
+  "pages/familyMember.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "font/iconfont-full.ttf",
+      "css/frozen.css",
+      "pages/mySelf.html"
+    ],
+    "refer": [
+      "pages/mySelf.html"
+    ]
+  },
+  "pages/yuyueguahao/patien_register.html": {
+    "resources": [
+      "pages/mySelf.html"
+    ],
+    "refer": [
+      "pages/mySelf.html"
+    ]
+  },
+  "pages/detailMsg.html": {
+    "resources": [
+      "pages/message1.html",
+      "fontIcon/iconfont.css"
+    ],
+    "refer": [
+      "pages/message1.html"
     ]
   }
 }

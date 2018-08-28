@@ -423,7 +423,8 @@
 					"js/Utils.js",
 					"font/iconfont-full.ttf",
 					"js/androidFh.js",
-					"img/self/self.png"
+					"img/self/self.png",
+					"pages/index.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -707,7 +708,8 @@
 					"js/frozen.js",
 					"css/style.css",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"js/androidFh.js"
 				],
 				"refer": [
 					"pages/divisionIntroduce_child.html"
@@ -860,7 +862,8 @@
 					"js/jquery-1.8.3.min.js",
 					"pages/yuyueguahao/pantien_reg_msg.html",
 					"css/frozen.css",
-					"pages/main.html"
+					"pages/main.html",
+					"pages/mySelf.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -925,7 +928,9 @@
 					"css/frozen.css",
 					"pages/main.html",
 					"pages/addPerple.html",
-					"pages/memberDetail.html"
+					"pages/memberDetail.html",
+					"font/iconfont-full.ttf",
+					"pages/mySelf.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -980,7 +985,20 @@
 				"priority": 0
 			},
 			"pages/index.html": {
-				"resources": [],
+				"resources": [
+					"img/index/zjyy.png",
+					"css/frozen.css",
+					"img/index/zjLogo.png",
+					"img/index/logo@2x.png",
+					"img/index/dongtai.png",
+					"pages/divisionIntroduce.html",
+					"font/iconfont-full.ttf",
+					"js/frozen.js",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"js/Utils.js",
+					"pages/yuyueguahao/choiceDepartment.html"
+				],
 				"refer": [
 					"pages/dynamic.html",
 					"pages/dynamic_list.html"
@@ -1036,7 +1054,9 @@
 					"js/frozen.js",
 					"css/frozen.css",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"font/iconfont-full.ttf",
+					"css/style.css"
 				],
 				"refer": [
 					"pages/divisionIntroduce_view.html"
@@ -1068,6 +1088,49 @@
 					"lib/zepto.min.js",
 					"js/Utils.js",
 					"pages/login.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/message1.html": {
+				"resources": [
+					"img/xiaofei1.png",
+					"img/yuyue1.png",
+					"css/frozen.css",
+					"js/androidFh.js",
+					"img/sixin1.png",
+					"img/tongzhi1.png",
+					"js/frozen.js",
+					"css/style.css",
+					"lib/zepto.min.js",
+					"pages/detailMsg.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/mySelf.html": {
+				"resources": [
+					"img/self/zixunjilu.png",
+					"img/index/yuyueRecord.png",
+					"img/self/jiaofeijilui.png",
+					"img/self/banben.png",
+					"img/self/wodeguanzhu.png",
+					"css/frozen.css",
+					"img/self/bangzhu.png",
+					"img/self/self.png",
+					"img/self/member.png",
+					"img/self/jiuzhenjilu.png",
+					"pages/familyMember.html",
+					"js/Utils.js",
+					"pages/yuyueguahao/patien_register.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"pages/detailMsg.html": {
+				"resources": [
+					"pages/message1.html",
+					"fontIcon/iconfont.css"
 				],
 				"refer": [],
 				"priority": 0
