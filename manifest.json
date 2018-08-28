@@ -707,7 +707,8 @@
 					"js/frozen.js",
 					"css/style.css",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"js/androidFh.js"
 				],
 				"refer": [
 					"pages/divisionIntroduce_child.html"
@@ -1036,7 +1037,9 @@
 					"js/frozen.js",
 					"css/frozen.css",
 					"lib/zepto.min.js",
-					"js/Utils.js"
+					"js/Utils.js",
+					"font/iconfont-full.ttf",
+					"css/style.css"
 				],
 				"refer": [
 					"pages/divisionIntroduce_view.html"

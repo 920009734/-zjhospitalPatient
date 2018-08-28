@@ -64,7 +64,8 @@
       "pages/divisionIntroduce.html",
       "pages/login.html",
       "pages/familyMember.html",
-      "pages/yuyueguahao/pantien_reg_msg.html"
+      "pages/yuyueguahao/pantien_reg_msg.html",
+      "pages/consultation/choiceDepartment.html"
     ],
     "refer": [
       "pages/expertScheduling.html",
@@ -74,7 +75,8 @@
       "pages/yuyueguahao/choiceDepartment.html",
       "pages/lineUpSearch/paiduijiaohaoMenu.html",
       "pages/divisionIntroduce.html",
-      "pages/login.html"
+      "pages/login.html",
+      "pages/consultation/choiceDepartment.html"
     ]
   },
   "pages/expertScheduling.html": {
@@ -127,7 +129,8 @@
       "lib/zepto.min.js",
       "js/androidFh.js",
       "js/Utils.js"
-    ]
+    ],
+    "refer": []
   },
   "pages/yuyueguahao/choiceDepartment.html": {
     "resources": [
@@ -174,7 +177,8 @@
       "img/index/jilu.png",
       "css/frozen.css",
       "img/index/tijain2.png",
-      "pages/main.html"
+      "pages/main.html",
+      "js/androidFh.js"
     ],
     "refer": [
       "pages/lineUpSearch/paiduiSearch.html",
@@ -214,13 +218,15 @@
       "css/style.css",
       "lib/zepto.min.js",
       "js/Utils.js"
-    ]
+    ],
+    "refer": []
   },
   "pages/index.html": {
     "refer": [
       "pages/dynamic_list.html",
       "pages/dynamic.html"
-    ]
+    ],
+    "resources": []
   },
   "pages/divisionIntroduce.html": {
     "resources": [
@@ -232,7 +238,8 @@
       "css/style.css",
       "lib/zepto.min.js",
       "js/Utils.js",
-      "pages/main.html"
+      "pages/main.html",
+      "js/androidFh.js"
     ],
     "refer": [
       "pages/divisionIntroduce_child.html",
@@ -242,6 +249,15 @@
   "pages/divisionIntroduce_child.html": {
     "refer": [
       "pages/divisionIntroduce_view.html"
+    ],
+    "resources": [
+      "css/frozen.css",
+      "H5Js/common.js",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js"
     ]
   },
   "pages/reset_password.html": {
@@ -258,6 +274,22 @@
     ],
     "refer": [
       "pages/login.html"
+    ]
+  },
+  "pages/consultation/choiceDepartment.html": {
+    "resources": [
+      "fontIcon/iconfont.css",
+      "css/frozen.css",
+      "js/androidFh.js",
+      "pages/main.html"
+    ],
+    "refer": [
+      "pages/main.html"
+    ]
+  },
+  "pages/divisionIntroduce_view.html": {
+    "resources": [
+      "css/frozen.css"
     ]
   }
 }
