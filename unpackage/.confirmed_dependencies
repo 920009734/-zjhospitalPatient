@@ -9,10 +9,12 @@
       "css/style.css",
       "lib/zepto.min.js",
       "js/Utils.js",
-      "pages/main.html"
+      "pages/main.html",
+      "pages/reset_password.html"
     ],
     "refer": [
-      "pages/main.html"
+      "pages/main.html",
+      "pages/reset_password.html"
     ]
   },
   "pages/main.html": {
@@ -61,6 +63,7 @@
       "pages/lineUpSearch/paiduijiaohaoMenu.html",
       "pages/divisionIntroduce.html",
       "pages/login.html",
+      "pages/familyMember.html",
       "pages/yuyueguahao/pantien_reg_msg.html"
     ],
     "refer": [
@@ -158,12 +161,10 @@
       "img/self/self.png",
       "js/androidFh.js",
       "js/Utils.js",
-      "pages/yuyueguahao/choiceDepartment.html",
-      "pages/yuyueguahao/doctorGuahao.html"
+      "pages/yuyueguahao/choiceDepartment.html"
     ],
     "refer": [
-      "pages/yuyueguahao/choiceDepartment.html",
-      "pages/yuyueguahao/doctorGuahao.html"
+      "pages/yuyueguahao/choiceDepartment.html"
     ]
   },
   "pages/lineUpSearch/paiduijiaohaoMenu.html": {
@@ -173,8 +174,7 @@
       "img/index/jilu.png",
       "css/frozen.css",
       "img/index/tijain2.png",
-      "pages/main.html",
-      "js/androidFh.js"
+      "pages/main.html"
     ],
     "refer": [
       "pages/lineUpSearch/paiduiSearch.html",
@@ -244,41 +244,20 @@
       "pages/divisionIntroduce_view.html"
     ]
   },
-  "pages/yuyueguahao/doctorGuahao_detail.html": {
+  "pages/reset_password.html": {
     "resources": [
-      "pages/yuyueguahao/comfirmMsg.html",
-      "img/self/self.png",
-      "css/frozen.css"
-    ],
-    "refer": [
-      "pages/yuyueguahao/comfirmMsg.html"
-    ]
-  },
-  "pages/yuyueguahao/doctorGuahao.html": {
-    "resources": [
-      "img/kes/a1.png",
+      "js/androidFh.js",
+      "font/iconfont-full.ttf",
+      "fontIcon/iconfont.css",
+      "js/frozen.js",
       "css/frozen.css",
-      "pages/yuyueguahao/doctorGuahao_detail.html"
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/login.html"
     ],
     "refer": [
-      "pages/yuyueguahao/doctorGuahao_detail.html"
-    ]
-  },
-  "pages/paymentSuccess.html": {
-    "resources": [
-      "css/frozen.css",
-      "pages/main.html"
-    ],
-    "refer": [
-      "pages/main.html"
-    ]
-  },
-  "pages/yuyueguahao/comfirmMsg.html": {
-    "resources": [
-      "pages/paymentSuccess.html"
-    ],
-    "refer": [
-      "pages/paymentSuccess.html"
+      "pages/login.html"
     ]
   }
 }
