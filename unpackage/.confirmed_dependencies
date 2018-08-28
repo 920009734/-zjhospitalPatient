@@ -144,7 +144,8 @@
       "js/frozen.js",
       "lib/zepto.min.js",
       "js/Utils.js",
-      "pages/main.html"
+      "pages/main.html",
+      "pages/index.html"
     ],
     "refer": [
       "pages/yuyueguahao/choiceDor.html",
@@ -226,7 +227,20 @@
       "pages/dynamic_list.html",
       "pages/dynamic.html"
     ],
-    "resources": []
+    "resources": [
+      "img/index/zjyy.png",
+      "css/frozen.css",
+      "img/index/zjLogo.png",
+      "img/index/logo@2x.png",
+      "img/index/dongtai.png",
+      "pages/divisionIntroduce.html",
+      "font/iconfont-full.ttf",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "js/Utils.js",
+      "pages/yuyueguahao/choiceDepartment.html"
+    ]
   },
   "pages/divisionIntroduce.html": {
     "resources": [
@@ -290,6 +304,68 @@
   "pages/divisionIntroduce_view.html": {
     "resources": [
       "css/frozen.css"
+    ],
+    "refer": []
+  },
+  "pages/message1.html": {
+    "resources": [
+      "img/xiaofei1.png",
+      "img/yuyue1.png",
+      "css/frozen.css",
+      "js/androidFh.js",
+      "img/sixin1.png",
+      "img/tongzhi1.png",
+      "js/frozen.js",
+      "css/style.css",
+      "lib/zepto.min.js",
+      "pages/detailMsg.html"
+    ],
+    "refer": []
+  },
+  "pages/mySelf.html": {
+    "resources": [
+      "img/self/zixunjilu.png",
+      "img/index/yuyueRecord.png",
+      "img/self/jiaofeijilui.png",
+      "img/self/banben.png",
+      "img/self/wodeguanzhu.png",
+      "css/frozen.css",
+      "img/self/bangzhu.png",
+      "img/self/self.png",
+      "img/self/member.png",
+      "img/self/jiuzhenjilu.png",
+      "pages/familyMember.html",
+      "js/Utils.js",
+      "pages/yuyueguahao/patien_register.html"
+    ],
+    "refer": []
+  },
+  "pages/familyMember.html": {
+    "resources": [
+      "js/jquery-1.8.3.min.js",
+      "font/iconfont-full.ttf",
+      "css/frozen.css",
+      "pages/mySelf.html"
+    ],
+    "refer": [
+      "pages/mySelf.html"
+    ]
+  },
+  "pages/yuyueguahao/patien_register.html": {
+    "resources": [
+      "pages/mySelf.html"
+    ],
+    "refer": [
+      "pages/mySelf.html"
+    ]
+  },
+  "pages/detailMsg.html": {
+    "resources": [
+      "pages/message1.html",
+      "fontIcon/iconfont.css"
+    ],
+    "refer": [
+      "pages/message1.html"
     ]
   }
 }
