@@ -226,8 +226,6 @@
     					
     					var patient = data.data.patient;
 						var memberList = data.data.memberList;
-    					console.log("patient:"+JSON.stringify(patient));
-    					console.log("memberList:"+JSON.stringify(memberList));
     					
     					$("#tj").append(
         					"<div class='per_name'>"+
@@ -299,15 +297,18 @@
 			
 			
 			$("#submitbt").click(function(){
-				var formData = {};
-			    formData.receiver=doctorCode;
-			    formData.sender=$("#huanzhe_").text();
-			    formData.content = $("#describe_").val();
-			    formData.patientId = $("#patientid").val();
+				var formData = new FormData();
+			    formData.append("receiver",doctorName);//接收人名字
+			    formData.append("receiverId",doctorCode);//接收人ID
+			    formData.append("sender",$("#huanzhe_").text());//发送人
+			    formData.append("senderId",$("#patientid").val());//发送人ID
+			    formData.append("content",$("#describe_").val());
+			    formData.append("patientId",$("#patientid").val());
 			  	
-			    //D7BB131564844D498EB7C89CEA95EF4F
+			  	/*传递图片信息*/
+			  	var filespar = new Array();
 			    for(var i = 0 ; i < files.length ; i ++){
-			    	formData.files = files[i];
+			    	formData.append("files",files[i]);
 			    }
 			    
 			    if($("#doctorName_").text()==""){
@@ -333,13 +334,15 @@
 		             type: 'POST',  
 		             data: formData,  
 		             contentType: false,  
-		             processData: false,  
+	             	 processData: false, 
 		             success: function (result) {
 		             	console.log("success:"+JSON.stringify(result))
 				     	if (result.success) {
+				     		$("#dialogText").html(result.message);
+							$(".ui-dialog").show();
 				    		location.href = "../main.html";
 				    	} else {
-				    		$("#dialogText").html(res.message);
+				    		$("#dialogText").html(result.message);
 							$(".ui-dialog").show();
 				    	}
 		             },
@@ -365,22 +368,29 @@
             var input = document.getElementsByClassName(obj2)[0];
             var imgArr = [];
             //遍历获取到得图片文件
-            for (var i = 0; i < 5; i++) {
+            for (var i = 0; i < file.files.length; i++) {
 				//给传值的files赋值
             	files.push(file.files[i]);
                 var imgUrl = window.URL.createObjectURL(file.files[i]);
                 imgArr.push(imgUrl);
+                /*用源生js创建DIV，并设置class样式和onclick事件*/
                 var img = document.createElement("img");
                 img.setAttribute("src", imgArr[i]);
                 var imgAdd = document.createElement("div");
                 imgAdd.setAttribute("class", "z_addImg");
+                imgAdd.setAttribute("onclick","djimg(this)");
                 imgAdd.appendChild(img);
                 imgContainer.appendChild(imgAdd);
             };
-            imgRemove();
+//          imgRemove();
         };
+        
+        /*移除图片预览*/
+        function djimg(data){
+        	data.parentNode.removeChild(data);
+        }
 
-        function imgRemove() {
+        /*function imgRemove() {
             var imgList = document.getElementsByClassName("z_addImg");
             var mask = document.getElementsByClassName("z_mask")[0];
             var cancel = document.getElementsByClassName("z_cancel")[0];
@@ -400,7 +410,8 @@
 
                 }
             };
-        }
+        }*/
+        
 	</script>
 		
 	</body>
